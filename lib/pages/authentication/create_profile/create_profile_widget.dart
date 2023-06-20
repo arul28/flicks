@@ -1,4 +1,5 @@
 import '/auth/base_auth_user_provider.dart';
+import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -315,17 +316,12 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           _model.usernameCreateController.text,
                         );
                         if (_model.usernameAvailable == true) {
-                          await UsersTable().update(
-                            data: {
-                              'full_name': _model.yourNameController.text,
-                              'bio': _model.bioCreateController.text,
-                              'user_name': _model.usernameCreateController.text,
-                            },
-                            matchingRows: (rows) => rows.eq(
-                              'email',
-                              FFAppState().email,
-                            ),
-                          );
+                          await UsersTable().insert({
+                            'full_name': _model.yourNameController.text,
+                            'bio': _model.bioCreateController.text,
+                            'user_name': _model.usernameCreateController.text,
+                            'email': currentUserEmail,
+                          });
 
                           context.goNamed('Profile');
                         } else {
