@@ -38,12 +38,12 @@ class CreateProfileModel extends FlutterFlowModel {
     }
 
     if (val.length < 4) {
-      return 'Username must be longer than 4 characters';
+      return 'Username must be between 4 and 20 characters';
+    }
+    if (val.length > 20) {
+      return 'Maximum 20 characters allowed, currently ${val.length}.';
     }
 
-    if (!RegExp(kTextValidatorUsernameRegex).hasMatch(val)) {
-      return 'username must be between 4 and 16 characters and must start with a letter. Special characters allowed : - & _';
-    }
     return null;
   }
 
