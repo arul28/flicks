@@ -54,6 +54,15 @@ abstract class FlutterFlowTheme {
   late Color error;
   late Color info;
 
+  late Color russianViolet;
+  late Color russianViolet2;
+  late Color persianIndigo;
+  late Color tekhelet;
+  late Color frenchViolet;
+  late Color amethyst;
+  late Color heliotrope;
+  late Color mauve;
+
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
   @Deprecated('Use displaySmall instead')
@@ -141,6 +150,15 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color warning = const Color(0xFFF9CF58);
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
+
+  late Color russianViolet = Color(0xFF10002B);
+  late Color russianViolet2 = Color(0xFF240046);
+  late Color persianIndigo = Color(0xFF3C096C);
+  late Color tekhelet = Color(0xFF5A189A);
+  late Color frenchViolet = Color(0xFF7B2CBF);
+  late Color amethyst = Color(0xFF9D4EDD);
+  late Color heliotrope = Color(0xFFC77DFF);
+  late Color mauve = Color(0xFFE0AAFF);
 }
 
 abstract class Typography {
@@ -312,6 +330,15 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color warning = const Color(0xFFF9CF58);
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
+
+  late Color russianViolet = Color(0xFF10002B);
+  late Color russianViolet2 = Color(0xFF240046);
+  late Color persianIndigo = Color(0xFF3C096C);
+  late Color tekhelet = Color(0xFF5A189A);
+  late Color frenchViolet = Color(0xFF7B2CBF);
+  late Color amethyst = Color(0xFF9D4EDD);
+  late Color heliotrope = Color(0xFFC77DFF);
+  late Color mauve = Color(0xFFE0AAFF);
 }
 
 extension TextStyleHelper on TextStyle {
