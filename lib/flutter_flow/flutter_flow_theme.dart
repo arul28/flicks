@@ -64,6 +64,7 @@ abstract class FlutterFlowTheme {
   late Color mauve;
   late Color primaryBtnText;
   late Color lineColor;
+  late Color noColor;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -163,6 +164,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color mauve = Color(0xFFE0AAFF);
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color lineColor = Color(0xFFE0E3E7);
+  late Color noColor = Color(0x00FFFFFF);
 }
 
 abstract class Typography {
@@ -345,6 +347,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color mauve = Color(0xFFE0AAFF);
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color lineColor = Color(0xFF22282F);
+  late Color noColor = Color(0x000F1113);
 }
 
 extension TextStyleHelper on TextStyle {
