@@ -121,6 +121,8 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -133,7 +135,7 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
             Expanded(
               child: Container(
                 width: double.infinity,
-                height: 500.0,
+                height: double.infinity,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -159,6 +161,7 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
                       begin: AlignmentDirectional(0.0, -1.0),
                       end: AlignmentDirectional(0, 1.0),
                     ),
+                    shape: BoxShape.rectangle,
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -208,8 +211,8 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 16.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            context.pushNamed('SignupPage');
                           },
                           text: 'Sign Up',
                           options: FFButtonOptions(
@@ -240,8 +243,8 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
                         padding:
                             EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 16.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            context.pushNamed('LoginPage');
                           },
                           text: 'Login',
                           options: FFButtonOptions(
