@@ -7,19 +7,19 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'login_page_model.dart';
-export 'login_page_model.dart';
+import 'signup_page_model.dart';
+export 'signup_page_model.dart';
 
-class LoginPageWidget extends StatefulWidget {
-  const LoginPageWidget({Key? key}) : super(key: key);
+class SignupPageWidget extends StatefulWidget {
+  const SignupPageWidget({Key? key}) : super(key: key);
 
   @override
-  _LoginPageWidgetState createState() => _LoginPageWidgetState();
+  _SignupPageWidgetState createState() => _SignupPageWidgetState();
 }
 
-class _LoginPageWidgetState extends State<LoginPageWidget>
+class _SignupPageWidgetState extends State<SignupPageWidget>
     with TickerProviderStateMixin {
-  late LoginPageModel _model;
+  late SignupPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -88,10 +88,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginPageModel());
+    _model = createModel(context, () => SignupPageModel());
 
     _model.emailAddressController ??= TextEditingController();
-    _model.passwordController ??= TextEditingController();
+    _model.passwordController1 ??= TextEditingController();
+    _model.passwordController2 ??= TextEditingController();
   }
 
   @override
@@ -163,7 +164,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                       child: Text(
-                        'Sign In',
+                        'Sign Up',
                         style:
                             FlutterFlowTheme.of(context).headlineLarge.override(
                                   fontFamily: 'Outfit',
@@ -245,9 +246,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                       child: Container(
                         width: double.infinity,
                         child: TextFormField(
-                          controller: _model.passwordController,
+                          controller: _model.passwordController1,
                           autofillHints: [AutofillHints.password],
-                          obscureText: !_model.passwordVisibility,
+                          obscureText: !_model.passwordVisibility1,
                           decoration: InputDecoration(
                             labelText: 'Password',
                             labelStyle:
@@ -287,12 +288,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                 24.0, 24.0, 24.0, 24.0),
                             suffixIcon: InkWell(
                               onTap: () => setState(
-                                () => _model.passwordVisibility =
-                                    !_model.passwordVisibility,
+                                () => _model.passwordVisibility1 =
+                                    !_model.passwordVisibility1,
                               ),
                               focusNode: FocusNode(skipTraversal: true),
                               child: Icon(
-                                _model.passwordVisibility
+                                _model.passwordVisibility1
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
                                 color:
@@ -302,7 +303,75 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                             ),
                           ),
                           style: FlutterFlowTheme.of(context).bodyMedium,
-                          validator: _model.passwordControllerValidator
+                          validator: _model.passwordController1Validator
+                              .asValidator(context),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                      child: Container(
+                        width: double.infinity,
+                        child: TextFormField(
+                          controller: _model.passwordController2,
+                          autofillHints: [AutofillHints.password],
+                          obscureText: !_model.passwordVisibility2,
+                          decoration: InputDecoration(
+                            labelText: 'Confirm Password',
+                            labelStyle:
+                                FlutterFlowTheme.of(context).labelMedium,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 24.0, 24.0, 24.0),
+                            suffixIcon: InkWell(
+                              onTap: () => setState(
+                                () => _model.passwordVisibility2 =
+                                    !_model.passwordVisibility2,
+                              ),
+                              focusNode: FocusNode(skipTraversal: true),
+                              child: Icon(
+                                _model.passwordVisibility2
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                            ),
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          validator: _model.passwordController2Validator
                               .asValidator(context),
                         ),
                       ),
@@ -316,7 +385,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                           onPressed: () {
                             print('Button pressed ...');
                           },
-                          text: 'Sign In',
+                          text: 'Sign Up',
                           options: FFButtonOptions(
                             width: 230.0,
                             height: 52.0,
@@ -341,60 +410,30 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
-                          },
-                          text: 'Forgot Password',
-                          options: FFButtonOptions(
-                            width: 230.0,
-                            height: 44.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            textStyle: FlutterFlowTheme.of(context).bodyMedium,
-                            elevation: 0.0,
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              width: 2.0,
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 24.0),
+                              child: Text(
+                                'Login to an existing account instead',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(12.0),
                           ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 200.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Align(
-                          alignment: AlignmentDirectional(0.0, 1.0),
-                          child: Text(
-                            'Sign Up Instead',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  decoration: TextDecoration.underline,
-                                ),
-                          ),
-                        ),
+                        ],
                       ),
                     ),
                   ],

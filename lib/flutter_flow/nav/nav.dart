@@ -34,12 +34,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => LoginPageWidget(),
+      errorBuilder: (context, state) => SignupPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => LoginPageWidget(),
+          builder: (context, _) => SignupPageWidget(),
+        ),
+        FFRoute(
+          name: 'SignupPage',
+          path: '/signupPage',
+          builder: (context, params) => SignupPageWidget(),
         ),
         FFRoute(
           name: 'LoginPage',
@@ -47,9 +52,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginPageWidget(),
         ),
         FFRoute(
-          name: 'Onboarding',
-          path: '/onboarding',
-          builder: (context, params) => OnboardingWidget(),
+          name: 'LandingPage',
+          path: '/landingPage',
+          builder: (context, params) => LandingPageWidget(),
+        ),
+        FFRoute(
+          name: 'CreateProfile',
+          path: '/createProfile',
+          builder: (context, params) => CreateProfileWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -8,7 +8,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class LoginPageModel extends FlutterFlowModel {
+class SignupPageModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -16,20 +16,26 @@ class LoginPageModel extends FlutterFlowModel {
   TextEditingController? emailAddressController;
   String? Function(BuildContext, String?)? emailAddressControllerValidator;
   // State field(s) for password widget.
-  TextEditingController? passwordController;
-  late bool passwordVisibility;
-  String? Function(BuildContext, String?)? passwordControllerValidator;
+  TextEditingController? passwordController1;
+  late bool passwordVisibility1;
+  String? Function(BuildContext, String?)? passwordController1Validator;
+  // State field(s) for password widget.
+  TextEditingController? passwordController2;
+  late bool passwordVisibility2;
+  String? Function(BuildContext, String?)? passwordController2Validator;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    passwordVisibility = false;
+    passwordVisibility1 = false;
+    passwordVisibility2 = false;
   }
 
   void dispose() {
     unfocusNode.dispose();
     emailAddressController?.dispose();
-    passwordController?.dispose();
+    passwordController1?.dispose();
+    passwordController2?.dispose();
   }
 
   /// Action blocks are added here.
