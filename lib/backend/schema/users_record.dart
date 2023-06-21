@@ -54,6 +54,26 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
+  // "followingNum" field.
+  int? _followingNum;
+  int get followingNum => _followingNum ?? 0;
+  bool hasFollowingNum() => _followingNum != null;
+
+  // "followingList" field.
+  List<DocumentReference>? _followingList;
+  List<DocumentReference> get followingList => _followingList ?? const [];
+  bool hasFollowingList() => _followingList != null;
+
+  // "followedByNum" field.
+  int? _followedByNum;
+  int get followedByNum => _followedByNum ?? 0;
+  bool hasFollowedByNum() => _followedByNum != null;
+
+  // "followedByList" field.
+  List<DocumentReference>? _followedByList;
+  List<DocumentReference> get followedByList => _followedByList ?? const [];
+  bool hasFollowedByList() => _followedByList != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -63,6 +83,10 @@ class UsersRecord extends FirestoreRecord {
     _pinned = getDataList(snapshotData['pinned']);
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
+    _followingNum = snapshotData['followingNum'] as int?;
+    _followingList = getDataList(snapshotData['followingList']);
+    _followedByNum = snapshotData['followedByNum'] as int?;
+    _followedByList = getDataList(snapshotData['followedByList']);
   }
 
   static CollectionReference get collection =>
@@ -106,6 +130,8 @@ Map<String, dynamic> createUsersRecordData({
   String? bio,
   DateTime? createdTime,
   String? phoneNumber,
+  int? followingNum,
+  int? followedByNum,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -116,6 +142,8 @@ Map<String, dynamic> createUsersRecordData({
       'bio': bio,
       'created_time': createdTime,
       'phone_number': phoneNumber,
+      'followingNum': followingNum,
+      'followedByNum': followedByNum,
     }.withoutNulls,
   );
 
