@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "346801684314",
+    "project_id": "flicks-da809",
+    "storage_bucket": "flicks-da809.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346801684314:android:a269143b51ef1987123d63",
+        "android_client_info": {
+          "package_name": "com.mycompany.flicks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346801684314-skrkd0knp0mvq5e9dn4u9m030n8u6bam.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.flicks",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "346801684314-td1di1n2urojpalvs97qdm9gpj0qca3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfUccv0111UrROSsKt2mL89QylZjZ21Tk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346801684314-td1di1n2urojpalvs97qdm9gpj0qca3p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "346801684314-fr7m9jnoho1e3cd0ln6derrajknvm6ti.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.flicks"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

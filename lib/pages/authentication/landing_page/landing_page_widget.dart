@@ -140,8 +140,8 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
                   gradient: LinearGradient(
                     colors: [
                       FlutterFlowTheme.of(context).primary,
-                      FlutterFlowTheme.of(context).heliotrope,
-                      FlutterFlowTheme.of(context).mauve
+                      FlutterFlowTheme.of(context).frenchViolet,
+                      FlutterFlowTheme.of(context).frenchViolet
                     ],
                     stops: [0.0, 0.5, 1.0],
                     begin: AlignmentDirectional(-1.0, -1.0),

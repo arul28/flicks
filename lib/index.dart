@@ -10,3 +10,9 @@ export '/pages/authentication/create_profile/create_profile_widget.dart'
 export '/pages/app_pages/profile/profile_widget.dart' show ProfileWidget;
 export '/pages/app_pages/feed/feed_widget.dart' show FeedWidget;
 export '/pages/app_pages/camera/camera_widget.dart' show CameraWidget;
+export '/pages/app_pages/setting_page/setting_page_widget.dart'
+    show SettingPageWidget;
+export '/pages/authentication/verification/verification_widget.dart'
+    show VerificationWidget;
+export '/pages/app_pages/edit_profile/edit_profile_widget.dart'
+    show EditProfileWidget;

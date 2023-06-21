@@ -1,33 +1,29 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'create_profile_model.dart';
-export 'create_profile_model.dart';
+import 'edit_profile_model.dart';
+export 'edit_profile_model.dart';
 
-class CreateProfileWidget extends StatefulWidget {
-  const CreateProfileWidget({Key? key}) : super(key: key);
+class EditProfileWidget extends StatefulWidget {
+  const EditProfileWidget({Key? key}) : super(key: key);
 
   @override
-  _CreateProfileWidgetState createState() => _CreateProfileWidgetState();
+  _EditProfileWidgetState createState() => _EditProfileWidgetState();
 }
 
-class _CreateProfileWidgetState extends State<CreateProfileWidget> {
-  late CreateProfileModel _model;
+class _EditProfileWidgetState extends State<EditProfileWidget> {
+  late EditProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CreateProfileModel());
+    _model = createModel(context, () => EditProfileModel());
 
     _model.yourNameController ??= TextEditingController();
     _model.usernameCreateController ??= TextEditingController();
@@ -92,7 +88,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                     child: Text(
-                      'Create your Profile',
+                      'Edit your Profile',
                       style:
                           FlutterFlowTheme.of(context).headlineMedium.override(
                                 fontFamily: 'Outfit',
@@ -305,31 +301,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () async {
-                      if (_model.formKey.currentState == null ||
-                          !_model.formKey.currentState!.validate()) {
-                        return;
-                      }
-                      _model.usernameCount = await queryUsersRecordCount(
-                        queryBuilder: (usersRecord) => usersRecord.where(
-                            'display_name',
-                            isEqualTo: _model.usernameCreateController.text),
-                      );
-                      if (_model.usernameCount == 0) {
-                        final usersUpdateData = createUsersRecordData(
-                          displayName: _model.usernameCreateController.text,
-                          bio: _model.bioCreateController.text,
-                        );
-                        await currentUserReference!.update(usersUpdateData);
-
-                        context.pushNamed('Profile');
-                      } else {
-                        setState(() {
-                          _model.usernameExists = true;
-                        });
-                      }
-
-                      setState(() {});
+                    onPressed: () {
+                      print('Button pressed ...');
                     },
                     text: 'Save Changes',
                     options: FFButtonOptions(

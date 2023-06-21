@@ -1,10 +1,11 @@
-import '/auth/supabase_auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -329,6 +330,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                     !_model.formKey.currentState!.validate()) {
                                   return;
                                 }
+                                HapticFeedback.vibrate();
                                 GoRouter.of(context).prepareAuthEvent();
 
                                 final user = await authManager.signInWithEmail(
@@ -339,11 +341,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                 if (user == null) {
                                   return;
                                 }
-
-                                setState(() {
-                                  FFAppState().email =
-                                      _model.emailAddressController.text;
-                                });
 
                                 context.goNamedAuth('Profile', context.mounted);
                               },

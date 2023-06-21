@@ -1,11 +1,14 @@
-import '/auth/supabase_auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'signup_page_model.dart';
@@ -452,10 +455,17 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                     return;
                                   }
 
-                                  setState(() {
-                                    FFAppState().email =
-                                        _model.emailAddressController.text;
-                                  });
+                                  final usersCreateData = createUsersRecordData(
+                                    email: _model.emailAddressController.text,
+                                    uid: random_data
+                                        .randomInteger(0, 1000000)
+                                        .toString(),
+                                  );
+                                  await UsersRecord.collection
+                                      .doc(user.uid)
+                                      .update(usersCreateData);
+
+                                  await authManager.sendEmailVerification();
 
                                   context.pushNamedAuth(
                                       'CreateProfile', context.mounted);
@@ -490,6 +500,114 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                               ),
                             ),
                           ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 0.0, 16.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Container(
+                                  width: 230.0,
+                                  height: 44.0,
+                                  child: Stack(
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () {
+                                            print('Button pressed ...');
+                                          },
+                                          text: 'Sign in with Google',
+                                          icon: Icon(
+                                            Icons.add,
+                                            color: Colors.transparent,
+                                            size: 20.0,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: 230.0,
+                                            height: 44.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 8.0, 0.0),
+                                            color: Colors.white,
+                                            textStyle: GoogleFonts.getFont(
+                                              'Roboto',
+                                              color: Color(0xFF606060),
+                                              fontSize: 17.0,
+                                            ),
+                                            elevation: 4.0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 0.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-0.83, 0.0),
+                                        child: Container(
+                                          width: 22.0,
+                                          height: 22.0,
+                                          clipBehavior: Clip.antiAlias,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Image.network(
+                                            'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FFButtonWidget(
+                              onPressed: () {
+                                print('Button pressed ...');
+                              },
+                              text: 'Sign in with Apple',
+                              icon: FaIcon(
+                                FontAwesomeIcons.apple,
+                                size: 20.0,
+                              ),
+                              options: FFButtonOptions(
+                                width: 230.0,
+                                height: 44.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 1.0),
+                                color: Colors.white,
+                                textStyle: GoogleFonts.getFont(
+                                  'Roboto',
+                                  color: Colors.black,
+                                  fontSize: 17.0,
+                                ),
+                                elevation: 4.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 0.0,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
