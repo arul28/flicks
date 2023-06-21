@@ -342,7 +342,32 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                   return;
                                 }
 
-                                context.goNamedAuth('Profile', context.mounted);
+                                if (currentUserEmailVerified) {
+                                  context.pushNamedAuth(
+                                      'Profile', context.mounted);
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('Verify Email'),
+                                        content: Text(
+                                            'You need to verify your email before you can log in'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  setState(() {});
+
+                                  context.pushNamedAuth(
+                                      'LoginPage', context.mounted);
+                                }
                               },
                               text: 'Sign In',
                               options: FFButtonOptions(

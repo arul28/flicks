@@ -468,7 +468,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                   await authManager.sendEmailVerification();
 
                                   context.pushNamedAuth(
-                                      'CreateProfile', context.mounted);
+                                      'Verification', context.mounted);
                                 } else {
                                   setState(() {
                                     _model.isPassMismatch = true;
