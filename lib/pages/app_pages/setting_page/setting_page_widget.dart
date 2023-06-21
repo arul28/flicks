@@ -180,8 +180,8 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(70.0, 0.0, 70.0, 0.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    context.pushNamed('LandingPage');
                   },
                   text: 'Log Out\n',
                   options: FFButtonOptions(
