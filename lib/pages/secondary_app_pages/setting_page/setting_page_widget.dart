@@ -194,7 +194,8 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                               await authManager.signOut();
                               GoRouter.of(context).clearRedirectLocation();
 
-                              context.pushNamedAuth('Profile', context.mounted);
+                              context.pushNamedAuth(
+                                  'LandingPage', context.mounted);
                             }
                           },
                           text: 'Log Out\n',
