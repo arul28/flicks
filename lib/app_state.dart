@@ -15,7 +15,8 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _safeInit(() {
-      _email = prefs.getString('ff_email') ?? _email;
+      _MaxPicsInCurrentSession = prefs.getInt('ff_MaxPicsInCurrentSession') ??
+          _MaxPicsInCurrentSession;
     });
   }
 
@@ -26,11 +27,17 @@ class FFAppState extends ChangeNotifier {
 
   late SharedPreferences prefs;
 
-  String _email = '';
-  String get email => _email;
-  set email(String _value) {
-    _email = _value;
-    prefs.setString('ff_email', _value);
+  int _MaxPicsInCurrentSession = 0;
+  int get MaxPicsInCurrentSession => _MaxPicsInCurrentSession;
+  set MaxPicsInCurrentSession(int _value) {
+    _MaxPicsInCurrentSession = _value;
+    prefs.setInt('ff_MaxPicsInCurrentSession', _value);
+  }
+
+  bool _searchActive = false;
+  bool get searchActive => _searchActive;
+  set searchActive(bool _value) {
+    _searchActive = _value;
   }
 }
 

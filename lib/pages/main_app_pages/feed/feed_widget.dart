@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -44,12 +45,14 @@ class _FeedWidgetState extends State<FeedWidget> {
           automaticallyImplyLeading: false,
           title: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 10.0),
-            child: Text(
-              'Account',
-              style: FlutterFlowTheme.of(context).headlineLarge.override(
-                    fontFamily: 'Outfit',
-                    color: FlutterFlowTheme.of(context).frenchViolet,
-                  ),
+            child: AuthUserStreamWidget(
+              builder: (context) => Text(
+                currentUserDisplayName,
+                style: FlutterFlowTheme.of(context).headlineLarge.override(
+                      fontFamily: 'Outfit',
+                      color: FlutterFlowTheme.of(context).frenchViolet,
+                    ),
+              ),
             ),
           ),
           actions: [
@@ -63,10 +66,10 @@ class _FeedWidgetState extends State<FeedWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('settingPage');
+                    context.pushNamed('searchUsers');
                   },
                   child: Icon(
-                    Icons.settings_outlined,
+                    Icons.person_search,
                     color: FlutterFlowTheme.of(context).amethyst,
                     size: 30.0,
                   ),

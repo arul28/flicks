@@ -139,6 +139,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'EditProfile',
           path: '/editProfile',
           builder: (context, params) => EditProfileWidget(),
+        ),
+        FFRoute(
+          name: 'ManageFriendsOption',
+          path: '/manageFriendsOption',
+          builder: (context, params) => ManageFriendsOptionWidget(),
+        ),
+        FFRoute(
+          name: 'searchUsers',
+          path: '/searchUsers',
+          builder: (context, params) => SearchUsersWidget(),
+        ),
+        FFRoute(
+          name: 'viewProfile',
+          path: '/viewProfile',
+          asyncParams: {
+            'userInfo': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: ViewProfileWidget(
+              userInfo: params.getParam('userInfo', ParamType.Document),
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

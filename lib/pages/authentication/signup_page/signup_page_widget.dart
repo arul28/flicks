@@ -455,15 +455,15 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                     return;
                                   }
 
-                                  final usersCreateData = createUsersRecordData(
-                                    email: _model.emailAddressController.text,
-                                    uid: random_data
-                                        .randomInteger(0, 1000000)
-                                        .toString(),
-                                  );
                                   await UsersRecord.collection
                                       .doc(user.uid)
-                                      .update(usersCreateData);
+                                      .update(createUsersRecordData(
+                                        email:
+                                            _model.emailAddressController.text,
+                                        uid: random_data
+                                            .randomInteger(0, 1000000)
+                                            .toString(),
+                                      ));
 
                                   await authManager.sendEmailVerification();
 

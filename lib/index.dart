@@ -16,3 +16,9 @@ export '/pages/authentication/verification/verification_widget.dart'
     show VerificationWidget;
 export '/pages/secondary_app_pages/edit_profile/edit_profile_widget.dart'
     show EditProfileWidget;
+export '/pages/secondary_app_pages/manage_friends_option/manage_friends_option_widget.dart'
+    show ManageFriendsOptionWidget;
+export '/pages/secondary_app_pages/search_users/search_users_widget.dart'
+    show SearchUsersWidget;
+export '/pages/secondary_app_pages/view_profile/view_profile_widget.dart'
+    show ViewProfileWidget;

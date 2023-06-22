@@ -201,6 +201,7 @@ class _VerificationWidgetState extends State<VerificationWidget>
                                     70.0, 0.0, 70.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    setState(() {});
                                     if (currentUserEmailVerified) {
                                       HapticFeedback.lightImpact();
 

@@ -310,13 +310,12 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                                   }
                                                 }
 
-                                                final usersUpdateData =
-                                                    createUsersRecordData(
+                                                await currentUserReference!
+                                                    .update(
+                                                        createUsersRecordData(
                                                   photoUrl:
                                                       _model.uploadedFileUrl,
-                                                );
-                                                await currentUserReference!
-                                                    .update(usersUpdateData);
+                                                ));
                                               },
                                               text: 'Add Image',
                                               options: FFButtonOptions(
@@ -556,11 +555,12 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                             isEqualTo: _model.usernameCreateController.text),
                       );
                       if (_model.usernameCount == 0) {
-                        final usersUpdateData = createUsersRecordData(
+                        await currentUserReference!
+                            .update(createUsersRecordData(
                           displayName: _model.usernameCreateController.text,
                           bio: _model.bioCreateController.text,
-                        );
-                        await currentUserReference!.update(usersUpdateData);
+                          fullName: _model.yourNameController.text,
+                        ));
 
                         context.pushNamed('Profile');
                       } else {

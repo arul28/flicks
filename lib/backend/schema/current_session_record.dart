@@ -32,7 +32,7 @@ class CurrentSessionRecord extends FirestoreRecord {
   void _initializeFields() {
     _startTime = snapshotData['StartTime'] as DateTime?;
     _endTime = snapshotData['EndTime'] as DateTime?;
-    _maxPics = snapshotData['maxPics'] as int?;
+    _maxPics = castToType<int>(snapshotData['maxPics']);
   }
 
   static CollectionReference get collection =>
