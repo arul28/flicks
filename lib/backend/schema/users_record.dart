@@ -74,6 +74,16 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get followedByList => _followedByList ?? const [];
   bool hasFollowedByList() => _followedByList != null;
 
+  // "currentSession" field.
+  List<String>? _currentSession;
+  List<String> get currentSession => _currentSession ?? const [];
+  bool hasCurrentSession() => _currentSession != null;
+
+  // "oldSession" field.
+  List<String>? _oldSession;
+  List<String> get oldSession => _oldSession ?? const [];
+  bool hasOldSession() => _oldSession != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -87,6 +97,8 @@ class UsersRecord extends FirestoreRecord {
     _followingList = getDataList(snapshotData['followingList']);
     _followedByNum = snapshotData['followedByNum'] as int?;
     _followedByList = getDataList(snapshotData['followedByList']);
+    _currentSession = getDataList(snapshotData['currentSession']);
+    _oldSession = getDataList(snapshotData['oldSession']);
   }
 
   static CollectionReference get collection =>
