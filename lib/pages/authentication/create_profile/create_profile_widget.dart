@@ -210,7 +210,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                                     child: Image.network(
                                                       valueOrDefault<String>(
                                                         _model.uploadedFileUrl,
-                                                        'https://images.unsplash.com/photo-1524785281156-c3c68d1e03c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                                                        'https://www.themoviedb.org/t/p/original/xMGWSdT0mcqzentuImFmVhkEgAQ.jpg',
                                                       ),
                                                       fit: BoxFit.cover,
                                                     ),

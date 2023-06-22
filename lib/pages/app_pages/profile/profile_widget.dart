@@ -123,7 +123,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   builder: (context) => ClipRRect(
                                     borderRadius: BorderRadius.circular(50.0),
                                     child: Image.network(
-                                      currentUserPhoto,
+                                      valueOrDefault<String>(
+                                        currentUserPhoto,
+                                        'https://www.themoviedb.org/t/p/original/xMGWSdT0mcqzentuImFmVhkEgAQ.jpg',
+                                      ),
                                       width: 100.0,
                                       height: 100.0,
                                       fit: BoxFit.cover,
