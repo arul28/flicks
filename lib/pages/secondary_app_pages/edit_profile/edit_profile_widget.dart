@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -253,6 +254,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                     child: FFButtonWidget(
                       onPressed: () async {
                         if (_model.picChanged == true) {
+                          await FirebaseStorage.instance
+                              .refFromURL(currentUserPhoto)
+                              .delete();
+
                           await currentUserReference!
                               .update(createUsersRecordData(
                             photoUrl: _model.uploadedFileUrl,

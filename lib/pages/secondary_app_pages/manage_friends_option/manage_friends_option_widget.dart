@@ -539,7 +539,7 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                             child: StreamBuilder<List<UsersRecord>>(
                               stream: queryUsersRecord(
                                 queryBuilder: (usersRecord) =>
-                                    usersRecord.where('incomingPendingRequests',
+                                    usersRecord.where('sentPendingRequests',
                                         arrayContains: currentUserReference),
                               ),
                               builder: (context, snapshot) {
@@ -769,7 +769,7 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                             child: StreamBuilder<List<UsersRecord>>(
                               stream: queryUsersRecord(
                                 queryBuilder: (usersRecord) =>
-                                    usersRecord.where('sentPendingRequests',
+                                    usersRecord.where('incomingPendingRequests',
                                         arrayContains: currentUserReference),
                               ),
                               builder: (context, snapshot) {
