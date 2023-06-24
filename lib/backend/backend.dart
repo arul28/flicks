@@ -6,8 +6,8 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/util/firestore_util.dart';
 
 import 'schema/users_record.dart';
-import 'schema/current_session_record.dart';
-import 'schema/friends_record.dart';
+import 'schema/current_session_pics_record.dart';
+import 'schema/current_session_details_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,8 +16,8 @@ export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
 export 'schema/users_record.dart';
-export 'schema/current_session_record.dart';
-export 'schema/friends_record.dart';
+export 'schema/current_session_pics_record.dart';
+export 'schema/current_session_details_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -71,113 +71,115 @@ Future<FFFirestorePage<UsersRecord>> queryUsersRecordPage({
       isStream: isStream,
     );
 
-/// Functions to query CurrentSessionRecords (as a Stream and as a Future).
-Future<int> queryCurrentSessionRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      CurrentSessionRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<CurrentSessionRecord>> queryCurrentSessionRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      CurrentSessionRecord.collection,
-      CurrentSessionRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<CurrentSessionRecord>> queryCurrentSessionRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      CurrentSessionRecord.collection,
-      CurrentSessionRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<FFFirestorePage<CurrentSessionRecord>> queryCurrentSessionRecordPage({
-  Query Function(Query)? queryBuilder,
-  DocumentSnapshot? nextPageMarker,
-  required int pageSize,
-  required bool isStream,
-}) =>
-    queryCollectionPage(
-      CurrentSessionRecord.collection,
-      CurrentSessionRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      nextPageMarker: nextPageMarker,
-      pageSize: pageSize,
-      isStream: isStream,
-    );
-
-/// Functions to query FriendsRecords (as a Stream and as a Future).
-Future<int> queryFriendsRecordCount({
+/// Functions to query CurrentSessionPicsRecords (as a Stream and as a Future).
+Future<int> queryCurrentSessionPicsRecordCount({
   DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      FriendsRecord.collection(parent),
+      CurrentSessionPicsRecord.collection(parent),
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<FriendsRecord>> queryFriendsRecord({
+Stream<List<CurrentSessionPicsRecord>> queryCurrentSessionPicsRecord({
   DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      FriendsRecord.collection(parent),
-      FriendsRecord.fromSnapshot,
+      CurrentSessionPicsRecord.collection(parent),
+      CurrentSessionPicsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<FriendsRecord>> queryFriendsRecordOnce({
+Future<List<CurrentSessionPicsRecord>> queryCurrentSessionPicsRecordOnce({
   DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      FriendsRecord.collection(parent),
-      FriendsRecord.fromSnapshot,
+      CurrentSessionPicsRecord.collection(parent),
+      CurrentSessionPicsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<FFFirestorePage<FriendsRecord>> queryFriendsRecordPage({
+Future<FFFirestorePage<CurrentSessionPicsRecord>>
+    queryCurrentSessionPicsRecordPage({
   DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   DocumentSnapshot? nextPageMarker,
   required int pageSize,
   required bool isStream,
 }) =>
-    queryCollectionPage(
-      FriendsRecord.collection(parent),
-      FriendsRecord.fromSnapshot,
+        queryCollectionPage(
+          CurrentSessionPicsRecord.collection(parent),
+          CurrentSessionPicsRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
+
+/// Functions to query CurrentSessionDetailsRecords (as a Stream and as a Future).
+Future<int> queryCurrentSessionDetailsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CurrentSessionDetailsRecord.collection,
       queryBuilder: queryBuilder,
-      nextPageMarker: nextPageMarker,
-      pageSize: pageSize,
-      isStream: isStream,
+      limit: limit,
     );
+
+Stream<List<CurrentSessionDetailsRecord>> queryCurrentSessionDetailsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CurrentSessionDetailsRecord.collection,
+      CurrentSessionDetailsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CurrentSessionDetailsRecord>> queryCurrentSessionDetailsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CurrentSessionDetailsRecord.collection,
+      CurrentSessionDetailsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<CurrentSessionDetailsRecord>>
+    queryCurrentSessionDetailsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          CurrentSessionDetailsRecord.collection,
+          CurrentSessionDetailsRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
 
 Future<int> queryCollectionCount(
   Query collection, {

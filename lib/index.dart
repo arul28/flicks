@@ -22,3 +22,5 @@ export '/pages/secondary_app_pages/search_users/search_users_widget.dart'
     show SearchUsersWidget;
 export '/pages/secondary_app_pages/view_profile/view_profile_widget.dart'
     show ViewProfileWidget;
+export '/pages/secondary_app_pages/support_form/support_form_widget.dart'
+    show SupportFormWidget;

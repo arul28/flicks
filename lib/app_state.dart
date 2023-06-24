@@ -39,6 +39,24 @@ class FFAppState extends ChangeNotifier {
   set searchActive(bool _value) {
     _searchActive = _value;
   }
+
+  bool _makePhoto = false;
+  bool get makePhoto => _makePhoto;
+  set makePhoto(bool _value) {
+    _makePhoto = _value;
+  }
+
+  int _index = 0;
+  int get index => _index;
+  set index(int _value) {
+    _index = _value;
+  }
+
+  String _filePath = '';
+  String get filePath => _filePath;
+  set filePath(String _value) {
+    _filePath = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

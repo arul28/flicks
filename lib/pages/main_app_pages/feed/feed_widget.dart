@@ -80,6 +80,14 @@ class _FeedWidgetState extends State<FeedWidget> {
           centerTitle: false,
           elevation: 0.0,
         ),
+        body: SafeArea(
+          top: true,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            scrollDirection: Axis.vertical,
+            children: [],
+          ),
+        ),
       ),
     );
   }

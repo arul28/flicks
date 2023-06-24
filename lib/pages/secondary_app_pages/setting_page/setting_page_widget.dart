@@ -127,16 +127,25 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
               ),
             ),
           ),
-          ListTile(
-            title: Text(
-              'Contact Us',
-              style: FlutterFlowTheme.of(context).titleLarge,
+          InkWell(
+            splashColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () async {
+              context.pushNamed('SupportForm');
+            },
+            child: ListTile(
+              title: Text(
+                'Contact Us',
+                style: FlutterFlowTheme.of(context).titleLarge,
+              ),
+              trailing: Icon(
+                Icons.arrow_right,
+              ),
+              tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+              dense: false,
             ),
-            trailing: Icon(
-              Icons.arrow_right,
-            ),
-            tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-            dense: false,
           ),
           Flexible(
             child: Align(

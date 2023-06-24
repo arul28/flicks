@@ -162,6 +162,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               userInfo: params.getParam('userInfo', ParamType.Document),
             ),
           ),
+        ),
+        FFRoute(
+          name: 'SupportForm',
+          path: '/supportForm',
+          builder: (context, params) => SupportFormWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
