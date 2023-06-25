@@ -24,3 +24,9 @@ export '/pages/secondary_app_pages/view_profile/view_profile_widget.dart'
     show ViewProfileWidget;
 export '/pages/secondary_app_pages/support_form/support_form_widget.dart'
     show SupportFormWidget;
+export '/pages/authentication/forgot_password/forgot_password_widget.dart'
+    show ForgotPasswordWidget;
+export '/pages/authentication/reset_password/reset_password_widget.dart'
+    show ResetPasswordWidget;
+export '/pages/main_app_pages/camera_copy/camera_copy_widget.dart'
+    show CameraCopyWidget;

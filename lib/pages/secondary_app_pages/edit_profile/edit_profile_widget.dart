@@ -97,12 +97,12 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                     child: Text(
                       'Edit your Profile',
-                      style:
-                          FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: 'Outfit',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 22.0,
-                              ),
+                      style: FlutterFlowTheme.of(context)
+                          .headlineSmall
+                          .override(
+                            fontFamily: 'Outfit',
+                            color: FlutterFlowTheme.of(context).frenchViolet,
+                          ),
                     ),
                   ),
                 ],
@@ -231,14 +231,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .labelLarge
-                            .override(
-                              fontFamily: 'Readex Pro',
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
-                              fontSize: 13.0,
-                            ),
+                        textStyle: FlutterFlowTheme.of(context).titleSmall,
                         elevation: 3.0,
                         borderSide: BorderSide(
                           color: Colors.transparent,
@@ -282,14 +275,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).amethyst,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .labelLarge
-                            .override(
-                              fontFamily: 'Readex Pro',
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
-                              fontSize: 13.0,
-                            ),
+                        textStyle: FlutterFlowTheme.of(context).titleSmall,
                         elevation: 3.0,
                         borderSide: BorderSide(
                           color: Colors.transparent,
@@ -441,7 +427,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .frenchViolet,
                                         textStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .titleSmall,
                                         elevation: 2.0,
                                         borderSide: BorderSide(
                                           color: Colors.transparent,

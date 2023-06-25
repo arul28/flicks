@@ -123,7 +123,10 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
               ),
               title: Text(
                 'Search users',
-                style: FlutterFlowTheme.of(context).headlineSmall,
+                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                      fontFamily: 'Outfit',
+                      color: FlutterFlowTheme.of(context).frenchViolet,
+                    ),
               ),
               actions: [],
               centerTitle: false,

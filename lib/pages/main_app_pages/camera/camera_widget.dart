@@ -45,43 +45,17 @@ class _CameraWidgetState extends State<CameraWidget> {
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).lineColor,
-          automaticallyImplyLeading: false,
-          title: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 10.0),
-            child: Text(
-              'Account',
-              style: FlutterFlowTheme.of(context).headlineLarge.override(
-                    fontFamily: 'Outfit',
-                    color: FlutterFlowTheme.of(context).frenchViolet,
-                  ),
-            ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            context.pushNamed('settingPage');
+          },
+          backgroundColor: FlutterFlowTheme.of(context).frenchViolet,
+          elevation: 8.0,
+          child: Icon(
+            Icons.settings,
+            color: Colors.white,
+            size: 24.0,
           ),
-          actions: [
-            Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 10.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('settingPage');
-                  },
-                  child: Icon(
-                    Icons.settings_outlined,
-                    color: FlutterFlowTheme.of(context).amethyst,
-                    size: 30.0,
-                  ),
-                ),
-              ),
-            ),
-          ],
-          centerTitle: false,
-          elevation: 0.0,
         ),
         body: SafeArea(
           top: true,
@@ -96,79 +70,91 @@ class _CameraWidgetState extends State<CameraWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    setState(() {
-                      FFAppState().makePhoto = true;
-                    });
-                    await Future.delayed(const Duration(milliseconds: 5000));
-
-                    await CurrentSessionPicsRecord.createDoc(
-                            currentUserReference!)
-                        .set(createCurrentSessionPicsRecordData(
-                      imagePath: functions.strToImgPath(FFAppState().filePath),
-                    ));
-                  },
-                  text: 'smdylb',
-                  options: FFButtonOptions(
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Readex Pro',
-                          color: Colors.white,
-                        ),
-                    elevation: 3.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(8.0),
+                alignment: AlignmentDirectional(-1.0, -1.0),
+                child: StreamBuilder<List<CurrentSessionPicsRecord>>(
+                  stream: queryCurrentSessionPicsRecord(
+                    parent: currentUserReference,
                   ),
-                ),
-              ),
-              StreamBuilder<List<CurrentSessionPicsRecord>>(
-                stream: queryCurrentSessionPicsRecord(
-                  parent: currentUserReference,
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50.0,
-                        height: 50.0,
-                        child: CircularProgressIndicator(
-                          color: FlutterFlowTheme.of(context).primary,
-                        ),
-                      ),
-                    );
-                  }
-                  List<CurrentSessionPicsRecord>
-                      listViewCurrentSessionPicsRecordList = snapshot.data!;
-                  return ListView.builder(
-                    padding: EdgeInsets.zero,
-                    scrollDirection: Axis.vertical,
-                    itemCount: listViewCurrentSessionPicsRecordList.length,
-                    itemBuilder: (context, listViewIndex) {
-                      final listViewCurrentSessionPicsRecord =
-                          listViewCurrentSessionPicsRecordList[listViewIndex];
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          listViewCurrentSessionPicsRecord.imagePath,
-                          width: 100.0,
-                          height: 100.0,
-                          fit: BoxFit.cover,
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            color: FlutterFlowTheme.of(context).primary,
+                          ),
                         ),
                       );
-                    },
-                  );
-                },
+                    }
+                    List<CurrentSessionPicsRecord>
+                        listViewCurrentSessionPicsRecordList = snapshot.data!;
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      itemCount: listViewCurrentSessionPicsRecordList.length,
+                      itemBuilder: (context, listViewIndex) {
+                        final listViewCurrentSessionPicsRecord =
+                            listViewCurrentSessionPicsRecordList[listViewIndex];
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(
+                            listViewCurrentSessionPicsRecord.imagePath,
+                            width: 100.0,
+                            height: 100.0,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(0.0, 1.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        setState(() {
+                          FFAppState().makePhoto = true;
+                        });
+                        await Future.delayed(
+                            const Duration(milliseconds: 5000));
+
+                        await CurrentSessionPicsRecord.createDoc(
+                                currentUserReference!)
+                            .set(createCurrentSessionPicsRecordData(
+                          imagePath:
+                              functions.strToImgPath(FFAppState().filePath),
+                        ));
+                      },
+                      text: 'smdylb',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                        hoverColor: FlutterFlowTheme.of(context).tertiary400,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

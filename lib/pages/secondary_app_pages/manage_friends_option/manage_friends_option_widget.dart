@@ -128,7 +128,10 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
             children: [
               Text(
                 'Manage Friends',
-                style: FlutterFlowTheme.of(context).headlineSmall,
+                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                      fontFamily: 'Outfit',
+                      color: FlutterFlowTheme.of(context).frenchViolet,
+                    ),
               ),
               Text(
                 'Invite your friends to join you!',

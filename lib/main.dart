@@ -131,6 +131,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'Feed': FeedWidget(),
       'Camera': CameraWidget(),
       'Profile': ProfileWidget(),
+      'CameraCopy': CameraCopyWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -155,20 +156,26 @@ class _NavBarPageState extends State<NavBarPage> {
         haptic: true,
         tabs: [
           GButton(
-            icon: Icons.dynamic_feed,
+            icon: Icons.dynamic_feed_outlined,
             text: '',
-            iconSize: 45.0,
+            iconSize: 50.0,
           ),
           GButton(
-            icon: Icons.camera_rounded,
+            icon: Icons.circle_outlined,
             text: '',
-            iconSize: 45.0,
+            iconSize: 50.0,
             backgroundColor: FlutterFlowTheme.of(context).noColor,
           ),
           GButton(
-            icon: Icons.person_rounded,
+            icon: Icons.person_outlined,
             text: '',
-            iconSize: 45.0,
+            iconSize: 50.0,
+          ),
+          GButton(
+            icon: Icons.circle_outlined,
+            text: '',
+            iconSize: 50.0,
+            backgroundColor: FlutterFlowTheme.of(context).noColor,
           )
         ],
       ),

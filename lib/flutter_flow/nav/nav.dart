@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow_theme.dart';
 import '/backend/backend.dart';
 
@@ -167,8 +168,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SupportForm',
           path: '/supportForm',
           builder: (context, params) => SupportFormWidget(),
+        ),
+        FFRoute(
+          name: 'ForgotPassword',
+          path: '/forgotPassword',
+          builder: (context, params) => ForgotPasswordWidget(),
+        ),
+        FFRoute(
+          name: 'ResetPassword',
+          path: '/resetPassword',
+          builder: (context, params) => ResetPasswordWidget(),
+        ),
+        FFRoute(
+          name: 'CameraCopy',
+          path: '/cameraCopy',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'CameraCopy')
+              : CameraCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {

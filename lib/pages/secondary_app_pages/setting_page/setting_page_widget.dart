@@ -1,8 +1,9 @@
-import '/auth/firebase_auth/auth_util.dart';
+import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +62,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
           child: Text(
             'Settings ',
-            style: FlutterFlowTheme.of(context).headlineLarge.override(
+            style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).frenchViolet,
                 ),
@@ -127,24 +128,62 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
               ),
             ),
           ),
-          InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              context.pushNamed('SupportForm');
-            },
-            child: ListTile(
-              title: Text(
-                'Contact Us',
-                style: FlutterFlowTheme.of(context).titleLarge,
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.pushNamed(
+                  'ResetPassword',
+                  extra: <String, dynamic>{
+                    kTransitionInfoKey: TransitionInfo(
+                      hasTransition: true,
+                      transitionType: PageTransitionType.rightToLeft,
+                    ),
+                  },
+                );
+              },
+              child: ListTile(
+                title: Text(
+                  'Reset Password',
+                  style: FlutterFlowTheme.of(context).titleLarge,
+                ),
+                subtitle: Text(
+                  'Reset your password',
+                  style: FlutterFlowTheme.of(context).labelMedium,
+                ),
+                trailing: Icon(
+                  Icons.arrow_right,
+                ),
+                tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                dense: false,
               ),
-              trailing: Icon(
-                Icons.arrow_right,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.pushNamed('SupportForm');
+              },
+              child: ListTile(
+                title: Text(
+                  'Contact Us',
+                  style: FlutterFlowTheme.of(context).titleLarge,
+                ),
+                trailing: Icon(
+                  Icons.arrow_right,
+                ),
+                tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                dense: false,
               ),
-              tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-              dense: false,
             ),
           ),
           Flexible(
@@ -157,7 +196,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
@@ -170,64 +209,54 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                     ),
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            70.0, 0.0, 70.0, 0.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            var confirmDialogResponse = await showDialog<bool>(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('Log Out?'),
-                                      content: Text(
-                                          'are you sure you want to log out?'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, false),
-                                          child: Text('Cancel'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, true),
-                                          child: Text('Confirm'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ) ??
-                                false;
-                            if (confirmDialogResponse) {
-                              GoRouter.of(context).prepareAuthEvent();
-                              await authManager.signOut();
-                              GoRouter.of(context).clearRedirectLocation();
-
-                              context.pushNamedAuth(
-                                  'LandingPage', context.mounted);
-                            }
-                          },
-                          text: 'Log Out\n',
-                          options: FFButtonOptions(
-                            width: 253.0,
-                            height: 50.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).frenchViolet,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
+                      child: Builder(
+                        builder: (context) => Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              70.0, 0.0, 70.0, 10.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              await showAlignedDialog(
+                                context: context,
+                                isGlobal: true,
+                                avoidOverflow: false,
+                                targetAnchor: AlignmentDirectional(0.0, 0.0)
+                                    .resolve(Directionality.of(context)),
+                                followerAnchor: AlignmentDirectional(0.0, 0.0)
+                                    .resolve(Directionality.of(context)),
+                                builder: (dialogContext) {
+                                  return Material(
+                                    color: Colors.transparent,
+                                    child: Container(
+                                      height: 110.0,
+                                      width: 320.0,
+                                      child: LogoutWidget(),
+                                    ),
+                                  );
+                                },
+                              ).then((value) => setState(() {}));
+                            },
+                            text: 'Log Out\n',
+                            options: FFButtonOptions(
+                              width: 253.0,
+                              height: 50.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).frenchViolet,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(30.0),
                             ),
-                            borderRadius: BorderRadius.circular(30.0),
                           ),
                         ),
                       ),
@@ -237,13 +266,16 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
               ),
             ),
           ),
-          Text(
-            'Licensed by BTA food and entertainment ',
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Readex Pro',
-                  color: Color(0xFF3B454D),
-                  fontStyle: FontStyle.italic,
-                ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 70.0),
+            child: Text(
+              'Licensed by BTA food and entertainment ',
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Readex Pro',
+                    color: Color(0xFF3B454D),
+                    fontStyle: FontStyle.italic,
+                  ),
+            ),
           ),
         ],
       ),
