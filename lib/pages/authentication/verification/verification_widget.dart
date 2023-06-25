@@ -1,11 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/components/verify_email/verify_email_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -223,74 +221,49 @@ class _VerificationWidgetState extends State<VerificationWidget>
                                         setState(() {});
                                         if (currentUserEmailVerified) {
                                           HapticFeedback.lightImpact();
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
-                                          if (widget.password! !=
-                                              widget.confirmPassword!) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: Text(
-                                                  'Passwords don\'t match!',
-                                                ),
-                                              ),
-                                            );
-                                            return;
-                                          }
 
-                                          final user = await authManager
-                                              .createAccountWithEmail(
-                                            context,
-                                            widget.email!,
-                                            widget.password!,
-                                          );
-                                          if (user == null) {
-                                            return;
-                                          }
-
-                                          await UsersRecord.collection
-                                              .doc(user.uid)
-                                              .update(createUsersRecordData(
-                                                email: widget.email,
-                                                uid: random_data
-                                                    .randomInteger(0, 1000000)
-                                                    .toString(),
-                                              ));
-
-                                          context.pushNamedAuth(
-                                              'CreateProfile', context.mounted);
+                                          context.pushNamed('CreateProfile');
                                         } else {
-                                          await showAlignedDialog(
-                                            context: context,
-                                            isGlobal: true,
-                                            avoidOverflow: false,
-                                            targetAnchor: AlignmentDirectional(
-                                                    0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                            followerAnchor:
-                                                AlignmentDirectional(0.0, 0.0)
-                                                    .resolve(Directionality.of(
-                                                        context)),
-                                            builder: (dialogContext) {
-                                              return Material(
-                                                color: Colors.transparent,
-                                                child: GestureDetector(
-                                                  onTap: () => FocusScope.of(
-                                                          context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode),
-                                                  child: Container(
-                                                    height: 120.0,
-                                                    width: 320.0,
-                                                    child: VerifyEmailWidget(),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then((value) => setState(() {}));
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 1000));
+                                          if (currentUserEmailVerified) {
+                                            HapticFeedback.lightImpact();
 
-                                          setState(() {});
+                                            context.pushNamed('CreateProfile');
+                                          } else {
+                                            await showAlignedDialog(
+                                              context: context,
+                                              isGlobal: true,
+                                              avoidOverflow: false,
+                                              targetAnchor:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              followerAnchor:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              builder: (dialogContext) {
+                                                return Material(
+                                                  color: Colors.transparent,
+                                                  child: GestureDetector(
+                                                    onTap: () => FocusScope.of(
+                                                            context)
+                                                        .requestFocus(
+                                                            _model.unfocusNode),
+                                                    child: Container(
+                                                      height: 120.0,
+                                                      width: 320.0,
+                                                      child:
+                                                          VerifyEmailWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then((value) => setState(() {}));
+                                          }
                                         }
                                       },
                                       text: 'Verify',
