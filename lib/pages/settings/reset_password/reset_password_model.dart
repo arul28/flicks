@@ -1,4 +1,3 @@
-import '/auth/base_auth_user_provider.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/email_reset_fail/email_reset_fail_widget.dart';
 import '/components/email_reset_success/email_reset_success_widget.dart';
@@ -21,15 +20,32 @@ class ResetPasswordModel extends FlutterFlowModel {
   // State field(s) for email widget.
   TextEditingController? emailController;
   String? Function(BuildContext, String?)? emailControllerValidator;
+  String? _emailControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for currentPass widget.
   TextEditingController? currentPassController;
   late bool currentPassVisibility;
   String? Function(BuildContext, String?)? currentPassControllerValidator;
+  String? _currentPassControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
+    emailControllerValidator = _emailControllerValidator;
     currentPassVisibility = false;
+    currentPassControllerValidator = _currentPassControllerValidator;
   }
 
   void dispose() {

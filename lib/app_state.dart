@@ -57,6 +57,12 @@ class FFAppState extends ChangeNotifier {
   set filePath(String _value) {
     _filePath = _value;
   }
+
+  bool _isLoggedIn = false;
+  bool get isLoggedIn => _isLoggedIn;
+  set isLoggedIn(bool _value) {
+    _isLoggedIn = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

@@ -264,217 +264,248 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                                     return Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 1.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 75.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .black600,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 0.0,
-                                              color: Color(0xFFE0E3E7),
-                                              offset: Offset(0.0, 1.0),
-                                            )
-                                          ],
-                                          border: Border.all(
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            'viewProfile',
+                                            queryParameters: {
+                                              'userInfo': serializeParam(
+                                                listViewUsersRecord,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'userInfo': listViewUsersRecord,
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 75.0,
+                                          decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
-                                                .noColor,
+                                                .black600,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                blurRadius: 0.0,
+                                                color: Color(0xFFE0E3E7),
+                                                offset: Offset(0.0, 1.0),
+                                              )
+                                            ],
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .noColor,
+                                            ),
                                           ),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  4.0, 4.0, 4.0, 4.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Container(
-                                                width: 60.0,
-                                                height: 60.0,
-                                                decoration: BoxDecoration(
-                                                  color: Color(0x4C4B39EF),
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    width: 2.0,
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          2.0, 2.0, 2.0, 2.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                    child: Image.network(
-                                                      listViewUsersRecord
-                                                          .photoUrl,
-                                                      width: 60.0,
-                                                      height: 60.0,
-                                                      fit: BoxFit.cover,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    4.0, 4.0, 4.0, 4.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Container(
+                                                  width: 60.0,
+                                                  height: 60.0,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0x4C4B39EF),
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      width: 2.0,
                                                     ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  12.0,
-                                                                  12.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        listViewUsersRecord
-                                                            .displayName,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Plus Jakarta Sans',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .gray200,
-                                                                  fontSize:
-                                                                      16.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  12.0,
-                                                                  4.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        listViewUsersRecord
-                                                            .fullName,
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .labelMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Plus Jakarta Sans',
-                                                              color: Color(
-                                                                  0xFF57636C),
-                                                              fontSize: 14.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  var confirmDialogResponse =
-                                                      await showDialog<bool>(
-                                                            context: context,
-                                                            builder:
-                                                                (alertDialogContext) {
-                                                              return AlertDialog(
-                                                                title: Text(
-                                                                    'Remove Friend'),
-                                                                content: Text(
-                                                                    'Are you sure you want to remove this friend?'),
-                                                                actions: [
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            false),
-                                                                    child: Text(
-                                                                        'Cancel'),
-                                                                  ),
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            true),
-                                                                    child: Text(
-                                                                        'Confirm'),
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          ) ??
-                                                          false;
-                                                  if (confirmDialogResponse) {
-                                                    await currentUserReference!
-                                                        .update({
-                                                      'friendsNum':
-                                                          FieldValue.increment(
-                                                              -(1)),
-                                                      'friendsList': FieldValue
-                                                          .arrayRemove([
-                                                        listViewUsersRecord
-                                                            .reference
-                                                      ]),
-                                                    });
-
-                                                    await listViewUsersRecord
-                                                        .reference
-                                                        .update({
-                                                      'friendsNum':
-                                                          FieldValue.increment(
-                                                              -(1)),
-                                                      'friendsList': FieldValue
-                                                          .arrayRemove([
-                                                        currentUserReference
-                                                      ]),
-                                                    });
-                                                    setState(() {});
-                                                  }
-                                                },
-                                                child: Card(
-                                                  clipBehavior: Clip
-                                                      .antiAliasWithSaveLayer,
-                                                  color: Color(0xFFF1F4F8),
-                                                  elevation: 1.0,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
                                                   ),
                                                   child: Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(4.0, 4.0,
-                                                                4.0, 4.0),
-                                                    child: Icon(
-                                                      Icons.remove,
-                                                      color: Color(0xFF57636C),
-                                                      size: 24.0,
+                                                            .fromSTEB(2.0, 2.0,
+                                                                2.0, 2.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40.0),
+                                                      child: Image.network(
+                                                        listViewUsersRecord
+                                                            .photoUrl,
+                                                        width: 60.0,
+                                                        height: 60.0,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    12.0,
+                                                                    12.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          listViewUsersRecord
+                                                              .displayName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Plus Jakarta Sans',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .gray200,
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    12.0,
+                                                                    4.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          listViewUsersRecord
+                                                              .fullName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Plus Jakarta Sans',
+                                                                color: Color(
+                                                                    0xFF57636C),
+                                                                fontSize: 14.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    var confirmDialogResponse =
+                                                        await showDialog<bool>(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      'Remove Friend'),
+                                                                  content: Text(
+                                                                      'Are you sure you want to remove this friend?'),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                      child: Text(
+                                                                          'Cancel'),
+                                                                    ),
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                      child: Text(
+                                                                          'Confirm'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            ) ??
+                                                            false;
+                                                    if (confirmDialogResponse) {
+                                                      await currentUserReference!
+                                                          .update({
+                                                        'friendsNum': FieldValue
+                                                            .increment(-(1)),
+                                                        'friendsList':
+                                                            FieldValue
+                                                                .arrayRemove([
+                                                          listViewUsersRecord
+                                                              .reference
+                                                        ]),
+                                                      });
+
+                                                      await listViewUsersRecord
+                                                          .reference
+                                                          .update({
+                                                        'friendsNum': FieldValue
+                                                            .increment(-(1)),
+                                                        'friendsList':
+                                                            FieldValue
+                                                                .arrayRemove([
+                                                          currentUserReference
+                                                        ]),
+                                                      });
+                                                      setState(() {});
+                                                    }
+
+                                                    context.pushNamed(
+                                                        'ManageFriendsOption');
+                                                  },
+                                                  child: Card(
+                                                    clipBehavior: Clip
+                                                        .antiAliasWithSaveLayer,
+                                                    color: Color(0xFFF1F4F8),
+                                                    elevation: 1.0,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  4.0,
+                                                                  4.0,
+                                                                  4.0,
+                                                                  4.0),
+                                                      child: Icon(
+                                                        Icons.remove,
+                                                        color:
+                                                            Color(0xFF57636C),
+                                                        size: 24.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ).animateOnPageLoad(animationsMap[
@@ -584,224 +615,25 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 1.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 75.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .black600,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: Color(0xFFE0E3E7),
-                                            offset: Offset(0.0, 1.0),
-                                          )
-                                        ],
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4.0, 4.0, 4.0, 4.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Container(
-                                              width: 60.0,
-                                              height: 60.0,
-                                              decoration: BoxDecoration(
-                                                color: Color(0x4C4B39EF),
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                  color: Color(0xFF4B39EF),
-                                                  width: 2.0,
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        2.0, 2.0, 2.0, 2.0),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          40.0),
-                                                  child: Image.network(
-                                                    listViewUsersRecord
-                                                        .photoUrl,
-                                                    width: 60.0,
-                                                    height: 60.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'viewProfile',
+                                          queryParameters: {
+                                            'userInfo': serializeParam(
+                                              listViewUsersRecord,
+                                              ParamType.Document,
                                             ),
-                                            Expanded(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(12.0,
-                                                                12.0, 0.0, 0.0),
-                                                    child: Text(
-                                                      listViewUsersRecord
-                                                          .displayName,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLarge
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Plus Jakarta Sans',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .gray200,
-                                                                fontSize: 16.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(12.0, 4.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      listViewUsersRecord
-                                                          .fullName,
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .labelMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                'Plus Jakarta Sans',
-                                                            color: Color(
-                                                                0xFF57636C),
-                                                            fontSize: 14.0,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                await currentUserReference!
-                                                    .update({
-                                                  'friendsList':
-                                                      FieldValue.arrayUnion([
-                                                    listViewUsersRecord
-                                                        .reference
-                                                  ]),
-                                                  'friendsNum':
-                                                      FieldValue.increment(1),
-                                                  'incomingPendingRequests':
-                                                      FieldValue.arrayRemove([
-                                                    listViewUsersRecord
-                                                        .reference
-                                                  ]),
-                                                  'incomingPendingRequestsNum':
-                                                      FieldValue.increment(
-                                                          -(1)),
-                                                });
-
-                                                await listViewUsersRecord
-                                                    .reference
-                                                    .update({
-                                                  'friendsList':
-                                                      FieldValue.arrayUnion([
-                                                    currentUserReference
-                                                  ]),
-                                                  'friendsNum':
-                                                      FieldValue.increment(1),
-                                                  'sentPendingRequests':
-                                                      FieldValue.arrayRemove([
-                                                    currentUserReference
-                                                  ]),
-                                                  'sentPendingRequestsNum':
-                                                      FieldValue.increment(
-                                                          -(1)),
-                                                });
-                                                setState(() {});
-                                              },
-                                              child: Card(
-                                                clipBehavior:
-                                                    Clip.antiAliasWithSaveLayer,
-                                                color: Color(0xFFF1F4F8),
-                                                elevation: 1.0,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          40.0),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          4.0, 4.0, 4.0, 4.0),
-                                                  child: Icon(
-                                                    Icons.add,
-                                                    color: Color(0xFF57636C),
-                                                    size: 24.0,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'containerOnPageLoadAnimation2']!),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 12.0, 0.0, 0.0),
-                            child: FutureBuilder<List<UsersRecord>>(
-                              future: queryUsersRecordOnce(
-                                queryBuilder: (usersRecord) =>
-                                    usersRecord.where('incomingPendingRequests',
-                                        arrayContains: currentUserReference),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<UsersRecord> listViewUsersRecordList =
-                                    snapshot.data!;
-                                return ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: listViewUsersRecordList.length,
-                                  itemBuilder: (context, listViewIndex) {
-                                    final listViewUsersRecord =
-                                        listViewUsersRecordList[listViewIndex];
-                                    return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 1.0),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'userInfo': listViewUsersRecord,
+                                          },
+                                        );
+                                      },
                                       child: Container(
                                         width: double.infinity,
                                         height: 75.0,
@@ -830,9 +662,7 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                                                   color: Color(0x4C4B39EF),
                                                   shape: BoxShape.circle,
                                                   border: Border.all(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
+                                                    color: Color(0xFF4B39EF),
                                                     width: 2.0,
                                                   ),
                                                 ),
@@ -919,95 +749,68 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                                                   ],
                                                 ),
                                               ),
-                                              Card(
-                                                clipBehavior:
-                                                    Clip.antiAliasWithSaveLayer,
-                                                color: Color(0xFFF1F4F8),
-                                                elevation: 1.0,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          40.0),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          4.0, 4.0, 4.0, 4.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      var confirmDialogResponse =
-                                                          await showDialog<
-                                                                  bool>(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (alertDialogContext) {
-                                                                  return AlertDialog(
-                                                                    title: Text(
-                                                                        'Take Back Request'),
-                                                                    content: Text(
-                                                                        'Are you sure you want to take back this friend request?'),
-                                                                    actions: [
-                                                                      TextButton(
-                                                                        onPressed: () => Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            false),
-                                                                        child: Text(
-                                                                            'Cancel'),
-                                                                      ),
-                                                                      TextButton(
-                                                                        onPressed: () => Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            true),
-                                                                        child: Text(
-                                                                            'Confirm'),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              ) ??
-                                                              false;
-                                                      if (confirmDialogResponse) {
-                                                        await currentUserReference!
-                                                            .update({
-                                                          'sentPendingRequestsNum':
-                                                              FieldValue
-                                                                  .increment(
-                                                                      -(1)),
-                                                          'sentAcceptedRequests':
-                                                              FieldValue
-                                                                  .arrayRemove([
-                                                            listViewUsersRecord
-                                                                .reference
-                                                          ]),
-                                                        });
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await currentUserReference!
+                                                      .update({
+                                                    'friendsList':
+                                                        FieldValue.arrayUnion([
+                                                      listViewUsersRecord
+                                                          .reference
+                                                    ]),
+                                                    'friendsNum':
+                                                        FieldValue.increment(1),
+                                                    'incomingPendingRequests':
+                                                        FieldValue.arrayRemove([
+                                                      listViewUsersRecord
+                                                          .reference
+                                                    ]),
+                                                    'incomingPendingRequestsNum':
+                                                        FieldValue.increment(
+                                                            -(1)),
+                                                  });
 
-                                                        await listViewUsersRecord
-                                                            .reference
-                                                            .update({
-                                                          'incomingPendingRequestsNum':
-                                                              FieldValue
-                                                                  .increment(
-                                                                      -(1)),
-                                                          'incomingPendingRequests':
-                                                              FieldValue
-                                                                  .arrayRemove([
-                                                            currentUserReference
-                                                          ]),
-                                                        });
-                                                      }
-                                                      setState(() {});
-                                                    },
+                                                  await listViewUsersRecord
+                                                      .reference
+                                                      .update({
+                                                    'friendsList':
+                                                        FieldValue.arrayUnion([
+                                                      currentUserReference
+                                                    ]),
+                                                    'friendsNum':
+                                                        FieldValue.increment(1),
+                                                    'sentPendingRequests':
+                                                        FieldValue.arrayRemove([
+                                                      currentUserReference
+                                                    ]),
+                                                    'sentPendingRequestsNum':
+                                                        FieldValue.increment(
+                                                            -(1)),
+                                                  });
+                                                  setState(() {});
+                                                },
+                                                child: Card(
+                                                  clipBehavior: Clip
+                                                      .antiAliasWithSaveLayer,
+                                                  color: Color(0xFFF1F4F8),
+                                                  elevation: 1.0,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40.0),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(4.0, 4.0,
+                                                                4.0, 4.0),
                                                     child: Icon(
-                                                      Icons.remove,
+                                                      Icons.add,
                                                       color: Color(0xFF57636C),
                                                       size: 24.0,
                                                     ),
@@ -1015,6 +818,288 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                                                 ),
                                               ),
                                             ],
+                                          ),
+                                        ),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'containerOnPageLoadAnimation2']!),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 12.0, 0.0, 0.0),
+                            child: FutureBuilder<List<UsersRecord>>(
+                              future: queryUsersRecordOnce(
+                                queryBuilder: (usersRecord) =>
+                                    usersRecord.where('incomingPendingRequests',
+                                        arrayContains: currentUserReference),
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<UsersRecord> listViewUsersRecordList =
+                                    snapshot.data!;
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: listViewUsersRecordList.length,
+                                  itemBuilder: (context, listViewIndex) {
+                                    final listViewUsersRecord =
+                                        listViewUsersRecordList[listViewIndex];
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 1.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            'viewProfile',
+                                            queryParameters: {
+                                              'userInfo': serializeParam(
+                                                listViewUsersRecord,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'userInfo': listViewUsersRecord,
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 75.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .black600,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                blurRadius: 0.0,
+                                                color: Color(0xFFE0E3E7),
+                                                offset: Offset(0.0, 1.0),
+                                              )
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    4.0, 4.0, 4.0, 4.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Container(
+                                                  width: 60.0,
+                                                  height: 60.0,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0x4C4B39EF),
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 2.0,
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(2.0, 2.0,
+                                                                2.0, 2.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40.0),
+                                                      child: Image.network(
+                                                        listViewUsersRecord
+                                                            .photoUrl,
+                                                        width: 60.0,
+                                                        height: 60.0,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    12.0,
+                                                                    12.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          listViewUsersRecord
+                                                              .displayName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Plus Jakarta Sans',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .gray200,
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    12.0,
+                                                                    4.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          listViewUsersRecord
+                                                              .fullName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Plus Jakarta Sans',
+                                                                color: Color(
+                                                                    0xFF57636C),
+                                                                fontSize: 14.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Card(
+                                                  clipBehavior: Clip
+                                                      .antiAliasWithSaveLayer,
+                                                  color: Color(0xFFF1F4F8),
+                                                  elevation: 1.0,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40.0),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(4.0, 4.0,
+                                                                4.0, 4.0),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        var confirmDialogResponse =
+                                                            await showDialog<
+                                                                    bool>(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (alertDialogContext) {
+                                                                    return AlertDialog(
+                                                                      title: Text(
+                                                                          'Take Back Request'),
+                                                                      content: Text(
+                                                                          'Are you sure you want to take back this friend request?'),
+                                                                      actions: [
+                                                                        TextButton(
+                                                                          onPressed: () => Navigator.pop(
+                                                                              alertDialogContext,
+                                                                              false),
+                                                                          child:
+                                                                              Text('Cancel'),
+                                                                        ),
+                                                                        TextButton(
+                                                                          onPressed: () => Navigator.pop(
+                                                                              alertDialogContext,
+                                                                              true),
+                                                                          child:
+                                                                              Text('Confirm'),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                ) ??
+                                                                false;
+                                                        if (confirmDialogResponse) {
+                                                          await currentUserReference!
+                                                              .update({
+                                                            'sentPendingRequestsNum':
+                                                                FieldValue
+                                                                    .increment(
+                                                                        -(1)),
+                                                            'sentAcceptedRequests':
+                                                                FieldValue
+                                                                    .arrayRemove([
+                                                              listViewUsersRecord
+                                                                  .reference
+                                                            ]),
+                                                          });
+
+                                                          await listViewUsersRecord
+                                                              .reference
+                                                              .update({
+                                                            'incomingPendingRequestsNum':
+                                                                FieldValue
+                                                                    .increment(
+                                                                        -(1)),
+                                                            'incomingPendingRequests':
+                                                                FieldValue
+                                                                    .arrayRemove([
+                                                              currentUserReference
+                                                            ]),
+                                                          });
+                                                        }
+                                                        setState(() {});
+                                                      },
+                                                      child: Icon(
+                                                        Icons.remove,
+                                                        color:
+                                                            Color(0xFF57636C),
+                                                        size: 24.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ).animateOnPageLoad(animationsMap[

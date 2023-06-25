@@ -55,7 +55,15 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
             size: 24.0,
           ),
           onPressed: () async {
-            context.safePop();
+            context.pushNamed(
+              'Profile',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.rightToLeft,
+                ),
+              },
+            );
           },
         ),
         title: Padding(
@@ -193,17 +201,13 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                        width: 200.0,
-                        height: 200.0,
-                        fit: BoxFit.fill,
-                      ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                      width: 200.0,
+                      height: 200.0,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   Align(

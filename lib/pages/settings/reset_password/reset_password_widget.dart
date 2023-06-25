@@ -1,4 +1,3 @@
-import '/auth/base_auth_user_provider.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/email_reset_fail/email_reset_fail_widget.dart';
 import '/components/email_reset_success/email_reset_success_widget.dart';
@@ -373,6 +372,43 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                           Expanded(
                             child: Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 40.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    context.pushNamed('settingPage');
+                                  },
+                                  text: 'Back',
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 50.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).gray200,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .black600,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Builder(
                                 builder: (context) => Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -396,10 +432,26 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                         return;
                                       }
 
-                                      if (loggedIn == true) {
-                                        context.pushNamedAuth(
-                                            'ResetPassword', context.mounted);
-
+                                      setState(() {
+                                        FFAppState().isLoggedIn = true;
+                                      });
+                                      if (FFAppState().isLoggedIn) {
+                                        if (_model
+                                            .emailController.text.isEmpty) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Email required!',
+                                              ),
+                                            ),
+                                          );
+                                          return;
+                                        }
+                                        await authManager.resetPassword(
+                                          email: _model.emailController.text,
+                                          context: context,
+                                        );
                                         await showAlignedDialog(
                                           context: context,
                                           isGlobal: true,
@@ -431,8 +483,13 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                           },
                                         ).then((value) => setState(() {}));
 
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        await authManager.signOut();
+                                        GoRouter.of(context)
+                                            .clearRedirectLocation();
+
                                         context.pushNamedAuth(
-                                            'settingPage', context.mounted);
+                                            'LoginPage', context.mounted);
                                       } else {
                                         await showAlignedDialog(
                                           context: context,
@@ -490,43 +547,6 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                       ),
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 40.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    context.pushNamed('settingPage');
-                                  },
-                                  text: 'Back',
-                                  options: FFButtonOptions(
-                                    width: double.infinity,
-                                    height: 50.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).gray200,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .black600,
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30.0),
                                   ),
                                 ),
                               ),
