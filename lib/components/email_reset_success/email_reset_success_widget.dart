@@ -4,18 +4,19 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'forgot_model.dart';
-export 'forgot_model.dart';
+import 'email_reset_success_model.dart';
+export 'email_reset_success_model.dart';
 
-class ForgotWidget extends StatefulWidget {
-  const ForgotWidget({Key? key}) : super(key: key);
+class EmailResetSuccessWidget extends StatefulWidget {
+  const EmailResetSuccessWidget({Key? key}) : super(key: key);
 
   @override
-  _ForgotWidgetState createState() => _ForgotWidgetState();
+  _EmailResetSuccessWidgetState createState() =>
+      _EmailResetSuccessWidgetState();
 }
 
-class _ForgotWidgetState extends State<ForgotWidget> {
-  late ForgotModel _model;
+class _EmailResetSuccessWidgetState extends State<EmailResetSuccessWidget> {
+  late EmailResetSuccessModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -26,7 +27,7 @@ class _ForgotWidgetState extends State<ForgotWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ForgotModel());
+    _model = createModel(context, () => EmailResetSuccessModel());
   }
 
   @override
@@ -66,6 +67,7 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                     Expanded(
                       child: Text(
                         'Check your email for a reset link! Click done after you reset your password.',
+                        textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lexend Deca',
                               color: Color(0xFF57636C),
@@ -86,7 +88,7 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                         EdgeInsetsDirectional.fromSTEB(90.0, 0.0, 110.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('LoginPage');
+                        Navigator.pop(context);
                       },
                       text: 'Done',
                       options: FFButtonOptions(

@@ -1,9 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/verify_email/verify_email_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -15,7 +17,16 @@ import 'verification_model.dart';
 export 'verification_model.dart';
 
 class VerificationWidget extends StatefulWidget {
-  const VerificationWidget({Key? key}) : super(key: key);
+  const VerificationWidget({
+    Key? key,
+    required this.email,
+    required this.password,
+    required this.confirmPassword,
+  }) : super(key: key);
+
+  final String? email;
+  final String? password;
+  final String? confirmPassword;
 
   @override
   _VerificationWidgetState createState() => _VerificationWidgetState();
@@ -212,8 +223,42 @@ class _VerificationWidgetState extends State<VerificationWidget>
                                         setState(() {});
                                         if (currentUserEmailVerified) {
                                           HapticFeedback.lightImpact();
+                                          GoRouter.of(context)
+                                              .prepareAuthEvent();
+                                          if (widget.password! !=
+                                              widget.confirmPassword!) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Passwords don\'t match!',
+                                                ),
+                                              ),
+                                            );
+                                            return;
+                                          }
 
-                                          context.pushNamed('CreateProfile');
+                                          final user = await authManager
+                                              .createAccountWithEmail(
+                                            context,
+                                            widget.email!,
+                                            widget.password!,
+                                          );
+                                          if (user == null) {
+                                            return;
+                                          }
+
+                                          await UsersRecord.collection
+                                              .doc(user.uid)
+                                              .update(createUsersRecordData(
+                                                email: widget.email,
+                                                uid: random_data
+                                                    .randomInteger(0, 1000000)
+                                                    .toString(),
+                                              ));
+
+                                          context.pushNamedAuth(
+                                              'CreateProfile', context.mounted);
                                         } else {
                                           await showAlignedDialog(
                                             context: context,

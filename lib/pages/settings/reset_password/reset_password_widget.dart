@@ -1,7 +1,12 @@
+import '/auth/base_auth_user_provider.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/components/email_reset_fail/email_reset_fail_widget.dart';
+import '/components/email_reset_success/email_reset_success_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -99,9 +104,8 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
     super.initState();
     _model = createModel(context, () => ResetPasswordModel());
 
+    _model.emailController ??= TextEditingController();
     _model.currentPassController ??= TextEditingController();
-    _model.newpassController ??= TextEditingController();
-    _model.newpassconfirmController ??= TextEditingController();
   }
 
   @override
@@ -207,10 +211,68 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 20.0, 20.0, 0.0),
+                                  child: TextFormField(
+                                    controller: _model.emailController,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Enter your email',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelSmall,
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .bodySmall,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              20.0, 24.0, 20.0, 24.0),
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    validator: _model.emailControllerValidator
+                                        .asValidator(context),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 20.0, 20.0, 40.0),
                                   child: TextFormField(
                                     controller: _model.currentPassController,
-                                    obscureText: false,
+                                    obscureText: !_model.currentPassVisibility,
                                     decoration: InputDecoration(
                                       labelText: 'Enter your current password',
                                       labelStyle: FlutterFlowTheme.of(context)
@@ -256,128 +318,26 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               20.0, 24.0, 20.0, 24.0),
+                                      suffixIcon: InkWell(
+                                        onTap: () => setState(
+                                          () => _model.currentPassVisibility =
+                                              !_model.currentPassVisibility,
+                                        ),
+                                        focusNode:
+                                            FocusNode(skipTraversal: true),
+                                        child: Icon(
+                                          _model.currentPassVisibility
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined,
+                                          color: Color(0xFF757575),
+                                          size: 22.0,
+                                        ),
+                                      ),
                                     ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
                                     validator: _model
                                         .currentPassControllerValidator
-                                        .asValidator(context),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 20.0, 20.0, 0.0),
-                                  child: TextFormField(
-                                    controller: _model.newpassController,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Enter your new password',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelSmall,
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      filled: true,
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              20.0, 24.0, 20.0, 24.0),
-                                    ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                    validator: _model.newpassControllerValidator
-                                        .asValidator(context),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 20.0, 20.0, 0.0),
-                                  child: TextFormField(
-                                    controller: _model.newpassconfirmController,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Confirm your password',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelSmall,
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      filled: true,
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              20.0, 24.0, 20.0, 24.0),
-                                    ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                    validator: _model
-                                        .newpassconfirmControllerValidator
                                         .asValidator(context),
                                   ),
                                 ),
@@ -413,35 +373,123 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                           Expanded(
                             child: Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    40.0, 0.0, 10.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button-Login pressed ...');
-                                  },
-                                  text: 'Send',
-                                  options: FFButtonOptions(
-                                    width: double.infinity,
-                                    height: 50.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).gray200,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .black600,
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
+                              child: Builder(
+                                builder: (context) => Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      40.0, 0.0, 10.0, 0.0),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      if (_model.formKey.currentState == null ||
+                                          !_model.formKey.currentState!
+                                              .validate()) {
+                                        return;
+                                      }
+                                      GoRouter.of(context).prepareAuthEvent();
+
+                                      final user =
+                                          await authManager.signInWithEmail(
+                                        context,
+                                        _model.emailController.text,
+                                        _model.currentPassController.text,
+                                      );
+                                      if (user == null) {
+                                        return;
+                                      }
+
+                                      if (loggedIn == true) {
+                                        context.pushNamedAuth(
+                                            'ResetPassword', context.mounted);
+
+                                        await showAlignedDialog(
+                                          context: context,
+                                          isGlobal: true,
+                                          avoidOverflow: false,
+                                          targetAnchor: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          followerAnchor: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          builder: (dialogContext) {
+                                            return Material(
+                                              color: Colors.transparent,
+                                              child: GestureDetector(
+                                                onTap: () =>
+                                                    FocusScope.of(context)
+                                                        .requestFocus(
+                                                            _model.unfocusNode),
+                                                child: Container(
+                                                  height: 120.0,
+                                                  width: 320.0,
+                                                  child:
+                                                      EmailResetSuccessWidget(),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ).then((value) => setState(() {}));
+
+                                        context.pushNamedAuth(
+                                            'settingPage', context.mounted);
+                                      } else {
+                                        await showAlignedDialog(
+                                          context: context,
+                                          isGlobal: true,
+                                          avoidOverflow: false,
+                                          targetAnchor: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          followerAnchor: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          builder: (dialogContext) {
+                                            return Material(
+                                              color: Colors.transparent,
+                                              child: GestureDetector(
+                                                onTap: () =>
+                                                    FocusScope.of(context)
+                                                        .requestFocus(
+                                                            _model.unfocusNode),
+                                                child: Container(
+                                                  height: 115.0,
+                                                  width: 320.0,
+                                                  child: EmailResetFailWidget(),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ).then((value) => setState(() {}));
+                                      }
+                                    },
+                                    text: 'Send',
+                                    options: FFButtonOptions(
+                                      width: double.infinity,
+                                      height: 50.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color:
+                                          FlutterFlowTheme.of(context).gray200,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .black600,
+                                          ),
+                                      elevation: 3.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30.0),
                                     ),
-                                    borderRadius: BorderRadius.circular(30.0),
                                   ),
                                 ),
                               ),
@@ -455,7 +503,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                     10.0, 0.0, 40.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    context.safePop();
+                                    context.pushNamed('settingPage');
                                   },
                                   text: 'Back',
                                   options: FFButtonOptions(

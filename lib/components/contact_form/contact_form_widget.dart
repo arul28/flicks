@@ -66,6 +66,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                     Expanded(
                       child: Text(
                         'Thanks for reaching out! We\'\'ll be in touch shortly',
+                        textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lexend Deca',
                               color: Color(0xFF57636C),

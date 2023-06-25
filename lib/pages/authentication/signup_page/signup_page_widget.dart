@@ -1,10 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -432,43 +430,25 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                   setState(() {
                                     _model.isPassMismatch = false;
                                   });
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  if (_model.passwordController.text !=
-                                      _model.confirmPasswordController.text) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Passwords don\'t match!',
-                                        ),
-                                      ),
-                                    );
-                                    return;
-                                  }
-
-                                  final user =
-                                      await authManager.createAccountWithEmail(
-                                    context,
-                                    _model.emailAddressController.text,
-                                    _model.passwordController.text,
-                                  );
-                                  if (user == null) {
-                                    return;
-                                  }
-
-                                  await UsersRecord.collection
-                                      .doc(user.uid)
-                                      .update(createUsersRecordData(
-                                        email:
-                                            _model.emailAddressController.text,
-                                        uid: random_data
-                                            .randomInteger(0, 1000000)
-                                            .toString(),
-                                      ));
-
                                   await authManager.sendEmailVerification();
 
-                                  context.pushNamedAuth(
-                                      'Verification', context.mounted);
+                                  context.goNamed(
+                                    'Verification',
+                                    queryParameters: {
+                                      'email': serializeParam(
+                                        _model.emailAddressController.text,
+                                        ParamType.String,
+                                      ),
+                                      'password': serializeParam(
+                                        _model.passwordController.text,
+                                        ParamType.String,
+                                      ),
+                                      'confirmPassword': serializeParam(
+                                        _model.confirmPasswordController.text,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                  );
                                 } else {
                                   setState(() {
                                     _model.isPassMismatch = true;

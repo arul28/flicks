@@ -69,6 +69,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                             EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Your Email has not yet been verified.',
+                          textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Lexend Deca',

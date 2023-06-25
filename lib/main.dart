@@ -131,7 +131,6 @@ class _NavBarPageState extends State<NavBarPage> {
       'Feed': FeedWidget(),
       'Camera': CameraWidget(),
       'Profile': ProfileWidget(),
-      'CameraCopy': CameraCopyWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -170,12 +169,6 @@ class _NavBarPageState extends State<NavBarPage> {
             icon: Icons.person_outlined,
             text: '',
             iconSize: 50.0,
-          ),
-          GButton(
-            icon: Icons.circle_outlined,
-            text: '',
-            iconSize: 50.0,
-            backgroundColor: FlutterFlowTheme.of(context).noColor,
           )
         ],
       ),

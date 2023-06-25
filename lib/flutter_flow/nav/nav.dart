@@ -134,7 +134,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Verification',
           path: '/verification',
-          builder: (context, params) => VerificationWidget(),
+          builder: (context, params) => VerificationWidget(
+            email: params.getParam('email', ParamType.String),
+            password: params.getParam('password', ParamType.String),
+            confirmPassword:
+                params.getParam('confirmPassword', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'EditProfile',
@@ -178,13 +183,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ResetPassword',
           path: '/resetPassword',
           builder: (context, params) => ResetPasswordWidget(),
-        ),
-        FFRoute(
-          name: 'CameraCopy',
-          path: '/cameraCopy',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'CameraCopy')
-              : CameraCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
