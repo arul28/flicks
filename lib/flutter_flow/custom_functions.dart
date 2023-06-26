@@ -16,5 +16,5 @@ String? strToImgPath(String? str) {
   // null safety
   str ??= ' ';
 
-  return str;
+  return str; //
 }

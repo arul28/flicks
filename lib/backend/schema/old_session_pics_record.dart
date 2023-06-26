@@ -6,8 +6,8 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class CurrentSessionPicsRecord extends FirestoreRecord {
-  CurrentSessionPicsRecord._(
+class OldSessionPicsRecord extends FirestoreRecord {
+  OldSessionPicsRecord._(
     DocumentReference reference,
     Map<String, dynamic> data,
   ) : super(reference, data) {
@@ -33,45 +33,44 @@ class CurrentSessionPicsRecord extends FirestoreRecord {
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
-          ? parent.collection('currentSessionPics')
-          : FirebaseFirestore.instance.collectionGroup('currentSessionPics');
+          ? parent.collection('oldSessionPics')
+          : FirebaseFirestore.instance.collectionGroup('oldSessionPics');
 
   static DocumentReference createDoc(DocumentReference parent) =>
-      parent.collection('currentSessionPics').doc();
+      parent.collection('oldSessionPics').doc();
 
-  static Stream<CurrentSessionPicsRecord> getDocument(DocumentReference ref) =>
-      ref.snapshots().map((s) => CurrentSessionPicsRecord.fromSnapshot(s));
+  static Stream<OldSessionPicsRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => OldSessionPicsRecord.fromSnapshot(s));
 
-  static Future<CurrentSessionPicsRecord> getDocumentOnce(
-          DocumentReference ref) =>
-      ref.get().then((s) => CurrentSessionPicsRecord.fromSnapshot(s));
+  static Future<OldSessionPicsRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => OldSessionPicsRecord.fromSnapshot(s));
 
-  static CurrentSessionPicsRecord fromSnapshot(DocumentSnapshot snapshot) =>
-      CurrentSessionPicsRecord._(
+  static OldSessionPicsRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      OldSessionPicsRecord._(
         snapshot.reference,
         mapFromFirestore(snapshot.data() as Map<String, dynamic>),
       );
 
-  static CurrentSessionPicsRecord getDocumentFromData(
+  static OldSessionPicsRecord getDocumentFromData(
     Map<String, dynamic> data,
     DocumentReference reference,
   ) =>
-      CurrentSessionPicsRecord._(reference, mapFromFirestore(data));
+      OldSessionPicsRecord._(reference, mapFromFirestore(data));
 
   @override
   String toString() =>
-      'CurrentSessionPicsRecord(reference: ${reference.path}, data: $snapshotData)';
+      'OldSessionPicsRecord(reference: ${reference.path}, data: $snapshotData)';
 
   @override
   int get hashCode => reference.path.hashCode;
 
   @override
   bool operator ==(other) =>
-      other is CurrentSessionPicsRecord &&
+      other is OldSessionPicsRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
 }
 
-Map<String, dynamic> createCurrentSessionPicsRecordData({
+Map<String, dynamic> createOldSessionPicsRecordData({
   String? imagePath,
   DateTime? timeTaken,
 }) {

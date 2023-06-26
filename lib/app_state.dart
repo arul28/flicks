@@ -18,6 +18,9 @@ class FFAppState extends ChangeNotifier {
       _MaxPicsInCurrentSession = prefs.getInt('ff_MaxPicsInCurrentSession') ??
           _MaxPicsInCurrentSession;
     });
+    _safeInit(() {
+      _isDark = prefs.getBool('ff_isDark') ?? _isDark;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -62,6 +65,13 @@ class FFAppState extends ChangeNotifier {
   bool get isLoggedIn => _isLoggedIn;
   set isLoggedIn(bool _value) {
     _isLoggedIn = _value;
+  }
+
+  bool _isDark = false;
+  bool get isDark => _isDark;
+  set isDark(bool _value) {
+    _isDark = _value;
+    prefs.setBool('ff_isDark', _value);
   }
 }
 

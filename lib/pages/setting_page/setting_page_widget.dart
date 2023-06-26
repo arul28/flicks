@@ -84,21 +84,30 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 25.0),
-            child: ListTile(
-              title: Text(
-                'Push Notifications ',
-                style: FlutterFlowTheme.of(context).titleLarge,
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.pushNamed('AppBehavior');
+              },
+              child: ListTile(
+                title: Text(
+                  'App Behavior',
+                  style: FlutterFlowTheme.of(context).titleLarge,
+                ),
+                subtitle: Text(
+                  'Edit the look of flicks',
+                  style: FlutterFlowTheme.of(context).labelMedium,
+                ),
+                trailing: Icon(
+                  Icons.arrow_right,
+                ),
+                tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                dense: false,
               ),
-              subtitle: Text(
-                'Flicks allows you full control of your notifications ',
-                style: FlutterFlowTheme.of(context).labelMedium,
-              ),
-              trailing: Icon(
-                Icons.arrow_right_outlined,
-              ),
-              tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-              dense: false,
             ),
           ),
           Padding(

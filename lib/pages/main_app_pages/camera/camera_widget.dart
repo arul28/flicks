@@ -126,10 +126,13 @@ class _CameraWidgetState extends State<CameraWidget> {
 
                         await CurrentSessionPicsRecord.createDoc(
                                 currentUserReference!)
-                            .set(createCurrentSessionPicsRecordData(
-                          imagePath:
-                              functions.strToImgPath(FFAppState().filePath),
-                        ));
+                            .set({
+                          ...createCurrentSessionPicsRecordData(
+                            imagePath:
+                                functions.strToImgPath(FFAppState().filePath),
+                          ),
+                          'timeTaken': FieldValue.serverTimestamp(),
+                        });
                       },
                       text: 'smdylb',
                       options: FFButtonOptions(

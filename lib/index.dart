@@ -27,3 +27,4 @@ export '/pages/authentication/forgot_password/forgot_password_widget.dart'
     show ForgotPasswordWidget;
 export '/pages/settings/reset_password/reset_password_widget.dart'
     show ResetPasswordWidget;
+export '/pages/app_behavior/app_behavior_widget.dart' show AppBehaviorWidget;

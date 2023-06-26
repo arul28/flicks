@@ -9,6 +9,8 @@ import 'schema/users_record.dart';
 import 'schema/current_session_pics_record.dart';
 import 'schema/current_session_details_record.dart';
 import 'schema/tickets_record.dart';
+import 'schema/old_session_details_record.dart';
+import 'schema/old_session_pics_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,6 +22,8 @@ export 'schema/users_record.dart';
 export 'schema/current_session_pics_record.dart';
 export 'schema/current_session_details_record.dart';
 export 'schema/tickets_record.dart';
+export 'schema/old_session_details_record.dart';
+export 'schema/old_session_pics_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -233,6 +237,115 @@ Future<FFFirestorePage<TicketsRecord>> queryTicketsRecordPage({
     queryCollectionPage(
       TicketsRecord.collection(parent),
       TicketsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query OldSessionDetailsRecords (as a Stream and as a Future).
+Future<int> queryOldSessionDetailsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      OldSessionDetailsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<OldSessionDetailsRecord>> queryOldSessionDetailsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      OldSessionDetailsRecord.collection,
+      OldSessionDetailsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<OldSessionDetailsRecord>> queryOldSessionDetailsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      OldSessionDetailsRecord.collection,
+      OldSessionDetailsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<OldSessionDetailsRecord>>
+    queryOldSessionDetailsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          OldSessionDetailsRecord.collection,
+          OldSessionDetailsRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
+
+/// Functions to query OldSessionPicsRecords (as a Stream and as a Future).
+Future<int> queryOldSessionPicsRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      OldSessionPicsRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<OldSessionPicsRecord>> queryOldSessionPicsRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      OldSessionPicsRecord.collection(parent),
+      OldSessionPicsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<OldSessionPicsRecord>> queryOldSessionPicsRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      OldSessionPicsRecord.collection(parent),
+      OldSessionPicsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<OldSessionPicsRecord>> queryOldSessionPicsRecordPage({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      OldSessionPicsRecord.collection(parent),
+      OldSessionPicsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
