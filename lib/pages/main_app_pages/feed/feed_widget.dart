@@ -315,7 +315,8 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                         BorderRadius.circular(
                                                             8.0),
                                                     child: Image.network(
-                                                      'https://picsum.photos/seed/718/600',
+                                                      pageViewOldSessionPicsRecord
+                                                          .imagePath,
                                                       width: 170.0,
                                                       height: 300.0,
                                                       fit: BoxFit.cover,

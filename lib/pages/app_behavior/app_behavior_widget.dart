@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'app_behavior_model.dart';
@@ -166,7 +167,7 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 2.0, 0.0, 0.0),
                             child: Icon(
-                              Icons.wb_sunny_rounded,
+                              Icons.notifications_active,
                               color: FlutterFlowTheme.of(context).secondaryText,
                               size: 24.0,
                             ),
@@ -174,59 +175,21 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
                         ),
                         Align(
                           alignment: AlignmentDirectional(-0.96, 0.56),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              if (Theme.of(context).brightness ==
-                                  Brightness.dark) {
-                                if (animationsMap[
-                                        'containerOnActionTriggerAnimation2'] !=
-                                    null) {
-                                  await animationsMap[
-                                          'containerOnActionTriggerAnimation2']!
-                                      .controller
-                                      .reverse();
-                                }
-                                setDarkModeSetting(context, ThemeMode.light);
-                                FFAppState().update(() {
-                                  FFAppState().isDark = false;
-                                });
-                              } else {
-                                if (animationsMap[
-                                        'containerOnActionTriggerAnimation2'] !=
-                                    null) {
-                                  setState(() => hasContainerTriggered2 = true);
-                                  SchedulerBinding.instance.addPostFrameCallback(
-                                      (_) async => await animationsMap[
-                                              'containerOnActionTriggerAnimation2']!
-                                          .controller
-                                          .forward(from: 0.0));
-                                }
-                                setDarkModeSetting(context, ThemeMode.dark);
-                                setState(() {
-                                  FFAppState().isDark = true;
-                                });
-                              }
-                            },
-                            child: Container(
-                              width: 36.0,
-                              height: 36.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 4.0,
-                                    color: Color(0x430B0D0F),
-                                    offset: Offset(0.0, 2.0),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(30.0),
-                                shape: BoxShape.rectangle,
-                              ),
+                          child: Container(
+                            width: 36.0,
+                            height: 36.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4.0,
+                                  color: Color(0x430B0D0F),
+                                  offset: Offset(0.0, 2.0),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(30.0),
+                              shape: BoxShape.rectangle,
                             ),
                           ).animateOnActionTrigger(
                               animationsMap[
@@ -284,8 +247,8 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 2.0, 0.0, 0.0),
-                            child: Icon(
-                              Icons.wb_sunny_rounded,
+                            child: FaIcon(
+                              FontAwesomeIcons.solidMoon,
                               color: FlutterFlowTheme.of(context).secondaryText,
                               size: 24.0,
                             ),
