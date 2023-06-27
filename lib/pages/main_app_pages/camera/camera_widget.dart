@@ -191,41 +191,42 @@ class _CameraWidgetState extends State<CameraWidget> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: AlignmentDirectional(0.0, 1.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          setState(() {
-                            FFAppState().makePhoto = true;
-                          });
-                          await Future.delayed(
-                              const Duration(milliseconds: 5000));
+                  if (!FFAppState().makePhoto)
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 1.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            setState(() {
+                              FFAppState().makePhoto = true;
+                            });
+                            await Future.delayed(
+                                const Duration(milliseconds: 5000));
 
-                          await CurrentSessionPicsRecord.createDoc(
-                                  currentUserReference!)
-                              .set({
-                            ...createCurrentSessionPicsRecordData(
-                              imagePath:
-                                  functions.strToImgPath(FFAppState().filePath),
-                            ),
-                            'timeTaken': FieldValue.serverTimestamp(),
-                          });
-                        },
-                        child: Icon(
-                          Icons.circle_outlined,
-                          color: FlutterFlowTheme.of(context).amethyst,
-                          size: 100.0,
+                            await CurrentSessionPicsRecord.createDoc(
+                                    currentUserReference!)
+                                .set({
+                              ...createCurrentSessionPicsRecordData(
+                                imagePath: functions
+                                    .strToImgPath(FFAppState().filePath),
+                              ),
+                              'timeTaken': FieldValue.serverTimestamp(),
+                            });
+                          },
+                          child: Icon(
+                            Icons.circle_outlined,
+                            color: FlutterFlowTheme.of(context).amethyst,
+                            size: 100.0,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),
