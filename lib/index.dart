@@ -10,7 +10,8 @@ export '/pages/authentication/create_profile/create_profile_widget.dart'
 export '/pages/main_app_pages/profile/profile_widget.dart' show ProfileWidget;
 export '/pages/main_app_pages/feed/feed_widget.dart' show FeedWidget;
 export '/pages/main_app_pages/camera/camera_widget.dart' show CameraWidget;
-export '/pages/setting_page/setting_page_widget.dart' show SettingPageWidget;
+export '/pages/settings/setting_page/setting_page_widget.dart'
+    show SettingPageWidget;
 export '/pages/authentication/verification/verification_widget.dart'
     show VerificationWidget;
 export '/pages/settings/edit_profile/edit_profile_widget.dart'
@@ -27,4 +28,5 @@ export '/pages/authentication/forgot_password/forgot_password_widget.dart'
     show ForgotPasswordWidget;
 export '/pages/settings/reset_password/reset_password_widget.dart'
     show ResetPasswordWidget;
-export '/pages/app_behavior/app_behavior_widget.dart' show AppBehaviorWidget;
+export '/pages/settings/app_behavior/app_behavior_widget.dart'
+    show AppBehaviorWidget;

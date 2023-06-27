@@ -1065,7 +1065,7 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                                                                 FieldValue
                                                                     .increment(
                                                                         -(1)),
-                                                            'sentAcceptedRequests':
+                                                            'sentPendingRequests':
                                                                 FieldValue
                                                                     .arrayRemove([
                                                               listViewUsersRecord

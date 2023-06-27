@@ -24,11 +24,17 @@ class OldSessionPicsRecord extends FirestoreRecord {
   DateTime? get timeTaken => _timeTaken;
   bool hasTimeTaken() => _timeTaken != null;
 
+  // "isPinned" field.
+  bool? _isPinned;
+  bool get isPinned => _isPinned ?? false;
+  bool hasIsPinned() => _isPinned != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _imagePath = snapshotData['imagePath'] as String?;
     _timeTaken = snapshotData['timeTaken'] as DateTime?;
+    _isPinned = snapshotData['isPinned'] as bool?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -73,11 +79,13 @@ class OldSessionPicsRecord extends FirestoreRecord {
 Map<String, dynamic> createOldSessionPicsRecordData({
   String? imagePath,
   DateTime? timeTaken,
+  bool? isPinned,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'imagePath': imagePath,
       'timeTaken': timeTaken,
+      'isPinned': isPinned,
     }.withoutNulls,
   );
 

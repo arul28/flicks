@@ -54,16 +54,6 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
-  // "currentSession" field.
-  List<String>? _currentSession;
-  List<String> get currentSession => _currentSession ?? const [];
-  bool hasCurrentSession() => _currentSession != null;
-
-  // "oldSession" field.
-  List<String>? _oldSession;
-  List<String> get oldSession => _oldSession ?? const [];
-  bool hasOldSession() => _oldSession != null;
-
   // "fullName" field.
   String? _fullName;
   String get fullName => _fullName ?? '';
@@ -79,17 +69,6 @@ class UsersRecord extends FirestoreRecord {
   int? _sentPendingRequestsNum;
   int get sentPendingRequestsNum => _sentPendingRequestsNum ?? 0;
   bool hasSentPendingRequestsNum() => _sentPendingRequestsNum != null;
-
-  // "sentAcceptedRequests" field.
-  List<DocumentReference>? _sentAcceptedRequests;
-  List<DocumentReference> get sentAcceptedRequests =>
-      _sentAcceptedRequests ?? const [];
-  bool hasSentAcceptedRequests() => _sentAcceptedRequests != null;
-
-  // "sentAcceptedRequestsNum" field.
-  int? _sentAcceptedRequestsNum;
-  int get sentAcceptedRequestsNum => _sentAcceptedRequestsNum ?? 0;
-  bool hasSentAcceptedRequestsNum() => _sentAcceptedRequestsNum != null;
 
   // "friendsList" field.
   List<DocumentReference>? _friendsList;
@@ -117,6 +96,11 @@ class UsersRecord extends FirestoreRecord {
   int get pinnedNum => _pinnedNum ?? 0;
   bool hasPinnedNum() => _pinnedNum != null;
 
+  // "comments" field.
+  List<CommentStruct>? _comments;
+  List<CommentStruct> get comments => _comments ?? const [];
+  bool hasComments() => _comments != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -126,15 +110,10 @@ class UsersRecord extends FirestoreRecord {
     _pinned = getDataList(snapshotData['pinned']);
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
-    _currentSession = getDataList(snapshotData['currentSession']);
-    _oldSession = getDataList(snapshotData['oldSession']);
     _fullName = snapshotData['fullName'] as String?;
     _sentPendingRequests = getDataList(snapshotData['sentPendingRequests']);
     _sentPendingRequestsNum =
         castToType<int>(snapshotData['sentPendingRequestsNum']);
-    _sentAcceptedRequests = getDataList(snapshotData['sentAcceptedRequests']);
-    _sentAcceptedRequestsNum =
-        castToType<int>(snapshotData['sentAcceptedRequestsNum']);
     _friendsList = getDataList(snapshotData['friendsList']);
     _friendsNum = castToType<int>(snapshotData['friendsNum']);
     _incomingPendingRequests =
@@ -142,6 +121,10 @@ class UsersRecord extends FirestoreRecord {
     _incomingPendingRequestsNum =
         castToType<int>(snapshotData['incomingPendingRequestsNum']);
     _pinnedNum = castToType<int>(snapshotData['pinnedNum']);
+    _comments = getStructList(
+      snapshotData['comments'],
+      CommentStruct.fromMap,
+    );
   }
 
   static CollectionReference get collection =>
@@ -187,7 +170,6 @@ Map<String, dynamic> createUsersRecordData({
   String? phoneNumber,
   String? fullName,
   int? sentPendingRequestsNum,
-  int? sentAcceptedRequestsNum,
   int? friendsNum,
   int? incomingPendingRequestsNum,
   int? pinnedNum,
@@ -203,7 +185,6 @@ Map<String, dynamic> createUsersRecordData({
       'phone_number': phoneNumber,
       'fullName': fullName,
       'sentPendingRequestsNum': sentPendingRequestsNum,
-      'sentAcceptedRequestsNum': sentAcceptedRequestsNum,
       'friendsNum': friendsNum,
       'incomingPendingRequestsNum': incomingPendingRequestsNum,
       'pinnedNum': pinnedNum,

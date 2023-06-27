@@ -15,6 +15,33 @@ abstract class BaseStruct {
   String serialize() => json.encode(toSerializableMap());
 }
 
+dynamic deserializeStructParam<T>(
+  dynamic param,
+  ParamType paramType,
+  bool isList, {
+  required StructBuilder<T> structBuilder,
+}) {
+  if (param == null) {
+    return null;
+  } else if (isList) {
+    return param is Iterable
+        ? param
+            .map((e) => deserializeStructParam<T>(e, paramType, false,
+                structBuilder: structBuilder))
+            .toList()
+        : null;
+  } else if (param is Map<String, dynamic>) {
+    return structBuilder(param);
+  } else {
+    return deserializeParam<T>(
+      param,
+      paramType,
+      isList,
+      structBuilder: structBuilder,
+    );
+  }
+}
+
 List<T>? getStructList<T>(
   dynamic value,
   StructBuilder<T> structBuilder,
