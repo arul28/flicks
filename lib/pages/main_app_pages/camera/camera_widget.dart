@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
@@ -75,28 +76,62 @@ class _CameraWidgetState extends State<CameraWidget> {
           child: Scaffold(
             key: scaffoldKey,
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(40.0),
+              preferredSize: Size.fromHeight(42.0),
               child: AppBar(
-                backgroundColor: FlutterFlowTheme.of(context).lineColor,
+                backgroundColor:
+                    FlutterFlowTheme.of(context).secondaryBackground,
                 automaticallyImplyLeading: false,
-                title: Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
-                    child: Text(
-                      'flicks',
-                      textAlign: TextAlign.center,
-                      style:
-                          FlutterFlowTheme.of(context).headlineLarge.override(
-                                fontFamily: 'Outfit',
-                                color: FlutterFlowTheme.of(context).amethyst,
-                                fontSize: 40.0,
-                              ),
+                title: Stack(
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 4.0, 0.0, 4.0),
+                            child: Text(
+                              'flicks',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineLarge
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    color:
+                                        FlutterFlowTheme.of(context).amethyst,
+                                    fontSize: 40.0,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                    if (!_model.takingImage!)
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                        child: FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 30.0,
+                          borderWidth: 1.0,
+                          buttonSize: 60.0,
+                          icon: Icon(
+                            Icons.camera_roll,
+                            color: FlutterFlowTheme.of(context).amethyst,
+                            size: 35.0,
+                          ),
+                          onPressed: () async {
+                            context.pushNamed('currentSessionPhotosDetails');
+                          },
+                        ),
+                      ),
+                  ],
                 ),
                 actions: [],
-                centerTitle: false,
+                centerTitle: true,
+                elevation: 2.0,
               ),
             ),
             body: SafeArea(
@@ -111,87 +146,100 @@ class _CameraWidgetState extends State<CameraWidget> {
                       height: double.infinity,
                     ),
                   ),
-                  Align(
-                    alignment: AlignmentDirectional(-1.0, -1.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 0.0),
-                      child: StreamBuilder<List<CurrentSessionDetailsRecord>>(
-                        stream: queryCurrentSessionDetailsRecord(
-                          singleRecord: true,
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  color: FlutterFlowTheme.of(context).primary,
+                  if (!_model.takingImage!)
+                    Align(
+                      alignment: AlignmentDirectional(-1.0, -1.0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            10.0, 10.0, 0.0, 0.0),
+                        child: StreamBuilder<List<CurrentSessionDetailsRecord>>(
+                          stream: queryCurrentSessionDetailsRecord(
+                            singleRecord: true,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                  ),
                                 ),
+                              );
+                            }
+                            List<CurrentSessionDetailsRecord>
+                                richTextCurrentSessionDetailsRecordList =
+                                snapshot.data!;
+                            // Return an empty Container when the item does not exist.
+                            if (snapshot.data!.isEmpty) {
+                              return Container();
+                            }
+                            final richTextCurrentSessionDetailsRecord =
+                                richTextCurrentSessionDetailsRecordList
+                                        .isNotEmpty
+                                    ? richTextCurrentSessionDetailsRecordList
+                                        .first
+                                    : null;
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context
+                                    .pushNamed('currentSessionPhotosDetails');
+                              },
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: valueOrDefault<String>(
+                                        cameraCount.toString(),
+                                        '0',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 50.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: '/',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 60.0,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: richTextCurrentSessionDetailsRecord!
+                                          .maxPics
+                                          .toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 50.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    )
+                                  ],
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
                             );
-                          }
-                          List<CurrentSessionDetailsRecord>
-                              richTextCurrentSessionDetailsRecordList =
-                              snapshot.data!;
-                          // Return an empty Container when the item does not exist.
-                          if (snapshot.data!.isEmpty) {
-                            return Container();
-                          }
-                          final richTextCurrentSessionDetailsRecord =
-                              richTextCurrentSessionDetailsRecordList.isNotEmpty
-                                  ? richTextCurrentSessionDetailsRecordList
-                                      .first
-                                  : null;
-                          return RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: valueOrDefault<String>(
-                                    cameraCount.toString(),
-                                    '0',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize: 50.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                                TextSpan(
-                                  text: '/',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize: 60.0,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                ),
-                                TextSpan(
-                                  text: richTextCurrentSessionDetailsRecord!
-                                      .maxPics
-                                      .toString(),
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize: 50.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                )
-                              ],
-                              style: FlutterFlowTheme.of(context).bodyMedium,
-                            ),
-                            textAlign: TextAlign.center,
-                          );
-                        },
+                          },
+                        ),
                       ),
                     ),
-                  ),
                   if (!_model.takingImage!)
                     Align(
                       alignment: AlignmentDirectional(0.0, 1.0),
@@ -211,7 +259,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                               _model.takingImage = true;
                             });
                             await Future.delayed(
-                                const Duration(milliseconds: 3000));
+                                const Duration(milliseconds: 4000));
 
                             await CurrentSessionPicsRecord.createDoc(
                                     currentUserReference!)
@@ -222,8 +270,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                               ),
                               'timeTaken': FieldValue.serverTimestamp(),
                             });
-
-                            context.goNamed('Camera');
+                            setState(() {
+                              _model.takingImage = false;
+                            });
                           },
                           child: Icon(
                             Icons.circle_outlined,
@@ -239,12 +288,16 @@ class _CameraWidgetState extends State<CameraWidget> {
                       if (_model.takingImage ?? true)
                         Align(
                           alignment: AlignmentDirectional(0.0, -1.0),
-                          child: Lottie.network(
-                            'https://assets5.lottiefiles.com/packages/lf20_fPPjzl7JC2.json',
-                            width: 150.0,
-                            height: 130.0,
-                            fit: BoxFit.cover,
-                            animate: true,
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 10.0, 0.0),
+                            child: Lottie.network(
+                              'https://assets5.lottiefiles.com/packages/lf20_fPPjzl7JC2.json',
+                              width: 150.0,
+                              height: 130.0,
+                              fit: BoxFit.cover,
+                              animate: true,
+                            ),
                           ),
                         ),
                       if (_model.takingImage ?? true)

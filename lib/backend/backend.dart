@@ -13,6 +13,7 @@ import 'schema/old_session_details_record.dart';
 import 'schema/old_session_pics_record.dart';
 import 'schema/history_record.dart';
 import 'schema/pinned_record.dart';
+import 'schema/comments_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,6 +29,7 @@ export 'schema/old_session_details_record.dart';
 export 'schema/old_session_pics_record.dart';
 export 'schema/history_record.dart';
 export 'schema/pinned_record.dart';
+export 'schema/comments_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -462,6 +464,62 @@ Future<FFFirestorePage<PinnedRecord>> queryPinnedRecordPage({
     queryCollectionPage(
       PinnedRecord.collection(parent),
       PinnedRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query CommentsRecords (as a Stream and as a Future).
+Future<int> queryCommentsRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CommentsRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CommentsRecord>> queryCommentsRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CommentsRecord.collection(parent),
+      CommentsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CommentsRecord>> queryCommentsRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CommentsRecord.collection(parent),
+      CommentsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<CommentsRecord>> queryCommentsRecordPage({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      CommentsRecord.collection(parent),
+      CommentsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

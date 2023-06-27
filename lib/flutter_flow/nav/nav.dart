@@ -198,6 +198,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             username: params.getParam('username', ParamType.String),
             profilePic: params.getParam('profilePic', ParamType.String),
           ),
+        ),
+        FFRoute(
+          name: 'currentSessionPhotosDetails',
+          path: '/currentSessionPhotosDetails',
+          builder: (context, params) => CurrentSessionPhotosDetailsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

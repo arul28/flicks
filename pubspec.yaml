@@ -26,6 +26,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   aligned_dialog: 0.0.6
+  aligned_tooltip: 0.0.1
   auto_size_text: 3.0.0
   cached_network_image: 3.2.1
   camera: ^0.10.5+2

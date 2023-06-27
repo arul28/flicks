@@ -12,6 +12,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class FeedModel extends FlutterFlowModel {
+  ///  Local state fields for this page.
+
+  bool? zeroPhotos;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for PageView widget.

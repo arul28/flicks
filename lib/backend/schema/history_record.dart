@@ -24,10 +24,10 @@ class HistoryRecord extends FirestoreRecord {
   List<String> get imagesList => _imagesList ?? const [];
   bool hasImagesList() => _imagesList != null;
 
-  // "timeCreated" field.
-  DateTime? _timeCreated;
-  DateTime? get timeCreated => _timeCreated;
-  bool hasTimeCreated() => _timeCreated != null;
+  // "developedAt" field.
+  DateTime? _developedAt;
+  DateTime? get developedAt => _developedAt;
+  bool hasDevelopedAt() => _developedAt != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
@@ -37,7 +37,7 @@ class HistoryRecord extends FirestoreRecord {
       CommentStruct.fromMap,
     );
     _imagesList = getDataList(snapshotData['imagesList']);
-    _timeCreated = snapshotData['timeCreated'] as DateTime?;
+    _developedAt = snapshotData['developedAt'] as DateTime?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -80,11 +80,11 @@ class HistoryRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createHistoryRecordData({
-  DateTime? timeCreated,
+  DateTime? developedAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'timeCreated': timeCreated,
+      'developedAt': developedAt,
     }.withoutNulls,
   );
 

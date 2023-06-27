@@ -32,3 +32,5 @@ export '/pages/settings/app_behavior/app_behavior_widget.dart'
     show AppBehaviorWidget;
 export '/pages/secondary_app_pages/image_viewer/image_viewer_widget.dart'
     show ImageViewerWidget;
+export '/pages/secondary_app_pages/current_session_photos_details/current_session_photos_details_widget.dart'
+    show CurrentSessionPhotosDetailsWidget;
