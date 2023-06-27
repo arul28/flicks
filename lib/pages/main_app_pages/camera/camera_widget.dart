@@ -198,7 +198,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                             FFAppState().makePhoto = true;
                           });
                           await Future.delayed(
-                              const Duration(milliseconds: 3000));
+                              const Duration(milliseconds: 5000));
 
                           await CurrentSessionPicsRecord.createDoc(
                                   currentUserReference!)
@@ -209,8 +209,6 @@ class _CameraWidgetState extends State<CameraWidget> {
                             ),
                             'timeTaken': FieldValue.serverTimestamp(),
                           });
-
-                          context.goNamed('Camera');
                         },
                         child: Icon(
                           Icons.circle_outlined,

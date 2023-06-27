@@ -87,22 +87,6 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                       FlutterFlowTheme.of(context).frenchViolet,
                                 ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                170.0, 0.0, 0.0, 0.0),
-                            child: Container(
-                              width: 39.0,
-                              height: 39.0,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/flicks-a8g18e/assets/50udmbfkutgl/%5Bremoval.ai%5D_tmp-649156ac0c6fa_JTTV80.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),

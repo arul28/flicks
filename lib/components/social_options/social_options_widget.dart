@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'social_options_model.dart';
 export 'social_options_model.dart';
 
@@ -44,7 +45,9 @@ class _SocialOptionsWidgetState extends State<SocialOptionsWidget> {
     return Container(
       width: 392.0,
       height: 220.0,
-      decoration: BoxDecoration(),
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -52,12 +55,12 @@ class _SocialOptionsWidgetState extends State<SocialOptionsWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
                 child: Text(
                   'Liked by [likedCount] users',
-                  style: FlutterFlowTheme.of(context).titleMedium.override(
-                        fontFamily: 'Readex Pro',
-                        fontSize: 14.0,
+                  style: FlutterFlowTheme.of(context).headlineSmall.override(
+                        fontFamily: 'Outfit',
+                        color: FlutterFlowTheme.of(context).frenchViolet,
                       ),
                 ),
               ),
@@ -68,43 +71,110 @@ class _SocialOptionsWidgetState extends State<SocialOptionsWidget> {
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             children: [
-              Container(
-                width: 100.0,
-                height: 100.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                      child: Container(
-                        width: 60.0,
-                        height: 60.0,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              15.0, 0.0, 0.0, 0.0),
+                          child: Container(
+                            width: 50.0,
+                            height: 50.0,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/flicks-a8g18e/assets/khc8zaga4log/image.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/flicks-a8g18e/assets/khc8zaga4log/image.png',
-                          fit: BoxFit.cover,
+                        AuthUserStreamWidget(
+                          builder: (context) => Text(
+                            currentUserDisplayName,
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  fontSize: 10.0,
+                                ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                    AuthUserStreamWidget(
-                      builder: (context) => Text(
-                        currentUserDisplayName,
-                        style: FlutterFlowTheme.of(context).bodyMedium,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  width: 418.0,
+                  height: 44.0,
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Builder(
+                        builder: (context) => Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 0.0, 5.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              await Share.share(
+                                currentPhoneNumber,
+                                sharePositionOrigin:
+                                    getWidgetBoundingBox(context),
+                              );
+                            },
+                            child: Icon(
+                              Icons.ios_share,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 24.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        child: Icon(
+                          Icons.mode_comment,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                        child: Text(
+                          '[num comments]',
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

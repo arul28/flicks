@@ -1,4 +1,6 @@
 import '/backend/backend.dart';
+import '/components/comments/comments_widget.dart';
+import '/components/social_options/social_options_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -24,13 +26,22 @@ class ImageViewerModel extends FlutterFlowModel {
           pageViewController!.page != null
       ? pageViewController!.page!.round()
       : 0;
+  // Model for socialOptions component.
+  late SocialOptionsModel socialOptionsModel;
+  // Model for comments component.
+  late CommentsModel commentsModel;
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    socialOptionsModel = createModel(context, () => SocialOptionsModel());
+    commentsModel = createModel(context, () => CommentsModel());
+  }
 
   void dispose() {
     unfocusNode.dispose();
+    socialOptionsModel.dispose();
+    commentsModel.dispose();
   }
 
   /// Action blocks are added here.
