@@ -20,6 +20,7 @@ class CreateProfileModel extends FlutterFlowModel {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
@@ -70,6 +71,7 @@ class CreateProfileModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     yourNameController?.dispose();
     usernameCreateController?.dispose();
     bioCreateController?.dispose();

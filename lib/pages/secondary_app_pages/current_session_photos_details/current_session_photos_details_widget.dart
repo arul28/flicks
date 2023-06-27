@@ -236,6 +236,44 @@ class _CurrentSessionPhotosDetailsWidgetState
                                         ),
                                       ),
                                     ),
+                                    AlignedTooltip(
+                                      content: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  4.0, 4.0, 4.0, 4.0),
+                                          child: Text(
+                                            'these flicks haven\'t devloped yet! wait for them to develop to view them',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 16.0,
+                                                ),
+                                          )),
+                                      offset: 4.0,
+                                      preferredDirection: AxisDirection.down,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .frenchViolet,
+                                      elevation: 4.0,
+                                      tailBaseWidth: 24.0,
+                                      tailLength: 10.0,
+                                      waitDuration: Duration(milliseconds: 100),
+                                      showDuration:
+                                          Duration(milliseconds: 1500),
+                                      triggerMode: TooltipTriggerMode.tap,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            6.0, 6.0, 0.0, 0.0),
+                                        child: Icon(
+                                          Icons.info_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 );
                               },
@@ -285,39 +323,6 @@ class _CurrentSessionPhotosDetailsWidgetState
                       ),
                     );
                   },
-                ),
-              ),
-              AlignedTooltip(
-                content: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
-                    child: Text(
-                      'these flicks haven\'t devloped yet! wait for them to develop to view them',
-                      style: FlutterFlowTheme.of(context).bodyLarge.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 16.0,
-                          ),
-                    )),
-                offset: 4.0,
-                preferredDirection: AxisDirection.down,
-                borderRadius: BorderRadius.circular(8.0),
-                backgroundColor: FlutterFlowTheme.of(context).frenchViolet,
-                elevation: 4.0,
-                tailBaseWidth: 24.0,
-                tailLength: 10.0,
-                waitDuration: Duration(milliseconds: 100),
-                showDuration: Duration(milliseconds: 1500),
-                triggerMode: TooltipTriggerMode.tap,
-                child: Align(
-                  alignment: AlignmentDirectional(1.0, -1.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0),
-                    child: Icon(
-                      Icons.info_sharp,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 30.0,
-                    ),
-                  ),
                 ),
               ),
             ],
