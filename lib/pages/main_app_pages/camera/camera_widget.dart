@@ -9,6 +9,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'camera_model.dart';
 export 'camera_model.dart';
@@ -191,7 +192,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                       ),
                     ),
                   ),
-                  if (!FFAppState().makePhoto)
+                  if (!_model.takingImage!)
                     Align(
                       alignment: AlignmentDirectional(0.0, 1.0),
                       child: Padding(
@@ -206,8 +207,11 @@ class _CameraWidgetState extends State<CameraWidget> {
                             setState(() {
                               FFAppState().makePhoto = true;
                             });
+                            setState(() {
+                              _model.takingImage = true;
+                            });
                             await Future.delayed(
-                                const Duration(milliseconds: 5000));
+                                const Duration(milliseconds: 3000));
 
                             await CurrentSessionPicsRecord.createDoc(
                                     currentUserReference!)
@@ -218,6 +222,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                               ),
                               'timeTaken': FieldValue.serverTimestamp(),
                             });
+
+                            context.goNamed('Camera');
                           },
                           child: Icon(
                             Icons.circle_outlined,
@@ -227,6 +233,34 @@ class _CameraWidgetState extends State<CameraWidget> {
                         ),
                       ),
                     ),
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      if (_model.takingImage ?? true)
+                        Align(
+                          alignment: AlignmentDirectional(0.0, -1.0),
+                          child: Lottie.network(
+                            'https://assets5.lottiefiles.com/packages/lf20_fPPjzl7JC2.json',
+                            width: 150.0,
+                            height: 130.0,
+                            fit: BoxFit.cover,
+                            animate: true,
+                          ),
+                        ),
+                      if (_model.takingImage ?? true)
+                        Text(
+                          'Capturing flick! Hold still...',
+                          style: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: 'Readex Pro',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                    ],
+                  ),
                 ],
               ),
             ),
