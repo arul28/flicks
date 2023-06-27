@@ -879,6 +879,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                 parameter1: listViewUsersRecord.photoUrl,
                                 parameter2: listViewUsersRecord.displayName,
                                 parameter3: listViewUsersRecord.reference,
+                                userDoc: listViewUsersRecord,
                               );
                             },
                           );

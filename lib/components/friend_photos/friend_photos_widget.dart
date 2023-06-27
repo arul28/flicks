@@ -16,11 +16,13 @@ class FriendPhotosWidget extends StatefulWidget {
     this.parameter1,
     this.parameter2,
     this.parameter3,
+    this.userDoc,
   }) : super(key: key);
 
   final String? parameter1;
   final String? parameter2;
   final DocumentReference? parameter3;
+  final UsersRecord? userDoc;
 
   @override
   _FriendPhotosWidgetState createState() => _FriendPhotosWidgetState();
@@ -155,16 +157,36 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       15.0, 0.0, 0.0, 0.0),
-                                  child: Container(
-                                    width: 45.0,
-                                    height: 45.0,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Image.network(
-                                      widget.parameter1!,
-                                      fit: BoxFit.cover,
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        'viewProfile',
+                                        queryParameters: {
+                                          'userInfo': serializeParam(
+                                            widget.userDoc,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'userInfo': widget.userDoc,
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 45.0,
+                                      height: 45.0,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Image.network(
+                                        widget.parameter1!,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -183,16 +205,6 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                                             fontWeight: FontWeight.w200,
                                           ),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      15.0, 5.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.mode_comment,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBtnText,
-                                    size: 24.0,
                                   ),
                                 ),
                               ],

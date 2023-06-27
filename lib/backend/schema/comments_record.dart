@@ -24,11 +24,17 @@ class CommentsRecord extends FirestoreRecord {
   String get message => _message ?? '';
   bool hasMessage() => _message != null;
 
+  // "timePosted" field.
+  DateTime? _timePosted;
+  DateTime? get timePosted => _timePosted;
+  bool hasTimePosted() => _timePosted != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _user = snapshotData['user'] as DocumentReference?;
     _message = snapshotData['message'] as String?;
+    _timePosted = snapshotData['timePosted'] as DateTime?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -73,11 +79,13 @@ class CommentsRecord extends FirestoreRecord {
 Map<String, dynamic> createCommentsRecordData({
   DocumentReference? user,
   String? message,
+  DateTime? timePosted,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'user': user,
       'message': message,
+      'timePosted': timePosted,
     }.withoutNulls,
   );
 

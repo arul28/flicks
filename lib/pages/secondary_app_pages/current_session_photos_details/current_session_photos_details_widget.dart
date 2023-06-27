@@ -292,16 +292,18 @@ class _CurrentSessionPhotosDetailsWidgetState
                     padding: EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
                     child: Text(
                       'these flicks haven\'t devloped yet! wait for them to develop to view them',
-                      style: FlutterFlowTheme.of(context).bodyLarge,
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
+                            fontFamily: 'Readex Pro',
+                            fontSize: 16.0,
+                          ),
                     )),
                 offset: 4.0,
                 preferredDirection: AxisDirection.down,
                 borderRadius: BorderRadius.circular(8.0),
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
+                backgroundColor: FlutterFlowTheme.of(context).frenchViolet,
                 elevation: 4.0,
                 tailBaseWidth: 24.0,
-                tailLength: 12.0,
+                tailLength: 10.0,
                 waitDuration: Duration(milliseconds: 100),
                 showDuration: Duration(milliseconds: 1500),
                 triggerMode: TooltipTriggerMode.tap,

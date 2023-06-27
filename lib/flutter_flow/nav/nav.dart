@@ -203,6 +203,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'currentSessionPhotosDetails',
           path: '/currentSessionPhotosDetails',
           builder: (context, params) => CurrentSessionPhotosDetailsWidget(),
+        ),
+        FFRoute(
+          name: 'viewAllFlicks',
+          path: '/viewAllFlicks',
+          builder: (context, params) => ViewAllFlicksWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

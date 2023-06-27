@@ -2,9 +2,11 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:flip_card/flip_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'view_profile_model.dart';
@@ -602,6 +604,130 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                 ),
                               ),
                             ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Stack(
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 543.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  4.0, 20.0, 4.0, 0.0),
+                              child: StreamBuilder<List<PinnedRecord>>(
+                                stream: queryPinnedRecord(
+                                  parent: widget.userInfo!.reference,
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<PinnedRecord>
+                                      staggeredViewPinnedRecordList =
+                                      snapshot.data!;
+                                  return MasonryGridView.count(
+                                    crossAxisCount: 3,
+                                    crossAxisSpacing: 10.0,
+                                    mainAxisSpacing: 10.0,
+                                    itemCount:
+                                        staggeredViewPinnedRecordList.length,
+                                    itemBuilder: (context, staggeredViewIndex) {
+                                      final staggeredViewPinnedRecord =
+                                          staggeredViewPinnedRecordList[
+                                              staggeredViewIndex];
+                                      return FlipCard(
+                                        fill: Fill.fillBack,
+                                        direction: FlipDirection.HORIZONTAL,
+                                        speed: 400,
+                                        front: Container(
+                                          width: 100.0,
+                                          height: 168.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.network(
+                                              staggeredViewPinnedRecord
+                                                  .imagePath,
+                                              width: 300.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        back: Container(
+                                          width: 100.0,
+                                          height: 168.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text(
+                                                dateTimeFormat(
+                                                    'yMMMd',
+                                                    staggeredViewPinnedRecord
+                                                        .timeTaken!),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        6.0, 0.0, 6.0, 0.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.asset(
+                                                    'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                                                    width: double.infinity,
+                                                    height: 120.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],

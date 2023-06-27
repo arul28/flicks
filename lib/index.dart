@@ -34,3 +34,5 @@ export '/pages/secondary_app_pages/image_viewer/image_viewer_widget.dart'
     show ImageViewerWidget;
 export '/pages/secondary_app_pages/current_session_photos_details/current_session_photos_details_widget.dart'
     show CurrentSessionPhotosDetailsWidget;
+export '/pages/secondary_app_pages/view_all_flicks/view_all_flicks_widget.dart'
+    show ViewAllFlicksWidget;

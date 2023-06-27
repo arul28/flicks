@@ -126,8 +126,8 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                   color: FlutterFlowTheme.of(context).secondaryText,
                   size: 30.0,
                 ),
-                onPressed: () {
-                  print('IconButton pressed ...');
+                onPressed: () async {
+                  context.safePop();
                 },
               ),
             ),
@@ -477,16 +477,37 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Container(
-                                            width: 60.0,
-                                            height: 60.0,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              listViewUsersRecord.photoUrl,
-                                              fit: BoxFit.cover,
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                'viewProfile',
+                                                queryParameters: {
+                                                  'userInfo': serializeParam(
+                                                    listViewUsersRecord,
+                                                    ParamType.Document,
+                                                  ),
+                                                }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  'userInfo':
+                                                      listViewUsersRecord,
+                                                },
+                                              );
+                                            },
+                                            child: Container(
+                                              width: 60.0,
+                                              height: 60.0,
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Image.network(
+                                                listViewUsersRecord.photoUrl,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
                                           Expanded(
@@ -526,41 +547,65 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'Comments (',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .amethyst,
-                                          fontSize: 24.0,
-                                        ),
-                                  ),
-                                  TextSpan(
-                                    text: '6',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ')',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .amethyst,
-                                          fontSize: 24.0,
-                                        ),
-                                  )
-                                ],
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                            FutureBuilder<int>(
+                              future: queryCommentsRecordCount(
+                                parent: widget.userRef,
                               ),
-                              textAlign: TextAlign.start,
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                int richTextCount = snapshot.data!;
+                                return RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Comments (',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .amethyst,
+                                              fontSize: 24.0,
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: richTextCount.toString(),
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: ')',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .amethyst,
+                                              fontSize: 24.0,
+                                            ),
+                                      )
+                                    ],
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                  textAlign: TextAlign.start,
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -587,7 +632,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                       autofocus: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Comment here',
+                                        labelText: 'Comment here...',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .labelMedium,
                                         hintStyle: FlutterFlowTheme.of(context)
@@ -656,8 +701,17 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 4.0, 0.0),
                                   child: FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      await CommentsRecord.createDoc(
+                                              widget.userRef!)
+                                          .set({
+                                        ...createCommentsRecordData(
+                                          user: currentUserReference,
+                                          message: _model.textController.text,
+                                        ),
+                                        'timePosted':
+                                            FieldValue.serverTimestamp(),
+                                      });
                                     },
                                     text: 'Post',
                                     options: FFButtonOptions(
@@ -674,7 +728,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: FlutterFlowTheme.of(context)
-                                                .amethyst,
+                                                .primary,
                                           ),
                                       elevation: 0.0,
                                       borderSide: BorderSide(
@@ -724,75 +778,160 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                         itemBuilder: (context, listViewIndex) {
                           final listViewCommentsRecord =
                               listViewCommentsRecordList[listViewIndex];
-                          return Container(
-                            width: double.infinity,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: StreamBuilder<UsersRecord>(
-                              stream: UsersRecord.getDocument(
-                                  listViewCommentsRecord.parentReference),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
+                          return Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 10.0),
+                            child: Container(
+                              width: double.infinity,
+                              height: 109.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: BorderRadius.circular(20.0),
+                                shape: BoxShape.rectangle,
+                                border: Border.all(
+                                  width: 3.0,
+                                ),
+                              ),
+                              child: StreamBuilder<UsersRecord>(
+                                stream: UsersRecord.getDocument(
+                                    listViewCommentsRecord.parentReference),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }
-                                final rowUsersRecord = snapshot.data!;
-                                return Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 6.0, 0.0, 6.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Container(
-                                            width: 70.0,
-                                            height: 70.0,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
+                                    );
+                                  }
+                                  final rowUsersRecord = snapshot.data!;
+                                  return Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 6.0, 0.0, 6.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'viewProfile',
+                                                  queryParameters: {
+                                                    'userInfo': serializeParam(
+                                                      rowUsersRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'userInfo': rowUsersRecord,
+                                                  },
+                                                );
+                                              },
+                                              child: Container(
+                                                width: 70.0,
+                                                height: 70.0,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.network(
+                                                  rowUsersRecord.photoUrl,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
-                                            child: Image.network(
-                                              rowUsersRecord.photoUrl,
-                                              fit: BoxFit.cover,
+                                            Text(
+                                              rowUsersRecord.displayName,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: Align(
+                                          alignment:
+                                              AlignmentDirectional(-1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    18.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              listViewCommentsRecord.message,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
                                             ),
                                           ),
-                                          Text(
-                                            rowUsersRecord.displayName,
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(1.0, 1.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 4.0, 4.0),
+                                          child: Text(
+                                            dateTimeFormat(
+                                                'M/d h:mm a',
+                                                listViewCommentsRecord
+                                                    .timePosted!),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                    Flexible(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            18.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          listViewCommentsRecord.message,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                );
-                              },
+                                      if (rowUsersRecord.reference ==
+                                          currentUserReference)
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(1.0, -1.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 4.0, 4.0, 0.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await listViewCommentsRecord
+                                                    .reference
+                                                    .delete();
+                                              },
+                                              child: Icon(
+                                                Icons.highlight_off_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 24.0,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
                             ),
                           );
                         },
