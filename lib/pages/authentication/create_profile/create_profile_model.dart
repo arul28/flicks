@@ -16,6 +16,8 @@ class CreateProfileModel extends FlutterFlowModel {
 
   bool usernameExists = false;
 
+  bool? imageAdded = false;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();

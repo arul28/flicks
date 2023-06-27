@@ -1,5 +1,7 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -49,27 +51,54 @@ class _SocialOptionsWidgetState extends State<SocialOptionsWidget> {
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Text(
-                'Liked by [likedCount] users',
-                style: FlutterFlowTheme.of(context).bodyMedium,
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 0.0),
+                child: Text(
+                  'Liked by [likedCount] users',
+                  style: FlutterFlowTheme.of(context).titleMedium.override(
+                        fontFamily: 'Readex Pro',
+                        fontSize: 14.0,
+                      ),
+                ),
               ),
             ],
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
+          ListView(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
             children: [
               Container(
-                width: 388.0,
+                width: 100.0,
                 height: 100.0,
-                decoration: BoxDecoration(),
-                child: Row(
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: ListView(
-                        padding: EdgeInsets.zero,
-                        scrollDirection: Axis.vertical,
-                        children: [],
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                      child: Container(
+                        width: 60.0,
+                        height: 60.0,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/flicks-a8g18e/assets/khc8zaga4log/image.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    AuthUserStreamWidget(
+                      builder: (context) => Text(
+                        currentUserDisplayName,
+                        style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
                     ),
                   ],
