@@ -7,6 +7,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'camera_model.dart';
@@ -28,6 +29,13 @@ class _CameraWidgetState extends State<CameraWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CameraModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        FFAppState().makePhoto = false;
+      });
+    });
   }
 
   @override

@@ -46,7 +46,7 @@ class _CameraPhotoState extends State<CameraPhoto> {
         FFAppState().update(() {
           FFAppState().makePhoto = false;
         });
-        String dir = '/users/' + currentUserUid + '/flicks/';
+        String dir = '/users/' + currentUserUid + '/';
         final downloadUrl = await uploadData(
             dir + FFAppState().index.toString() + '.jpg', fileAsBytes);
         FFAppState().update(() {
