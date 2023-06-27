@@ -30,3 +30,5 @@ export '/pages/settings/reset_password/reset_password_widget.dart'
     show ResetPasswordWidget;
 export '/pages/settings/app_behavior/app_behavior_widget.dart'
     show AppBehaviorWidget;
+export '/pages/secondary_app_pages/image_viewer/image_viewer_widget.dart'
+    show ImageViewerWidget;

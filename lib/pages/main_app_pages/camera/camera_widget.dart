@@ -107,43 +107,79 @@ class _CameraWidgetState extends State<CameraWidget> {
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 0.0),
-                      child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '5',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: 50.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                            ),
-                            TextSpan(
-                              text: '/',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: 60.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                            ),
-                            TextSpan(
-                              text: '8',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: 50.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                            )
-                          ],
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                      child: StreamBuilder<List<CurrentSessionDetailsRecord>>(
+                        stream: queryCurrentSessionDetailsRecord(
+                          singleRecord: true,
                         ),
-                        textAlign: TextAlign.center,
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                ),
+                              ),
+                            );
+                          }
+                          List<CurrentSessionDetailsRecord>
+                              richTextCurrentSessionDetailsRecordList =
+                              snapshot.data!;
+                          // Return an empty Container when the item does not exist.
+                          if (snapshot.data!.isEmpty) {
+                            return Container();
+                          }
+                          final richTextCurrentSessionDetailsRecord =
+                              richTextCurrentSessionDetailsRecordList.isNotEmpty
+                                  ? richTextCurrentSessionDetailsRecordList
+                                      .first
+                                  : null;
+                          return RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: valueOrDefault<String>(
+                                    cameraCount.toString(),
+                                    '0',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 50.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                                TextSpan(
+                                  text: '/',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 60.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                ),
+                                TextSpan(
+                                  text: richTextCurrentSessionDetailsRecord!
+                                      .maxPics
+                                      .toString(),
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 50.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                )
+                              ],
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                            ),
+                            textAlign: TextAlign.center,
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -151,7 +187,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                     alignment: AlignmentDirectional(0.0, 1.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 20.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,

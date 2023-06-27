@@ -19,10 +19,16 @@ class PinnedRecord extends FirestoreRecord {
   String get imagePath => _imagePath ?? '';
   bool hasImagePath() => _imagePath != null;
 
+  // "timeTaken" field.
+  DateTime? _timeTaken;
+  DateTime? get timeTaken => _timeTaken;
+  bool hasTimeTaken() => _timeTaken != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _imagePath = snapshotData['imagePath'] as String?;
+    _timeTaken = snapshotData['timeTaken'] as DateTime?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -65,10 +71,12 @@ class PinnedRecord extends FirestoreRecord {
 
 Map<String, dynamic> createPinnedRecordData({
   String? imagePath,
+  DateTime? timeTaken,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'imagePath': imagePath,
+      'timeTaken': timeTaken,
     }.withoutNulls,
   );
 

@@ -553,6 +553,9 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                 imagePath:
                                                                     pageViewOldSessionPicsRecord
                                                                         .imagePath,
+                                                                timeTaken:
+                                                                    pageViewOldSessionPicsRecord
+                                                                        .timeTaken,
                                                               ));
                                                             },
                                                             child: Icon(

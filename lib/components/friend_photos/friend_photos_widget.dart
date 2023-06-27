@@ -106,13 +106,39 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                 ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  child: Image.network(
-                                    pageViewOldSessionPicsRecord.imagePath,
-                                    width: 300.0,
-                                    height: 200.0,
-                                    fit: BoxFit.cover,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      'imageViewer',
+                                      queryParameters: {
+                                        'userRef': serializeParam(
+                                          pageViewOldSessionPicsRecord
+                                              .parentReference,
+                                          ParamType.DocumentReference,
+                                        ),
+                                        'username': serializeParam(
+                                          widget.parameter2,
+                                          ParamType.String,
+                                        ),
+                                        'profilePic': serializeParam(
+                                          widget.parameter1,
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    child: Image.network(
+                                      pageViewOldSessionPicsRecord.imagePath,
+                                      width: 300.0,
+                                      height: 200.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -145,7 +171,7 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                                 Flexible(
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        15.0, 5.0, 0.0, 0.0),
+                                        15.0, 5.0, 0.0, 5.0),
                                     child: Text(
                                       widget.parameter2!,
                                       textAlign: TextAlign.center,
@@ -157,6 +183,16 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                                             fontWeight: FontWeight.w200,
                                           ),
                                     ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      15.0, 5.0, 0.0, 0.0),
+                                  child: Icon(
+                                    Icons.mode_comment,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
+                                    size: 24.0,
                                   ),
                                 ),
                               ],

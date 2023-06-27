@@ -188,6 +188,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'AppBehavior',
           path: '/appBehavior',
           builder: (context, params) => AppBehaviorWidget(),
+        ),
+        FFRoute(
+          name: 'imageViewer',
+          path: '/imageViewer',
+          builder: (context, params) => ImageViewerWidget(
+            userRef: params.getParam(
+                'userRef', ParamType.DocumentReference, false, ['users']),
+            username: params.getParam('username', ParamType.String),
+            profilePic: params.getParam('profilePic', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
