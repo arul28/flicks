@@ -1,22 +1,27 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'logout_model.dart';
-export 'logout_model.dart';
+import 'delete_flick_model.dart';
+export 'delete_flick_model.dart';
 
-class LogoutWidget extends StatefulWidget {
-  const LogoutWidget({Key? key}) : super(key: key);
+class DeleteFlickWidget extends StatefulWidget {
+  const DeleteFlickWidget({
+    Key? key,
+    required this.currentSessionPics,
+  }) : super(key: key);
+
+  final DocumentReference? currentSessionPics;
 
   @override
-  _LogoutWidgetState createState() => _LogoutWidgetState();
+  _DeleteFlickWidgetState createState() => _DeleteFlickWidgetState();
 }
 
-class _LogoutWidgetState extends State<LogoutWidget> {
-  late LogoutModel _model;
+class _DeleteFlickWidgetState extends State<DeleteFlickWidget> {
+  late DeleteFlickModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -27,7 +32,7 @@ class _LogoutWidgetState extends State<LogoutWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LogoutModel());
+    _model = createModel(context, () => DeleteFlickModel());
   }
 
   @override
@@ -48,8 +53,8 @@ class _LogoutWidgetState extends State<LogoutWidget> {
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 400.0,
-        height: 150.0,
+        width: 344.0,
+        height: 131.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.0),
@@ -66,10 +71,10 @@ class _LogoutWidgetState extends State<LogoutWidget> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            15.0, 0.0, 15.0, 0.0),
                         child: Text(
-                          'Are you sure you want to logout?',
+                          'Are you sure you want to delete this flick? You can\'t undo this',
                           textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
@@ -86,11 +91,11 @@ class _LogoutWidgetState extends State<LogoutWidget> {
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 25.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 25.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         context.safePop();
@@ -116,14 +121,10 @@ class _LogoutWidgetState extends State<LogoutWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 25.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 15.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        GoRouter.of(context).prepareAuthEvent();
-                        await authManager.signOut();
-                        GoRouter.of(context).clearRedirectLocation();
-
-                        context.pushNamedAuth('LandingPage', context.mounted);
+                        await widget.currentSessionPics!.delete();
                       },
                       text: 'Confirm',
                       options: FFButtonOptions(

@@ -36,3 +36,5 @@ export '/pages/secondary_app_pages/current_session_photos_details/current_sessio
     show CurrentSessionPhotosDetailsWidget;
 export '/pages/secondary_app_pages/view_all_flicks/view_all_flicks_widget.dart'
     show ViewAllFlicksWidget;
+export '/pages/secondary_app_pages/users_friends/users_friends_widget.dart'
+    show UsersFriendsWidget;

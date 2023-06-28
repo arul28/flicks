@@ -63,7 +63,7 @@ class _HistoryViewWidgetState extends State<HistoryViewWidget> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(40.0),
                   child: Image.network(
-                    'https://picsum.photos/seed/533/600',
+                    widget.imgPath!,
                     width: 453.0,
                     height: 684.0,
                     fit: BoxFit.cover,

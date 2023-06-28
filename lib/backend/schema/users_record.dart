@@ -101,11 +101,6 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get liked => _liked ?? const [];
   bool hasLiked() => _liked != null;
 
-  // "commented" field.
-  List<CommentStruct>? _commented;
-  List<CommentStruct> get commented => _commented ?? const [];
-  bool hasCommented() => _commented != null;
-
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -127,10 +122,6 @@ class UsersRecord extends FirestoreRecord {
         castToType<int>(snapshotData['incomingPendingRequestsNum']);
     _pinnedNum = castToType<int>(snapshotData['pinnedNum']);
     _liked = getDataList(snapshotData['liked']);
-    _commented = getStructList(
-      snapshotData['commented'],
-      CommentStruct.fromMap,
-    );
   }
 
   static CollectionReference get collection =>

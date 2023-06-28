@@ -349,175 +349,181 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ],
                     ),
                     Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 606.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  4.0, 0.0, 4.0, 0.0),
-                              child: StreamBuilder<List<PinnedRecord>>(
-                                stream: queryPinnedRecord(
-                                  parent: currentUserReference,
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<PinnedRecord>
-                                      staggeredViewPinnedRecordList =
-                                      snapshot.data!;
-                                  return MasonryGridView.count(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing: 10.0,
-                                    mainAxisSpacing: 10.0,
-                                    itemCount:
-                                        staggeredViewPinnedRecordList.length,
-                                    itemBuilder: (context, staggeredViewIndex) {
-                                      final staggeredViewPinnedRecord =
-                                          staggeredViewPinnedRecordList[
-                                              staggeredViewIndex];
-                                      return FlipCard(
-                                        fill: Fill.fillBack,
-                                        direction: FlipDirection.HORIZONTAL,
-                                        speed: 400,
-                                        front: Stack(
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(16.0),
-                                              child: Image.network(
-                                                staggeredViewPinnedRecord
-                                                    .imagePath,
-                                                width: 300.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 4.0, 4.0, 0.0),
-                                                child: InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () => FocusScope
-                                                                  .of(context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode),
-                                                          child: Padding(
-                                                            padding:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .viewInsets,
-                                                            child: Container(
-                                                              height: double
-                                                                  .infinity,
-                                                              child:
-                                                                  ProfileViewPinnedWidget(
-                                                                imgPath:
-                                                                    staggeredViewPinnedRecord
-                                                                        .imagePath,
-                                                                pinnedRef:
-                                                                    staggeredViewPinnedRecord
-                                                                        .reference,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        setState(() {}));
-                                                  },
-                                                  child: Icon(
-                                                    Icons.expand_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .black600,
-                                                    size: 24.0,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        back: Container(
-                                          width: 300.0,
-                                          height: 200.0,
-                                          decoration: BoxDecoration(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 516.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    4.0, 0.0, 4.0, 0.0),
+                                child: StreamBuilder<List<PinnedRecord>>(
+                                  stream: queryPinnedRecord(
+                                    parent: currentUserReference,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
+                                                .primary,
                                           ),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
+                                        ),
+                                      );
+                                    }
+                                    List<PinnedRecord>
+                                        staggeredViewPinnedRecordList =
+                                        snapshot.data!;
+                                    return MasonryGridView.count(
+                                      crossAxisCount: 3,
+                                      crossAxisSpacing: 10.0,
+                                      mainAxisSpacing: 10.0,
+                                      itemCount:
+                                          staggeredViewPinnedRecordList.length,
+                                      itemBuilder:
+                                          (context, staggeredViewIndex) {
+                                        final staggeredViewPinnedRecord =
+                                            staggeredViewPinnedRecordList[
+                                                staggeredViewIndex];
+                                        return FlipCard(
+                                          fill: Fill.fillBack,
+                                          direction: FlipDirection.HORIZONTAL,
+                                          speed: 400,
+                                          front: Stack(
                                             children: [
-                                              Text(
-                                                dateTimeFormat(
-                                                    'M/d h:mm a',
-                                                    staggeredViewPinnedRecord
-                                                        .timeTaken!),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                              ),
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                                                  width: 269.0,
-                                                  height: 131.0,
+                                                    BorderRadius.circular(16.0),
+                                                child: Image.network(
+                                                  staggeredViewPinnedRecord
+                                                      .imagePath,
+                                                  width: 300.0,
+                                                  height: 200.0,
                                                   fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    1.0, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 4.0, 4.0, 0.0),
+                                                  child: InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled:
+                                                            true,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return GestureDetector(
+                                                            onTap: () => FocusScope
+                                                                    .of(context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode),
+                                                            child: Padding(
+                                                              padding: MediaQuery
+                                                                      .of(context)
+                                                                  .viewInsets,
+                                                              child: Container(
+                                                                height: double
+                                                                    .infinity,
+                                                                child:
+                                                                    ProfileViewPinnedWidget(
+                                                                  imgPath:
+                                                                      staggeredViewPinnedRecord
+                                                                          .imagePath,
+                                                                  pinnedRef:
+                                                                      staggeredViewPinnedRecord
+                                                                          .reference,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          setState(() {}));
+                                                    },
+                                                    child: Icon(
+                                                      Icons.zoom_out_map,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      size: 24.0,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
+                                          back: Container(
+                                            width: 300.0,
+                                            height: 200.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Text(
+                                                  dateTimeFormat(
+                                                      'M/d h:mm a',
+                                                      staggeredViewPinnedRecord
+                                                          .timeTaken!),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.asset(
+                                                    'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                                                    width: 269.0,
+                                                    height: 131.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],

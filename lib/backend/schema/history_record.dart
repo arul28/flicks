@@ -14,11 +14,6 @@ class HistoryRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "comments" field.
-  List<CommentStruct>? _comments;
-  List<CommentStruct> get comments => _comments ?? const [];
-  bool hasComments() => _comments != null;
-
   // "imagesList" field.
   List<String>? _imagesList;
   List<String> get imagesList => _imagesList ?? const [];
@@ -32,10 +27,6 @@ class HistoryRecord extends FirestoreRecord {
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
-    _comments = getStructList(
-      snapshotData['comments'],
-      CommentStruct.fromMap,
-    );
     _imagesList = getDataList(snapshotData['imagesList']);
     _developedAt = snapshotData['developedAt'] as DateTime?;
   }

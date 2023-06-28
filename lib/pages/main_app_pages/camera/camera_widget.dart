@@ -1,10 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/pics_limit_hit/pics_limit_hit_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -136,53 +138,50 @@ class _CameraWidgetState extends State<CameraWidget> {
             ),
             body: SafeArea(
               top: true,
-              child: Stack(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: custom_widgets.CameraPhoto(
-                      width: double.infinity,
-                      height: double.infinity,
-                    ),
-                  ),
-                  if (!_model.takingImage!)
-                    Align(
-                      alignment: AlignmentDirectional(-1.0, -1.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 0.0, 0.0),
-                        child: StreamBuilder<List<CurrentSessionDetailsRecord>>(
-                          stream: queryCurrentSessionDetailsRecord(
-                            singleRecord: true,
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                  ),
-                                ),
-                              );
-                            }
-                            List<CurrentSessionDetailsRecord>
-                                richTextCurrentSessionDetailsRecordList =
-                                snapshot.data!;
-                            // Return an empty Container when the item does not exist.
-                            if (snapshot.data!.isEmpty) {
-                              return Container();
-                            }
-                            final richTextCurrentSessionDetailsRecord =
-                                richTextCurrentSessionDetailsRecordList
-                                        .isNotEmpty
-                                    ? richTextCurrentSessionDetailsRecordList
-                                        .first
-                                    : null;
-                            return InkWell(
+              child: StreamBuilder<List<CurrentSessionDetailsRecord>>(
+                stream: queryCurrentSessionDetailsRecord(
+                  singleRecord: true,
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          color: FlutterFlowTheme.of(context).primary,
+                        ),
+                      ),
+                    );
+                  }
+                  List<CurrentSessionDetailsRecord>
+                      stackCurrentSessionDetailsRecordList = snapshot.data!;
+                  // Return an empty Container when the item does not exist.
+                  if (snapshot.data!.isEmpty) {
+                    return Container();
+                  }
+                  final stackCurrentSessionDetailsRecord =
+                      stackCurrentSessionDetailsRecordList.isNotEmpty
+                          ? stackCurrentSessionDetailsRecordList.first
+                          : null;
+                  return Stack(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        child: custom_widgets.CameraPhoto(
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                      ),
+                      if (!_model.takingImage!)
+                        Align(
+                          alignment: AlignmentDirectional(-1.0, -1.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 10.0, 0.0, 0.0),
+                            child: InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
                               hoverColor: Colors.transparent,
@@ -218,9 +217,12 @@ class _CameraWidgetState extends State<CameraWidget> {
                                           ),
                                     ),
                                     TextSpan(
-                                      text: richTextCurrentSessionDetailsRecord!
-                                          .maxPics
-                                          .toString(),
+                                      text: valueOrDefault<String>(
+                                        stackCurrentSessionDetailsRecord!
+                                            .maxPics
+                                            .toString(),
+                                        '0',
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .labelLarge
                                           .override(
@@ -235,86 +237,120 @@ class _CameraWidgetState extends State<CameraWidget> {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  if (!_model.takingImage!)
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 1.0),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            setState(() {
-                              FFAppState().makePhoto = true;
-                            });
-                            setState(() {
-                              _model.takingImage = true;
-                            });
-                            await Future.delayed(
-                                const Duration(milliseconds: 4000));
-
-                            await CurrentSessionPicsRecord.createDoc(
-                                    currentUserReference!)
-                                .set({
-                              ...createCurrentSessionPicsRecordData(
-                                imagePath: functions
-                                    .strToImgPath(FFAppState().filePath),
-                              ),
-                              'timeTaken': FieldValue.serverTimestamp(),
-                            });
-                            setState(() {
-                              _model.takingImage = false;
-                            });
-                          },
-                          child: Icon(
-                            Icons.circle_outlined,
-                            color: FlutterFlowTheme.of(context).amethyst,
-                            size: 100.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      if (_model.takingImage ?? true)
-                        Align(
-                          alignment: AlignmentDirectional(0.0, -1.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 10.0, 10.0, 0.0),
-                            child: Lottie.network(
-                              'https://assets5.lottiefiles.com/packages/lf20_fPPjzl7JC2.json',
-                              width: 150.0,
-                              height: 130.0,
-                              fit: BoxFit.cover,
-                              animate: true,
                             ),
                           ),
                         ),
-                      if (_model.takingImage ?? true)
-                        Text(
-                          'Capturing flick! Hold still...',
-                          style: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: 'Readex Pro',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                                fontWeight: FontWeight.w500,
+                      if (!_model.takingImage!)
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 1.0),
+                          child: Builder(
+                            builder: (context) => Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 20.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (cameraCount >=
+                                      stackCurrentSessionDetailsRecord!
+                                          .maxPics) {
+                                    await showAlignedDialog(
+                                      context: context,
+                                      isGlobal: true,
+                                      avoidOverflow: false,
+                                      targetAnchor: AlignmentDirectional(
+                                              0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
+                                      followerAnchor: AlignmentDirectional(
+                                              0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
+                                      builder: (dialogContext) {
+                                        return Material(
+                                          color: Colors.transparent,
+                                          child: GestureDetector(
+                                            onTap: () => FocusScope.of(context)
+                                                .requestFocus(
+                                                    _model.unfocusNode),
+                                            child: PicsLimitHitWidget(),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => setState(() {}));
+                                  } else {
+                                    setState(() {
+                                      FFAppState().makePhoto = true;
+                                    });
+                                    setState(() {
+                                      _model.takingImage = true;
+                                    });
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 3000));
+
+                                    await CurrentSessionPicsRecord.createDoc(
+                                            currentUserReference!)
+                                        .set({
+                                      ...createCurrentSessionPicsRecordData(
+                                        imagePath: functions.strToImgPath(
+                                            FFAppState().filePath),
+                                      ),
+                                      'timeTaken': FieldValue.serverTimestamp(),
+                                    });
+                                    setState(() {
+                                      _model.takingImage = false;
+                                    });
+                                  }
+                                },
+                                child: Icon(
+                                  Icons.circle_outlined,
+                                  color: FlutterFlowTheme.of(context).amethyst,
+                                  size: 100.0,
+                                ),
                               ),
+                            ),
+                          ),
                         ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (_model.takingImage ?? true)
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 10.0, 10.0, 0.0),
+                                  child: Lottie.network(
+                                    'https://assets5.lottiefiles.com/packages/lf20_fPPjzl7JC2.json',
+                                    width: 150.0,
+                                    height: 130.0,
+                                    fit: BoxFit.cover,
+                                    animate: true,
+                                  ),
+                                ),
+                            ],
+                          ),
+                          if (_model.takingImage ?? true)
+                            Text(
+                              'Capturing flick! Hold still...',
+                              style: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                        ],
+                      ),
                     ],
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),

@@ -147,188 +147,176 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 0.0, 10.0, 0.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                StreamBuilder<List<OldSessionPicsRecord>>(
-                                  stream: queryOldSessionPicsRecord(
-                                    parent: widget.userRef,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<OldSessionPicsRecord>
-                                        pageViewOldSessionPicsRecordList =
-                                        snapshot.data!;
-                                    return Container(
-                                      width: double.infinity,
-                                      height: 533.0,
-                                      child: Stack(
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 30.0),
-                                            child: PageView.builder(
-                                              controller: _model
-                                                      .pageViewController ??=
-                                                  PageController(
-                                                      initialPage: min(
-                                                          0,
-                                                          pageViewOldSessionPicsRecordList
-                                                                  .length -
-                                                              1)),
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount:
-                                                  pageViewOldSessionPicsRecordList
-                                                      .length,
-                                              itemBuilder:
-                                                  (context, pageViewIndex) {
-                                                final pageViewOldSessionPicsRecord =
-                                                    pageViewOldSessionPicsRecordList[
-                                                        pageViewIndex];
-                                                return FlipCard(
-                                                  fill: Fill.fillBack,
-                                                  direction:
-                                                      FlipDirection.HORIZONTAL,
-                                                  speed: 400,
-                                                  front: ClipRRect(
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            10.0, 0.0, 10.0, 0.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            StreamBuilder<List<OldSessionPicsRecord>>(
+                              stream: queryOldSessionPicsRecord(
+                                parent: widget.userRef,
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<OldSessionPicsRecord>
+                                    pageViewOldSessionPicsRecordList =
+                                    snapshot.data!;
+                                return Container(
+                                  width: double.infinity,
+                                  height: 533.0,
+                                  child: Stack(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 30.0),
+                                        child: PageView.builder(
+                                          controller: _model
+                                                  .pageViewController ??=
+                                              PageController(
+                                                  initialPage: min(
+                                                      0,
+                                                      pageViewOldSessionPicsRecordList
+                                                              .length -
+                                                          1)),
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount:
+                                              pageViewOldSessionPicsRecordList
+                                                  .length,
+                                          itemBuilder:
+                                              (context, pageViewIndex) {
+                                            final pageViewOldSessionPicsRecord =
+                                                pageViewOldSessionPicsRecordList[
+                                                    pageViewIndex];
+                                            return FlipCard(
+                                              fill: Fill.fillBack,
+                                              direction:
+                                                  FlipDirection.HORIZONTAL,
+                                              speed: 400,
+                                              front: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(16.0),
+                                                child: Image.network(
+                                                  pageViewOldSessionPicsRecord
+                                                      .imagePath,
+                                                  width: 300.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              back: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Text(
+                                                    dateTimeFormat(
+                                                        'MMMMEEEEd',
+                                                        pageViewOldSessionPicsRecord
+                                                            .timeTaken!),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .heliotrope,
+                                                          fontSize: 24.0,
+                                                        ),
+                                                  ),
+                                                  ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            16.0),
-                                                    child: Image.network(
-                                                      pageViewOldSessionPicsRecord
-                                                          .imagePath,
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
                                                       width: 300.0,
                                                       height: 200.0,
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                                  back: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      Text(
-                                                        dateTimeFormat(
-                                                            'MMMMEEEEd',
-                                                            pageViewOldSessionPicsRecord
-                                                                .timeTaken!),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .heliotrope,
-                                                                  fontSize:
-                                                                      24.0,
-                                                                ),
-                                                      ),
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        child: Image.asset(
-                                                          'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                                                          width: 300.0,
-                                                          height: 200.0,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 1.0),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 10.0),
-                                              child: smooth_page_indicator
-                                                  .SmoothPageIndicator(
-                                                controller: _model
-                                                        .pageViewController ??=
-                                                    PageController(
-                                                        initialPage: min(
-                                                            0,
-                                                            pageViewOldSessionPicsRecordList
-                                                                    .length -
-                                                                1)),
-                                                count:
-                                                    pageViewOldSessionPicsRecordList
-                                                        .length,
-                                                axisDirection: Axis.horizontal,
-                                                onDotClicked: (i) async {
-                                                  await _model
-                                                      .pageViewController!
-                                                      .animateToPage(
-                                                    i,
-                                                    duration: Duration(
-                                                        milliseconds: 500),
-                                                    curve: Curves.ease,
-                                                  );
-                                                },
-                                                effect: smooth_page_indicator
-                                                    .ExpandingDotsEffect(
-                                                  expansionFactor: 2.0,
-                                                  spacing: 8.0,
-                                                  radius: 16.0,
-                                                  dotWidth: 16.0,
-                                                  dotHeight: 4.0,
-                                                  dotColor: FlutterFlowTheme.of(
-                                                          context)
-                                                      .lineColor,
-                                                  activeDotColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .mauve,
-                                                  paintStyle:
-                                                      PaintingStyle.fill,
-                                                ),
+                                                ],
                                               ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 1.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 10.0),
+                                          child: smooth_page_indicator
+                                              .SmoothPageIndicator(
+                                            controller: _model
+                                                    .pageViewController ??=
+                                                PageController(
+                                                    initialPage: min(
+                                                        0,
+                                                        pageViewOldSessionPicsRecordList
+                                                                .length -
+                                                            1)),
+                                            count:
+                                                pageViewOldSessionPicsRecordList
+                                                    .length,
+                                            axisDirection: Axis.horizontal,
+                                            onDotClicked: (i) async {
+                                              await _model.pageViewController!
+                                                  .animateToPage(
+                                                i,
+                                                duration:
+                                                    Duration(milliseconds: 500),
+                                                curve: Curves.ease,
+                                              );
+                                            },
+                                            effect: smooth_page_indicator
+                                                .ExpandingDotsEffect(
+                                              expansionFactor: 2.0,
+                                              spacing: 8.0,
+                                              radius: 16.0,
+                                              dotWidth: 16.0,
+                                              dotHeight: 4.0,
+                                              dotColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .lineColor,
+                                              activeDotColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .mauve,
+                                              paintStyle: PaintingStyle.fill,
                                             ),
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'pageViewOnPageLoadAnimation']!);
-                                  },
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ).animateOnPageLoad(animationsMap[
+                                    'pageViewOnPageLoadAnimation']!);
+                              },
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   Container(
                     width: double.infinity,
@@ -712,6 +700,9 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                         'timePosted':
                                             FieldValue.serverTimestamp(),
                                       });
+                                      setState(() {
+                                        _model.textController?.clear();
+                                      });
                                     },
                                     text: 'Post',
                                     options: FFButtonOptions(
@@ -795,7 +786,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                               ),
                               child: StreamBuilder<UsersRecord>(
                                 stream: UsersRecord.getDocument(
-                                    listViewCommentsRecord.parentReference),
+                                    listViewCommentsRecord.user!),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {

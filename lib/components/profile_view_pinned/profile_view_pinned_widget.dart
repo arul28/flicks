@@ -1,6 +1,8 @@
+import '/components/un_pin_message/un_pin_message_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,7 +69,7 @@ class _ProfileViewPinnedWidgetState extends State<ProfileViewPinnedWidget> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(40.0),
                   child: Image.network(
-                    'https://picsum.photos/seed/533/600',
+                    widget.imgPath!,
                     width: 453.0,
                     height: 684.0,
                     fit: BoxFit.cover,
@@ -136,78 +138,71 @@ class _ProfileViewPinnedWidgetState extends State<ProfileViewPinnedWidget> {
               width: double.infinity,
               height: 60.0,
               decoration: BoxDecoration(),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12.0, 8.0, 12.0, 8.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    var confirmDialogResponse = await showDialog<bool>(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Un-pin image?'),
-                              content: Text(
-                                  'Are you sure you want to remove this image from your profile? Unless the image is not newly devloped, you won\'t be able to add it back.'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext, false),
-                                  child: Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext, true),
-                                  child: Text('Confirm'),
+              child: Builder(
+                builder: (context) => Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 8.0, 12.0, 8.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await showAlignedDialog(
+                        context: context,
+                        isGlobal: true,
+                        avoidOverflow: false,
+                        targetAnchor: AlignmentDirectional(0.0, 0.0)
+                            .resolve(Directionality.of(context)),
+                        followerAnchor: AlignmentDirectional(0.0, 0.0)
+                            .resolve(Directionality.of(context)),
+                        builder: (dialogContext) {
+                          return Material(
+                            color: Colors.transparent,
+                            child: UnPinMessageWidget(
+                              pinnedRef: widget.pinnedRef!,
+                            ),
+                          );
+                        },
+                      ).then((value) => setState(() {}));
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          elevation: 0.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                8.0, 8.0, 8.0, 8.0),
+                            child: Icon(
+                              Icons.delete_outline,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 20.0,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 0.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Un-pin',
+                                  style: FlutterFlowTheme.of(context).bodyLarge,
                                 ),
                               ],
-                            );
-                          },
-                        ) ??
-                        false;
-                    if (confirmDialogResponse) {
-                      await widget.pinnedRef!.delete();
-                    }
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        elevation: 0.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              8.0, 8.0, 8.0, 8.0),
-                          child: Icon(
-                            Icons.delete_outline,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 20.0,
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 0.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Un-pin',
-                                style: FlutterFlowTheme.of(context).bodyLarge,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

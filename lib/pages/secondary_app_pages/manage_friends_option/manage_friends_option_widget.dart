@@ -154,7 +154,15 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.safePop();
+                  context.pushNamed(
+                    'Profile',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.bottomToTop,
+                      ),
+                    },
+                  );
                 },
               ),
             ),
@@ -1001,94 +1009,96 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                                                     ],
                                                   ),
                                                 ),
-                                                Card(
-                                                  clipBehavior: Clip
-                                                      .antiAliasWithSaveLayer,
-                                                  color: Color(0xFFF1F4F8),
-                                                  elevation: 1.0,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(4.0, 4.0,
-                                                                4.0, 4.0),
-                                                    child: InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        var confirmDialogResponse =
-                                                            await showDialog<
-                                                                    bool>(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (alertDialogContext) {
-                                                                    return AlertDialog(
-                                                                      title: Text(
-                                                                          'Take Back Request'),
-                                                                      content: Text(
-                                                                          'Are you sure you want to take back this friend request?'),
-                                                                      actions: [
-                                                                        TextButton(
-                                                                          onPressed: () => Navigator.pop(
-                                                                              alertDialogContext,
-                                                                              false),
-                                                                          child:
-                                                                              Text('Cancel'),
-                                                                        ),
-                                                                        TextButton(
-                                                                          onPressed: () => Navigator.pop(
-                                                                              alertDialogContext,
-                                                                              true),
-                                                                          child:
-                                                                              Text('Confirm'),
-                                                                        ),
-                                                                      ],
-                                                                    );
-                                                                  },
-                                                                ) ??
-                                                                false;
-                                                        if (confirmDialogResponse) {
-                                                          await currentUserReference!
-                                                              .update({
-                                                            'sentPendingRequestsNum':
-                                                                FieldValue
-                                                                    .increment(
-                                                                        -(1)),
-                                                            'sentPendingRequests':
-                                                                FieldValue
-                                                                    .arrayRemove([
-                                                              listViewUsersRecord
-                                                                  .reference
-                                                            ]),
-                                                          });
-
-                                                          await listViewUsersRecord
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    var confirmDialogResponse =
+                                                        await showDialog<bool>(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      'Take Back Request'),
+                                                                  content: Text(
+                                                                      'Are you sure you want to take back this friend request?'),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                      child: Text(
+                                                                          'Cancel'),
+                                                                    ),
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                      child: Text(
+                                                                          'Confirm'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            ) ??
+                                                            false;
+                                                    if (confirmDialogResponse) {
+                                                      await currentUserReference!
+                                                          .update({
+                                                        'sentPendingRequestsNum':
+                                                            FieldValue
+                                                                .increment(
+                                                                    -(1)),
+                                                        'sentPendingRequests':
+                                                            FieldValue
+                                                                .arrayRemove([
+                                                          listViewUsersRecord
                                                               .reference
-                                                              .update({
-                                                            'incomingPendingRequestsNum':
-                                                                FieldValue
-                                                                    .increment(
-                                                                        -(1)),
-                                                            'incomingPendingRequests':
-                                                                FieldValue
-                                                                    .arrayRemove([
-                                                              currentUserReference
-                                                            ]),
-                                                          });
-                                                        }
-                                                        setState(() {});
-                                                      },
+                                                        ]),
+                                                      });
+
+                                                      await listViewUsersRecord
+                                                          .reference
+                                                          .update({
+                                                        'incomingPendingRequestsNum':
+                                                            FieldValue
+                                                                .increment(
+                                                                    -(1)),
+                                                        'incomingPendingRequests':
+                                                            FieldValue
+                                                                .arrayRemove([
+                                                          currentUserReference
+                                                        ]),
+                                                      });
+                                                    }
+                                                    setState(() {});
+                                                  },
+                                                  child: Card(
+                                                    clipBehavior: Clip
+                                                        .antiAliasWithSaveLayer,
+                                                    color: Color(0xFFF1F4F8),
+                                                    elevation: 1.0,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  4.0,
+                                                                  4.0,
+                                                                  4.0,
+                                                                  4.0),
                                                       child: Icon(
                                                         Icons.remove,
                                                         color:

@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import '../flutter_flow_theme.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 
 import '../../auth/base_auth_user_provider.dart';
 
@@ -208,6 +207,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'viewAllFlicks',
           path: '/viewAllFlicks',
           builder: (context, params) => ViewAllFlicksWidget(),
+        ),
+        FFRoute(
+          name: 'usersFriends',
+          path: '/usersFriends',
+          builder: (context, params) => UsersFriendsWidget(
+            userRef: params.getParam(
+                'userRef', ParamType.DocumentReference, false, ['users']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

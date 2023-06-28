@@ -1,22 +1,27 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'logout_model.dart';
-export 'logout_model.dart';
+import 'un_pin_message_model.dart';
+export 'un_pin_message_model.dart';
 
-class LogoutWidget extends StatefulWidget {
-  const LogoutWidget({Key? key}) : super(key: key);
+class UnPinMessageWidget extends StatefulWidget {
+  const UnPinMessageWidget({
+    Key? key,
+    required this.pinnedRef,
+  }) : super(key: key);
+
+  final DocumentReference? pinnedRef;
 
   @override
-  _LogoutWidgetState createState() => _LogoutWidgetState();
+  _UnPinMessageWidgetState createState() => _UnPinMessageWidgetState();
 }
 
-class _LogoutWidgetState extends State<LogoutWidget> {
-  late LogoutModel _model;
+class _UnPinMessageWidgetState extends State<UnPinMessageWidget> {
+  late UnPinMessageModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -27,7 +32,7 @@ class _LogoutWidgetState extends State<LogoutWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LogoutModel());
+    _model = createModel(context, () => UnPinMessageModel());
   }
 
   @override
@@ -48,8 +53,8 @@ class _LogoutWidgetState extends State<LogoutWidget> {
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 400.0,
-        height: 150.0,
+        width: 317.0,
+        height: 178.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.0),
@@ -65,20 +70,15 @@ class _LogoutWidgetState extends State<LogoutWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          'Are you sure you want to logout?',
-                          textAlign: TextAlign.center,
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
+                      child: Text(
+                        'Are you sure you want to remove this image from your profile? Unless the image is not newly devloped, you won\'t be able to add it back.',
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Lexend Deca',
+                              color: Color(0xFF57636C),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.normal,
+                            ),
                       ),
                     ),
                   ],
@@ -119,11 +119,9 @@ class _LogoutWidgetState extends State<LogoutWidget> {
                         EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 25.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        GoRouter.of(context).prepareAuthEvent();
-                        await authManager.signOut();
-                        GoRouter.of(context).clearRedirectLocation();
+                        await widget.pinnedRef!.delete();
 
-                        context.pushNamedAuth('LandingPage', context.mounted);
+                        context.pushNamed('Profile');
                       },
                       text: 'Confirm',
                       options: FFButtonOptions(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -73,6 +72,12 @@ class FFAppState extends ChangeNotifier {
   set isDark(bool _value) {
     _isDark = _value;
     prefs.setBool('ff_isDark', _value);
+  }
+
+  int _currentSessionPicsNum = 0;
+  int get currentSessionPicsNum => _currentSessionPicsNum;
+  set currentSessionPicsNum(int _value) {
+    _currentSessionPicsNum = _value;
   }
 }
 
