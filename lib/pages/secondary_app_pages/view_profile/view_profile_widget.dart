@@ -36,24 +36,26 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.isFriend = (currentUserDocument?.friendsList?.toList() ?? [])
-                .contains(widget.userInfo!.reference)
-            ? true
-            : false;
-        _model.sentWaiting =
-            (currentUserDocument?.sentPendingRequests?.toList() ?? [])
-                    .contains(widget.userInfo!.reference)
-                ? true
-                : false;
-        _model.recievedWaiting =
-            (currentUserDocument?.incomingPendingRequests?.toList() ?? [])
-                    .contains(widget.userInfo!.reference)
-                ? true
-                : false;
-        _model.noConnection =
-            !_model.isFriend && !_model.sentWaiting && !_model.recievedWaiting;
-      });
+      if ((currentUserDocument?.friendsList?.toList() ?? [])
+          .contains(widget.userInfo!.reference)) {
+        setState(() {
+          _model.isFriend = true;
+        });
+      } else if ((currentUserDocument?.sentPendingRequests?.toList() ?? [])
+          .contains(widget.userInfo!.reference)) {
+        setState(() {
+          _model.sentWaiting = true;
+        });
+      } else if ((currentUserDocument?.incomingPendingRequests?.toList() ?? [])
+          .contains(widget.userInfo!.reference)) {
+        setState(() {
+          _model.recievedWaiting = true;
+        });
+      } else {
+        setState(() {
+          _model.noConnection = true;
+        });
+      }
     });
   }
 

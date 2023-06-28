@@ -18,3 +18,7 @@ String? strToImgPath(String? str) {
 
   return str; //
 }
+
+int addOne(int index) {
+  return index + 1;
+}

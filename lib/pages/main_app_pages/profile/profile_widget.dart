@@ -419,59 +419,96 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 4.0, 4.0, 0.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return GestureDetector(
-                                                            onTap: () => FocusScope
-                                                                    .of(context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode),
-                                                            child: Padding(
-                                                              padding: MediaQuery
-                                                                      .of(context)
-                                                                  .viewInsets,
-                                                              child: Container(
-                                                                height: double
-                                                                    .infinity,
-                                                                child:
-                                                                    ProfileViewPinnedWidget(
-                                                                  imgPath:
-                                                                      staggeredViewPinnedRecord
-                                                                          .imagePath,
-                                                                  pinnedRef:
-                                                                      staggeredViewPinnedRecord
-                                                                          .reference,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          setState(() {}));
-                                                    },
-                                                    child: Icon(
-                                                      Icons.zoom_out_map,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      size: 24.0,
+                                                  child: FutureBuilder<int>(
+                                                    future:
+                                                        queryOldSessionPicsRecordCount(
+                                                      parent:
+                                                          currentUserReference,
+                                                      queryBuilder: (oldSessionPicsRecord) =>
+                                                          oldSessionPicsRecord.where(
+                                                              'imagePath',
+                                                              isEqualTo:
+                                                                  staggeredViewPinnedRecord
+                                                                      .imagePath),
                                                     ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      int iconCount =
+                                                          snapshot.data!;
+                                                      return InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          await showModalBottomSheet(
+                                                            isScrollControlled:
+                                                                true,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return GestureDetector(
+                                                                onTap: () => FocusScope.of(
+                                                                        context)
+                                                                    .requestFocus(
+                                                                        _model
+                                                                            .unfocusNode),
+                                                                child: Padding(
+                                                                  padding: MediaQuery.of(
+                                                                          context)
+                                                                      .viewInsets,
+                                                                  child:
+                                                                      Container(
+                                                                    height: double
+                                                                        .infinity,
+                                                                    child:
+                                                                        ProfileViewPinnedWidget(
+                                                                      imgPath:
+                                                                          staggeredViewPinnedRecord
+                                                                              .imagePath,
+                                                                      pinnedRef:
+                                                                          staggeredViewPinnedRecord
+                                                                              .reference,
+                                                                      count:
+                                                                          iconCount,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ).then((value) =>
+                                                              setState(() {}));
+                                                        },
+                                                        child: Icon(
+                                                          Icons.zoom_out_map,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          size: 24.0,
+                                                        ),
+                                                      );
+                                                    },
                                                   ),
                                                 ),
                                               ),

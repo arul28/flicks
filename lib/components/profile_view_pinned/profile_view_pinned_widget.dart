@@ -5,6 +5,7 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'profile_view_pinned_model.dart';
@@ -15,10 +16,12 @@ class ProfileViewPinnedWidget extends StatefulWidget {
     Key? key,
     required this.imgPath,
     required this.pinnedRef,
+    required this.count,
   }) : super(key: key);
 
   final String? imgPath;
   final DocumentReference? pinnedRef;
+  final int? count;
 
   @override
   _ProfileViewPinnedWidgetState createState() =>
@@ -38,6 +41,15 @@ class _ProfileViewPinnedWidgetState extends State<ProfileViewPinnedWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProfileViewPinnedModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (widget.count != 0) {
+        setState(() {
+          _model.unpinnable = false;
+        });
+      }
+    });
   }
 
   @override
@@ -134,79 +146,89 @@ class _ProfileViewPinnedWidgetState extends State<ProfileViewPinnedWidget> {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              height: 60.0,
-              decoration: BoxDecoration(),
-              child: Builder(
-                builder: (context) => Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 8.0, 12.0, 8.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      await showAlignedDialog(
-                        context: context,
-                        isGlobal: true,
-                        avoidOverflow: false,
-                        targetAnchor: AlignmentDirectional(0.0, 0.0)
-                            .resolve(Directionality.of(context)),
-                        followerAnchor: AlignmentDirectional(0.0, 0.0)
-                            .resolve(Directionality.of(context)),
-                        builder: (dialogContext) {
-                          return Material(
-                            color: Colors.transparent,
-                            child: UnPinMessageWidget(
-                              pinnedRef: widget.pinnedRef!,
-                            ),
-                          );
-                        },
-                      ).then((value) => setState(() {}));
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          elevation: 0.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                8.0, 8.0, 8.0, 8.0),
-                            child: Icon(
-                              Icons.delete_outline,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 20.0,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 0.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Un-pin',
-                                  style: FlutterFlowTheme.of(context).bodyLarge,
+            if (_model.unpinnable ?? true)
+              Container(
+                width: double.infinity,
+                height: 60.0,
+                decoration: BoxDecoration(),
+                child: Builder(
+                  builder: (context) => Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(12.0, 8.0, 12.0, 8.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        await showAlignedDialog(
+                          context: context,
+                          isGlobal: true,
+                          avoidOverflow: false,
+                          targetAnchor: AlignmentDirectional(0.0, 0.0)
+                              .resolve(Directionality.of(context)),
+                          followerAnchor: AlignmentDirectional(0.0, 0.0)
+                              .resolve(Directionality.of(context)),
+                          builder: (dialogContext) {
+                            return Material(
+                              color: Colors.transparent,
+                              child: Container(
+                                height: 162.0,
+                                width: 317.0,
+                                child: UnPinMessageWidget(
+                                  pinnedRef: widget.pinnedRef!,
                                 ),
-                              ],
+                              ),
+                            );
+                          },
+                        ).then((value) => setState(() {}));
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 8.0, 8.0, 8.0),
+                              child: Icon(
+                                Icons.delete_outline,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 20.0,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Un-pin',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyLarge,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),

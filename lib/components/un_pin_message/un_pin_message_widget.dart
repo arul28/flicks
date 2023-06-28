@@ -54,7 +54,7 @@ class _UnPinMessageWidgetState extends State<UnPinMessageWidget> {
       ),
       child: Container(
         width: 317.0,
-        height: 178.0,
+        height: 162.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.0),

@@ -4,6 +4,7 @@ import '/components/friend_photos/friend_photos_widget.dart';
 import '/components/pinned_message/pinned_message_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:aligned_dialog/aligned_dialog.dart';
@@ -405,401 +406,445 @@ class _FeedWidgetState extends State<FeedWidget> {
                                       ),
                                     ],
                                   ),
-                                  if (feedCount != 0)
-                                    Expanded(
-                                      child: StreamBuilder<
-                                          List<OldSessionPicsRecord>>(
-                                        stream: queryOldSessionPicsRecord(
-                                          parent: currentUserReference,
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<OldSessionPicsRecord>
-                                              pageViewOldSessionPicsRecordList =
-                                              snapshot.data!;
-                                          return Container(
-                                            width: double.infinity,
-                                            height: 500.0,
-                                            child: Stack(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 35.0),
-                                                  child: PageView.builder(
-                                                    controller: _model
-                                                            .pageViewController ??=
-                                                        PageController(
-                                                            initialPage: min(
-                                                                1,
-                                                                pageViewOldSessionPicsRecordList
-                                                                        .length -
-                                                                    1)),
-                                                    onPageChanged: (_) =>
-                                                        setState(() {}),
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    itemCount:
-                                                        pageViewOldSessionPicsRecordList
-                                                            .length,
-                                                    itemBuilder: (context,
-                                                        pageViewIndex) {
-                                                      final pageViewOldSessionPicsRecord =
-                                                          pageViewOldSessionPicsRecordList[
-                                                              pageViewIndex];
-                                                      return Stack(
-                                                        children: [
-                                                          Align(
-                                                            alignment:
-                                                                AlignmentDirectional(
-                                                                    1.0, 0.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                Align(
-                                                                  alignment:
-                                                                      AlignmentDirectional(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child:
-                                                                      Container(
-                                                                    width:
-                                                                        170.0,
-                                                                    height:
-                                                                        300.0,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                    ),
-                                                                    child:
-                                                                        Align(
+                                  Expanded(
+                                    child: Stack(
+                                      children: [
+                                        if (feedCount != 0)
+                                          StreamBuilder<
+                                              List<OldSessionPicsRecord>>(
+                                            stream: queryOldSessionPicsRecord(
+                                              parent: currentUserReference,
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50.0,
+                                                    height: 50.0,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              List<OldSessionPicsRecord>
+                                                  pageViewOldSessionPicsRecordList =
+                                                  snapshot.data!;
+                                              return Container(
+                                                width: double.infinity,
+                                                height: 500.0,
+                                                child: Stack(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  35.0),
+                                                      child: PageView.builder(
+                                                        controller: _model
+                                                                .pageViewController ??=
+                                                            PageController(
+                                                                initialPage: min(
+                                                                    0,
+                                                                    pageViewOldSessionPicsRecordList
+                                                                            .length -
+                                                                        1)),
+                                                        onPageChanged: (_) =>
+                                                            setState(() {}),
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        itemCount:
+                                                            pageViewOldSessionPicsRecordList
+                                                                .length,
+                                                        itemBuilder: (context,
+                                                            pageViewIndex) {
+                                                          final pageViewOldSessionPicsRecord =
+                                                              pageViewOldSessionPicsRecordList[
+                                                                  pageViewIndex];
+                                                          return Stack(
+                                                            children: [
+                                                              Align(
+                                                                alignment:
+                                                                    AlignmentDirectional(
+                                                                        1.0,
+                                                                        0.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceAround,
+                                                                  children: [
+                                                                    Align(
                                                                       alignment:
                                                                           AlignmentDirectional(
                                                                               0.0,
                                                                               0.0),
                                                                       child:
-                                                                          ClipRRect(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(8.0),
-                                                                        child: Image
-                                                                            .network(
-                                                                          pageViewOldSessionPicsRecord
-                                                                              .imagePath,
-                                                                          width:
-                                                                              144.0,
-                                                                          height:
-                                                                              300.0,
-                                                                          fit: BoxFit
-                                                                              .cover,
+                                                                          Container(
+                                                                        width:
+                                                                            170.0,
+                                                                        height:
+                                                                            300.0,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryBackground,
                                                                         ),
+                                                                        child:
+                                                                            Align(
+                                                                          alignment: AlignmentDirectional(
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8.0),
+                                                                            child:
+                                                                                Image.network(
+                                                                              pageViewOldSessionPicsRecord.imagePath,
+                                                                              width: 144.0,
+                                                                              height: 300.0,
+                                                                              fit: BoxFit.cover,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              if (pageViewOldSessionPicsRecord
+                                                                  .isPinned)
+                                                                Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          -1.0,
+                                                                          0.0),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            30.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        await pageViewOldSessionPicsRecord
+                                                                            .reference
+                                                                            .update(createOldSessionPicsRecordData(
+                                                                          isPinned:
+                                                                              false,
+                                                                        ));
+                                                                        await cardContainerPinnedRecordList
+                                                                            .where((e) =>
+                                                                                pageViewOldSessionPicsRecord.imagePath ==
+                                                                                e.imagePath)
+                                                                            .toList()
+                                                                            .first
+                                                                            .reference
+                                                                            .delete();
+                                                                      },
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .push_pin,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .amethyst,
+                                                                        size:
+                                                                            50.0,
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          if (pageViewOldSessionPicsRecord
-                                                              .isPinned)
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      -1.0,
-                                                                      0.0),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
+                                                              if (!pageViewOldSessionPicsRecord
+                                                                  .isPinned)
+                                                                Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          -1.0,
+                                                                          0.0),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             30.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                child: InkWell(
-                                                                  splashColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  focusColor: Colors
-                                                                      .transparent,
-                                                                  hoverColor: Colors
-                                                                      .transparent,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  onTap:
-                                                                      () async {
-                                                                    await pageViewOldSessionPicsRecord
-                                                                        .reference
-                                                                        .update(
-                                                                            createOldSessionPicsRecordData(
-                                                                      isPinned:
-                                                                          false,
-                                                                    ));
-                                                                    await cardContainerPinnedRecordList
-                                                                        .where((e) =>
-                                                                            pageViewOldSessionPicsRecord.imagePath ==
-                                                                            e.imagePath)
-                                                                        .toList()
-                                                                        .first
-                                                                        .reference
-                                                                        .delete();
-                                                                  },
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .push_pin,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .amethyst,
-                                                                    size: 50.0,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          if (!pageViewOldSessionPicsRecord
-                                                              .isPinned)
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      -1.0,
-                                                                      0.0),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            30.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                child: InkWell(
-                                                                  splashColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  focusColor: Colors
-                                                                      .transparent,
-                                                                  hoverColor: Colors
-                                                                      .transparent,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  onTap:
-                                                                      () async {
-                                                                    await pageViewOldSessionPicsRecord
-                                                                        .reference
-                                                                        .update(
-                                                                            createOldSessionPicsRecordData(
-                                                                      isPinned:
-                                                                          true,
-                                                                    ));
+                                                                    child:
+                                                                        InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        await pageViewOldSessionPicsRecord
+                                                                            .reference
+                                                                            .update(createOldSessionPicsRecordData(
+                                                                          isPinned:
+                                                                              true,
+                                                                        ));
 
-                                                                    await PinnedRecord.createDoc(
-                                                                            currentUserReference!)
-                                                                        .set(
-                                                                            createPinnedRecordData(
-                                                                      imagePath:
-                                                                          pageViewOldSessionPicsRecord
-                                                                              .imagePath,
-                                                                      timeTaken:
-                                                                          pageViewOldSessionPicsRecord
-                                                                              .timeTaken,
-                                                                    ));
-                                                                  },
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .push_pin_outlined,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .amethyst,
-                                                                    size: 50.0,
+                                                                        await PinnedRecord.createDoc(currentUserReference!)
+                                                                            .set(createPinnedRecordData(
+                                                                          imagePath:
+                                                                              pageViewOldSessionPicsRecord.imagePath,
+                                                                          timeTaken:
+                                                                              pageViewOldSessionPicsRecord.timeTaken,
+                                                                        ));
+                                                                      },
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .push_pin_outlined,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .amethyst,
+                                                                        size:
+                                                                            50.0,
+                                                                      ),
+                                                                    ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ),
-                                                          Align(
-                                                            alignment:
-                                                                AlignmentDirectional(
-                                                                    1.0, 0.0),
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
+                                                              Align(
+                                                                alignment:
+                                                                    AlignmentDirectional(
+                                                                        1.0,
+                                                                        0.0),
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           20.0,
                                                                           0.0),
-                                                              child:
-                                                                  FutureBuilder<
-                                                                      int>(
-                                                                future:
-                                                                    queryOldSessionPicsRecordCount(
-                                                                  parent:
-                                                                      currentUserReference,
-                                                                ),
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  // Customize what your widget looks like when it's loading.
-                                                                  if (!snapshot
-                                                                      .hasData) {
-                                                                    return Center(
-                                                                      child:
-                                                                          SizedBox(
-                                                                        width:
-                                                                            50.0,
-                                                                        height:
-                                                                            50.0,
-                                                                        child:
-                                                                            CircularProgressIndicator(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-                                                                  int richTextCount =
-                                                                      snapshot
-                                                                          .data!;
-                                                                  return RichText(
-                                                                    text:
-                                                                        TextSpan(
-                                                                      children: [
-                                                                        TextSpan(
-                                                                          text: _model
-                                                                              .pageViewCurrentIndex
-                                                                              .toString(),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyLarge
-                                                                              .override(
-                                                                                fontFamily: 'Readex Pro',
-                                                                                color: FlutterFlowTheme.of(context).heliotrope,
-                                                                                fontSize: 28.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                        ),
-                                                                        TextSpan(
-                                                                          text:
-                                                                              ' / ',
-                                                                          style:
-                                                                              GoogleFonts.getFont(
-                                                                            'Outfit',
-                                                                            fontWeight:
-                                                                                FontWeight.w800,
-                                                                            fontSize:
-                                                                                24.0,
-                                                                            fontStyle:
-                                                                                FontStyle.normal,
-                                                                          ),
-                                                                        ),
-                                                                        TextSpan(
-                                                                          text:
-                                                                              valueOrDefault<String>(
-                                                                            richTextCount.toString(),
-                                                                            '0',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyLarge
-                                                                              .override(
-                                                                                fontFamily: 'Readex Pro',
-                                                                                color: FlutterFlowTheme.of(context).heliotrope,
-                                                                                fontSize: 28.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                        )
-                                                                      ],
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium,
+                                                                  child:
+                                                                      FutureBuilder<
+                                                                          int>(
+                                                                    future:
+                                                                        queryOldSessionPicsRecordCount(
+                                                                      parent:
+                                                                          currentUserReference,
                                                                     ),
-                                                                  );
-                                                                },
+                                                                    builder:
+                                                                        (context,
+                                                                            snapshot) {
+                                                                      // Customize what your widget looks like when it's loading.
+                                                                      if (!snapshot
+                                                                          .hasData) {
+                                                                        return Center(
+                                                                          child:
+                                                                              SizedBox(
+                                                                            width:
+                                                                                50.0,
+                                                                            height:
+                                                                                50.0,
+                                                                            child:
+                                                                                CircularProgressIndicator(
+                                                                              color: FlutterFlowTheme.of(context).primary,
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      }
+                                                                      int richTextCount =
+                                                                          snapshot
+                                                                              .data!;
+                                                                      return RichText(
+                                                                        text:
+                                                                            TextSpan(
+                                                                          children: [
+                                                                            TextSpan(
+                                                                              text: functions.addOne(_model.pageViewCurrentIndex).toString(),
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    color: FlutterFlowTheme.of(context).heliotrope,
+                                                                                    fontSize: 28.0,
+                                                                                    fontWeight: FontWeight.w600,
+                                                                                  ),
+                                                                            ),
+                                                                            TextSpan(
+                                                                              text: ' / ',
+                                                                              style: GoogleFonts.getFont(
+                                                                                'Outfit',
+                                                                                fontWeight: FontWeight.w800,
+                                                                                fontSize: 24.0,
+                                                                                fontStyle: FontStyle.normal,
+                                                                              ),
+                                                                            ),
+                                                                            TextSpan(
+                                                                              text: valueOrDefault<String>(
+                                                                                richTextCount.toString(),
+                                                                                '0',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    color: FlutterFlowTheme.of(context).heliotrope,
+                                                                                    fontSize: 28.0,
+                                                                                    fontWeight: FontWeight.w600,
+                                                                                  ),
+                                                                            )
+                                                                          ],
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 1.0),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 16.0),
-                                                    child: smooth_page_indicator
-                                                        .SmoothPageIndicator(
-                                                      controller: _model
-                                                              .pageViewController ??=
-                                                          PageController(
-                                                              initialPage: min(
-                                                                  1,
-                                                                  pageViewOldSessionPicsRecordList
-                                                                          .length -
-                                                                      1)),
-                                                      count:
-                                                          pageViewOldSessionPicsRecordList
-                                                              .length,
-                                                      axisDirection:
-                                                          Axis.horizontal,
-                                                      onDotClicked: (i) async {
-                                                        await _model
-                                                            .pageViewController!
-                                                            .animateToPage(
-                                                          i,
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  500),
-                                                          curve: Curves.ease,
-                                                        );
-                                                      },
-                                                      effect: smooth_page_indicator
-                                                          .ExpandingDotsEffect(
-                                                        expansionFactor: 3.0,
-                                                        spacing: 8.0,
-                                                        radius: 16.0,
-                                                        dotWidth: 16.0,
-                                                        dotHeight: 8.0,
-                                                        dotColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .accent1,
-                                                        activeDotColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        paintStyle:
-                                                            PaintingStyle.fill,
+                                                            ],
+                                                          );
+                                                        },
                                                       ),
                                                     ),
-                                                  ),
+                                                    Align(
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0.0, 1.0),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    16.0),
+                                                        child: smooth_page_indicator
+                                                            .SmoothPageIndicator(
+                                                          controller: _model
+                                                                  .pageViewController ??=
+                                                              PageController(
+                                                                  initialPage: min(
+                                                                      0,
+                                                                      pageViewOldSessionPicsRecordList
+                                                                              .length -
+                                                                          1)),
+                                                          count:
+                                                              pageViewOldSessionPicsRecordList
+                                                                  .length,
+                                                          axisDirection:
+                                                              Axis.horizontal,
+                                                          onDotClicked:
+                                                              (i) async {
+                                                            await _model
+                                                                .pageViewController!
+                                                                .animateToPage(
+                                                              i,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                              curve:
+                                                                  Curves.ease,
+                                                            );
+                                                          },
+                                                          effect: smooth_page_indicator
+                                                              .ExpandingDotsEffect(
+                                                            expansionFactor:
+                                                                3.0,
+                                                            spacing: 8.0,
+                                                            radius: 16.0,
+                                                            dotWidth: 16.0,
+                                                            dotHeight: 8.0,
+                                                            dotColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .accent1,
+                                                            activeDotColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                            paintStyle:
+                                                                PaintingStyle
+                                                                    .fill,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
+                                              );
+                                            },
+                                          ),
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(1.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 20.0, 40.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'imageViewer',
+                                                  queryParameters: {
+                                                    'userRef': serializeParam(
+                                                      currentUserReference,
+                                                      ParamType
+                                                          .DocumentReference,
+                                                    ),
+                                                    'username': serializeParam(
+                                                      currentUserDisplayName,
+                                                      ParamType.String,
+                                                    ),
+                                                    'profilePic':
+                                                        serializeParam(
+                                                      currentUserPhoto,
+                                                      ParamType.String,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Icon(
+                                                Icons.comment_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .heliotrope,
+                                                size: 40.0,
+                                              ),
                                             ),
-                                          );
-                                        },
-                                      ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                  ),
                                   if (feedCount == 0)
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
