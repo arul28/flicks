@@ -306,7 +306,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                   Icons.circle_outlined,
                                   color:
                                       FlutterFlowTheme.of(context).frenchViolet,
-                                  size: 100.0,
+                                  size: 80.0,
                                 ),
                               ),
                             ),
@@ -324,7 +324,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                               if (_model.takingImage ?? true)
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 30.0, 0.0),
+                                      0.0, 10.0, 40.0, 0.0),
                                   child: Lottie.network(
                                     'https://assets5.lottiefiles.com/packages/lf20_fPPjzl7JC2.json',
                                     width: 150.0,
@@ -365,7 +365,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                               });
                             },
                             child: Icon(
-                              Icons.flip_camera_ios_rounded,
+                              Icons.flip_camera_android_outlined,
                               color: FlutterFlowTheme.of(context).frenchViolet,
                               size: 50.0,
                             ),

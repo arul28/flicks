@@ -72,7 +72,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
             'Settings ',
             style: FlutterFlowTheme.of(context).headlineLarge.override(
                   fontFamily: 'Outfit',
-                  fontSize: 30.0,
+                  fontSize: 24.0,
                 ),
           ),
         ),
@@ -269,12 +269,14 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                                   0.0, 0.0, 0.0, 0.0),
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).frenchViolet,
+                              color:
+                                  FlutterFlowTheme.of(context).primaryBtnText,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color: Colors.white,
+                                    color:
+                                        FlutterFlowTheme.of(context).black600,
                                   ),
                               elevation: 3.0,
                               borderSide: BorderSide(
@@ -298,7 +300,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                 'Licensed by BTA food and entertainment ',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Readex Pro',
-                      color: Color(0xFF3B454D),
+                      color: FlutterFlowTheme.of(context).primaryBtnText,
                       fontStyle: FontStyle.italic,
                     ),
               ),

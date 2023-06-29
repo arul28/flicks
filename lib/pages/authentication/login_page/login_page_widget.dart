@@ -203,7 +203,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                             width: double.infinity,
                             child: TextFormField(
                               controller: _model.emailAddressController,
-                              autofocus: true,
                               autofillHints: [AutofillHints.email],
                               obscureText: false,
                               decoration: InputDecoration(

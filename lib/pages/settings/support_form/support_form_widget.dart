@@ -74,11 +74,11 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
                 'Contact Us',
                 style: FlutterFlowTheme.of(context).headlineLarge.override(
                       fontFamily: 'Outfit',
-                      fontSize: 30.0,
+                      fontSize: 24.0,
                     ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(100.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(120.0, 0.0, 0.0, 0.0),
                 child: Container(
                   width: 39.0,
                   height: 39.0,
@@ -306,23 +306,24 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
                             ),
                             options: FFButtonOptions(
                               width: double.infinity,
-                              height: 51.0,
+                              height: 48.0,
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).primary,
+                              color:
+                                  FlutterFlowTheme.of(context).primaryBtnText,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color: Colors.white,
+                                    color:
+                                        FlutterFlowTheme.of(context).black600,
                                     fontWeight: FontWeight.w500,
                                   ),
                               elevation: 4.0,
                               borderSide: BorderSide(
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                color: FlutterFlowTheme.of(context).black600,
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(60.0),

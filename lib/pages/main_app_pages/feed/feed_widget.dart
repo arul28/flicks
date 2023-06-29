@@ -45,87 +45,84 @@ class _FeedWidgetState extends State<FeedWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return FutureBuilder<int>(
-      future: queryOldSessionPicsRecordCount(
-        parent: currentUserReference,
-      ),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: Center(
-              child: SizedBox(
-                width: 50.0,
-                height: 50.0,
-                child: CircularProgressIndicator(
-                  color: FlutterFlowTheme.of(context).primary,
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.pushNamed('Camera');
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                  width: 40.0,
+                  height: 40.0,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-          );
-        }
-        int feedCount = snapshot.data!;
-        return Scaffold(
-          key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            automaticallyImplyLeading: false,
-            title: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('Camera');
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                      width: 40.0,
-                      height: 40.0,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Text(
-                  'flicks',
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Outfit',
-                        color: FlutterFlowTheme.of(context).frenchViolet,
-                      ),
-                ),
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('searchUsers');
-                  },
-                  child: Icon(
-                    Icons.person_search_sharp,
+            Text(
+              'flicks',
+              style: FlutterFlowTheme.of(context).headlineLarge.override(
+                    fontFamily: 'Outfit',
                     color: FlutterFlowTheme.of(context).frenchViolet,
-                    size: 35.0,
                   ),
-                ),
-              ],
             ),
-            actions: [],
-            centerTitle: false,
-            elevation: 0.0,
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Row(
+            InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.pushNamed('searchUsers');
+              },
+              child: Icon(
+                Icons.person_search_sharp,
+                color: FlutterFlowTheme.of(context).frenchViolet,
+                size: 35.0,
+              ),
+            ),
+          ],
+        ),
+        actions: [],
+        centerTitle: false,
+        elevation: 0.0,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            FutureBuilder<int>(
+              future: queryOldSessionPicsRecordCount(
+                parent: currentUserReference,
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: CircularProgressIndicator(
+                        color: FlutterFlowTheme.of(context).primary,
+                      ),
+                    ),
+                  );
+                }
+                int rowCount = snapshot.data!;
+                return Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
@@ -163,170 +160,135 @@ class _FeedWidgetState extends State<FeedWidget> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  FutureBuilder<int>(
-                                    future: queryOldSessionPicsRecordCount(
-                                      parent: currentUserReference,
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            child: CircularProgressIndicator(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      int rowCount = snapshot.data!;
-                                      return Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 12.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Your flicks',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color: Colors.white,
-                                                        fontSize: 24.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 10.0, 0.0),
-                                            child: StreamBuilder<
-                                                List<OldSessionDetailsRecord>>(
-                                              stream:
-                                                  queryOldSessionDetailsRecord(
-                                                singleRecord: true,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 12.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Developed Flicks',
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineMedium
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Colors.white,
+                                                fontSize: 24.0,
+                                                fontWeight: FontWeight.w600,
                                               ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<OldSessionDetailsRecord>
-                                                    richTextOldSessionDetailsRecordList =
-                                                    snapshot.data!;
-                                                // Return an empty Container when the item does not exist.
-                                                if (snapshot.data!.isEmpty) {
-                                                  return Container();
-                                                }
-                                                final richTextOldSessionDetailsRecord =
-                                                    richTextOldSessionDetailsRecordList
-                                                            .isNotEmpty
-                                                        ? richTextOldSessionDetailsRecordList
-                                                            .first
-                                                        : null;
-                                                return RichText(
-                                                  text: TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text: valueOrDefault<
-                                                            String>(
-                                                          rowCount.toString(),
-                                                          '0',
-                                                        ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBtnText,
-                                                                  fontSize:
-                                                                      24.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                ),
-                                                      ),
-                                                      TextSpan(
-                                                        text: ' / ',
-                                                        style:
-                                                            GoogleFonts.getFont(
-                                                          'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBtnText,
-                                                          fontWeight:
-                                                              FontWeight.w800,
-                                                          fontSize: 18.0,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text: valueOrDefault<
-                                                            String>(
-                                                          richTextOldSessionDetailsRecord!
-                                                              .maxPics
-                                                              .toString(),
-                                                          '0',
-                                                        ),
-                                                        style:
-                                                            GoogleFonts.getFont(
-                                                          'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBtnText,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 24.0,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text: ' flicks taken',
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .grayIcon,
-                                                          fontWeight:
-                                                              FontWeight.w100,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      )
-                                                    ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 10.0, 10.0, 0.0),
+                                        child: StreamBuilder<
+                                            List<OldSessionDetailsRecord>>(
+                                          stream: queryOldSessionDetailsRecord(
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<OldSessionDetailsRecord>
+                                                richTextOldSessionDetailsRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the item does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final richTextOldSessionDetailsRecord =
+                                                richTextOldSessionDetailsRecordList
+                                                        .isNotEmpty
+                                                    ? richTextOldSessionDetailsRecordList
+                                                        .first
+                                                    : null;
+                                            return RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: rowCount.toString(),
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .headlineMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBtnText,
+                                                          fontSize: 24.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
                                                   ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
+                                                  TextSpan(
+                                                    text: ' / ',
+                                                    style: GoogleFonts.getFont(
+                                                      'Poppins',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBtnText,
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      fontSize: 18.0,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        valueOrDefault<String>(
+                                                      richTextOldSessionDetailsRecord!
+                                                          .maxPics
+                                                          .toString(),
+                                                      '0',
+                                                    ),
+                                                    style: GoogleFonts.getFont(
+                                                      'Poppins',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBtnText,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 24.0,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' flicks taken',
+                                                    style: TextStyle(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .grayIcon,
+                                                      fontWeight:
+                                                          FontWeight.w100,
+                                                      fontSize: 14.0,
+                                                    ),
+                                                  )
+                                                ],
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineMedium,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -409,7 +371,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                   Expanded(
                                     child: Stack(
                                       children: [
-                                        if (feedCount != 0)
+                                        if (rowCount != 0)
                                           StreamBuilder<
                                               List<OldSessionPicsRecord>>(
                                             stream: queryOldSessionPicsRecord(
@@ -798,54 +760,56 @@ class _FeedWidgetState extends State<FeedWidget> {
                                               );
                                             },
                                           ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(1.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 20.0, 40.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed(
-                                                  'imageViewer',
-                                                  queryParameters: {
-                                                    'userRef': serializeParam(
-                                                      currentUserReference,
-                                                      ParamType
-                                                          .DocumentReference,
-                                                    ),
-                                                    'username': serializeParam(
-                                                      currentUserDisplayName,
-                                                      ParamType.String,
-                                                    ),
-                                                    'profilePic':
-                                                        serializeParam(
-                                                      currentUserPhoto,
-                                                      ParamType.String,
-                                                    ),
-                                                  }.withoutNulls,
-                                                );
-                                              },
-                                              child: Icon(
-                                                Icons.comment_rounded,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .frenchViolet,
-                                                size: 40.0,
+                                        if (rowCount != 0)
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(1.0, 0.0),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 20.0, 40.0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context.pushNamed(
+                                                    'imageViewer',
+                                                    queryParameters: {
+                                                      'userRef': serializeParam(
+                                                        currentUserReference,
+                                                        ParamType
+                                                            .DocumentReference,
+                                                      ),
+                                                      'username':
+                                                          serializeParam(
+                                                        currentUserDisplayName,
+                                                        ParamType.String,
+                                                      ),
+                                                      'profilePic':
+                                                          serializeParam(
+                                                        currentUserPhoto,
+                                                        ParamType.String,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
+                                                },
+                                                child: Icon(
+                                                  Icons.comment_rounded,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .frenchViolet,
+                                                  size: 40.0,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
                                       ],
                                     ),
                                   ),
-                                  if (feedCount == 0)
+                                  if (rowCount == 0)
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -877,84 +841,115 @@ class _FeedWidgetState extends State<FeedWidget> {
                       ),
                     ),
                   ],
-                ),
-                Divider(
-                  thickness: 3.0,
-                  indent: 10.0,
-                  endIndent: 10.0,
-                  color: FlutterFlowTheme.of(context).frenchViolet,
-                ),
-                if (valueOrDefault(currentUserDocument?.friendsNum, 0) == 0)
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
-                    child: AuthUserStreamWidget(
-                      builder: (context) => Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Add friends to see their flicks!',
-                            style: FlutterFlowTheme.of(context).headlineMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 32.0),
-                  child: Column(
+                );
+              },
+            ),
+            Divider(
+              thickness: 3.0,
+              indent: 10.0,
+              endIndent: 10.0,
+              color: FlutterFlowTheme.of(context).frenchViolet,
+            ),
+            if (valueOrDefault(currentUserDocument?.friendsNum, 0) == 0)
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                child: AuthUserStreamWidget(
+                  builder: (context) => Row(
                     mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      StreamBuilder<List<UsersRecord>>(
-                        stream: queryUsersRecord(
-                          queryBuilder: (usersRecord) => usersRecord.where(
-                              'friendsList',
-                              arrayContains: currentUserReference),
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
-                            );
-                          }
-                          List<UsersRecord> listViewUsersRecordList =
-                              snapshot.data!;
-                          return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: listViewUsersRecordList.length,
-                            itemBuilder: (context, listViewIndex) {
-                              final listViewUsersRecord =
-                                  listViewUsersRecordList[listViewIndex];
-                              return FriendPhotosWidget(
-                                key: Key(
-                                    'Keyqli_${listViewIndex}_of_${listViewUsersRecordList.length}'),
-                                parameter1: listViewUsersRecord.photoUrl,
-                                parameter2: listViewUsersRecord.displayName,
-                                parameter3: listViewUsersRecord.reference,
-                                userDoc: listViewUsersRecord,
-                              );
-                            },
-                          );
-                        },
+                      Text(
+                        'Add friends to see their flicks!',
+                        style: FlutterFlowTheme.of(context).headlineMedium,
                       ),
                     ],
                   ),
                 ),
-              ],
+              ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 32.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  StreamBuilder<List<UsersRecord>>(
+                    stream: queryUsersRecord(
+                      queryBuilder: (usersRecord) => usersRecord.where(
+                          'friendsList',
+                          arrayContains: currentUserReference),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              color: FlutterFlowTheme.of(context).primary,
+                            ),
+                          ),
+                        );
+                      }
+                      List<UsersRecord> listViewUsersRecordList =
+                          snapshot.data!;
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listViewUsersRecordList.length,
+                        itemBuilder: (context, listViewIndex) {
+                          final listViewUsersRecord =
+                              listViewUsersRecordList[listViewIndex];
+                          return FutureBuilder<int>(
+                            future: queryOldSessionPicsRecordCount(
+                              parent: listViewUsersRecord.reference,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                    ),
+                                  ),
+                                );
+                              }
+                              int containerCount = snapshot.data!;
+                              return Container(
+                                width: double.infinity,
+                                height: 320.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: Visibility(
+                                  visible: containerCount != 0,
+                                  child: FriendPhotosWidget(
+                                    key: Key(
+                                        'Keyqli_${listViewIndex}_of_${listViewUsersRecordList.length}'),
+                                    parameter1: listViewUsersRecord.photoUrl,
+                                    parameter2: listViewUsersRecord.displayName,
+                                    parameter3: listViewUsersRecord.reference,
+                                    userDoc: listViewUsersRecord,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }

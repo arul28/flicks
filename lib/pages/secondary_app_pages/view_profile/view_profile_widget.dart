@@ -38,15 +38,23 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if ((currentUserDocument?.friendsList?.toList() ?? [])
           .contains(widget.userInfo!.reference)) {
-        _model.isFriend = true;
+        setState(() {
+          _model.isFriend = true;
+        });
       } else if ((currentUserDocument?.sentPendingRequests?.toList() ?? [])
           .contains(widget.userInfo!.reference)) {
-        _model.sentWaiting = true;
+        setState(() {
+          _model.sentWaiting = true;
+        });
       } else if ((currentUserDocument?.incomingPendingRequests?.toList() ?? [])
           .contains(widget.userInfo!.reference)) {
-        _model.recievedWaiting = true;
+        setState(() {
+          _model.recievedWaiting = true;
+        });
       } else {
-        _model.noConnection = true;
+        setState(() {
+          _model.noConnection = true;
+        });
       }
     });
   }
@@ -307,8 +315,9 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                   setState(() {
                                     _model.sentWaiting = true;
                                     _model.noConnection = false;
+                                    _model.isFriend = false;
+                                    _model.recievedWaiting = false;
                                   });
-                                  setState(() {});
                                 },
                                 child: Container(
                                   width: 200.0,
@@ -415,6 +424,8 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                     setState(() {
                                       _model.isFriend = false;
                                       _model.noConnection = true;
+                                      _model.sentWaiting = false;
+                                      _model.recievedWaiting = false;
                                     });
                                   }
                                   setState(() {});
@@ -537,19 +548,29 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                     'friendsList': FieldValue.arrayUnion(
                                         [widget.userInfo!.reference]),
                                     'friendsNum': FieldValue.increment(1),
+                                    'incomingPendingRequests':
+                                        FieldValue.arrayRemove(
+                                            [widget.userInfo!.reference]),
+                                    'incomingPendingRequestsNum':
+                                        FieldValue.increment(-(1)),
                                   });
 
                                   await widget.userInfo!.reference.update({
                                     'friendsList': FieldValue.arrayUnion(
                                         [currentUserReference]),
                                     'friendsNum': FieldValue.increment(1),
+                                    'sentPendingRequests':
+                                        FieldValue.arrayRemove(
+                                            [currentUserReference]),
+                                    'sentPendingRequestsNum':
+                                        FieldValue.increment(-(1)),
                                   });
                                   setState(() {
                                     _model.isFriend = true;
                                     _model.recievedWaiting = false;
                                     _model.noConnection = false;
+                                    _model.sentWaiting = false;
                                   });
-                                  setState(() {});
                                 },
                                 child: Container(
                                   width: 200.0,

@@ -30,17 +30,42 @@ class CameraPhoto extends StatefulWidget {
 
 class _CameraPhotoState extends State<CameraPhoto> {
   CameraController? controller;
-  late Future<List<CameraDescription>> _cameras;
+  List<CameraDescription>? _cameras;
+  int selectedCameraIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _cameras = availableCameras();
+    availableCameras().then((value) => _cameras = value);
+  }
+
+  _initializeController() {
+    if (_cameras != null && _cameras!.isNotEmpty) {
+      controller = CameraController(
+          _cameras![selectedCameraIndex], ResolutionPreset.max);
+      controller!.initialize().then((_) {
+        if (!mounted) {
+          return;
+        }
+        setState(() {});
+      });
+    }
   }
 
   @override
   void didUpdateWidget(covariant CameraPhoto oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (_cameras != null) {
+      if (FFAppState().switchCam && selectedCameraIndex == 0) {
+        selectedCameraIndex = 1;
+        _initializeController();
+        FFAppState().switchCam = false;
+      } else if (!FFAppState().switchCam && selectedCameraIndex == 1) {
+        selectedCameraIndex = 0;
+        _initializeController();
+      }
+    }
+
     if (FFAppState().makePhoto) {
       controller!.takePicture().then((file) async {
         Uint8List fileAsBytes = await file.readAsBytes();
@@ -49,7 +74,7 @@ class _CameraPhotoState extends State<CameraPhoto> {
           fileAsBytes,
           minHeight: 1920,
           minWidth: 1080,
-          quality: 88,
+          quality: 70,
         );
         FFAppState().update(() {
           FFAppState().makePhoto = false;
@@ -73,21 +98,11 @@ class _CameraPhotoState extends State<CameraPhoto> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<CameraDescription>>(
-      future: _cameras,
+    return FutureBuilder<void>(
+      future: controller?.initialize(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-            if (controller == null) {
-              controller =
-                  CameraController(snapshot.data![0], ResolutionPreset.max);
-              controller!.initialize().then((_) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {});
-              });
-            }
+          if (_cameras != null && _cameras!.isNotEmpty) {
             return controller!.value.isInitialized
                 ? MaterialApp(
                     home: CameraPreview(controller!),

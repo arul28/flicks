@@ -387,7 +387,7 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                                     ),
                               ),
                               TextSpan(
-                                text: 'likes',
+                                text: ' likes',
                                 style: TextStyle(),
                               )
                             ],

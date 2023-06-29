@@ -101,7 +101,7 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
             'App Behavior',
             style: FlutterFlowTheme.of(context).headlineLarge.override(
                   fontFamily: 'Outfit',
-                  fontSize: 28.0,
+                  fontSize: 24.0,
                 ),
           ),
         ),

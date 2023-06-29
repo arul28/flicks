@@ -382,22 +382,25 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                   text: 'Back',
                                   options: FFButtonOptions(
                                     width: double.infinity,
-                                    height: 50.0,
+                                    height: 47.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).gray200,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: FlutterFlowTheme.of(context)
                                               .black600,
+                                          fontSize: 14.0,
                                         ),
                                     elevation: 3.0,
                                     borderSide: BorderSide(
-                                      color: Colors.transparent,
+                                      color:
+                                          FlutterFlowTheme.of(context).black600,
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
@@ -525,24 +528,26 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                     text: 'Send',
                                     options: FFButtonOptions(
                                       width: double.infinity,
-                                      height: 50.0,
+                                      height: 47.0,
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 0.0),
                                       iconPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).gray200,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: FlutterFlowTheme.of(context)
                                                 .black600,
+                                            fontSize: 14.0,
                                           ),
                                       elevation: 3.0,
                                       borderSide: BorderSide(
-                                        color: Colors.transparent,
+                                        color: FlutterFlowTheme.of(context)
+                                            .black600,
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(30.0),
