@@ -36,35 +36,30 @@ class _CameraPhotoState extends State<CameraPhoto> {
   @override
   void initState() {
     super.initState();
-    availableCameras().then((value) => _cameras = value);
+    availableCameras().then((value) {
+      _cameras = value;
+      _initializeController(selectedCameraIndex);
+    });
   }
 
-  _initializeController(int cameraIndex) async {
-    if (controller != null) {
-      await controller!.dispose();
-    }
+  Future<void> _initializeController(int cameraIndex) async {
+    final oldController = controller;
     controller = CameraController(
       _cameras![cameraIndex],
-      cameraIndex == 0
-          ? ResolutionPreset.max
-          : ResolutionPreset.high, // use high preset for the front camera
+      cameraIndex == 0 ? ResolutionPreset.max : ResolutionPreset.high,
     );
-    controller!.addListener(() {
-      if (mounted) setState(() {});
-      if (controller!.value.hasError) {
-        print('Camera error ${controller!.value.errorDescription}');
+
+    controller!.initialize().then((_) async {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+
+      // Dispose of the old controller here, inside the callback
+      if (oldController != null) {
+        await oldController.dispose();
       }
     });
-
-    try {
-      await controller!.initialize();
-    } on CameraException catch (e) {
-      print('Error: ${e.description}');
-    }
-
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override

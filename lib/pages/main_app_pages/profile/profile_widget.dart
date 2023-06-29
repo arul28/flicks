@@ -152,7 +152,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             context.pushNamed(
-                                              'ManageFriendsOption',
+                                              'manageFriends',
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
                                                     TransitionInfo(
@@ -190,7 +190,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
                                           context.pushNamed(
-                                            'ManageFriendsOption',
+                                            'manageFriends',
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
                                                   TransitionInfo(
