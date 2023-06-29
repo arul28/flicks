@@ -54,7 +54,7 @@ class _CameraWidgetState extends State<CameraWidget>
         ShakeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 1380.ms,
+          duration: 2000.ms,
           hz: 4,
           offset: Offset(3.0, 3.0),
           rotation: 0.087,
@@ -179,28 +179,26 @@ class _CameraWidgetState extends State<CameraWidget>
                           ),
                         ],
                       ),
-                      if (!_model.takingImage!)
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 4.0),
-                          child: FlutterFlowIconButton(
-                            borderColor: Colors.transparent,
-                            borderRadius: 30.0,
-                            borderWidth: 1.0,
-                            buttonSize: 60.0,
-                            icon: Icon(
-                              Icons.camera_roll,
-                              color: FlutterFlowTheme.of(context).frenchViolet,
-                              size: 35.0,
-                            ),
-                            onPressed: () async {
-                              context.pushNamed('currentSessionPhotosDetails');
-                            },
-                          ).animateOnActionTrigger(
-                            animationsMap[
-                                'iconButtonOnActionTriggerAnimation']!,
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                        child: FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 30.0,
+                          borderWidth: 1.0,
+                          buttonSize: 60.0,
+                          icon: Icon(
+                            Icons.camera_roll,
+                            color: FlutterFlowTheme.of(context).frenchViolet,
+                            size: 35.0,
                           ),
+                          onPressed: () async {
+                            context.pushNamed('currentSessionPhotosDetails');
+                          },
+                        ).animateOnActionTrigger(
+                          animationsMap['iconButtonOnActionTriggerAnimation']!,
                         ),
+                      ),
                     ],
                   ),
                   actions: [],

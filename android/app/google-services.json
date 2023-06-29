@@ -58,6 +58,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "346801684314-l8hmrgu053hk5q40cvd8u30u274avvch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.flicks",
+            "certificate_hash": "313a9388c74cf47af3172bab9e3fa12d7da69f6a"
+          }
+        },
+        {
           "client_id": "346801684314-skrkd0knp0mvq5e9dn4u9m030n8u6bam.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
