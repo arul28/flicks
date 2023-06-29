@@ -184,9 +184,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ResetPasswordWidget(),
         ),
         FFRoute(
-          name: 'AppBehavior',
-          path: '/appBehavior',
-          builder: (context, params) => AppBehaviorWidget(),
+          name: 'manageSettings',
+          path: '/manageSettings',
+          builder: (context, params) => ManageSettingsWidget(),
         ),
         FFRoute(
           name: 'imageViewer',

@@ -99,15 +99,15 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.pushNamed('AppBehavior');
+                  context.pushNamed('manageSettings');
                 },
                 child: ListTile(
                   title: Text(
-                    'App Behavior',
+                    'Manage Settings',
                     style: FlutterFlowTheme.of(context).titleLarge,
                   ),
                   subtitle: Text(
-                    'Edit the look of flicks',
+                    'flicks settings',
                     style: FlutterFlowTheme.of(context).labelMedium,
                   ),
                   trailing: Icon(

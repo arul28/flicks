@@ -7,19 +7,19 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'app_behavior_model.dart';
-export 'app_behavior_model.dart';
+import 'manage_settings_model.dart';
+export 'manage_settings_model.dart';
 
-class AppBehaviorWidget extends StatefulWidget {
-  const AppBehaviorWidget({Key? key}) : super(key: key);
+class ManageSettingsWidget extends StatefulWidget {
+  const ManageSettingsWidget({Key? key}) : super(key: key);
 
   @override
-  _AppBehaviorWidgetState createState() => _AppBehaviorWidgetState();
+  _ManageSettingsWidgetState createState() => _ManageSettingsWidgetState();
 }
 
-class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
+class _ManageSettingsWidgetState extends State<ManageSettingsWidget>
     with TickerProviderStateMixin {
-  late AppBehaviorModel _model;
+  late ManageSettingsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var hasContainerTriggered = false;
@@ -42,7 +42,7 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AppBehaviorModel());
+    _model = createModel(context, () => ManageSettingsModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -91,7 +91,7 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
         title: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
           child: Text(
-            'App Behavior',
+            'Manage Settings',
             style: FlutterFlowTheme.of(context).headlineLarge.override(
                   fontFamily: 'Outfit',
                   fontSize: 24.0,
@@ -217,9 +217,10 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 600.0, 0.0, 70.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 570.0, 0.0, 70.0),
               child: Text(
-                'Licensed by BTA food and entertainment ',
+                'Licensed by BTA food and entertainment \nVersion 0.0.37',
+                textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Readex Pro',
                       color: FlutterFlowTheme.of(context).primaryBtnText,
