@@ -125,6 +125,8 @@ class _DeleteFlickWidgetState extends State<DeleteFlickWidget> {
                     child: FFButtonWidget(
                       onPressed: () async {
                         await widget.currentSessionPics!.delete();
+
+                        context.pushNamed('currentSessionPhotosDetails');
                       },
                       text: 'Confirm',
                       options: FFButtonOptions(

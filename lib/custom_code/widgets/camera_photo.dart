@@ -55,16 +55,16 @@ class _CameraPhotoState extends State<CameraPhoto> {
       controller = null;
     }
     _isControllerDisposed = false;
+    var cameras = await _cameras;
     controller = CameraController(
-      (await _cameras)[cameraIndex],
+      cameras[cameraIndex],
       ResolutionPreset.max,
     );
-    controller!.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    });
+    await controller!.initialize();
+    if (!mounted) {
+      return;
+    }
+    setState(() {});
   }
 
   @override
@@ -84,7 +84,7 @@ class _CameraPhotoState extends State<CameraPhoto> {
           fileAsBytes,
           minHeight: 1920,
           minWidth: 1080,
-          quality: 88,
+          quality: 55,
         );
         FFAppState().update(() {
           FFAppState().makePhoto = false;
