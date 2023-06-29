@@ -32,6 +32,7 @@ class _CameraPhotoState extends State<CameraPhoto> {
   CameraController? controller;
   late Future<List<CameraDescription>> _cameras;
   late bool wasSwitched;
+  bool _isControllerDisposed = false;
 
   @override
   void initState() {
@@ -42,9 +43,11 @@ class _CameraPhotoState extends State<CameraPhoto> {
 
   Future<void> _initializeController(int cameraIndex) async {
     if (controller != null) {
+      _isControllerDisposed = true;
       await controller!.dispose();
       controller = null;
     }
+    _isControllerDisposed = false;
     controller = CameraController(
       (await _cameras)[cameraIndex],
       ResolutionPreset.max,
@@ -64,7 +67,9 @@ class _CameraPhotoState extends State<CameraPhoto> {
       _initializeController(FFAppState().switchCam ? 1 : 0);
       wasSwitched = FFAppState().switchCam;
     }
-    if (FFAppState().makePhoto && controller != null) {
+    if (FFAppState().makePhoto &&
+        controller != null &&
+        !_isControllerDisposed) {
       controller!.takePicture().then((file) async {
         Uint8List fileAsBytes = await file.readAsBytes();
         // Compress the image
@@ -90,13 +95,16 @@ class _CameraPhotoState extends State<CameraPhoto> {
 
   @override
   void dispose() {
+    _isControllerDisposed = true;
     controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return controller != null && controller!.value.isInitialized
+    return controller != null &&
+            controller!.value.isInitialized &&
+            !_isControllerDisposed
         ? MaterialApp(
             home: CameraPreview(controller!),
           )
