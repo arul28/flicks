@@ -33,46 +33,6 @@ class _CameraWidgetState extends State<CameraWidget>
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final animationsMap = {
-    'imageOnActionTriggerAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: true,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1080.ms,
-          duration: 1000.ms,
-          begin: 1.0,
-          end: 0.0,
-        ),
-      ],
-    ),
-    'textOnActionTriggerAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: true,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1000.ms,
-          duration: 1000.ms,
-          begin: 1.0,
-          end: 0.0,
-        ),
-      ],
-    ),
     'iconOnActionTriggerAnimation': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
       applyInitialState: true,
@@ -364,7 +324,7 @@ class _CameraWidgetState extends State<CameraWidget>
                                       },
                                     ).then((value) => setState(() {}));
                                   } else {
-                                    HapticFeedback.mediumImpact();
+                                    HapticFeedback.heavyImpact();
                                     setState(() {
                                       FFAppState().makePhoto = true;
                                     });
@@ -408,18 +368,16 @@ class _CameraWidgetState extends State<CameraWidget>
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                                    width: 200.0,
-                                    height: 200.0,
-                                    fit: BoxFit.cover,
+                                if (_model.takingImage ?? true)
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                                      width: 200.0,
+                                      height: 200.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ).animateOnActionTrigger(
-                                  animationsMap[
-                                      'imageOnActionTriggerAnimation']!,
-                                ),
                               ],
                             ),
                           if (_model.takingImage ?? true)
@@ -434,45 +392,45 @@ class _CameraWidgetState extends State<CameraWidget>
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.w500,
                                   ),
-                            ).animateOnActionTrigger(
-                              animationsMap['textOnActionTriggerAnimation']!,
                             ),
                         ],
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(1.0, 1.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 20.0, 20.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              setState(() {
-                                FFAppState().switchCam =
-                                    !FFAppState().switchCam ? true : false;
-                              });
-                              if (animationsMap[
-                                      'iconButtonOnActionTriggerAnimation'] !=
-                                  null) {
-                                await animationsMap[
-                                        'iconButtonOnActionTriggerAnimation']!
-                                    .controller
-                                    .forward(from: 0.0);
-                              }
-                            },
-                            child: Icon(
-                              Icons.flip_camera_android_outlined,
-                              color: FlutterFlowTheme.of(context).frenchViolet,
-                              size: 50.0,
+                      if (!_model.takingImage!)
+                        Align(
+                          alignment: AlignmentDirectional(1.0, 1.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 20.0, 20.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                setState(() {
+                                  FFAppState().switchCam =
+                                      !FFAppState().switchCam ? true : false;
+                                });
+                                if (animationsMap[
+                                        'iconOnActionTriggerAnimation'] !=
+                                    null) {
+                                  await animationsMap[
+                                          'iconOnActionTriggerAnimation']!
+                                      .controller
+                                      .forward(from: 0.0);
+                                }
+                              },
+                              child: Icon(
+                                Icons.flip_camera_android_outlined,
+                                color:
+                                    FlutterFlowTheme.of(context).frenchViolet,
+                                size: 50.0,
+                              ),
+                            ).animateOnActionTrigger(
+                              animationsMap['iconOnActionTriggerAnimation']!,
                             ),
-                          ).animateOnActionTrigger(
-                            animationsMap['iconOnActionTriggerAnimation']!,
                           ),
                         ),
-                      ),
                     ],
                   );
                 },

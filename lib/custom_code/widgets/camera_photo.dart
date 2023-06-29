@@ -84,7 +84,7 @@ class _CameraPhotoState extends State<CameraPhoto> {
           fileAsBytes,
           minHeight: 1920,
           minWidth: 1080,
-          quality: 88,
+          quality: 70,
         );
         FFAppState().update(() {
           FFAppState().makePhoto = false;
