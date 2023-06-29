@@ -28,6 +28,7 @@ dependencies:
   aligned_dialog: 0.0.6
   aligned_tooltip: 0.0.1
   auto_size_text: 3.0.0
+  badges: 2.0.2
   cached_network_image: 3.2.1
   camera: ^0.10.5+2
   cloud_firestore: 4.8.0
@@ -69,7 +70,6 @@ dependencies:
   infinite_scroll_pagination: 3.2.0
   intl: 0.18.0
   json_path: 0.4.1
-  lottie: 1.2.1
   mime_type: 1.0.0
   page_transition: 2.0.4
   path_provider: 2.0.14

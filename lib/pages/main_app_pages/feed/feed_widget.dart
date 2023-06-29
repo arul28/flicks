@@ -468,15 +468,44 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                               0.0,
                                                                               0.0),
                                                                           child:
-                                                                              ClipRRect(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                              InkWell(
+                                                                            splashColor:
+                                                                                Colors.transparent,
+                                                                            focusColor:
+                                                                                Colors.transparent,
+                                                                            hoverColor:
+                                                                                Colors.transparent,
+                                                                            highlightColor:
+                                                                                Colors.transparent,
+                                                                            onTap:
+                                                                                () async {
+                                                                              context.pushNamed(
+                                                                                'imageViewer',
+                                                                                queryParameters: {
+                                                                                  'userRef': serializeParam(
+                                                                                    currentUserReference,
+                                                                                    ParamType.DocumentReference,
+                                                                                  ),
+                                                                                  'username': serializeParam(
+                                                                                    currentUserDisplayName,
+                                                                                    ParamType.String,
+                                                                                  ),
+                                                                                  'profilePic': serializeParam(
+                                                                                    currentUserPhoto,
+                                                                                    ParamType.String,
+                                                                                  ),
+                                                                                }.withoutNulls,
+                                                                              );
+                                                                            },
                                                                             child:
-                                                                                Image.network(
-                                                                              pageViewOldSessionPicsRecord.imagePath,
-                                                                              width: 144.0,
-                                                                              height: 300.0,
-                                                                              fit: BoxFit.cover,
+                                                                                ClipRRect(
+                                                                              borderRadius: BorderRadius.circular(8.0),
+                                                                              child: Image.network(
+                                                                                pageViewOldSessionPicsRecord.imagePath,
+                                                                                width: 144.0,
+                                                                                height: 300.0,
+                                                                                fit: BoxFit.cover,
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -687,6 +716,71 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                   ),
                                                                 ),
                                                               ),
+                                                              if (rowCount != 0)
+                                                                Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          1.0,
+                                                                          0.0),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            30.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        context
+                                                                            .pushNamed(
+                                                                          'imageViewer',
+                                                                          queryParameters:
+                                                                              {
+                                                                            'userRef':
+                                                                                serializeParam(
+                                                                              currentUserReference,
+                                                                              ParamType.DocumentReference,
+                                                                            ),
+                                                                            'username':
+                                                                                serializeParam(
+                                                                              currentUserDisplayName,
+                                                                              ParamType.String,
+                                                                            ),
+                                                                            'profilePic':
+                                                                                serializeParam(
+                                                                              currentUserPhoto,
+                                                                              ParamType.String,
+                                                                            ),
+                                                                          }.withoutNulls,
+                                                                        );
+                                                                      },
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .comment_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .frenchViolet,
+                                                                        size:
+                                                                            40.0,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
                                                             ],
                                                           );
                                                         },
@@ -759,52 +853,6 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                 ),
                                               );
                                             },
-                                          ),
-                                        if (rowCount != 0)
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(1.0, 0.0),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 20.0, 40.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    'imageViewer',
-                                                    queryParameters: {
-                                                      'userRef': serializeParam(
-                                                        currentUserReference,
-                                                        ParamType
-                                                            .DocumentReference,
-                                                      ),
-                                                      'username':
-                                                          serializeParam(
-                                                        currentUserDisplayName,
-                                                        ParamType.String,
-                                                      ),
-                                                      'profilePic':
-                                                          serializeParam(
-                                                        currentUserPhoto,
-                                                        ParamType.String,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-                                                },
-                                                child: Icon(
-                                                  Icons.comment_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .frenchViolet,
-                                                  size: 40.0,
-                                                ),
-                                              ),
-                                            ),
                                           ),
                                       ],
                                     ),

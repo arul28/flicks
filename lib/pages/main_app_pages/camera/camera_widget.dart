@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/pics_limit_hit/pics_limit_hit_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -11,8 +12,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'camera_model.dart';
 export 'camera_model.dart';
@@ -24,10 +26,81 @@ class CameraWidget extends StatefulWidget {
   _CameraWidgetState createState() => _CameraWidgetState();
 }
 
-class _CameraWidgetState extends State<CameraWidget> {
+class _CameraWidgetState extends State<CameraWidget>
+    with TickerProviderStateMixin {
   late CameraModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'imageOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1000.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 1080.ms,
+          duration: 1000.ms,
+          begin: 1.0,
+          end: 0.0,
+        ),
+      ],
+    ),
+    'textOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1000.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 1000.ms,
+          duration: 1000.ms,
+          begin: 1.0,
+          end: 0.0,
+        ),
+      ],
+    ),
+    'iconOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        RotateEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 880.ms,
+          begin: 0.0,
+          end: 2.0,
+        ),
+      ],
+    ),
+    'iconButtonOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        ShakeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1380.ms,
+          hz: 4,
+          offset: Offset(3.0, 3.0),
+          rotation: 0.087,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
@@ -40,6 +113,13 @@ class _CameraWidgetState extends State<CameraWidget> {
         FFAppState().makePhoto = false;
       });
     });
+
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
   }
 
   @override
@@ -127,13 +207,14 @@ class _CameraWidgetState extends State<CameraWidget> {
                           onPressed: () async {
                             context.pushNamed('currentSessionPhotosDetails');
                           },
+                        ).animateOnActionTrigger(
+                          animationsMap['iconButtonOnActionTriggerAnimation']!,
                         ),
                       ),
                   ],
                 ),
                 actions: [],
                 centerTitle: true,
-                elevation: 2.0,
               ),
             ),
             body: SafeArea(
@@ -283,14 +364,39 @@ class _CameraWidgetState extends State<CameraWidget> {
                                       },
                                     ).then((value) => setState(() {}));
                                   } else {
+                                    HapticFeedback.mediumImpact();
+                                    if (animationsMap[
+                                            'iconButtonOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'iconButtonOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
                                     setState(() {
                                       FFAppState().makePhoto = true;
                                     });
                                     setState(() {
                                       _model.takingImage = true;
                                     });
+                                    if (animationsMap[
+                                            'imageOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'imageOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
+                                    if (animationsMap[
+                                            'textOnActionTriggerAnimation'] !=
+                                        null) {
+                                      await animationsMap[
+                                              'textOnActionTriggerAnimation']!
+                                          .controller
+                                          .forward(from: 0.0);
+                                    }
                                     await Future.delayed(
-                                        const Duration(milliseconds: 3000));
+                                        const Duration(milliseconds: 2000));
 
                                     await CurrentSessionPicsRecord.createDoc(
                                             currentUserReference!)
@@ -318,38 +424,42 @@ class _CameraWidgetState extends State<CameraWidget> {
                         ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              if (_model.takingImage ?? true)
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 50.0, 0.0),
-                                  child: Lottie.network(
-                                    'https://assets5.lottiefiles.com/packages/lf20_fPPjzl7JC2.json',
-                                    width: 150.0,
-                                    height: 130.0,
+                          if (_model.takingImage ?? true)
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                                    width: 200.0,
+                                    height: 200.0,
                                     fit: BoxFit.cover,
-                                    animate: true,
                                   ),
+                                ).animateOnActionTrigger(
+                                  animationsMap[
+                                      'imageOnActionTriggerAnimation']!,
                                 ),
-                            ],
-                          ),
+                              ],
+                            ),
                           if (_model.takingImage ?? true)
                             Text(
-                              'Capturing flick! Hold still...',
+                              'flick captured!',
                               style: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Readex Pro',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBtnText,
+                                    fontSize: 18.0,
                                     fontWeight: FontWeight.w500,
                                   ),
+                            ).animateOnActionTrigger(
+                              animationsMap['textOnActionTriggerAnimation']!,
                             ),
                         ],
                       ),
@@ -368,12 +478,22 @@ class _CameraWidgetState extends State<CameraWidget> {
                                 FFAppState().switchCam =
                                     !FFAppState().switchCam ? true : false;
                               });
+                              if (animationsMap[
+                                      'iconButtonOnActionTriggerAnimation'] !=
+                                  null) {
+                                await animationsMap[
+                                        'iconButtonOnActionTriggerAnimation']!
+                                    .controller
+                                    .forward(from: 0.0);
+                              }
                             },
                             child: Icon(
                               Icons.flip_camera_android_outlined,
                               color: FlutterFlowTheme.of(context).frenchViolet,
                               size: 50.0,
                             ),
+                          ).animateOnActionTrigger(
+                            animationsMap['iconOnActionTriggerAnimation']!,
                           ),
                         ),
                       ),
