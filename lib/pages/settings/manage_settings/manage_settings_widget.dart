@@ -121,7 +121,7 @@ class _ManageSettingsWidgetState extends State<ManageSettingsWidget>
             mainAxisSize: MainAxisSize.max,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 1.0,
+                width: MediaQuery.sizeOf(context).width * 1.0,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -206,7 +206,7 @@ class _ManageSettingsWidgetState extends State<ManageSettingsWidget>
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 1.0,
+                width: MediaQuery.sizeOf(context).width * 1.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                   boxShadow: [
@@ -216,18 +216,6 @@ class _ManageSettingsWidgetState extends State<ManageSettingsWidget>
                       offset: Offset(0.0, 0.0),
                     )
                   ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 570.0, 0.0, 70.0),
-                child: Text(
-                  'Licensed by BTA food and entertainment \nVersion 0.0.37',
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Readex Pro',
-                        color: FlutterFlowTheme.of(context).primaryBtnText,
-                        fontStyle: FontStyle.italic,
-                      ),
                 ),
               ),
             ],

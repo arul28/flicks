@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -80,4 +82,22 @@ Map<String, dynamic> createHistoryRecordData({
   );
 
   return firestoreData;
+}
+
+class HistoryRecordDocumentEquality implements Equality<HistoryRecord> {
+  const HistoryRecordDocumentEquality();
+
+  @override
+  bool equals(HistoryRecord? e1, HistoryRecord? e2) {
+    const listEquality = ListEquality();
+    return listEquality.equals(e1?.imagesList, e2?.imagesList) &&
+        e1?.developedAt == e2?.developedAt;
+  }
+
+  @override
+  int hash(HistoryRecord? e) =>
+      const ListEquality().hash([e?.imagesList, e?.developedAt]);
+
+  @override
+  bool isValidKey(Object? o) => o is HistoryRecord;
 }

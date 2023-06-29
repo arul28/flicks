@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -90,4 +92,23 @@ Map<String, dynamic> createOldSessionPicsRecordData({
   );
 
   return firestoreData;
+}
+
+class OldSessionPicsRecordDocumentEquality
+    implements Equality<OldSessionPicsRecord> {
+  const OldSessionPicsRecordDocumentEquality();
+
+  @override
+  bool equals(OldSessionPicsRecord? e1, OldSessionPicsRecord? e2) {
+    return e1?.imagePath == e2?.imagePath &&
+        e1?.timeTaken == e2?.timeTaken &&
+        e1?.isPinned == e2?.isPinned;
+  }
+
+  @override
+  int hash(OldSessionPicsRecord? e) =>
+      const ListEquality().hash([e?.imagePath, e?.timeTaken, e?.isPinned]);
+
+  @override
+  bool isValidKey(Object? o) => o is OldSessionPicsRecord;
 }

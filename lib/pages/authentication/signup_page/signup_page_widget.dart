@@ -462,6 +462,8 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                         uid: random_data
                                             .randomInteger(0, 1000000)
                                             .toString(),
+                                        emailVerified: false,
+                                        profileCreated: false,
                                       ));
 
                                   await authManager.sendEmailVerification();
@@ -472,14 +474,6 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                     queryParameters: {
                                       'email': serializeParam(
                                         _model.emailAddressController.text,
-                                        ParamType.String,
-                                      ),
-                                      'password': serializeParam(
-                                        _model.passwordController.text,
-                                        ParamType.String,
-                                      ),
-                                      'confirmPassword': serializeParam(
-                                        _model.confirmPasswordController.text,
                                         ParamType.String,
                                       ),
                                     }.withoutNulls,

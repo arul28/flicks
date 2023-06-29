@@ -168,6 +168,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   validateFileFormat(m.storagePath, context))) {
                             setState(() => _model.isDataUploading = true);
                             var selectedUploadedFiles = <FFUploadedFile>[];
+
                             var downloadUrls = <String>[];
                             try {
                               selectedUploadedFiles = selectedMedia

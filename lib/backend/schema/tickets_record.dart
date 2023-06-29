@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -98,4 +100,23 @@ Map<String, dynamic> createTicketsRecordData({
   );
 
   return firestoreData;
+}
+
+class TicketsRecordDocumentEquality implements Equality<TicketsRecord> {
+  const TicketsRecordDocumentEquality();
+
+  @override
+  bool equals(TicketsRecord? e1, TicketsRecord? e2) {
+    return e1?.message == e2?.message &&
+        e1?.subject == e2?.subject &&
+        e1?.email == e2?.email &&
+        e1?.dateCreated == e2?.dateCreated;
+  }
+
+  @override
+  int hash(TicketsRecord? e) => const ListEquality()
+      .hash([e?.message, e?.subject, e?.email, e?.dateCreated]);
+
+  @override
+  bool isValidKey(Object? o) => o is TicketsRecord;
 }

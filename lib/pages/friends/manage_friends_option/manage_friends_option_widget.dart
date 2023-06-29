@@ -181,7 +181,7 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                     child: LinearPercentIndicator(
                       percent: 1.0,
-                      width: MediaQuery.of(context).size.width * 1.0,
+                      width: MediaQuery.sizeOf(context).width * 1.0,
                       lineHeight: 12.0,
                       animation: true,
                       progressColor: FlutterFlowTheme.of(context).frenchViolet,

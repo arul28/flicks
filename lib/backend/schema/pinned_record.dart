@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -81,4 +83,20 @@ Map<String, dynamic> createPinnedRecordData({
   );
 
   return firestoreData;
+}
+
+class PinnedRecordDocumentEquality implements Equality<PinnedRecord> {
+  const PinnedRecordDocumentEquality();
+
+  @override
+  bool equals(PinnedRecord? e1, PinnedRecord? e2) {
+    return e1?.imagePath == e2?.imagePath && e1?.timeTaken == e2?.timeTaken;
+  }
+
+  @override
+  int hash(PinnedRecord? e) =>
+      const ListEquality().hash([e?.imagePath, e?.timeTaken]);
+
+  @override
+  bool isValidKey(Object? o) => o is PinnedRecord;
 }

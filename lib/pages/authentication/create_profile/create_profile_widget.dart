@@ -111,7 +111,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 1.0,
+                            width: MediaQuery.sizeOf(context).width * 1.0,
                             height: 243.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context).noColor,
@@ -274,6 +274,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                                             true);
                                                         var selectedUploadedFiles =
                                                             <FFUploadedFile>[];
+
                                                         var downloadUrls =
                                                             <String>[];
                                                         try {
@@ -620,6 +621,11 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                       'https://images.unsplash.com/photo-1561713383-78b4befb5f86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80',
                                 ));
                               }
+
+                              await currentUserReference!
+                                  .update(createUsersRecordData(
+                                profileCreated: true,
+                              ));
 
                               context.pushNamed('Profile');
                             } else {

@@ -135,9 +135,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/verification',
           builder: (context, params) => VerificationWidget(
             email: params.getParam('email', ParamType.String),
-            password: params.getParam('password', ParamType.String),
-            confirmPassword:
-                params.getParam('confirmPassword', ParamType.String),
           ),
         ),
         FFRoute(

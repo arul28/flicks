@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -90,4 +92,22 @@ Map<String, dynamic> createCommentsRecordData({
   );
 
   return firestoreData;
+}
+
+class CommentsRecordDocumentEquality implements Equality<CommentsRecord> {
+  const CommentsRecordDocumentEquality();
+
+  @override
+  bool equals(CommentsRecord? e1, CommentsRecord? e2) {
+    return e1?.user == e2?.user &&
+        e1?.message == e2?.message &&
+        e1?.timePosted == e2?.timePosted;
+  }
+
+  @override
+  int hash(CommentsRecord? e) =>
+      const ListEquality().hash([e?.user, e?.message, e?.timePosted]);
+
+  @override
+  bool isValidKey(Object? o) => o is CommentsRecord;
 }

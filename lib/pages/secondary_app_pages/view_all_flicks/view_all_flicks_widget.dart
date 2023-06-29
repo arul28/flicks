@@ -148,8 +148,9 @@ class _ViewAllFlicksWidgetState extends State<ViewAllFlicksWidget> {
                                                       .requestFocus(
                                                           _model.unfocusNode),
                                               child: Padding(
-                                                padding: MediaQuery.of(context)
-                                                    .viewInsets,
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
                                                 child: HistoryViewWidget(
                                                   imgPath: imagesHistoryItem,
                                                 ),

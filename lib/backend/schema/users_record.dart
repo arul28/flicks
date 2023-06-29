@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -101,6 +103,21 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get liked => _liked ?? const [];
   bool hasLiked() => _liked != null;
 
+  // "emailVerified" field.
+  bool? _emailVerified;
+  bool get emailVerified => _emailVerified ?? false;
+  bool hasEmailVerified() => _emailVerified != null;
+
+  // "profileCreated" field.
+  bool? _profileCreated;
+  bool get profileCreated => _profileCreated ?? false;
+  bool hasProfileCreated() => _profileCreated != null;
+
+  // "firstViewAfterSwitch" field.
+  bool? _firstViewAfterSwitch;
+  bool get firstViewAfterSwitch => _firstViewAfterSwitch ?? false;
+  bool hasFirstViewAfterSwitch() => _firstViewAfterSwitch != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -122,6 +139,9 @@ class UsersRecord extends FirestoreRecord {
         castToType<int>(snapshotData['incomingPendingRequestsNum']);
     _pinnedNum = castToType<int>(snapshotData['pinnedNum']);
     _liked = getDataList(snapshotData['liked']);
+    _emailVerified = snapshotData['emailVerified'] as bool?;
+    _profileCreated = snapshotData['profileCreated'] as bool?;
+    _firstViewAfterSwitch = snapshotData['firstViewAfterSwitch'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -170,6 +190,9 @@ Map<String, dynamic> createUsersRecordData({
   int? friendsNum,
   int? incomingPendingRequestsNum,
   int? pinnedNum,
+  bool? emailVerified,
+  bool? profileCreated,
+  bool? firstViewAfterSwitch,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -185,8 +208,68 @@ Map<String, dynamic> createUsersRecordData({
       'friendsNum': friendsNum,
       'incomingPendingRequestsNum': incomingPendingRequestsNum,
       'pinnedNum': pinnedNum,
+      'emailVerified': emailVerified,
+      'profileCreated': profileCreated,
+      'firstViewAfterSwitch': firstViewAfterSwitch,
     }.withoutNulls,
   );
 
   return firestoreData;
+}
+
+class UsersRecordDocumentEquality implements Equality<UsersRecord> {
+  const UsersRecordDocumentEquality();
+
+  @override
+  bool equals(UsersRecord? e1, UsersRecord? e2) {
+    const listEquality = ListEquality();
+    return e1?.email == e2?.email &&
+        e1?.displayName == e2?.displayName &&
+        e1?.photoUrl == e2?.photoUrl &&
+        e1?.uid == e2?.uid &&
+        e1?.bio == e2?.bio &&
+        listEquality.equals(e1?.pinned, e2?.pinned) &&
+        e1?.createdTime == e2?.createdTime &&
+        e1?.phoneNumber == e2?.phoneNumber &&
+        e1?.fullName == e2?.fullName &&
+        listEquality.equals(e1?.sentPendingRequests, e2?.sentPendingRequests) &&
+        e1?.sentPendingRequestsNum == e2?.sentPendingRequestsNum &&
+        listEquality.equals(e1?.friendsList, e2?.friendsList) &&
+        e1?.friendsNum == e2?.friendsNum &&
+        listEquality.equals(
+            e1?.incomingPendingRequests, e2?.incomingPendingRequests) &&
+        e1?.incomingPendingRequestsNum == e2?.incomingPendingRequestsNum &&
+        e1?.pinnedNum == e2?.pinnedNum &&
+        listEquality.equals(e1?.liked, e2?.liked) &&
+        e1?.emailVerified == e2?.emailVerified &&
+        e1?.profileCreated == e2?.profileCreated &&
+        e1?.firstViewAfterSwitch == e2?.firstViewAfterSwitch;
+  }
+
+  @override
+  int hash(UsersRecord? e) => const ListEquality().hash([
+        e?.email,
+        e?.displayName,
+        e?.photoUrl,
+        e?.uid,
+        e?.bio,
+        e?.pinned,
+        e?.createdTime,
+        e?.phoneNumber,
+        e?.fullName,
+        e?.sentPendingRequests,
+        e?.sentPendingRequestsNum,
+        e?.friendsList,
+        e?.friendsNum,
+        e?.incomingPendingRequests,
+        e?.incomingPendingRequestsNum,
+        e?.pinnedNum,
+        e?.liked,
+        e?.emailVerified,
+        e?.profileCreated,
+        e?.firstViewAfterSwitch
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is UsersRecord;
 }
