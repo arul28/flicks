@@ -365,36 +365,12 @@ class _CameraWidgetState extends State<CameraWidget>
                                     ).then((value) => setState(() {}));
                                   } else {
                                     HapticFeedback.mediumImpact();
-                                    if (animationsMap[
-                                            'iconButtonOnActionTriggerAnimation'] !=
-                                        null) {
-                                      await animationsMap[
-                                              'iconButtonOnActionTriggerAnimation']!
-                                          .controller
-                                          .forward(from: 0.0);
-                                    }
                                     setState(() {
                                       FFAppState().makePhoto = true;
                                     });
                                     setState(() {
                                       _model.takingImage = true;
                                     });
-                                    if (animationsMap[
-                                            'imageOnActionTriggerAnimation'] !=
-                                        null) {
-                                      await animationsMap[
-                                              'imageOnActionTriggerAnimation']!
-                                          .controller
-                                          .forward(from: 0.0);
-                                    }
-                                    if (animationsMap[
-                                            'textOnActionTriggerAnimation'] !=
-                                        null) {
-                                      await animationsMap[
-                                              'textOnActionTriggerAnimation']!
-                                          .controller
-                                          .forward(from: 0.0);
-                                    }
                                     await Future.delayed(
                                         const Duration(milliseconds: 2000));
 
