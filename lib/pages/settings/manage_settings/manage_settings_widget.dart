@@ -116,119 +116,122 @@ class _ManageSettingsWidgetState extends State<ManageSettingsWidget>
             end: AlignmentDirectional(0, 1.0),
           ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 1.0,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 1.0,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 1.0,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 1.0,
+                      color: FlutterFlowTheme.of(context).noColor,
+                      offset: Offset(0.0, 0.0),
+                    )
+                  ],
+                  border: Border.all(
                     color: FlutterFlowTheme.of(context).noColor,
-                    offset: Offset(0.0, 0.0),
-                  )
-                ],
-                border: Border.all(
-                  color: FlutterFlowTheme.of(context).noColor,
+                  ),
                 ),
-              ),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 24.0, 12.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Push Notifications',
-                      style: FlutterFlowTheme.of(context).titleMedium,
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 40.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).frenchViolet,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 4.0,
-                            color: FlutterFlowTheme.of(context).amethyst,
-                            offset: Offset(0.0, 2.0),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(20.0),
+                child: Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 24.0, 12.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Push Notifications',
+                        style: FlutterFlowTheme.of(context).titleMedium,
                       ),
-                      child: Stack(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(-0.9, 0.0),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 2.0, 0.0, 0.0),
-                              child: Icon(
-                                Icons.notifications_active,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
+                      Container(
+                        width: 80.0,
+                        height: 40.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).frenchViolet,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: FlutterFlowTheme.of(context).amethyst,
+                              offset: Offset(0.0, 2.0),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Stack(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(-0.9, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 2.0, 0.0, 0.0),
+                                child: Icon(
+                                  Icons.notifications_active,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(-0.96, 0.56),
-                            child: Container(
-                              width: 36.0,
-                              height: 36.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 4.0,
-                                    color: Color(0x430B0D0F),
-                                    offset: Offset(0.0, 2.0),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(30.0),
-                                shape: BoxShape.rectangle,
-                              ),
-                            ).animateOnActionTrigger(
-                                animationsMap[
-                                    'containerOnActionTriggerAnimation']!,
-                                hasBeenTriggered: hasContainerTriggered),
-                          ),
-                        ],
+                            Align(
+                              alignment: AlignmentDirectional(-0.96, 0.56),
+                              child: Container(
+                                width: 36.0,
+                                height: 36.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4.0,
+                                      color: Color(0x430B0D0F),
+                                      offset: Offset(0.0, 2.0),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  shape: BoxShape.rectangle,
+                                ),
+                              ).animateOnActionTrigger(
+                                  animationsMap[
+                                      'containerOnActionTriggerAnimation']!,
+                                  hasBeenTriggered: hasContainerTriggered),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 1.0,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 1.0,
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      offset: Offset(0.0, 0.0),
+                    )
                   ],
                 ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 1.0,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 1.0,
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                    offset: Offset(0.0, 0.0),
-                  )
-                ],
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 570.0, 0.0, 70.0),
+                child: Text(
+                  'Licensed by BTA food and entertainment \nVersion 0.0.37',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        color: FlutterFlowTheme.of(context).primaryBtnText,
+                        fontStyle: FontStyle.italic,
+                      ),
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 570.0, 0.0, 70.0),
-              child: Text(
-                'Licensed by BTA food and entertainment \nVersion 0.0.37',
-                textAlign: TextAlign.center,
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Readex Pro',
-                      color: FlutterFlowTheme.of(context).primaryBtnText,
-                      fontStyle: FontStyle.italic,
-                    ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
