@@ -365,7 +365,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               setState(() {
-                                FFAppState().switchCam = true;
+                                FFAppState().switchCam =
+                                    !FFAppState().switchCam ? true : false;
                               });
                             },
                             child: Icon(
