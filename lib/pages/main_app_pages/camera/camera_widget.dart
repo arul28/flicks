@@ -328,7 +328,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                               if (_model.takingImage ?? true)
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 40.0, 0.0),
+                                      0.0, 10.0, 50.0, 0.0),
                                   child: Lottie.network(
                                     'https://assets5.lottiefiles.com/packages/lf20_fPPjzl7JC2.json',
                                     width: 150.0,

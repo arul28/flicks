@@ -30,53 +30,41 @@ class CameraPhoto extends StatefulWidget {
 
 class _CameraPhotoState extends State<CameraPhoto> {
   CameraController? controller;
-  List<CameraDescription>? _cameras;
-  int selectedCameraIndex = 0;
+  late Future<List<CameraDescription>> _cameras;
+  late bool wasSwitched;
 
   @override
   void initState() {
     super.initState();
-    availableCameras().then((value) {
-      _cameras = value;
-      _initializeController(selectedCameraIndex);
-    });
+    _cameras = availableCameras();
+    wasSwitched = FFAppState().switchCam;
   }
 
   Future<void> _initializeController(int cameraIndex) async {
-    final oldController = controller;
+    if (controller != null) {
+      await controller!.dispose();
+      controller = null;
+    }
     controller = CameraController(
-      _cameras![cameraIndex],
-      cameraIndex == 0 ? ResolutionPreset.max : ResolutionPreset.high,
+      (await _cameras)[cameraIndex],
+      ResolutionPreset.max,
     );
-
-    controller!.initialize().then((_) async {
+    controller!.initialize().then((_) {
       if (!mounted) {
         return;
       }
       setState(() {});
-
-      // Dispose of the old controller here, inside the callback
-      if (oldController != null) {
-        await oldController.dispose();
-      }
     });
   }
 
   @override
   void didUpdateWidget(covariant CameraPhoto oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (_cameras != null) {
-      if (FFAppState().switchCam && selectedCameraIndex == 0) {
-        selectedCameraIndex = 1;
-        _initializeController(selectedCameraIndex);
-        FFAppState().switchCam = false;
-      } else if (!FFAppState().switchCam && selectedCameraIndex == 1) {
-        selectedCameraIndex = 0;
-        _initializeController(selectedCameraIndex);
-      }
+    if (wasSwitched != FFAppState().switchCam) {
+      _initializeController(FFAppState().switchCam ? 1 : 0);
+      wasSwitched = FFAppState().switchCam;
     }
-
-    if (FFAppState().makePhoto) {
+    if (FFAppState().makePhoto && controller != null) {
       controller!.takePicture().then((file) async {
         Uint8List fileAsBytes = await file.readAsBytes();
         // Compress the image
@@ -84,7 +72,7 @@ class _CameraPhotoState extends State<CameraPhoto> {
           fileAsBytes,
           minHeight: 1920,
           minWidth: 1080,
-          quality: 70,
+          quality: 88,
         );
         FFAppState().update(() {
           FFAppState().makePhoto = false;
@@ -108,23 +96,10 @@ class _CameraPhotoState extends State<CameraPhoto> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
-      future: controller?.initialize(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (_cameras != null && _cameras!.isNotEmpty) {
-            return controller!.value.isInitialized
-                ? MaterialApp(
-                    home: CameraPreview(controller!),
-                  )
-                : Container();
-          } else {
-            return Center(child: Text('No cameras available.'));
-          }
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
-    );
+    return controller != null && controller!.value.isInitialized
+        ? MaterialApp(
+            home: CameraPreview(controller!),
+          )
+        : Center(child: CircularProgressIndicator());
   }
 }
