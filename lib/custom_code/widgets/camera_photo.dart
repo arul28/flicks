@@ -96,6 +96,11 @@ class _CameraPhotoState extends State<CameraPhoto> {
           FFAppState().index = FFAppState().index + 1;
           FFAppState().filePath = downloadUrl ?? '';
         });
+
+        // Dispose and reinitialize controller after picture is taken
+        _isControllerDisposed = true;
+        await controller!.dispose();
+        _initializeController(FFAppState().switchCam ? 1 : 0);
       }).catchError((error) {});
     }
   }
