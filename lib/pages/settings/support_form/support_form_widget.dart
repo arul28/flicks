@@ -49,9 +49,9 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).frenchViolet,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -59,44 +59,24 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
             borderWidth: 1.0,
             buttonSize: 60.0,
             icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
+              Icons.arrow_back_outlined,
+              color: Colors.white,
               size: 30.0,
             ),
             onPressed: () async {
               context.pop();
             },
           ),
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Text(
-                'Contact Us',
-                style: FlutterFlowTheme.of(context).headlineLarge.override(
-                      fontFamily: 'Outfit',
-                      fontSize: 24.0,
-                    ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(120.0, 0.0, 0.0, 0.0),
-                child: Container(
-                  width: 39.0,
-                  height: 39.0,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Image.network(
-                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/flicks-a8g18e/assets/50udmbfkutgl/%5Bremoval.ai%5D_tmp-649156ac0c6fa_JTTV80.png',
-                    fit: BoxFit.cover,
-                  ),
+          title: Text(
+            'Contact Us',
+            style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: 'Outfit',
+                  fontSize: 24.0,
                 ),
-              ),
-            ],
           ),
           actions: [],
-          centerTitle: false,
-          elevation: 0.0,
+          centerTitle: true,
+          elevation: 2.0,
         ),
         body: SafeArea(
           top: true,

@@ -594,7 +594,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                         Icons
                                                                             .push_pin_outlined,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .amethyst,
+                                                                            .frenchViolet,
                                                                         size:
                                                                             50.0,
                                                                       ),

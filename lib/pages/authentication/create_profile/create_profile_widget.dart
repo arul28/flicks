@@ -371,21 +371,18 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .amethyst,
+                                                              .primaryBtnText,
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .labelMedium
+                                                              .titleSmall
                                                               .override(
                                                                 fontFamily:
-                                                                    'Plus Jakarta Sans',
+                                                                    'Readex Pro',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .primaryBtnText,
+                                                                    .black600,
                                                                 fontSize: 12.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
                                                               ),
                                                       elevation: 2.0,
                                                       borderSide: BorderSide(
@@ -641,12 +638,12 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).frenchViolet,
+                            color: FlutterFlowTheme.of(context).primaryBtnText,
                             textStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
+                                .titleSmall
                                 .override(
                                   fontFamily: 'Readex Pro',
-                                  color: Colors.white,
+                                  color: FlutterFlowTheme.of(context).black600,
                                 ),
                             elevation: 2.0,
                             borderSide: BorderSide(

@@ -43,33 +43,27 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
           borderRadius: 30.0,
-          buttonSize: 46.0,
+          borderWidth: 1.0,
+          buttonSize: 60.0,
           icon: Icon(
-            Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 24.0,
+            Icons.arrow_back_outlined,
+            color: Colors.white,
+            size: 30.0,
           ),
           onPressed: () async {
-            context.pushNamed(
-              'Profile',
-              extra: <String, dynamic>{
-                kTransitionInfoKey: TransitionInfo(
-                  hasTransition: true,
-                  transitionType: PageTransitionType.rightToLeft,
-                ),
-              },
-            );
+            context.pop();
           },
         ),
         title: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
           child: Text(
             'Settings ',
+            textAlign: TextAlign.start,
             style: FlutterFlowTheme.of(context).headlineLarge.override(
                   fontFamily: 'Outfit',
                   fontSize: 24.0,
@@ -77,8 +71,8 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
           ),
         ),
         actions: [],
-        centerTitle: false,
-        elevation: 0.0,
+        centerTitle: true,
+        elevation: 2.0,
       ),
       body: Container(
         width: 398.0,

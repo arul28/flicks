@@ -72,27 +72,20 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
           borderRadius: 30.0,
-          buttonSize: 46.0,
+          borderWidth: 1.0,
+          buttonSize: 60.0,
           icon: Icon(
-            Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 24.0,
+            Icons.arrow_back_outlined,
+            color: Colors.white,
+            size: 30.0,
           ),
           onPressed: () async {
-            context.pushNamed(
-              'Profile',
-              extra: <String, dynamic>{
-                kTransitionInfoKey: TransitionInfo(
-                  hasTransition: true,
-                  transitionType: PageTransitionType.rightToLeft,
-                ),
-              },
-            );
+            context.pop();
           },
         ),
         title: Padding(
@@ -106,8 +99,8 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
           ),
         ),
         actions: [],
-        centerTitle: false,
-        elevation: 0.0,
+        centerTitle: true,
+        elevation: 2.0,
       ),
       body: Container(
         width: 402.0,
@@ -129,14 +122,16 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
             Container(
               width: MediaQuery.of(context).size.width * 1.0,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 1.0,
-                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    color: FlutterFlowTheme.of(context).noColor,
                     offset: Offset(0.0, 0.0),
                   )
                 ],
+                border: Border.all(
+                  color: FlutterFlowTheme.of(context).noColor,
+                ),
               ),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 24.0, 12.0),
@@ -146,7 +141,7 @@ class _AppBehaviorWidgetState extends State<AppBehaviorWidget>
                   children: [
                     Text(
                       'Push Notifications',
-                      style: FlutterFlowTheme.of(context).titleLarge,
+                      style: FlutterFlowTheme.of(context).titleMedium,
                     ),
                     Container(
                       width: 80.0,
