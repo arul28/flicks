@@ -55,16 +55,16 @@ class _CameraPhotoState extends State<CameraPhoto> {
       controller = null;
     }
     _isControllerDisposed = false;
-    var cameras = await _cameras;
     controller = CameraController(
-      cameras[cameraIndex],
+      (await _cameras)[cameraIndex],
       ResolutionPreset.max,
     );
-    await controller!.initialize();
-    if (!mounted) {
-      return;
-    }
-    setState(() {});
+    controller!.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
   }
 
   @override

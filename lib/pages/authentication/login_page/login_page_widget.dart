@@ -1,10 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
+import '/components/verify_email/verify_email_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -322,74 +322,90 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                         ),
                         Align(
                           alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 16.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                if (_model.formKey.currentState == null ||
-                                    !_model.formKey.currentState!.validate()) {
-                                  return;
-                                }
-                                HapticFeedback.vibrate();
-                                GoRouter.of(context).prepareAuthEvent();
+                          child: Builder(
+                            builder: (context) => Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 16.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  if (_model.formKey.currentState == null ||
+                                      !_model.formKey.currentState!
+                                          .validate()) {
+                                    return;
+                                  }
+                                  HapticFeedback.vibrate();
+                                  GoRouter.of(context).prepareAuthEvent();
 
-                                final user = await authManager.signInWithEmail(
-                                  context,
-                                  _model.emailAddressController.text,
-                                  _model.passwordController.text,
-                                );
-                                if (user == null) {
-                                  return;
-                                }
+                                  final user =
+                                      await authManager.signInWithEmail(
+                                    context,
+                                    _model.emailAddressController.text,
+                                    _model.passwordController.text,
+                                  );
+                                  if (user == null) {
+                                    return;
+                                  }
 
-                                if (currentUserEmailVerified) {
-                                  if (valueOrDefault<bool>(
-                                      currentUserDocument?.profileCreated,
-                                      false)) {
+                                  if (currentUserEmailVerified) {
                                     context.pushNamedAuth(
                                         'Profile', context.mounted);
                                   } else {
-                                    context.pushNamedAuth(
-                                        'CreateProfile', context.mounted);
-                                  }
-                                } else {
-                                  await authManager.sendEmailVerification();
+                                    await showAlignedDialog(
+                                      context: context,
+                                      isGlobal: true,
+                                      avoidOverflow: false,
+                                      targetAnchor: AlignmentDirectional(
+                                              0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
+                                      followerAnchor: AlignmentDirectional(
+                                              0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
+                                      builder: (dialogContext) {
+                                        return Material(
+                                          color: Colors.transparent,
+                                          child: GestureDetector(
+                                            onTap: () => FocusScope.of(context)
+                                                .requestFocus(
+                                                    _model.unfocusNode),
+                                            child: Container(
+                                              height: 120.0,
+                                              width: 320.0,
+                                              child: VerifyEmailWidget(),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => setState(() {}));
 
-                                  context.pushNamedAuth(
-                                    'Verification',
-                                    context.mounted,
-                                    queryParameters: {
-                                      'email': serializeParam(
-                                        currentUserEmail,
-                                        ParamType.String,
+                                    setState(() {});
+
+                                    context.pushNamedAuth(
+                                        'LoginPage', context.mounted);
+                                  }
+                                },
+                                text: 'Sign In',
+                                options: FFButtonOptions(
+                                  width: 230.0,
+                                  height: 52.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color:
+                                      FlutterFlowTheme.of(context).frenchViolet,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
                                       ),
-                                    }.withoutNulls,
-                                  );
-                                }
-                              },
-                              text: 'Sign In',
-                              options: FFButtonOptions(
-                                width: 230.0,
-                                height: 52.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color:
-                                    FlutterFlowTheme.of(context).frenchViolet,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: Colors.white,
-                                    ),
-                                elevation: 3.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                borderRadius: BorderRadius.circular(12.0),
                               ),
                             ),
                           ),
@@ -426,134 +442,36 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                             ),
                           ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 24.0, 0.0, 16.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                    child: Container(
-                                      width: 230.0,
-                                      height: 44.0,
-                                      child: Stack(
-                                        children: [
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                GoRouter.of(context)
-                                                    .prepareAuthEvent();
-                                                final user = await authManager
-                                                    .signInWithGoogle(context);
-                                                if (user == null) {
-                                                  return;
-                                                }
-                                                HapticFeedback.lightImpact();
-
-                                                await currentUserReference!
-                                                    .update(
-                                                        createUsersRecordData(
-                                                  emailVerified: true,
-                                                ));
-                                                if (valueOrDefault<bool>(
-                                                    currentUserDocument
-                                                        ?.profileCreated,
-                                                    false)) {
-                                                  context.pushNamedAuth(
-                                                      'Profile',
-                                                      context.mounted);
-                                                } else {
-                                                  context.pushNamedAuth(
-                                                      'CreateProfile',
-                                                      context.mounted);
-                                                }
-                                              },
-                                              text: 'Sign in with Google',
-                                              icon: Icon(
-                                                Icons.add,
-                                                color: Colors.transparent,
-                                                size: 20.0,
-                                              ),
-                                              options: FFButtonOptions(
-                                                width: 230.0,
-                                                height: 44.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 0.0),
-                                                iconPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 8.0, 0.0),
-                                                color: Colors.white,
-                                                textStyle: GoogleFonts.getFont(
-                                                  'Roboto',
-                                                  color: Color(0xFF606060),
-                                                  fontSize: 17.0,
-                                                ),
-                                                elevation: 4.0,
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 0.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: AlignmentDirectional(
-                                                -0.83, 0.0),
-                                            child: Container(
-                                              width: 22.0,
-                                              height: 22.0,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Image.network(
-                                                'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
-                                                fit: BoxFit.contain,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
                         Align(
                           alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 20.0, 0.0, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed('SignupPage');
-                              },
-                              child: Text(
-                                'Sign Up Instead',
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 16.0,
-                                      decoration: TextDecoration.underline,
-                                    ),
+                          child: Container(
+                            width: double.infinity,
+                            height: 200.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, 1.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed('SignupPage');
+                                },
+                                child: Text(
+                                  'Sign Up Instead',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                ),
                               ),
                             ),
                           ),

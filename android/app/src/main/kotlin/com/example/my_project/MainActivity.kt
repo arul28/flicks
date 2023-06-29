@@ -1,4 +1,4 @@
-package com.bta.flicks
+package com.mycompany.flicks
 
 import io.flutter.embedding.android.FlutterActivity
 

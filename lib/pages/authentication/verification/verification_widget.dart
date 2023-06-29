@@ -1,12 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/components/verify_email/verify_email_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -20,9 +18,13 @@ class VerificationWidget extends StatefulWidget {
   const VerificationWidget({
     Key? key,
     required this.email,
+    required this.password,
+    required this.confirmPassword,
   }) : super(key: key);
 
   final String? email;
+  final String? password;
+  final String? confirmPassword;
 
   @override
   _VerificationWidgetState createState() => _VerificationWidgetState();
@@ -148,31 +150,6 @@ class _VerificationWidgetState extends State<VerificationWidget>
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Align(
-                    alignment: AlignmentDirectional(-1.0, -1.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          GoRouter.of(context).prepareAuthEvent();
-                          await authManager.signOut();
-                          GoRouter.of(context).clearRedirectLocation();
-
-                          context.goNamedAuth('LandingPage', context.mounted);
-                        },
-                        child: Icon(
-                          Icons.chevron_left_sharp,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 40.0,
-                        ),
-                      ),
-                    ),
-                  ),
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 0.0, 32.0),
@@ -245,22 +222,12 @@ class _VerificationWidgetState extends State<VerificationWidget>
                                         if (currentUserEmailVerified) {
                                           HapticFeedback.lightImpact();
 
-                                          await currentUserReference!
-                                              .update(createUsersRecordData(
-                                            emailVerified: true,
-                                          ));
-
                                           context.pushNamed('CreateProfile');
                                         } else {
                                           await Future.delayed(const Duration(
                                               milliseconds: 1000));
                                           if (currentUserEmailVerified) {
                                             HapticFeedback.lightImpact();
-
-                                            await currentUserReference!
-                                                .update(createUsersRecordData(
-                                              emailVerified: true,
-                                            ));
 
                                             context.pushNamed('CreateProfile');
                                           } else {

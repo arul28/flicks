@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -454,6 +454,16 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                     return;
                                   }
 
+                                  await UsersRecord.collection
+                                      .doc(user.uid)
+                                      .update(createUsersRecordData(
+                                        email:
+                                            _model.emailAddressController.text,
+                                        uid: random_data
+                                            .randomInteger(0, 1000000)
+                                            .toString(),
+                                      ));
+
                                   await authManager.sendEmailVerification();
 
                                   context.goNamedAuth(
@@ -462,6 +472,14 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                     queryParameters: {
                                       'email': serializeParam(
                                         _model.emailAddressController.text,
+                                        ParamType.String,
+                                      ),
+                                      'password': serializeParam(
+                                        _model.passwordController.text,
+                                        ParamType.String,
+                                      ),
+                                      'confirmPassword': serializeParam(
+                                        _model.confirmPasswordController.text,
                                         ParamType.String,
                                       ),
                                     }.withoutNulls,
@@ -516,26 +534,10 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                         alignment:
                                             AlignmentDirectional(0.0, 0.0),
                                         child: FFButtonWidget(
-                                          onPressed: () async {
-                                            GoRouter.of(context)
-                                                .prepareAuthEvent();
-                                            final user = await authManager
-                                                .signInWithGoogle(context);
-                                            if (user == null) {
-                                              return;
-                                            }
-
-                                            await currentUserReference!
-                                                .update(createUsersRecordData(
-                                              emailVerified: true,
-                                              profileCreated: false,
-                                            ));
-
-                                            context.pushNamedAuth(
-                                                'CreateProfile',
-                                                context.mounted);
+                                          onPressed: () {
+                                            print('Button pressed ...');
                                           },
-                                          text: 'Sign up with Google',
+                                          text: 'Sign in with Google',
                                           icon: Icon(
                                             Icons.add,
                                             color: Colors.transparent,

@@ -622,11 +622,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                 ));
                               }
 
-                              await currentUserReference!
-                                  .update(createUsersRecordData(
-                                profileCreated: true,
-                              ));
-
                               context.pushNamed('Profile');
                             } else {
                               setState(() {
