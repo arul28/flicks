@@ -16,7 +16,7 @@ export '/pages/authentication/verification/verification_widget.dart'
     show VerificationWidget;
 export '/pages/settings/edit_profile/edit_profile_widget.dart'
     show EditProfileWidget;
-export '/pages/secondary_app_pages/manage_friends_option/manage_friends_option_widget.dart'
+export '/pages/friends/manage_friends_option/manage_friends_option_widget.dart'
     show ManageFriendsOptionWidget;
 export '/pages/secondary_app_pages/search_users/search_users_widget.dart'
     show SearchUsersWidget;
@@ -38,3 +38,9 @@ export '/pages/secondary_app_pages/view_all_flicks/view_all_flicks_widget.dart'
     show ViewAllFlicksWidget;
 export '/pages/secondary_app_pages/users_friends/users_friends_widget.dart'
     show UsersFriendsWidget;
+export '/pages/friends/manage_friends/manage_friends_widget.dart'
+    show ManageFriendsWidget;
+export '/pages/friends/manage_requests/manage_requests_widget.dart'
+    show ManageRequestsWidget;
+export '/pages/friends/manage_pending/manage_pending_widget.dart'
+    show ManagePendingWidget;

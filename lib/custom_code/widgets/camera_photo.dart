@@ -39,16 +39,31 @@ class _CameraPhotoState extends State<CameraPhoto> {
     availableCameras().then((value) => _cameras = value);
   }
 
-  _initializeController() {
-    if (_cameras != null && _cameras!.isNotEmpty) {
-      controller = CameraController(
-          _cameras![selectedCameraIndex], ResolutionPreset.max);
-      controller!.initialize().then((_) {
-        if (!mounted) {
-          return;
-        }
-        setState(() {});
-      });
+  _initializeController(int cameraIndex) async {
+    if (controller != null) {
+      await controller!.dispose();
+    }
+    controller = CameraController(
+      _cameras![cameraIndex],
+      cameraIndex == 0
+          ? ResolutionPreset.max
+          : ResolutionPreset.high, // use high preset for the front camera
+    );
+    controller!.addListener(() {
+      if (mounted) setState(() {});
+      if (controller!.value.hasError) {
+        print('Camera error ${controller!.value.errorDescription}');
+      }
+    });
+
+    try {
+      await controller!.initialize();
+    } on CameraException catch (e) {
+      print('Error: ${e.description}');
+    }
+
+    if (mounted) {
+      setState(() {});
     }
   }
 
@@ -58,11 +73,11 @@ class _CameraPhotoState extends State<CameraPhoto> {
     if (_cameras != null) {
       if (FFAppState().switchCam && selectedCameraIndex == 0) {
         selectedCameraIndex = 1;
-        _initializeController();
+        _initializeController(selectedCameraIndex);
         FFAppState().switchCam = false;
       } else if (!FFAppState().switchCam && selectedCameraIndex == 1) {
         selectedCameraIndex = 0;
-        _initializeController();
+        _initializeController(selectedCameraIndex);
       }
     }
 

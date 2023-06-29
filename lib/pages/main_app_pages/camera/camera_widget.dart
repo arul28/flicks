@@ -202,7 +202,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                           .labelLarge
                                           .override(
                                             fontFamily: 'Readex Pro',
-                                            fontSize: 50.0,
+                                            fontSize: 25.0,
                                             fontWeight: FontWeight.w600,
                                           ),
                                     ),
@@ -212,7 +212,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                           .labelLarge
                                           .override(
                                             fontFamily: 'Readex Pro',
-                                            fontSize: 60.0,
+                                            fontSize: 25.0,
                                             fontWeight: FontWeight.normal,
                                           ),
                                     ),
@@ -227,13 +227,17 @@ class _CameraWidgetState extends State<CameraWidget> {
                                           .labelLarge
                                           .override(
                                             fontFamily: 'Readex Pro',
-                                            fontSize: 50.0,
+                                            fontSize: 25.0,
                                             fontWeight: FontWeight.w600,
                                           ),
                                     )
                                   ],
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 10.0,
+                                      ),
                                 ),
                                 textAlign: TextAlign.center,
                               ),

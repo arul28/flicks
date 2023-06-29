@@ -114,8 +114,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
       body: SafeArea(
         top: true,
         child: Container(
-          width: 394.0,
-          height: 797.0,
+          height: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [

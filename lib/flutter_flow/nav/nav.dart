@@ -215,6 +215,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             userRef: params.getParam(
                 'userRef', ParamType.DocumentReference, false, ['users']),
           ),
+        ),
+        FFRoute(
+          name: 'manageFriends',
+          path: '/manageFriends',
+          builder: (context, params) => ManageFriendsWidget(),
+        ),
+        FFRoute(
+          name: 'manageRequests',
+          path: '/manageRequests',
+          builder: (context, params) => ManageRequestsWidget(),
+        ),
+        FFRoute(
+          name: 'managePending',
+          path: '/managePending',
+          builder: (context, params) => ManagePendingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
