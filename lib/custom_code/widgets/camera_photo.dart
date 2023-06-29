@@ -37,7 +37,14 @@ class _CameraPhotoState extends State<CameraPhoto> {
   @override
   void initState() {
     super.initState();
-    _cameras = availableCameras();
+    _cameras = availableCameras().then((List<CameraDescription> cameras) {
+      if (cameras.isNotEmpty) {
+        _initializeController(FFAppState().switchCam ? 1 : 0);
+      } else {
+        print("No cameras available.");
+      }
+      return cameras;
+    });
     wasSwitched = FFAppState().switchCam;
   }
 
