@@ -147,88 +147,84 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      if (valueOrDefault(
-                                              currentUserDocument
-                                                  ?.incomingPendingRequestsNum,
-                                              0) >
-                                          0)
-                                        AuthUserStreamWidget(
-                                          builder: (context) => badges.Badge(
-                                            badgeContent: Text(
-                                              (currentUserDocument
-                                                          ?.incomingPendingRequests
-                                                          ?.toList() ??
-                                                      [])
-                                                  .length
-                                                  .toString()
-                                                  .maybeHandleOverflow(
-                                                      maxChars: 2),
+                                      AuthUserStreamWidget(
+                                        builder: (context) => badges.Badge(
+                                          badgeContent: Text(
+                                            (currentUserDocument
+                                                        ?.incomingPendingRequests
+                                                        ?.toList() ??
+                                                    [])
+                                                .length
+                                                .toString()
+                                                .maybeHandleOverflow(
+                                                    maxChars: 2),
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleSmall
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: Colors.white,
+                                                  fontSize: 12.0,
+                                                ),
+                                          ),
+                                          showBadge: valueOrDefault(
+                                                  currentUserDocument
+                                                      ?.incomingPendingRequestsNum,
+                                                  0) >
+                                              0,
+                                          shape: badges.BadgeShape.circle,
+                                          badgeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          elevation: 4.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  4.0, 4.0, 4.0, 4.0),
+                                          position:
+                                              badges.BadgePosition.topStart(),
+                                          animationType:
+                                              badges.BadgeAnimationType.scale,
+                                          toAnimate: true,
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                'manageFriends',
+                                                extra: <String, dynamic>{
+                                                  kTransitionInfoKey:
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType
+                                                            .scale,
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                  ),
+                                                },
+                                              );
+                                            },
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.friendsNum,
+                                                        0)
+                                                    .toString(),
+                                                '0',
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .titleSmall
+                                                      .displaySmall
                                                       .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        color: Colors.white,
-                                                        fontSize: 12.0,
+                                                        fontFamily: 'Outfit',
+                                                        fontSize: 40.0,
                                                       ),
-                                            ),
-                                            showBadge: true,
-                                            shape: badges.BadgeShape.circle,
-                                            badgeColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            elevation: 4.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    4.0, 4.0, 4.0, 4.0),
-                                            position:
-                                                badges.BadgePosition.topStart(),
-                                            animationType:
-                                                badges.BadgeAnimationType.scale,
-                                            toAnimate: true,
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed(
-                                                  'manageFriends',
-                                                  extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
-                                                        TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .scale,
-                                                      alignment: Alignment
-                                                          .bottomCenter,
-                                                    ),
-                                                  },
-                                                );
-                                              },
-                                              child: Text(
-                                                valueOrDefault<String>(
-                                                  valueOrDefault(
-                                                          currentUserDocument
-                                                              ?.friendsNum,
-                                                          0)
-                                                      .toString(),
-                                                  '0',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .displaySmall
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          fontSize: 40.0,
-                                                        ),
-                                              ),
                                             ),
                                           ),
                                         ),
+                                      ),
                                       InkWell(
                                         splashColor: Colors.transparent,
                                         focusColor: Colors.transparent,
