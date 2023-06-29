@@ -101,8 +101,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                                   .headlineLarge
                                   .override(
                                     fontFamily: 'Outfit',
-                                    color:
-                                        FlutterFlowTheme.of(context).amethyst,
+                                    color: FlutterFlowTheme.of(context)
+                                        .frenchViolet,
                                     fontSize: 40.0,
                                   ),
                             ),
@@ -121,7 +121,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                           buttonSize: 60.0,
                           icon: Icon(
                             Icons.camera_roll,
-                            color: FlutterFlowTheme.of(context).amethyst,
+                            color: FlutterFlowTheme.of(context).frenchViolet,
                             size: 35.0,
                           ),
                           onPressed: () async {
@@ -304,7 +304,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                                 },
                                 child: Icon(
                                   Icons.circle_outlined,
-                                  color: FlutterFlowTheme.of(context).amethyst,
+                                  color:
+                                      FlutterFlowTheme.of(context).frenchViolet,
                                   size: 100.0,
                                 ),
                               ),
@@ -323,7 +324,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                               if (_model.takingImage ?? true)
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 10.0, 0.0),
+                                      0.0, 10.0, 30.0, 0.0),
                                   child: Lottie.network(
                                     'https://assets5.lottiefiles.com/packages/lf20_fPPjzl7JC2.json',
                                     width: 150.0,
@@ -347,6 +348,29 @@ class _CameraWidgetState extends State<CameraWidget> {
                                   ),
                             ),
                         ],
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(1.0, 1.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 20.0, 20.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              setState(() {
+                                FFAppState().switchCam = true;
+                              });
+                            },
+                            child: Icon(
+                              Icons.flip_camera_ios_rounded,
+                              color: FlutterFlowTheme.of(context).frenchViolet,
+                              size: 50.0,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   );

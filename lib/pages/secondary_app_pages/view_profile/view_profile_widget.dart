@@ -38,23 +38,15 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if ((currentUserDocument?.friendsList?.toList() ?? [])
           .contains(widget.userInfo!.reference)) {
-        setState(() {
-          _model.isFriend = true;
-        });
+        _model.isFriend = true;
       } else if ((currentUserDocument?.sentPendingRequests?.toList() ?? [])
           .contains(widget.userInfo!.reference)) {
-        setState(() {
-          _model.sentWaiting = true;
-        });
+        _model.sentWaiting = true;
       } else if ((currentUserDocument?.incomingPendingRequests?.toList() ?? [])
           .contains(widget.userInfo!.reference)) {
-        setState(() {
-          _model.recievedWaiting = true;
-        });
+        _model.recievedWaiting = true;
       } else {
-        setState(() {
-          _model.noConnection = true;
-        });
+        _model.noConnection = true;
       }
     });
   }

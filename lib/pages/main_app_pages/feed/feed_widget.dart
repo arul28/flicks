@@ -643,7 +643,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                 alignment:
                                                                     AlignmentDirectional(
                                                                         1.0,
-                                                                        0.0),
+                                                                        -1.0),
                                                                 child: Padding(
                                                                   padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -690,8 +690,8 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                               text: functions.addOne(_model.pageViewCurrentIndex).toString(),
                                                                               style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                     fontFamily: 'Readex Pro',
-                                                                                    color: FlutterFlowTheme.of(context).heliotrope,
-                                                                                    fontSize: 28.0,
+                                                                                    color: FlutterFlowTheme.of(context).frenchViolet,
+                                                                                    fontSize: 20.0,
                                                                                     fontWeight: FontWeight.w600,
                                                                                   ),
                                                                             ),
@@ -700,7 +700,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                               style: GoogleFonts.getFont(
                                                                                 'Outfit',
                                                                                 fontWeight: FontWeight.w800,
-                                                                                fontSize: 24.0,
+                                                                                fontSize: 20.0,
                                                                                 fontStyle: FontStyle.normal,
                                                                               ),
                                                                             ),
@@ -711,8 +711,8 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                               ),
                                                                               style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                     fontFamily: 'Readex Pro',
-                                                                                    color: FlutterFlowTheme.of(context).heliotrope,
-                                                                                    fontSize: 28.0,
+                                                                                    color: FlutterFlowTheme.of(context).frenchViolet,
+                                                                                    fontSize: 20.0,
                                                                                     fontWeight: FontWeight.w600,
                                                                                   ),
                                                                             )
@@ -836,7 +836,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                 Icons.comment_rounded,
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .heliotrope,
+                                                        .frenchViolet,
                                                 size: 40.0,
                                               ),
                                             ),
@@ -863,7 +863,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                   fontFamily: 'Outfit',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .heliotrope,
+                                                      .frenchViolet,
                                                 ),
                                           ),
                                         ),
@@ -882,7 +882,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                   thickness: 3.0,
                   indent: 10.0,
                   endIndent: 10.0,
-                  color: FlutterFlowTheme.of(context).heliotrope,
+                  color: FlutterFlowTheme.of(context).frenchViolet,
                 ),
                 if (valueOrDefault(currentUserDocument?.friendsNum, 0) == 0)
                   Padding(

@@ -54,7 +54,7 @@ class _ViewAllFlicksWidgetState extends State<ViewAllFlicksWidget> {
             buttonSize: 60.0,
             icon: Icon(
               Icons.arrow_back_outlined,
-              color: FlutterFlowTheme.of(context).amethyst,
+              color: FlutterFlowTheme.of(context).frenchViolet,
               size: 30.0,
             ),
             onPressed: () async {
@@ -73,7 +73,7 @@ class _ViewAllFlicksWidgetState extends State<ViewAllFlicksWidget> {
             'flicks',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: 'Outfit',
-                  color: FlutterFlowTheme.of(context).amethyst,
+                  color: FlutterFlowTheme.of(context).frenchViolet,
                   fontSize: 28.0,
                   fontWeight: FontWeight.w600,
                 ),
@@ -102,87 +102,91 @@ class _ViewAllFlicksWidgetState extends State<ViewAllFlicksWidget> {
                 );
               }
               List<HistoryRecord> columnHistoryRecordList = snapshot.data!;
-              return Column(
-                mainAxisSize: MainAxisSize.max,
-                children: List.generate(columnHistoryRecordList.length,
-                    (columnIndex) {
-                  final columnHistoryRecord =
-                      columnHistoryRecordList[columnIndex];
-                  return Container(
-                    width: double.infinity,
-                    height: 193.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Stack(
-                      children: [
-                        Builder(
-                          builder: (context) {
-                            final imagesHistory =
-                                columnHistoryRecord.imagesList.toList();
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: imagesHistory.length,
-                              itemBuilder: (context, imagesHistoryIndex) {
-                                final imagesHistoryItem =
-                                    imagesHistory[imagesHistoryIndex];
-                                return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      4.0, 10.0, 4.0, 20.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => FocusScope.of(context)
-                                                .requestFocus(
-                                                    _model.unfocusNode),
-                                            child: Padding(
-                                              padding: MediaQuery.of(context)
-                                                  .viewInsets,
-                                              child: HistoryViewWidget(
-                                                imgPath: imagesHistoryItem,
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: List.generate(columnHistoryRecordList.length,
+                      (columnIndex) {
+                    final columnHistoryRecord =
+                        columnHistoryRecordList[columnIndex];
+                    return Container(
+                      width: double.infinity,
+                      height: 193.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: Stack(
+                        children: [
+                          Builder(
+                            builder: (context) {
+                              final imagesHistory =
+                                  columnHistoryRecord.imagesList.toList();
+                              return ListView.builder(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: imagesHistory.length,
+                                itemBuilder: (context, imagesHistoryIndex) {
+                                  final imagesHistoryItem =
+                                      imagesHistory[imagesHistoryIndex];
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        4.0, 10.0, 4.0, 20.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          context: context,
+                                          builder: (context) {
+                                            return GestureDetector(
+                                              onTap: () =>
+                                                  FocusScope.of(context)
+                                                      .requestFocus(
+                                                          _model.unfocusNode),
+                                              child: Padding(
+                                                padding: MediaQuery.of(context)
+                                                    .viewInsets,
+                                                child: HistoryViewWidget(
+                                                  imgPath: imagesHistoryItem,
+                                                ),
                                               ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => setState(() {}));
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(16.0),
-                                      child: Image.network(
-                                        imagesHistoryItem,
-                                        width: 131.0,
-                                        height: 200.0,
-                                        fit: BoxFit.cover,
+                                            );
+                                          },
+                                        ).then((value) => setState(() {}));
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                        child: Image.network(
+                                          imagesHistoryItem,
+                                          width: 131.0,
+                                          height: 200.0,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0.0, 1.0),
-                          child: Text(
-                            dateTimeFormat(
-                                'yMMMd', columnHistoryRecord.developedAt!),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                  );
+                                },
+                              );
+                            },
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 1.0),
+                            child: Text(
+                              dateTimeFormat(
+                                  'yMMMd', columnHistoryRecord.developedAt!),
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                ),
               );
             },
           ),

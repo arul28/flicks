@@ -90,23 +90,41 @@ class _UsersFriendsWidgetState extends State<UsersFriendsWidget>
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'arul',
-                      style: FlutterFlowTheme.of(context).headlineLarge,
-                    ),
-                    TextSpan(
-                      text: '\'s friends',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18.0,
+              StreamBuilder<UsersRecord>(
+                stream: UsersRecord.getDocument(widget.userRef!),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          color: FlutterFlowTheme.of(context).primary,
+                        ),
                       ),
-                    )
-                  ],
-                  style: FlutterFlowTheme.of(context).bodyMedium,
-                ),
+                    );
+                  }
+                  final richTextUsersRecord = snapshot.data!;
+                  return RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: richTextUsersRecord.displayName,
+                          style: FlutterFlowTheme.of(context).headlineLarge,
+                        ),
+                        TextSpan(
+                          text: '\'s friends',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18.0,
+                          ),
+                        )
+                      ],
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -149,7 +167,8 @@ class _UsersFriendsWidgetState extends State<UsersFriendsWidget>
                         width: MediaQuery.of(context).size.width * 1.0,
                         lineHeight: 12.0,
                         animation: true,
-                        progressColor: FlutterFlowTheme.of(context).heliotrope,
+                        progressColor:
+                            FlutterFlowTheme.of(context).frenchViolet,
                         backgroundColor: Color(0xFFE0E3E7),
                         barRadius: Radius.circular(0.0),
                         padding: EdgeInsets.zero,

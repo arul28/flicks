@@ -62,7 +62,7 @@ class _CurrentSessionPhotosDetailsWidgetState
             buttonSize: 60.0,
             icon: Icon(
               Icons.arrow_back_outlined,
-              color: FlutterFlowTheme.of(context).amethyst,
+              color: FlutterFlowTheme.of(context).frenchViolet,
               size: 30.0,
             ),
             onPressed: () async {
@@ -73,7 +73,7 @@ class _CurrentSessionPhotosDetailsWidgetState
             'flicks',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: 'Outfit',
-                  color: FlutterFlowTheme.of(context).amethyst,
+                  color: FlutterFlowTheme.of(context).frenchViolet,
                   fontSize: 28.0,
                   fontWeight: FontWeight.w600,
                 ),

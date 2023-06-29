@@ -104,7 +104,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       },
                       child: Icon(
                         Icons.settings_outlined,
-                        color: FlutterFlowTheme.of(context).amethyst,
+                        color: FlutterFlowTheme.of(context).frenchViolet,
                         size: 30.0,
                       ),
                     ),
@@ -322,7 +322,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   fontFamily: 'Readex Pro',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .heliotrope,
+                                                      .frenchViolet,
                                                   fontSize: 16.0,
                                                 ),
                                           ),
@@ -334,7 +334,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           child: Icon(
                                             Icons.photo_album_outlined,
                                             color: FlutterFlowTheme.of(context)
-                                                .heliotrope,
+                                                .frenchViolet,
                                             size: 24.0,
                                           ),
                                         ),

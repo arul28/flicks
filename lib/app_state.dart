@@ -79,6 +79,12 @@ class FFAppState extends ChangeNotifier {
   set currentSessionPicsNum(int _value) {
     _currentSessionPicsNum = _value;
   }
+
+  bool _switchCam = false;
+  bool get switchCam => _switchCam;
+  set switchCam(bool _value) {
+    _switchCam = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

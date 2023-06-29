@@ -151,7 +151,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                             controller: _model.textController,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.textController',
-                              Duration(milliseconds: 0),
+                              Duration(milliseconds: 500),
                               () async {
                                 setState(() {
                                   _model.simpleSearchResults = TextSearch(
@@ -343,7 +343,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                                               BorderRadius.circular(10.0),
                                           border: Border.all(
                                             color: FlutterFlowTheme.of(context)
-                                                .heliotrope,
+                                                .frenchViolet,
                                             width: 2.0,
                                           ),
                                         ),

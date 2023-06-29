@@ -369,12 +369,12 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                 fontFamily: 'Outfit',
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .amethyst,
+                                                        .frenchViolet,
                                                 fontSize: 40.0,
                                               ),
                                         ),
                                         TextSpan(
-                                          text: 'likes',
+                                          text: ' likes',
                                           style: TextStyle(
                                             fontSize: 16.0,
                                           ),
@@ -404,7 +404,8 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                 value: _model.liked!,
                                 onIcon: Icon(
                                   Icons.camera_sharp,
-                                  color: FlutterFlowTheme.of(context).amethyst,
+                                  color:
+                                      FlutterFlowTheme.of(context).frenchViolet,
                                   size: 34.0,
                                 ),
                                 offIcon: Icon(
@@ -565,7 +566,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                               fontFamily: 'Readex Pro',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .amethyst,
+                                                      .frenchViolet,
                                               fontSize: 24.0,
                                             ),
                                       ),
@@ -583,7 +584,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                               fontFamily: 'Readex Pro',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .amethyst,
+                                                      .frenchViolet,
                                               fontSize: 24.0,
                                             ),
                                       )

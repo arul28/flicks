@@ -184,7 +184,7 @@ class _ManageFriendsOptionWidgetState extends State<ManageFriendsOptionWidget>
                       width: MediaQuery.of(context).size.width * 1.0,
                       lineHeight: 12.0,
                       animation: true,
-                      progressColor: FlutterFlowTheme.of(context).heliotrope,
+                      progressColor: FlutterFlowTheme.of(context).frenchViolet,
                       backgroundColor: Color(0xFFE0E3E7),
                       barRadius: Radius.circular(0.0),
                       padding: EdgeInsets.zero,

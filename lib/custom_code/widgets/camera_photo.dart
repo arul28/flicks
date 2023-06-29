@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../../auth/firebase_auth/auth_util.dart';
 import '../../backend/firebase_storage/storage.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class CameraPhoto extends StatefulWidget {
   const CameraPhoto({
@@ -43,12 +44,19 @@ class _CameraPhotoState extends State<CameraPhoto> {
     if (FFAppState().makePhoto) {
       controller!.takePicture().then((file) async {
         Uint8List fileAsBytes = await file.readAsBytes();
+        // Compress the image
+        var result = await FlutterImageCompress.compressWithList(
+          fileAsBytes,
+          minHeight: 1920,
+          minWidth: 1080,
+          quality: 88,
+        );
         FFAppState().update(() {
           FFAppState().makePhoto = false;
         });
         String dir = '/users/' + currentUserUid + '/flicks/';
         final downloadUrl = await uploadData(
-            dir + FFAppState().index.toString() + '.jpg', fileAsBytes);
+            dir + FFAppState().index.toString() + '.jpg', result);
         FFAppState().update(() {
           FFAppState().index = FFAppState().index + 1;
           FFAppState().filePath = downloadUrl ?? '';

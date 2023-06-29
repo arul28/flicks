@@ -72,13 +72,13 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
             children: [
               Text(
                 'Contact Us',
-                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                style: FlutterFlowTheme.of(context).headlineLarge.override(
                       fontFamily: 'Outfit',
-                      color: FlutterFlowTheme.of(context).frenchViolet,
+                      fontSize: 30.0,
                     ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(140.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(100.0, 0.0, 0.0, 0.0),
                 child: Container(
                   width: 39.0,
                   height: 39.0,
@@ -100,144 +100,164 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Welcome to support',
-                    style: FlutterFlowTheme.of(context).labelLarge,
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                    child: Text(
-                      'Report a Problem',
-                      style: FlutterFlowTheme.of(context).headlineMedium,
-                    ),
-                  ),
-                  Form(
-                    key: _model.formKey,
-                    autovalidateMode: AutovalidateMode.disabled,
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          TextFormField(
-                            controller: _model.subjectFieldController,
-                            autofocus: true,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Subject',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 12.0, 16.0, 12.0),
-                            ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            cursorColor: FlutterFlowTheme.of(context).primary,
-                            validator: _model.subjectFieldControllerValidator
-                                .asValidator(context),
-                          ),
-                          TextFormField(
-                            controller: _model.decriptionFieldController,
-                            autofocus: true,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintText:
-                                  'Short Description of what is going on...',
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 24.0, 16.0, 12.0),
-                            ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            maxLines: 16,
-                            minLines: 6,
-                            cursorColor: FlutterFlowTheme.of(context).primary,
-                            validator: _model.decriptionFieldControllerValidator
-                                .asValidator(context),
-                          ),
-                        ].divide(SizedBox(height: 12.0)),
+          child: Container(
+            width: 394.0,
+            height: 800.0,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  FlutterFlowTheme.of(context).primary,
+                  FlutterFlowTheme.of(context).frenchViolet
+                ],
+                stops: [0.0, 1.0],
+                begin: AlignmentDirectional(0.0, -1.0),
+                end: AlignmentDirectional(0, 1.0),
+              ),
+            ),
+            child: Align(
+              alignment: AlignmentDirectional(0.0, -1.0),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome to support',
+                        style: FlutterFlowTheme.of(context).labelLarge,
                       ),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 352.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Builder(
-                          builder: (context) => FFButtonWidget(
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                        child: Text(
+                          'Report a Problem',
+                          style: FlutterFlowTheme.of(context).headlineMedium,
+                        ),
+                      ),
+                      Form(
+                        key: _model.formKey,
+                        autovalidateMode: AutovalidateMode.disabled,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 16.0, 0.0, 0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              TextFormField(
+                                controller: _model.subjectFieldController,
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Subject',
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 12.0, 16.0, 12.0),
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                cursorColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                validator: _model
+                                    .subjectFieldControllerValidator
+                                    .asValidator(context),
+                              ),
+                              TextFormField(
+                                controller: _model.decriptionFieldController,
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintText:
+                                      'Short Description of what is going on...',
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 24.0, 16.0, 12.0),
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                maxLines: 16,
+                                minLines: 6,
+                                cursorColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                validator: _model
+                                    .decriptionFieldControllerValidator
+                                    .asValidator(context),
+                              ),
+                            ].divide(SizedBox(height: 12.0)),
+                          ),
+                        ),
+                      ),
+                      Builder(
+                        builder: (context) => Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              50.0, 50.0, 50.0, 50.0),
+                          child: FFButtonWidget(
                             onPressed: () async {
                               if (_model.formKey.currentState == null ||
                                   !_model.formKey.currentState!.validate()) {
@@ -301,17 +321,18 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
                                   ),
                               elevation: 4.0,
                               borderSide: BorderSide(
-                                color: Colors.transparent,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(60.0),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
