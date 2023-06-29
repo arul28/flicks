@@ -163,14 +163,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 .override(
                                                   fontFamily: 'Readex Pro',
                                                   color: Colors.white,
-                                                  fontSize: 12.0,
                                                 ),
                                           ),
-                                          showBadge: valueOrDefault(
-                                                  currentUserDocument
-                                                      ?.incomingPendingRequestsNum,
-                                                  0) >
-                                              0,
+                                          showBadge: true,
                                           shape: badges.BadgeShape.circle,
                                           badgeColor:
                                               FlutterFlowTheme.of(context)
@@ -178,7 +173,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           elevation: 4.0,
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  4.0, 4.0, 4.0, 4.0),
+                                                  8.0, 8.0, 8.0, 8.0),
                                           position:
                                               badges.BadgePosition.topStart(),
                                           animationType:

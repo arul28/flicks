@@ -122,111 +122,48 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).lineColor,
             ),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.goNamed(
-                                  'usersFriends',
-                                  queryParameters: {
-                                    'userRef': serializeParam(
-                                      widget.userInfo!.reference,
-                                      ParamType.DocumentReference,
-                                    ),
-                                  }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.scale,
-                                      alignment: Alignment.bottomCenter,
-                                    ),
-                                  },
-                                );
-                              },
-                              child: Text(
-                                valueOrDefault<String>(
-                                  widget.userInfo!.friendsNum.toString(),
-                                  '0',
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .displaySmall
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      fontSize: 40.0,
-                                    ),
-                              ),
-                            ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed(
-                                  'ManageFriendsOption',
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.scale,
-                                      alignment: Alignment.bottomCenter,
-                                    ),
-                                  },
-                                );
-                              },
-                              child: Text(
-                                'Friends',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color:
-                                          FlutterFlowTheme.of(context).amethyst,
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50.0),
-                          child: Image.network(
-                            widget.userInfo!.photoUrl,
-                            width: 100.0,
-                            height: 100.0,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.goNamed(
+                                'usersFriends',
+                                queryParameters: {
+                                  'userRef': serializeParam(
+                                    widget.userInfo!.reference,
+                                    ParamType.DocumentReference,
+                                  ),
+                                }.withoutNulls,
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.scale,
+                                    alignment: Alignment.bottomCenter,
+                                  ),
+                                },
+                              );
+                            },
+                            child: Text(
                               valueOrDefault<String>(
-                                widget.userInfo!.pinnedNum.toString(),
+                                widget.userInfo!.friendsNum.toString(),
                                 '0',
                               ),
                               style: FlutterFlowTheme.of(context)
@@ -236,9 +173,26 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                     fontSize: 40.0,
                                   ),
                             ),
-                            Text(
-                              'Pinned',
-                              textAlign: TextAlign.center,
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                'ManageFriendsOption',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.scale,
+                                    alignment: Alignment.bottomCenter,
+                                  ),
+                                },
+                              );
+                            },
+                            child: Text(
+                              'Friends',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -247,258 +201,125 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                         FlutterFlowTheme.of(context).amethyst,
                                   ),
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50.0),
+                        child: Image.network(
+                          widget.userInfo!.photoUrl,
+                          width: 100.0,
+                          height: 100.0,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                    ],
-                  ),
-                  Flexible(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: 100.0,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).noColor,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            valueOrDefault<String>(
+                              widget.userInfo!.pinnedNum.toString(),
+                              '0',
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, -1.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 15.0, 0.0, 0.0),
-                                child: Text(
-                                  widget.userInfo!.bio.maybeHandleOverflow(
-                                    maxChars: 40,
-                                    replacement: '…',
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  fontSize: 40.0,
                                 ),
+                          ),
+                          Text(
+                            'Pinned',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: FlutterFlowTheme.of(context).amethyst,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Flexible(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          width: 100.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).noColor,
+                          ),
+                          child: Align(
+                            alignment: AlignmentDirectional(0.0, -1.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 15.0, 0.0, 0.0),
+                              child: Text(
+                                widget.userInfo!.bio.maybeHandleOverflow(
+                                  maxChars: 40,
+                                  replacement: '…',
+                                ),
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Stack(
-                          children: [
-                            if (_model.noConnection == true)
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await currentUserReference!.update({
-                                      'sentPendingRequests':
-                                          FieldValue.arrayUnion(
-                                              [widget.userInfo!.reference]),
-                                      'sentPendingRequestsNum':
-                                          FieldValue.increment(1),
-                                    });
-
-                                    await widget.userInfo!.reference.update({
-                                      'incomingPendingRequests':
-                                          FieldValue.arrayUnion(
-                                              [currentUserReference]),
-                                      'incomingPendingRequestsNum':
-                                          FieldValue.increment(1),
-                                    });
-                                    setState(() {
-                                      _model.sentWaiting = true;
-                                      _model.noConnection = false;
-                                      _model.isFriend = false;
-                                      _model.recievedWaiting = false;
-                                    });
-                                  },
-                                  child: Container(
-                                    width: 200.0,
-                                    height: 60.0,
-                                    constraints: BoxConstraints(
-                                      maxHeight: 32.0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .heliotrope,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 4.0,
-                                          color: Color(0x32171717),
-                                          offset: Offset(0.0, 2.0),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(70.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 8.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.person_add,
-                                            color: Colors.white,
-                                            size: 20.0,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Add Friend',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color: Colors.white,
-                                                        fontSize: 14.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            if (_model.isFriend == true)
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    var confirmDialogResponse =
-                                        await showDialog<bool>(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text('Remove Friend?'),
-                                                  content: Text(
-                                                      'Are you sure you want to remove this friend?'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              false),
-                                                      child: Text('Cancel'),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              true),
-                                                      child: Text('Confirm'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ) ??
-                                            false;
-                                    if (confirmDialogResponse) {
-                                      await currentUserReference!.update({
-                                        'friendsList': FieldValue.arrayRemove(
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          if (_model.noConnection == true)
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await currentUserReference!.update({
+                                    'sentPendingRequests':
+                                        FieldValue.arrayUnion(
                                             [widget.userInfo!.reference]),
-                                        'friendsNum':
-                                            FieldValue.increment(-(1)),
-                                      });
+                                    'sentPendingRequestsNum':
+                                        FieldValue.increment(1),
+                                  });
 
-                                      await widget.userInfo!.reference.update({
-                                        'friendsList': FieldValue.arrayRemove(
+                                  await widget.userInfo!.reference.update({
+                                    'incomingPendingRequests':
+                                        FieldValue.arrayUnion(
                                             [currentUserReference]),
-                                        'friendsNum':
-                                            FieldValue.increment(-(1)),
-                                      });
-                                      setState(() {
-                                        _model.isFriend = false;
-                                        _model.noConnection = true;
-                                        _model.sentWaiting = false;
-                                        _model.recievedWaiting = false;
-                                      });
-                                    }
-                                    setState(() {});
-                                  },
-                                  child: Container(
-                                    width: 200.0,
-                                    height: 60.0,
-                                    constraints: BoxConstraints(
-                                      maxHeight: 32.0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .frenchViolet,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 4.0,
-                                          color: Color(0x32171717),
-                                          offset: Offset(0.0, 2.0),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(70.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 8.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.group_remove,
-                                            color: Colors.white,
-                                            size: 20.0,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Remove Friend',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color: Colors.white,
-                                                        fontSize: 14.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            if (_model.sentWaiting)
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                    'incomingPendingRequestsNum':
+                                        FieldValue.increment(1),
+                                  });
+                                  setState(() {
+                                    _model.sentWaiting = true;
+                                    _model.noConnection = false;
+                                    _model.isFriend = false;
+                                    _model.recievedWaiting = false;
+                                  });
+                                },
                                 child: Container(
                                   width: 200.0,
                                   height: 60.0,
@@ -507,7 +328,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                   ),
                                   decoration: BoxDecoration(
                                     color:
-                                        FlutterFlowTheme.of(context).amethyst,
+                                        FlutterFlowTheme.of(context).heliotrope,
                                     boxShadow: [
                                       BoxShadow(
                                         blurRadius: 4.0,
@@ -526,7 +347,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Icon(
-                                          Icons.send,
+                                          Icons.person_add,
                                           color: Colors.white,
                                           size: 20.0,
                                         ),
@@ -535,7 +356,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 0.0, 0.0, 0.0),
                                           child: Text(
-                                            'Friend Request Sent',
+                                            'Add Friend',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -551,234 +372,391 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                   ),
                                 ),
                               ),
-                            if (_model.recievedWaiting)
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
+                            ),
+                          if (_model.isFriend == true)
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  var confirmDialogResponse =
+                                      await showDialog<bool>(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('Remove Friend?'),
+                                                content: Text(
+                                                    'Are you sure you want to remove this friend?'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            false),
+                                                    child: Text('Cancel'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            true),
+                                                    child: Text('Confirm'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ) ??
+                                          false;
+                                  if (confirmDialogResponse) {
                                     await currentUserReference!.update({
-                                      'friendsList': FieldValue.arrayUnion(
+                                      'friendsList': FieldValue.arrayRemove(
                                           [widget.userInfo!.reference]),
-                                      'friendsNum': FieldValue.increment(1),
-                                      'incomingPendingRequests':
-                                          FieldValue.arrayRemove(
-                                              [widget.userInfo!.reference]),
-                                      'incomingPendingRequestsNum':
-                                          FieldValue.increment(-(1)),
+                                      'friendsNum': FieldValue.increment(-(1)),
                                     });
 
                                     await widget.userInfo!.reference.update({
-                                      'friendsList': FieldValue.arrayUnion(
+                                      'friendsList': FieldValue.arrayRemove(
                                           [currentUserReference]),
-                                      'friendsNum': FieldValue.increment(1),
-                                      'sentPendingRequests':
-                                          FieldValue.arrayRemove(
-                                              [currentUserReference]),
-                                      'sentPendingRequestsNum':
-                                          FieldValue.increment(-(1)),
+                                      'friendsNum': FieldValue.increment(-(1)),
                                     });
                                     setState(() {
-                                      _model.isFriend = true;
-                                      _model.recievedWaiting = false;
-                                      _model.noConnection = false;
+                                      _model.isFriend = false;
+                                      _model.noConnection = true;
                                       _model.sentWaiting = false;
+                                      _model.recievedWaiting = false;
                                     });
-                                  },
-                                  child: Container(
-                                    width: 200.0,
-                                    height: 60.0,
-                                    constraints: BoxConstraints(
-                                      maxHeight: 32.0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFF3124A1),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 4.0,
-                                          color: Color(0x32171717),
-                                          offset: Offset(0.0, 2.0),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(70.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 8.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.check,
-                                            color: Colors.white,
-                                            size: 20.0,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Accept Friend Request',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color: Colors.white,
-                                                        fontSize: 14.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                  }
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  width: 200.0,
+                                  height: 60.0,
+                                  constraints: BoxConstraints(
+                                    maxHeight: 32.0,
                                   ),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Stack(
-                    children: [
-                      SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              height: 543.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    4.0, 10.0, 4.0, 0.0),
-                                child: StreamBuilder<List<PinnedRecord>>(
-                                  stream: queryPinnedRecord(
-                                    parent: widget.userInfo!.reference,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .frenchViolet,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 4.0,
+                                        color: Color(0x32171717),
+                                        offset: Offset(0.0, 2.0),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(70.0),
                                   ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 0.0, 8.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.group_remove,
+                                          color: Colors.white,
+                                          size: 20.0,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 0.0, 0.0, 0.0),
+                                          child: Text(
+                                            'Remove Friend',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Colors.white,
+                                                  fontSize: 14.0,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
                                           ),
                                         ),
-                                      );
-                                    }
-                                    List<PinnedRecord>
-                                        staggeredViewPinnedRecordList =
-                                        snapshot.data!;
-                                    return MasonryGridView.count(
-                                      crossAxisCount: 3,
-                                      crossAxisSpacing: 10.0,
-                                      mainAxisSpacing: 10.0,
-                                      itemCount:
-                                          staggeredViewPinnedRecordList.length,
-                                      itemBuilder:
-                                          (context, staggeredViewIndex) {
-                                        final staggeredViewPinnedRecord =
-                                            staggeredViewPinnedRecordList[
-                                                staggeredViewIndex];
-                                        return FlipCard(
-                                          fill: Fill.fillBack,
-                                          direction: FlipDirection.HORIZONTAL,
-                                          speed: 400,
-                                          front: Container(
-                                            width: 100.0,
-                                            height: 168.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.network(
-                                                staggeredViewPinnedRecord
-                                                    .imagePath,
-                                                width: 300.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          back: Container(
-                                            width: 100.0,
-                                            height: 168.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Text(
-                                                  dateTimeFormat(
-                                                      'yMMMd',
-                                                      staggeredViewPinnedRecord
-                                                          .timeTaken!),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          6.0, 0.0, 6.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                                                      width: double.infinity,
-                                                      height: 120.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          if (_model.sentWaiting)
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Container(
+                                width: 200.0,
+                                height: 60.0,
+                                constraints: BoxConstraints(
+                                  maxHeight: 32.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).amethyst,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4.0,
+                                      color: Color(0x32171717),
+                                      offset: Offset(0.0, 2.0),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(70.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 0.0, 8.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.send,
+                                        color: Colors.white,
+                                        size: 20.0,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Friend Request Sent',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                                color: Colors.white,
+                                                fontSize: 14.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          if (_model.recievedWaiting)
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await currentUserReference!.update({
+                                    'friendsList': FieldValue.arrayUnion(
+                                        [widget.userInfo!.reference]),
+                                    'friendsNum': FieldValue.increment(1),
+                                    'incomingPendingRequests':
+                                        FieldValue.arrayRemove(
+                                            [widget.userInfo!.reference]),
+                                    'incomingPendingRequestsNum':
+                                        FieldValue.increment(-(1)),
+                                  });
+
+                                  await widget.userInfo!.reference.update({
+                                    'friendsList': FieldValue.arrayUnion(
+                                        [currentUserReference]),
+                                    'friendsNum': FieldValue.increment(1),
+                                    'sentPendingRequests':
+                                        FieldValue.arrayRemove(
+                                            [currentUserReference]),
+                                    'sentPendingRequestsNum':
+                                        FieldValue.increment(-(1)),
+                                  });
+                                  setState(() {
+                                    _model.isFriend = true;
+                                    _model.recievedWaiting = false;
+                                    _model.noConnection = false;
+                                    _model.sentWaiting = false;
+                                  });
+                                },
+                                child: Container(
+                                  width: 200.0,
+                                  height: 60.0,
+                                  constraints: BoxConstraints(
+                                    maxHeight: 32.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF3124A1),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 4.0,
+                                        color: Color(0x32171717),
+                                        offset: Offset(0.0, 2.0),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(70.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 0.0, 8.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.check,
+                                          color: Colors.white,
+                                          size: 20.0,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 0.0, 0.0, 0.0),
+                                          child: Text(
+                                            'Accept Friend Request',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Colors.white,
+                                                  fontSize: 14.0,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                Stack(
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 543.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  4.0, 10.0, 4.0, 0.0),
+                              child: StreamBuilder<List<PinnedRecord>>(
+                                stream: queryPinnedRecord(
+                                  parent: widget.userInfo!.reference,
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<PinnedRecord>
+                                      staggeredViewPinnedRecordList =
+                                      snapshot.data!;
+                                  return MasonryGridView.count(
+                                    crossAxisCount: 3,
+                                    crossAxisSpacing: 10.0,
+                                    mainAxisSpacing: 10.0,
+                                    itemCount:
+                                        staggeredViewPinnedRecordList.length,
+                                    itemBuilder: (context, staggeredViewIndex) {
+                                      final staggeredViewPinnedRecord =
+                                          staggeredViewPinnedRecordList[
+                                              staggeredViewIndex];
+                                      return FlipCard(
+                                        fill: Fill.fillBack,
+                                        direction: FlipDirection.HORIZONTAL,
+                                        speed: 400,
+                                        front: Container(
+                                          width: 100.0,
+                                          height: 168.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.network(
+                                              staggeredViewPinnedRecord
+                                                  .imagePath,
+                                              width: 300.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        back: Container(
+                                          width: 100.0,
+                                          height: 168.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text(
+                                                dateTimeFormat(
+                                                    'yMMMd',
+                                                    staggeredViewPinnedRecord
+                                                        .timeTaken!),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        6.0, 0.0, 6.0, 0.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.asset(
+                                                    'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                                                    width: double.infinity,
+                                                    height: 120.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

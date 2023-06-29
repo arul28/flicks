@@ -291,7 +291,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 70.0),
               child: Text(
-                'Licensed by BTA food and entertainment \nBeta Version 0.0.40',
+                'Licensed by BTA food and entertainment \nVersion 0.0.37',
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Readex Pro',
