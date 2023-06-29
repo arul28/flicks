@@ -155,7 +155,16 @@ class _ManageRequestsWidgetState extends State<ManageRequestsWidget>
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('manageFriends');
+                        context.pushNamed(
+                          'manageFriends',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.max,

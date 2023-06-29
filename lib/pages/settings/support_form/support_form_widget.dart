@@ -76,7 +76,7 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 0.0,
         ),
         body: SafeArea(
           top: true,

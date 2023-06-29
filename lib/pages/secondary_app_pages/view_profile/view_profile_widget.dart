@@ -74,6 +74,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).lineColor,
           automaticallyImplyLeading: false,

@@ -160,7 +160,16 @@ class _ManageFriendsWidgetState extends State<ManageFriendsWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('manageRequests');
+                        context.pushNamed(
+                          'manageRequests',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -187,7 +196,16 @@ class _ManageFriendsWidgetState extends State<ManageFriendsWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('managePending');
+                        context.pushNamed(
+                          'managePending',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.max,

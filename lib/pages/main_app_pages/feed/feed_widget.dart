@@ -846,8 +846,6 @@ class _FeedWidgetState extends State<FeedWidget> {
             ),
             Divider(
               thickness: 3.0,
-              indent: 10.0,
-              endIndent: 10.0,
               color: FlutterFlowTheme.of(context).frenchViolet,
             ),
             if (valueOrDefault(currentUserDocument?.friendsNum, 0) == 0)

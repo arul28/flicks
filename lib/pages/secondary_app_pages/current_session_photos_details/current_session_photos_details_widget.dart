@@ -80,7 +80,7 @@ class _CurrentSessionPhotosDetailsWidgetState
           ),
           actions: [],
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 0.0,
         ),
         body: SafeArea(
           top: true,

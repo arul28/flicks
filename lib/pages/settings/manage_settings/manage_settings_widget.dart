@@ -100,7 +100,7 @@ class _ManageSettingsWidgetState extends State<ManageSettingsWidget>
         ),
         actions: [],
         centerTitle: true,
-        elevation: 2.0,
+        elevation: 0.0,
       ),
       body: Container(
         width: 402.0,

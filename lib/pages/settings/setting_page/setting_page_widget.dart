@@ -56,7 +56,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
             size: 30.0,
           ),
           onPressed: () async {
-            context.pop();
+            context.pushNamed('Profile');
           },
         ),
         title: Padding(
@@ -72,7 +72,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
         ),
         actions: [],
         centerTitle: true,
-        elevation: 2.0,
+        elevation: 0.0,
       ),
       body: Container(
         width: 398.0,
@@ -291,7 +291,8 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 70.0),
               child: Text(
-                'Licensed by BTA food and entertainment ',
+                'Licensed by BTA food and entertainment \nVersion 0.0.37',
+                textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Readex Pro',
                       color: FlutterFlowTheme.of(context).primaryBtnText,
