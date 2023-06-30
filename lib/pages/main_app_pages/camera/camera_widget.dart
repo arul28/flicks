@@ -58,8 +58,6 @@ class _CameraWidgetState extends State<CameraWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setState(() {
         FFAppState().makePhoto = false;
-        FFAppState().isProcessing = false;
-        FFAppState().isInitialized = false;
       });
       if (valueOrDefault<bool>(
               currentUserDocument?.firstViewAfterSwitch, false) ==
@@ -414,8 +412,8 @@ class _CameraWidgetState extends State<CameraWidget>
                               ),
                           ],
                         ),
-                        if (!(FFAppState().isInitialized &&
-                            !FFAppState().isProcessing))
+                        if (FFAppState().isInitialized &&
+                            !FFAppState().isProcessing)
                           Align(
                             alignment: AlignmentDirectional(1.0, 1.0),
                             child: Padding(
