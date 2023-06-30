@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'index.dart'; // Imports other custom widgets
+
 import '../../auth/firebase_auth/auth_util.dart';
 import '../../backend/firebase_storage/storage.dart';
 import 'package:camera/camera.dart';
@@ -64,21 +66,28 @@ class _CameraPhotoState extends State<CameraPhoto> {
     if (!mounted) {
       return;
     }
+    FFAppState().isInitialized = true;
     setState(() {});
   }
 
   @override
   void didUpdateWidget(covariant CameraPhoto oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (wasSwitched != FFAppState().switchCam) {
       _initializeController(FFAppState().switchCam ? 1 : 0);
       wasSwitched = FFAppState().switchCam;
     }
-    if (FFAppState().makePhoto &&
+
+    if (FFAppState().isInitialized &&
+        !FFAppState().isProcessing &&
+        FFAppState().makePhoto &&
         controller != null &&
         !_isControllerDisposed) {
+      FFAppState().isProcessing = true;
       controller!.takePicture().then((file) async {
         Uint8List fileAsBytes = await file.readAsBytes();
+
         // Compress the image
         var result = await FlutterImageCompress.compressWithList(
           fileAsBytes,
@@ -86,17 +95,25 @@ class _CameraPhotoState extends State<CameraPhoto> {
           minWidth: 1080,
           quality: 55,
         );
+
         FFAppState().update(() {
           FFAppState().makePhoto = false;
         });
+
         String dir = '/users/' + currentUserUid + '/flicks/';
         final downloadUrl = await uploadData(
             dir + FFAppState().index.toString() + '.jpg', result);
+
         FFAppState().update(() {
           FFAppState().index = FFAppState().index + 1;
           FFAppState().filePath = downloadUrl ?? '';
         });
-      }).catchError((error) {});
+
+        FFAppState().isProcessing = false;
+      }).catchError((error) {
+        print("Error taking picture: $error");
+        FFAppState().isProcessing = false;
+      });
     }
   }
 

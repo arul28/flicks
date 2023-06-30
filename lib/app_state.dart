@@ -85,6 +85,18 @@ class FFAppState extends ChangeNotifier {
   set switchCam(bool _value) {
     _switchCam = _value;
   }
+
+  bool _isProcessing = false;
+  bool get isProcessing => _isProcessing;
+  set isProcessing(bool _value) {
+    _isProcessing = _value;
+  }
+
+  bool _isInitialized = false;
+  bool get isInitialized => _isInitialized;
+  set isInitialized(bool _value) {
+    _isInitialized = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
