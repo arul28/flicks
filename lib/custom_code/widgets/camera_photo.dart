@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'index.dart'; // Imports other custom widgets
-
 import '../../auth/firebase_auth/auth_util.dart';
 import '../../backend/firebase_storage/storage.dart';
 import 'package:camera/camera.dart';
@@ -33,105 +31,75 @@ class CameraPhoto extends StatefulWidget {
 class _CameraPhotoState extends State<CameraPhoto> {
   CameraController? controller;
   late Future<List<CameraDescription>> _cameras;
-  late bool wasSwitched;
-  bool _isControllerDisposed = false;
 
   @override
   void initState() {
     super.initState();
-    _cameras = availableCameras().then((List<CameraDescription> cameras) {
-      if (cameras.isNotEmpty) {
-        _initializeController(FFAppState().switchCam ? 1 : 0);
-      } else {
-        print("No cameras available.");
-      }
-      return cameras;
-    });
-    wasSwitched = FFAppState().switchCam;
-  }
-
-  Future<void> _initializeController(int cameraIndex) async {
-    if (controller != null) {
-      _isControllerDisposed = true;
-      await controller!.dispose();
-      controller = null;
-    }
-    _isControllerDisposed = false;
-    var cameras = await _cameras;
-    controller = CameraController(
-      cameras[cameraIndex],
-      ResolutionPreset.max,
-    );
-    await controller!.initialize();
-    if (!mounted) {
-      return;
-    }
-    FFAppState().isInitialized = true;
-    setState(() {});
+    _cameras = availableCameras();
   }
 
   @override
   void didUpdateWidget(covariant CameraPhoto oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    if (wasSwitched != FFAppState().switchCam) {
-      _initializeController(FFAppState().switchCam ? 1 : 0);
-      wasSwitched = FFAppState().switchCam;
-    }
-
-    if (FFAppState().isInitialized &&
-        !FFAppState().isProcessing &&
-        FFAppState().makePhoto &&
-        controller != null &&
-        !_isControllerDisposed) {
-      FFAppState().isProcessing = true;
+    if (FFAppState().makePhoto) {
       controller!.takePicture().then((file) async {
         Uint8List fileAsBytes = await file.readAsBytes();
-
         // Compress the image
         var result = await FlutterImageCompress.compressWithList(
           fileAsBytes,
           minHeight: 1920,
           minWidth: 1080,
-          quality: 55,
+          quality: 60,
         );
-
         FFAppState().update(() {
           FFAppState().makePhoto = false;
         });
-
         String dir = '/users/' + currentUserUid + '/flicks/';
         final downloadUrl = await uploadData(
             dir + FFAppState().index.toString() + '.jpg', result);
-
         FFAppState().update(() {
           FFAppState().index = FFAppState().index + 1;
           FFAppState().filePath = downloadUrl ?? '';
         });
-
-        FFAppState().isProcessing = false;
-      }).catchError((error) {
-        print("Error taking picture: $error");
-        FFAppState().isProcessing = false;
-      });
+      }).catchError((error) {});
     }
   }
 
   @override
   void dispose() {
-    _isControllerDisposed = true;
     controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return controller != null &&
-            controller!.value.isInitialized &&
-            !_isControllerDisposed
-        ? MaterialApp(
-            home: CameraPreview(controller!),
-          )
-        : Center(child: CircularProgressIndicator());
+    return FutureBuilder<List<CameraDescription>>(
+      future: _cameras,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+            if (controller == null) {
+              controller =
+                  CameraController(snapshot.data![0], ResolutionPreset.max);
+              controller!.initialize().then((_) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {});
+              });
+            }
+            return controller!.value.isInitialized
+                ? MaterialApp(
+                    home: CameraPreview(controller!),
+                  )
+                : Container();
+          } else {
+            return Center(child: Text('No cameras available.'));
+          }
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
   }
 }

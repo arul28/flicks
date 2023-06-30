@@ -297,8 +297,7 @@ class _CameraWidgetState extends State<CameraWidget>
                               ),
                             ),
                           ),
-                        if (FFAppState().isInitialized &&
-                            !FFAppState().isProcessing)
+                        if (_model.takingImage ?? true)
                           Align(
                             alignment: AlignmentDirectional(0.0, 1.0),
                             child: Builder(
@@ -412,38 +411,17 @@ class _CameraWidgetState extends State<CameraWidget>
                               ),
                           ],
                         ),
-                        if (FFAppState().isInitialized &&
-                            !FFAppState().isProcessing)
+                        if (!_model.takingImage!)
                           Align(
                             alignment: AlignmentDirectional(1.0, 1.0),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 20.0, 20.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  setState(() {
-                                    FFAppState().switchCam =
-                                        !FFAppState().switchCam ? true : false;
-                                  });
-                                  if (animationsMap[
-                                          'iconOnActionTriggerAnimation'] !=
-                                      null) {
-                                    await animationsMap[
-                                            'iconOnActionTriggerAnimation']!
-                                        .controller
-                                        .forward(from: 0.0);
-                                  }
-                                },
-                                child: Icon(
-                                  Icons.flip_camera_android_outlined,
-                                  color:
-                                      FlutterFlowTheme.of(context).frenchViolet,
-                                  size: 50.0,
-                                ),
+                              child: Icon(
+                                Icons.flip_camera_android_outlined,
+                                color:
+                                    FlutterFlowTheme.of(context).frenchViolet,
+                                size: 50.0,
                               ).animateOnActionTrigger(
                                 animationsMap['iconOnActionTriggerAnimation']!,
                               ),
