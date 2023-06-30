@@ -1,3 +1,15 @@
 # flicks
 
-current main version includes full email authentication (still need to add google sign in). Loggin in and out works and users can edit and view their profile. Friending system also works. 
+current build: beta v0.1.1
+
+steps to run:
+
+in vs code run flutter pub get
+
+run pod install
+
+in xcode add microphone usage and add photo library additions to info.plist
+
+
+
+
