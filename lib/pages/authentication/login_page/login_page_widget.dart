@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login_page_model.dart';
@@ -509,16 +510,21 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                           Align(
                                             alignment: AlignmentDirectional(
                                                 -0.83, 0.0),
-                                            child: Container(
-                                              width: 22.0,
-                                              height: 22.0,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Image.network(
-                                                'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
-                                                fit: BoxFit.contain,
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      10.0, 0.0, 0.0, 0.0),
+                                              child: Container(
+                                                width: 22.0,
+                                                height: 22.0,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.network(
+                                                  'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
+                                                  fit: BoxFit.contain,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -528,6 +534,89 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                   ),
                                 ],
                               ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Container(
+                                    width: 230.0,
+                                    height: 44.0,
+                                    child: Stack(
+                                      children: [
+                                        isAndroid
+                                            ? Container()
+                                            : FFButtonWidget(
+                                                onPressed: () async {
+                                                  GoRouter.of(context)
+                                                      .prepareAuthEvent();
+                                                  final user = await authManager
+                                                      .signInWithApple(context);
+                                                  if (user == null) {
+                                                    return;
+                                                  }
+                                                  HapticFeedback.lightImpact();
+
+                                                  await currentUserReference!
+                                                      .update(
+                                                          createUsersRecordData(
+                                                    emailVerified: true,
+                                                  ));
+                                                  if (valueOrDefault<bool>(
+                                                      currentUserDocument
+                                                          ?.profileCreated,
+                                                      false)) {
+                                                    context.pushNamedAuth(
+                                                        'Profile',
+                                                        context.mounted);
+                                                  } else {
+                                                    context.pushNamedAuth(
+                                                        'CreateProfile',
+                                                        context.mounted);
+                                                  }
+                                                },
+                                                text: 'Sign in with Apple',
+                                                icon: FaIcon(
+                                                  FontAwesomeIcons.apple,
+                                                  size: 20.0,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  width: 230.0,
+                                                  height: 44.0,
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 0.0),
+                                                  iconPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              10.0, 1.0),
+                                                  color: Colors.white,
+                                                  textStyle:
+                                                      GoogleFonts.getFont(
+                                                    'Roboto',
+                                                    color: Colors.black,
+                                                    fontSize: 17.0,
+                                                  ),
+                                                  elevation: 4.0,
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 0.0,
+                                                  ),
+                                                ),
+                                              ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

@@ -76,142 +76,146 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
       ),
       child: Stack(
         children: [
-          StreamBuilder<List<OldSessionPicsRecord>>(
-            stream: queryOldSessionPicsRecord(
-              parent: widget.parameter3,
-            ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      color: FlutterFlowTheme.of(context).primary,
-                    ),
-                  ),
-                );
-              }
-              List<OldSessionPicsRecord> pageViewOldSessionPicsRecordList =
-                  snapshot.data!;
-              return Container(
-                width: double.infinity,
-                height: 500.0,
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
-                      child: PageView.builder(
-                        controller: _model.pageViewController ??=
-                            PageController(
-                                initialPage: min(
-                                    0,
-                                    pageViewOldSessionPicsRecordList.length -
-                                        1)),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: pageViewOldSessionPicsRecordList.length,
-                        itemBuilder: (context, pageViewIndex) {
-                          final pageViewOldSessionPicsRecord =
-                              pageViewOldSessionPicsRecordList[pageViewIndex];
-                          return Stack(
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 200.0,
-                                    height: 350.0,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed(
-                                          'imageViewer',
-                                          queryParameters: {
-                                            'userRef': serializeParam(
-                                              pageViewOldSessionPicsRecord
-                                                  .parentReference,
-                                              ParamType.DocumentReference,
-                                            ),
-                                            'username': serializeParam(
-                                              widget.parameter2,
-                                              ParamType.String,
-                                            ),
-                                            'profilePic': serializeParam(
-                                              widget.parameter1,
-                                              ParamType.String,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                        child: Image.network(
-                                          pageViewOldSessionPicsRecord
-                                              .imagePath,
-                                          width: 300.0,
-                                          height: 200.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          );
-                        },
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
+            child: StreamBuilder<List<OldSessionPicsRecord>>(
+              stream: queryOldSessionPicsRecord(
+                parent: widget.parameter3,
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: CircularProgressIndicator(
+                        color: FlutterFlowTheme.of(context).primary,
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 1.0),
-                      child: Padding(
+                  );
+                }
+                List<OldSessionPicsRecord> pageViewOldSessionPicsRecordList =
+                    snapshot.data!;
+                return Container(
+                  width: double.infinity,
+                  height: 500.0,
+                  child: Stack(
+                    children: [
+                      Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: smooth_page_indicator.SmoothPageIndicator(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
+                        child: PageView.builder(
                           controller: _model.pageViewController ??=
                               PageController(
                                   initialPage: min(
                                       0,
                                       pageViewOldSessionPicsRecordList.length -
                                           1)),
-                          count: pageViewOldSessionPicsRecordList.length,
-                          axisDirection: Axis.horizontal,
-                          onDotClicked: (i) async {
-                            await _model.pageViewController!.animateToPage(
-                              i,
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.ease,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: pageViewOldSessionPicsRecordList.length,
+                          itemBuilder: (context, pageViewIndex) {
+                            final pageViewOldSessionPicsRecord =
+                                pageViewOldSessionPicsRecordList[pageViewIndex];
+                            return Stack(
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 163.0,
+                                      height: 350.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            'imageViewer',
+                                            queryParameters: {
+                                              'userRef': serializeParam(
+                                                pageViewOldSessionPicsRecord
+                                                    .parentReference,
+                                                ParamType.DocumentReference,
+                                              ),
+                                              'username': serializeParam(
+                                                widget.parameter2,
+                                                ParamType.String,
+                                              ),
+                                              'profilePic': serializeParam(
+                                                widget.parameter1,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                          child: Image.network(
+                                            pageViewOldSessionPicsRecord
+                                                .imagePath,
+                                            width: 269.0,
+                                            height: 200.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             );
                           },
-                          effect: smooth_page_indicator.ExpandingDotsEffect(
-                            expansionFactor: 3.0,
-                            spacing: 8.0,
-                            radius: 16.0,
-                            dotWidth: 6.0,
-                            dotHeight: 6.0,
-                            dotColor: FlutterFlowTheme.of(context).accent1,
-                            activeDotColor:
-                                FlutterFlowTheme.of(context).frenchViolet,
-                            paintStyle: PaintingStyle.fill,
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 1.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 16.0),
+                          child: smooth_page_indicator.SmoothPageIndicator(
+                            controller: _model.pageViewController ??=
+                                PageController(
+                                    initialPage: min(
+                                        0,
+                                        pageViewOldSessionPicsRecordList
+                                                .length -
+                                            1)),
+                            count: pageViewOldSessionPicsRecordList.length,
+                            axisDirection: Axis.horizontal,
+                            onDotClicked: (i) async {
+                              await _model.pageViewController!.animateToPage(
+                                i,
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.ease,
+                              );
+                            },
+                            effect: smooth_page_indicator.ExpandingDotsEffect(
+                              expansionFactor: 3.0,
+                              spacing: 8.0,
+                              radius: 16.0,
+                              dotWidth: 6.0,
+                              dotHeight: 6.0,
+                              dotColor: FlutterFlowTheme.of(context).accent1,
+                              activeDotColor:
+                                  FlutterFlowTheme.of(context).frenchViolet,
+                              paintStyle: PaintingStyle.fill,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
@@ -242,8 +246,8 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                       );
                     },
                     child: Container(
-                      width: 45.0,
-                      height: 45.0,
+                      width: 48.0,
+                      height: 48.0,
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -264,7 +268,7 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).bodySmall.override(
                             fontFamily: 'Readex Pro',
-                            fontSize: 9.0,
+                            fontSize: 12.0,
                             fontWeight: FontWeight.w200,
                           ),
                     ),

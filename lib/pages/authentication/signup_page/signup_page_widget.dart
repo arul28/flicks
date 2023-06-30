@@ -591,35 +591,52 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
-                              },
-                              text: 'Sign in with Apple',
-                              icon: FaIcon(
-                                FontAwesomeIcons.apple,
-                                size: 20.0,
-                              ),
-                              options: FFButtonOptions(
-                                width: 230.0,
-                                height: 44.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 10.0, 1.0),
-                                color: Colors.white,
-                                textStyle: GoogleFonts.getFont(
-                                  'Roboto',
-                                  color: Colors.black,
-                                  fontSize: 17.0,
-                                ),
-                                elevation: 4.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 0.0,
-                                ),
-                              ),
-                            ),
+                            isAndroid
+                                ? Container()
+                                : FFButtonWidget(
+                                    onPressed: () async {
+                                      GoRouter.of(context).prepareAuthEvent();
+                                      final user = await authManager
+                                          .signInWithApple(context);
+                                      if (user == null) {
+                                        return;
+                                      }
+
+                                      await currentUserReference!
+                                          .update(createUsersRecordData(
+                                        emailVerified: true,
+                                        profileCreated: false,
+                                      ));
+
+                                      context.pushNamedAuth(
+                                          'CreateProfile', context.mounted);
+                                    },
+                                    text: 'Sign up with Apple',
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.apple,
+                                      size: 20.0,
+                                    ),
+                                    options: FFButtonOptions(
+                                      width: 230.0,
+                                      height: 44.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 10.0, 1.0),
+                                      color: Colors.white,
+                                      textStyle: GoogleFonts.getFont(
+                                        'Roboto',
+                                        color: Colors.black,
+                                        fontSize: 17.0,
+                                      ),
+                                      elevation: 4.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 0.0,
+                                      ),
+                                    ),
+                                  ),
                           ],
                         ),
                         Padding(
