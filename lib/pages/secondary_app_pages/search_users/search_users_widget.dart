@@ -87,7 +87,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).frenchViolet,
             body: Center(
               child: SizedBox(
                 width: 50.0,
@@ -104,7 +104,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
           onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).frenchViolet,
             appBar: AppBar(
               backgroundColor: FlutterFlowTheme.of(context).primary,
               automaticallyImplyLeading: false,
@@ -131,13 +131,13 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
               ),
               actions: [],
               centerTitle: true,
-              elevation: 2.0,
+              elevation: 0.0,
             ),
             body: SafeArea(
               top: true,
               child: Container(
-                width: 378.0,
-                height: 757.0,
+                width: 397.0,
+                height: 800.0,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
