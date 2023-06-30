@@ -297,7 +297,7 @@ class _CameraWidgetState extends State<CameraWidget>
                               ),
                             ),
                           ),
-                        if (_model.takingImage ?? true)
+                        if (!_model.takingImage!)
                           Align(
                             alignment: AlignmentDirectional(0.0, 1.0),
                             child: Builder(
