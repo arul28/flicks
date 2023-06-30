@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'index.dart'; // Imports other custom widgets
+
 import '../../auth/firebase_auth/auth_util.dart';
 import '../../backend/firebase_storage/storage.dart';
 import 'package:camera/camera.dart';
@@ -30,12 +32,39 @@ class CameraPhoto extends StatefulWidget {
 
 class _CameraPhotoState extends State<CameraPhoto> {
   CameraController? controller;
-  late Future<List<CameraDescription>> _cameras;
+  late Future<void> _initializeCameras;
+  List<CameraDescription> _cameraList = [];
+  int selectedCameraIndex =
+      0; // Added to keep track of which camera is selected
 
   @override
   void initState() {
     super.initState();
-    _cameras = availableCameras();
+    _initializeCameras = _getAvailableCameras();
+  }
+
+  Future<void> _getAvailableCameras() async {
+    _cameraList = await availableCameras();
+    _initializeController();
+  }
+
+  void _initializeController() {
+    controller = CameraController(
+        _cameraList[selectedCameraIndex], ResolutionPreset.max);
+    controller!.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
+  }
+
+  // Function to switch camera
+  void onSwitchCamera() {
+    selectedCameraIndex = selectedCameraIndex < _cameraList.length - 1
+        ? selectedCameraIndex + 1
+        : 0;
+    _initializeController();
   }
 
   @override
@@ -73,24 +102,26 @@ class _CameraPhotoState extends State<CameraPhoto> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<CameraDescription>>(
-      future: _cameras,
+    return FutureBuilder<void>(
+      future: _initializeCameras,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-            if (controller == null) {
-              controller =
-                  CameraController(snapshot.data![0], ResolutionPreset.max);
-              controller!.initialize().then((_) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {});
-              });
-            }
+          if (_cameraList.isNotEmpty) {
             return controller!.value.isInitialized
-                ? MaterialApp(
-                    home: CameraPreview(controller!),
+                ? Stack(
+                    children: <Widget>[
+                      MaterialApp(
+                        home: CameraPreview(controller!),
+                      ),
+                      Positioned(
+                        bottom: 20,
+                        right: 20,
+                        child: FloatingActionButton(
+                          child: Icon(Icons.flip_camera_android),
+                          onPressed: onSwitchCamera,
+                        ),
+                      ),
+                    ],
                   )
                 : Container();
           } else {

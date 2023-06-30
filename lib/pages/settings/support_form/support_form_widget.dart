@@ -278,6 +278,8 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
                                   );
                                 },
                               ).then((value) => setState(() {}));
+
+                              context.pushNamed('settingPage');
                             },
                             text: 'Submit Ticket',
                             icon: Icon(

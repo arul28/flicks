@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
 import '/components/pics_limit_hit/pics_limit_hit_widget.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -14,7 +13,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'camera_model.dart';
@@ -27,27 +25,10 @@ class CameraWidget extends StatefulWidget {
   _CameraWidgetState createState() => _CameraWidgetState();
 }
 
-class _CameraWidgetState extends State<CameraWidget>
-    with TickerProviderStateMixin {
+class _CameraWidgetState extends State<CameraWidget> {
   late CameraModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = {
-    'iconOnActionTriggerAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: true,
-      effects: [
-        RotateEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 880.ms,
-          begin: 0.0,
-          end: 2.0,
-        ),
-      ],
-    ),
-  };
 
   @override
   void initState() {
@@ -86,13 +67,6 @@ class _CameraWidgetState extends State<CameraWidget>
         ).then((value) => setState(() {}));
       }
     });
-
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
   }
 
   @override
@@ -347,7 +321,7 @@ class _CameraWidgetState extends State<CameraWidget>
                                         _model.takingImage = true;
                                       });
                                       await Future.delayed(
-                                          const Duration(milliseconds: 4000));
+                                          const Duration(milliseconds: 3000));
 
                                       await CurrentSessionPicsRecord.createDoc(
                                               currentUserReference!)
@@ -411,22 +385,6 @@ class _CameraWidgetState extends State<CameraWidget>
                               ),
                           ],
                         ),
-                        if (!_model.takingImage!)
-                          Align(
-                            alignment: AlignmentDirectional(1.0, 1.0),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 20.0, 20.0),
-                              child: Icon(
-                                Icons.flip_camera_android_outlined,
-                                color:
-                                    FlutterFlowTheme.of(context).frenchViolet,
-                                size: 50.0,
-                              ).animateOnActionTrigger(
-                                animationsMap['iconOnActionTriggerAnimation']!,
-                              ),
-                            ),
-                          ),
                       ],
                     );
                   },
