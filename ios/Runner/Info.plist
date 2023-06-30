@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.346801684314-k1imp091p1bhs3k075f1l82vff5ha4t2</string>
+                <string>com.googleusercontent.apps.346801684314-as9be97870b9ia0rr6s4qcpc3bgs63n7</string>
                 
             </array>
         </dict>
@@ -58,6 +58,11 @@
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>In order to upload data, this app requires permission to access the photo library.</string>
 
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
 
 
 	<key>UILaunchStoryboardName</key>

@@ -22,7 +22,7 @@
           }
         },
         {
-          "client_id": "346801684314-td1di1n2urojpalvs97qdm9gpj0qca3p.apps.googleusercontent.com",
+          "client_id": "346801684314-94rgaeigb7jtij9kjd0bj99a8vhvo1go.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,14 +35,58 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "346801684314-td1di1n2urojpalvs97qdm9gpj0qca3p.apps.googleusercontent.com",
+              "client_id": "346801684314-94rgaeigb7jtij9kjd0bj99a8vhvo1go.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "346801684314-fr7m9jnoho1e3cd0ln6derrajknvm6ti.apps.googleusercontent.com",
+              "client_id": "346801684314-as9be97870b9ia0rr6s4qcpc3bgs63n7.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.mycompany.flicks"
+                "bundle_id": "com.btafae.flicks"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346801684314:android:0e33f43ef4c1087d123d63",
+        "android_client_info": {
+          "package_name": "com.btafae.flicks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346801684314-lb4jbdi3ja1nfi5o7v2m3pe4glm4dljp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.btafae.flicks",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "346801684314-94rgaeigb7jtij9kjd0bj99a8vhvo1go.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfUccv0111UrROSsKt2mL89QylZjZ21Tk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346801684314-94rgaeigb7jtij9kjd0bj99a8vhvo1go.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "346801684314-as9be97870b9ia0rr6s4qcpc3bgs63n7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.btafae.flicks"
               }
             }
           ]
@@ -74,7 +118,7 @@
           }
         },
         {
-          "client_id": "346801684314-td1di1n2urojpalvs97qdm9gpj0qca3p.apps.googleusercontent.com",
+          "client_id": "346801684314-94rgaeigb7jtij9kjd0bj99a8vhvo1go.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -87,14 +131,14 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "346801684314-td1di1n2urojpalvs97qdm9gpj0qca3p.apps.googleusercontent.com",
+              "client_id": "346801684314-94rgaeigb7jtij9kjd0bj99a8vhvo1go.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "346801684314-fr7m9jnoho1e3cd0ln6derrajknvm6ti.apps.googleusercontent.com",
+              "client_id": "346801684314-as9be97870b9ia0rr6s4qcpc3bgs63n7.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.mycompany.flicks"
+                "bundle_id": "com.btafae.flicks"
               }
             }
           ]
