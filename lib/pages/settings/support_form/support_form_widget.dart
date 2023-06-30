@@ -126,7 +126,6 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
                             children: [
                               TextFormField(
                                 controller: _model.subjectFieldController,
-                                autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Subject',
@@ -177,7 +176,6 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
                               ),
                               TextFormField(
                                 controller: _model.decriptionFieldController,
-                                autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelStyle:
@@ -270,8 +268,8 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
                                       onTap: () => FocusScope.of(context)
                                           .requestFocus(_model.unfocusNode),
                                       child: Container(
-                                        height: 120.0,
-                                        width: 300.0,
+                                        height: 110.0,
+                                        width: 320.0,
                                         child: ContactFormWidget(),
                                       ),
                                     ),

@@ -515,7 +515,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                                         .requestFocus(
                                                             _model.unfocusNode),
                                                 child: Container(
-                                                  height: 115.0,
+                                                  height: 120.0,
                                                   width: 320.0,
                                                   child: EmailResetFailWidget(),
                                                 ),

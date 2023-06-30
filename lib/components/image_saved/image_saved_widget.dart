@@ -4,18 +4,18 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'contact_form_model.dart';
-export 'contact_form_model.dart';
+import 'image_saved_model.dart';
+export 'image_saved_model.dart';
 
-class ContactFormWidget extends StatefulWidget {
-  const ContactFormWidget({Key? key}) : super(key: key);
+class ImageSavedWidget extends StatefulWidget {
+  const ImageSavedWidget({Key? key}) : super(key: key);
 
   @override
-  _ContactFormWidgetState createState() => _ContactFormWidgetState();
+  _ImageSavedWidgetState createState() => _ImageSavedWidgetState();
 }
 
-class _ContactFormWidgetState extends State<ContactFormWidget> {
-  late ContactFormModel _model;
+class _ImageSavedWidgetState extends State<ImageSavedWidget> {
+  late ImageSavedModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -26,7 +26,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ContactFormModel());
+    _model = createModel(context, () => ImageSavedModel());
   }
 
   @override
@@ -40,17 +40,15 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return
-        // skv
-        Material(
+    return Material(
       color: Colors.transparent,
       elevation: 1.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 320.0,
-        height: 120.0,
+        width: 300.0,
+        height: 100.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.0),
@@ -66,15 +64,20 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Text(
-                        'Thanks for reaching out! We\'\'ll be in touch shortly',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Lexend Deca',
-                              color: Color(0xFF57636C),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.normal,
-                            ),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                        child: Text(
+                          'Image saved to Camera Roll.',
+                          textAlign: TextAlign.center,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Color(0xFF57636C),
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                        ),
                       ),
                     ),
                   ],
@@ -86,10 +89,10 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 110.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(90.0, 0.0, 110.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.safePop();
+                        Navigator.pop(context);
                       },
                       text: 'Ok',
                       options: FFButtonOptions(

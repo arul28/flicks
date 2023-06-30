@@ -49,8 +49,8 @@ class _FirstViewAfterSwitchWidgetState
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 400.0,
-        height: 150.0,
+        width: 320.0,
+        height: 120.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).amethyst,
           borderRadius: BorderRadius.circular(25.0),
@@ -78,6 +78,7 @@ class _FirstViewAfterSwitchWidgetState
                                 fontFamily: 'Outfit',
                                 color:
                                     FlutterFlowTheme.of(context).primaryBtnText,
+                                fontSize: 18.0,
                               ),
                         ),
                       ),

@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 
 import 'index.dart'; // Imports other custom widgets
 
+import 'index.dart'; // Imports other custom widgets
+
 import '../../auth/firebase_auth/auth_util.dart';
 import '../../backend/firebase_storage/storage.dart';
 import 'package:camera/camera.dart';
@@ -61,9 +63,7 @@ class _CameraPhotoState extends State<CameraPhoto> {
 
   // Function to switch camera
   void onSwitchCamera() {
-    selectedCameraIndex = selectedCameraIndex < _cameraList.length - 1
-        ? selectedCameraIndex + 1
-        : 0;
+    selectedCameraIndex = selectedCameraIndex == 0 ? 1 : 0;
     _initializeController();
   }
 
@@ -78,7 +78,7 @@ class _CameraPhotoState extends State<CameraPhoto> {
           fileAsBytes,
           minHeight: 1920,
           minWidth: 1080,
-          quality: 60,
+          quality: 25,
         );
         FFAppState().update(() {
           FFAppState().makePhoto = false;
@@ -100,7 +100,6 @@ class _CameraPhotoState extends State<CameraPhoto> {
     super.dispose();
   }
 
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
       future: _initializeCameras,
@@ -117,7 +116,10 @@ class _CameraPhotoState extends State<CameraPhoto> {
                         bottom: 20,
                         right: 20,
                         child: FloatingActionButton(
-                          child: Icon(Icons.flip_camera_android),
+                          backgroundColor: const Color.fromARGB(
+                              255, 113, 16, 131), // Updated to purple
+                          child: Icon(Icons
+                              .flip_camera_android_outlined), // Updated to switch_camera icon
                           onPressed: onSwitchCamera,
                         ),
                       ),

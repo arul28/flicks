@@ -73,7 +73,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               child: GestureDetector(
                 onTap: () =>
                     FocusScope.of(context).requestFocus(_model.unfocusNode),
-                child: FirstViewAfterSwitchWidget(),
+                child: Container(
+                  height: 120.0,
+                  width: 320.0,
+                  child: FirstViewAfterSwitchWidget(),
+                ),
               ),
             );
           },
@@ -325,17 +329,36 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   Align(
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                     child: AuthUserStreamWidget(
-                                      builder: (context) => ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(50.0),
-                                        child: Image.network(
-                                          valueOrDefault<String>(
-                                            currentUserPhoto,
-                                            'https://www.themoviedb.org/t/p/original/xMGWSdT0mcqzentuImFmVhkEgAQ.jpg',
+                                      builder: (context) => InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onLongPress: () async {
+                                          context.pushNamed(
+                                            'EditProfile',
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                              ),
+                                            },
+                                          );
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50.0),
+                                          child: Image.network(
+                                            valueOrDefault<String>(
+                                              currentUserPhoto,
+                                              'https://www.themoviedb.org/t/p/original/xMGWSdT0mcqzentuImFmVhkEgAQ.jpg',
+                                            ),
+                                            width: 100.0,
+                                            height: 100.0,
+                                            fit: BoxFit.cover,
                                           ),
-                                          width: 100.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),

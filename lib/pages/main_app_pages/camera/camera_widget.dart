@@ -60,7 +60,11 @@ class _CameraWidgetState extends State<CameraWidget> {
               child: GestureDetector(
                 onTap: () =>
                     FocusScope.of(context).requestFocus(_model.unfocusNode),
-                child: FirstViewAfterSwitchWidget(),
+                child: Container(
+                  height: 120.0,
+                  width: 320.0,
+                  child: FirstViewAfterSwitchWidget(),
+                ),
               ),
             );
           },

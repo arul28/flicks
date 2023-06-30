@@ -54,7 +54,11 @@ class _FeedWidgetState extends State<FeedWidget> {
           builder: (dialogContext) {
             return Material(
               color: Colors.transparent,
-              child: FirstViewAfterSwitchWidget(),
+              child: Container(
+                height: 120.0,
+                width: 320.0,
+                child: FirstViewAfterSwitchWidget(),
+              ),
             );
           },
         ).then((value) => setState(() {}));

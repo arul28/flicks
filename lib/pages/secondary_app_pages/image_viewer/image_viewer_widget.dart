@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'image_viewer_model.dart';
 export 'image_viewer_model.dart';
@@ -208,15 +210,52 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                               direction:
                                                   FlipDirection.HORIZONTAL,
                                               speed: 400,
-                                              front: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(16.0),
-                                                child: Image.network(
-                                                  pageViewOldSessionPicsRecord
-                                                      .imagePath,
-                                                  width: 300.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
+                                              front: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await Navigator.push(
+                                                    context,
+                                                    PageTransition(
+                                                      type: PageTransitionType
+                                                          .fade,
+                                                      child:
+                                                          FlutterFlowExpandedImageView(
+                                                        image: Image.network(
+                                                          pageViewOldSessionPicsRecord
+                                                              .imagePath,
+                                                          fit: BoxFit.contain,
+                                                        ),
+                                                        allowRotation: true,
+                                                        tag:
+                                                            pageViewOldSessionPicsRecord
+                                                                .imagePath,
+                                                        useHeroAnimation: true,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Hero(
+                                                  tag:
+                                                      pageViewOldSessionPicsRecord
+                                                          .imagePath,
+                                                  transitionOnUserGestures:
+                                                      true,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16.0),
+                                                    child: Image.network(
+                                                      pageViewOldSessionPicsRecord
+                                                          .imagePath,
+                                                      width: 300.0,
+                                                      height: 200.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                               back: Column(
@@ -318,209 +357,180 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                       ),
                     ],
                   ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        FutureBuilder<int>(
+                          future: queryUsersRecordCount(
+                            queryBuilder: (usersRecord) => usersRecord
+                                .where('liked', arrayContains: widget.userRef),
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
+                              );
+                            }
+                            int richTextCount = snapshot.data!;
+                            return RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: valueOrDefault<String>(
+                                      richTextCount.toString(),
+                                      '0',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineLarge
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .frenchViolet,
+                                          fontSize: 40.0,
+                                        ),
+                                  ),
+                                  TextSpan(
+                                    text: ' likes',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                    ),
+                                  )
+                                ],
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              ),
+                            );
+                          },
+                        ),
+                        ToggleIcon(
+                          onPressed: () async {
+                            setState(() => _model.liked = !_model.liked!);
+                            if (_model.liked!) {
+                              await currentUserReference!.update({
+                                'liked':
+                                    FieldValue.arrayUnion([widget.userRef]),
+                              });
+                            } else {
+                              await currentUserReference!.update({
+                                'liked':
+                                    FieldValue.arrayRemove([widget.userRef]),
+                              });
+                            }
+                          },
+                          value: _model.liked!,
+                          onIcon: Icon(
+                            Icons.camera_sharp,
+                            color: FlutterFlowTheme.of(context).frenchViolet,
+                            size: 34.0,
+                          ),
+                          offIcon: Icon(
+                            Icons.camera_outlined,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 34.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Container(
                     width: double.infinity,
-                    height: 143.0,
+                    height: 100.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 0.0, 10.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                FutureBuilder<int>(
-                                  future: queryUsersRecordCount(
-                                    queryBuilder: (usersRecord) =>
-                                        usersRecord.where('liked',
-                                            arrayContains: widget.userRef),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                      child: StreamBuilder<List<UsersRecord>>(
+                        stream: queryUsersRecord(
+                          queryBuilder: (usersRecord) => usersRecord
+                              .where('liked', arrayContains: widget.userRef),
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                ),
+                              ),
+                            );
+                          }
+                          List<UsersRecord> listViewUsersRecordList =
+                              snapshot.data!;
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: listViewUsersRecordList.length,
+                            itemBuilder: (context, listViewIndex) {
+                              final listViewUsersRecord =
+                                  listViewUsersRecordList[listViewIndex];
+                              return Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'viewProfile',
+                                          queryParameters: {
+                                            'userInfo': serializeParam(
+                                              listViewUsersRecord,
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'userInfo': listViewUsersRecord,
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        width: 60.0,
+                                        height: 60.0,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
                                         ),
-                                      );
-                                    }
-                                    int richTextCount = snapshot.data!;
-                                    return RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: valueOrDefault<String>(
-                                              richTextCount.toString(),
-                                              '0',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineLarge
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .frenchViolet,
-                                                  fontSize: 40.0,
-                                                ),
-                                          ),
-                                          TextSpan(
-                                            text: ' likes',
-                                            style: TextStyle(
-                                              fontSize: 16.0,
-                                            ),
-                                          )
-                                        ],
+                                        child: Image.network(
+                                          listViewUsersRecord.photoUrl,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        listViewUsersRecord.displayName,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
-                                    );
-                                  },
+                                    ),
+                                  ],
                                 ),
-                                ToggleIcon(
-                                  onPressed: () async {
-                                    setState(
-                                        () => _model.liked = !_model.liked!);
-                                    if (_model.liked!) {
-                                      await currentUserReference!.update({
-                                        'liked': FieldValue.arrayUnion(
-                                            [widget.userRef]),
-                                      });
-                                    } else {
-                                      await currentUserReference!.update({
-                                        'liked': FieldValue.arrayRemove(
-                                            [widget.userRef]),
-                                      });
-                                    }
-                                  },
-                                  value: _model.liked!,
-                                  onIcon: Icon(
-                                    Icons.camera_sharp,
-                                    color: FlutterFlowTheme.of(context)
-                                        .frenchViolet,
-                                    size: 34.0,
-                                  ),
-                                  offIcon: Icon(
-                                    Icons.camera_outlined,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 34.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 0.0),
-                              child: StreamBuilder<List<UsersRecord>>(
-                                stream: queryUsersRecord(
-                                  queryBuilder: (usersRecord) =>
-                                      usersRecord.where('liked',
-                                          arrayContains: widget.userRef),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<UsersRecord> listViewUsersRecordList =
-                                      snapshot.data!;
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: listViewUsersRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewUsersRecord =
-                                          listViewUsersRecordList[
-                                              listViewIndex];
-                                      return Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 10.0, 0.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed(
-                                                  'viewProfile',
-                                                  queryParameters: {
-                                                    'userInfo': serializeParam(
-                                                      listViewUsersRecord,
-                                                      ParamType.Document,
-                                                    ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'userInfo':
-                                                        listViewUsersRecord,
-                                                  },
-                                                );
-                                              },
-                                              child: Container(
-                                                width: 60.0,
-                                                height: 60.0,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  listViewUsersRecord.photoUrl,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                listViewUsersRecord.displayName,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
+                              );
+                            },
+                          );
+                        },
                       ),
                     ),
                   ),

@@ -157,18 +157,18 @@ class _NavBarPageState extends State<NavBarPage> {
           GButton(
             icon: Icons.dynamic_feed_outlined,
             text: '',
-            iconSize: 40.0,
+            iconSize: 50.0,
           ),
           GButton(
             icon: FFIcons.kremovalAiTmp649156ac0c6faJttv80,
             text: '',
-            iconSize: 40.0,
+            iconSize: 50.0,
             backgroundColor: FlutterFlowTheme.of(context).noColor,
           ),
           GButton(
             icon: Icons.person_outlined,
             text: '',
-            iconSize: 40.0,
+            iconSize: 50.0,
           )
         ],
       ),
