@@ -10,15 +10,37 @@ export '/pages/authentication/create_profile/create_profile_widget.dart'
 export '/pages/main_app_pages/profile/profile_widget.dart' show ProfileWidget;
 export '/pages/main_app_pages/feed/feed_widget.dart' show FeedWidget;
 export '/pages/main_app_pages/camera/camera_widget.dart' show CameraWidget;
-export '/pages/secondary_app_pages/setting_page/setting_page_widget.dart'
+export '/pages/settings/setting_page/setting_page_widget.dart'
     show SettingPageWidget;
 export '/pages/authentication/verification/verification_widget.dart'
     show VerificationWidget;
-export '/pages/secondary_app_pages/edit_profile/edit_profile_widget.dart'
+export '/pages/settings/edit_profile/edit_profile_widget.dart'
     show EditProfileWidget;
-export '/pages/secondary_app_pages/manage_friends_option/manage_friends_option_widget.dart'
+export '/pages/friends/manage_friends_option/manage_friends_option_widget.dart'
     show ManageFriendsOptionWidget;
 export '/pages/secondary_app_pages/search_users/search_users_widget.dart'
     show SearchUsersWidget;
 export '/pages/secondary_app_pages/view_profile/view_profile_widget.dart'
     show ViewProfileWidget;
+export '/pages/settings/support_form/support_form_widget.dart'
+    show SupportFormWidget;
+export '/pages/authentication/forgot_password/forgot_password_widget.dart'
+    show ForgotPasswordWidget;
+export '/pages/settings/reset_password/reset_password_widget.dart'
+    show ResetPasswordWidget;
+export '/pages/settings/manage_settings/manage_settings_widget.dart'
+    show ManageSettingsWidget;
+export '/pages/secondary_app_pages/image_viewer/image_viewer_widget.dart'
+    show ImageViewerWidget;
+export '/pages/secondary_app_pages/current_session_photos_details/current_session_photos_details_widget.dart'
+    show CurrentSessionPhotosDetailsWidget;
+export '/pages/secondary_app_pages/view_all_flicks/view_all_flicks_widget.dart'
+    show ViewAllFlicksWidget;
+export '/pages/secondary_app_pages/users_friends/users_friends_widget.dart'
+    show UsersFriendsWidget;
+export '/pages/friends/manage_friends/manage_friends_widget.dart'
+    show ManageFriendsWidget;
+export '/pages/friends/manage_requests/manage_requests_widget.dart'
+    show ManageRequestsWidget;
+export '/pages/friends/manage_pending/manage_pending_widget.dart'
+    show ManagePendingWidget;

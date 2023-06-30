@@ -275,6 +275,23 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
                 ],
               ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
             ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                  child: Text(
+                    'beta v.0.1.1\nliscened and published by BTA food and entertainment ©',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Readex Pro',
+                          fontSize: 11.0,
+                        ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

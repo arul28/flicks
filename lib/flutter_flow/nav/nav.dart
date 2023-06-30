@@ -133,7 +133,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Verification',
           path: '/verification',
-          builder: (context, params) => VerificationWidget(),
+          builder: (context, params) => VerificationWidget(
+            email: params.getParam('email', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'EditProfile',
@@ -162,6 +164,69 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               userInfo: params.getParam('userInfo', ParamType.Document),
             ),
           ),
+        ),
+        FFRoute(
+          name: 'SupportForm',
+          path: '/supportForm',
+          builder: (context, params) => SupportFormWidget(),
+        ),
+        FFRoute(
+          name: 'ForgotPassword',
+          path: '/forgotPassword',
+          builder: (context, params) => ForgotPasswordWidget(),
+        ),
+        FFRoute(
+          name: 'ResetPassword',
+          path: '/resetPassword',
+          builder: (context, params) => ResetPasswordWidget(),
+        ),
+        FFRoute(
+          name: 'manageSettings',
+          path: '/manageSettings',
+          builder: (context, params) => ManageSettingsWidget(),
+        ),
+        FFRoute(
+          name: 'imageViewer',
+          path: '/imageViewer',
+          builder: (context, params) => ImageViewerWidget(
+            userRef: params.getParam(
+                'userRef', ParamType.DocumentReference, false, ['users']),
+            username: params.getParam('username', ParamType.String),
+            profilePic: params.getParam('profilePic', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'currentSessionPhotosDetails',
+          path: '/currentSessionPhotosDetails',
+          builder: (context, params) => CurrentSessionPhotosDetailsWidget(),
+        ),
+        FFRoute(
+          name: 'viewAllFlicks',
+          path: '/viewAllFlicks',
+          builder: (context, params) => ViewAllFlicksWidget(),
+        ),
+        FFRoute(
+          name: 'usersFriends',
+          path: '/usersFriends',
+          builder: (context, params) => UsersFriendsWidget(
+            userRef: params.getParam(
+                'userRef', ParamType.DocumentReference, false, ['users']),
+          ),
+        ),
+        FFRoute(
+          name: 'manageFriends',
+          path: '/manageFriends',
+          builder: (context, params) => ManageFriendsWidget(),
+        ),
+        FFRoute(
+          name: 'manageRequests',
+          path: '/manageRequests',
+          builder: (context, params) => ManageRequestsWidget(),
+        ),
+        FFRoute(
+          name: 'managePending',
+          path: '/managePending',
+          builder: (context, params) => ManagePendingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

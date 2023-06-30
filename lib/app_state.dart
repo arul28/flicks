@@ -18,6 +18,9 @@ class FFAppState extends ChangeNotifier {
       _MaxPicsInCurrentSession = prefs.getInt('ff_MaxPicsInCurrentSession') ??
           _MaxPicsInCurrentSession;
     });
+    _safeInit(() {
+      _isDark = prefs.getBool('ff_isDark') ?? _isDark;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -38,6 +41,49 @@ class FFAppState extends ChangeNotifier {
   bool get searchActive => _searchActive;
   set searchActive(bool _value) {
     _searchActive = _value;
+  }
+
+  bool _makePhoto = false;
+  bool get makePhoto => _makePhoto;
+  set makePhoto(bool _value) {
+    _makePhoto = _value;
+  }
+
+  int _index = 0;
+  int get index => _index;
+  set index(int _value) {
+    _index = _value;
+  }
+
+  String _filePath = '';
+  String get filePath => _filePath;
+  set filePath(String _value) {
+    _filePath = _value;
+  }
+
+  bool _isLoggedIn = false;
+  bool get isLoggedIn => _isLoggedIn;
+  set isLoggedIn(bool _value) {
+    _isLoggedIn = _value;
+  }
+
+  bool _isDark = false;
+  bool get isDark => _isDark;
+  set isDark(bool _value) {
+    _isDark = _value;
+    prefs.setBool('ff_isDark', _value);
+  }
+
+  int _currentSessionPicsNum = 0;
+  int get currentSessionPicsNum => _currentSessionPicsNum;
+  set currentSessionPicsNum(int _value) {
+    _currentSessionPicsNum = _value;
+  }
+
+  bool _switchCam = false;
+  bool get switchCam => _switchCam;
+  set switchCam(bool _value) {
+    _switchCam = _value;
   }
 }
 

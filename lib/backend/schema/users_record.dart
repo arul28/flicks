@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -54,16 +56,6 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
-  // "currentSession" field.
-  List<String>? _currentSession;
-  List<String> get currentSession => _currentSession ?? const [];
-  bool hasCurrentSession() => _currentSession != null;
-
-  // "oldSession" field.
-  List<String>? _oldSession;
-  List<String> get oldSession => _oldSession ?? const [];
-  bool hasOldSession() => _oldSession != null;
-
   // "fullName" field.
   String? _fullName;
   String get fullName => _fullName ?? '';
@@ -79,17 +71,6 @@ class UsersRecord extends FirestoreRecord {
   int? _sentPendingRequestsNum;
   int get sentPendingRequestsNum => _sentPendingRequestsNum ?? 0;
   bool hasSentPendingRequestsNum() => _sentPendingRequestsNum != null;
-
-  // "sentAcceptedRequests" field.
-  List<DocumentReference>? _sentAcceptedRequests;
-  List<DocumentReference> get sentAcceptedRequests =>
-      _sentAcceptedRequests ?? const [];
-  bool hasSentAcceptedRequests() => _sentAcceptedRequests != null;
-
-  // "sentAcceptedRequestsNum" field.
-  int? _sentAcceptedRequestsNum;
-  int get sentAcceptedRequestsNum => _sentAcceptedRequestsNum ?? 0;
-  bool hasSentAcceptedRequestsNum() => _sentAcceptedRequestsNum != null;
 
   // "friendsList" field.
   List<DocumentReference>? _friendsList;
@@ -117,6 +98,26 @@ class UsersRecord extends FirestoreRecord {
   int get pinnedNum => _pinnedNum ?? 0;
   bool hasPinnedNum() => _pinnedNum != null;
 
+  // "liked" field.
+  List<DocumentReference>? _liked;
+  List<DocumentReference> get liked => _liked ?? const [];
+  bool hasLiked() => _liked != null;
+
+  // "emailVerified" field.
+  bool? _emailVerified;
+  bool get emailVerified => _emailVerified ?? false;
+  bool hasEmailVerified() => _emailVerified != null;
+
+  // "profileCreated" field.
+  bool? _profileCreated;
+  bool get profileCreated => _profileCreated ?? false;
+  bool hasProfileCreated() => _profileCreated != null;
+
+  // "firstViewAfterSwitch" field.
+  bool? _firstViewAfterSwitch;
+  bool get firstViewAfterSwitch => _firstViewAfterSwitch ?? false;
+  bool hasFirstViewAfterSwitch() => _firstViewAfterSwitch != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -126,15 +127,10 @@ class UsersRecord extends FirestoreRecord {
     _pinned = getDataList(snapshotData['pinned']);
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
-    _currentSession = getDataList(snapshotData['currentSession']);
-    _oldSession = getDataList(snapshotData['oldSession']);
     _fullName = snapshotData['fullName'] as String?;
     _sentPendingRequests = getDataList(snapshotData['sentPendingRequests']);
     _sentPendingRequestsNum =
         castToType<int>(snapshotData['sentPendingRequestsNum']);
-    _sentAcceptedRequests = getDataList(snapshotData['sentAcceptedRequests']);
-    _sentAcceptedRequestsNum =
-        castToType<int>(snapshotData['sentAcceptedRequestsNum']);
     _friendsList = getDataList(snapshotData['friendsList']);
     _friendsNum = castToType<int>(snapshotData['friendsNum']);
     _incomingPendingRequests =
@@ -142,6 +138,10 @@ class UsersRecord extends FirestoreRecord {
     _incomingPendingRequestsNum =
         castToType<int>(snapshotData['incomingPendingRequestsNum']);
     _pinnedNum = castToType<int>(snapshotData['pinnedNum']);
+    _liked = getDataList(snapshotData['liked']);
+    _emailVerified = snapshotData['emailVerified'] as bool?;
+    _profileCreated = snapshotData['profileCreated'] as bool?;
+    _firstViewAfterSwitch = snapshotData['firstViewAfterSwitch'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -187,10 +187,12 @@ Map<String, dynamic> createUsersRecordData({
   String? phoneNumber,
   String? fullName,
   int? sentPendingRequestsNum,
-  int? sentAcceptedRequestsNum,
   int? friendsNum,
   int? incomingPendingRequestsNum,
   int? pinnedNum,
+  bool? emailVerified,
+  bool? profileCreated,
+  bool? firstViewAfterSwitch,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -203,12 +205,71 @@ Map<String, dynamic> createUsersRecordData({
       'phone_number': phoneNumber,
       'fullName': fullName,
       'sentPendingRequestsNum': sentPendingRequestsNum,
-      'sentAcceptedRequestsNum': sentAcceptedRequestsNum,
       'friendsNum': friendsNum,
       'incomingPendingRequestsNum': incomingPendingRequestsNum,
       'pinnedNum': pinnedNum,
+      'emailVerified': emailVerified,
+      'profileCreated': profileCreated,
+      'firstViewAfterSwitch': firstViewAfterSwitch,
     }.withoutNulls,
   );
 
   return firestoreData;
+}
+
+class UsersRecordDocumentEquality implements Equality<UsersRecord> {
+  const UsersRecordDocumentEquality();
+
+  @override
+  bool equals(UsersRecord? e1, UsersRecord? e2) {
+    const listEquality = ListEquality();
+    return e1?.email == e2?.email &&
+        e1?.displayName == e2?.displayName &&
+        e1?.photoUrl == e2?.photoUrl &&
+        e1?.uid == e2?.uid &&
+        e1?.bio == e2?.bio &&
+        listEquality.equals(e1?.pinned, e2?.pinned) &&
+        e1?.createdTime == e2?.createdTime &&
+        e1?.phoneNumber == e2?.phoneNumber &&
+        e1?.fullName == e2?.fullName &&
+        listEquality.equals(e1?.sentPendingRequests, e2?.sentPendingRequests) &&
+        e1?.sentPendingRequestsNum == e2?.sentPendingRequestsNum &&
+        listEquality.equals(e1?.friendsList, e2?.friendsList) &&
+        e1?.friendsNum == e2?.friendsNum &&
+        listEquality.equals(
+            e1?.incomingPendingRequests, e2?.incomingPendingRequests) &&
+        e1?.incomingPendingRequestsNum == e2?.incomingPendingRequestsNum &&
+        e1?.pinnedNum == e2?.pinnedNum &&
+        listEquality.equals(e1?.liked, e2?.liked) &&
+        e1?.emailVerified == e2?.emailVerified &&
+        e1?.profileCreated == e2?.profileCreated &&
+        e1?.firstViewAfterSwitch == e2?.firstViewAfterSwitch;
+  }
+
+  @override
+  int hash(UsersRecord? e) => const ListEquality().hash([
+        e?.email,
+        e?.displayName,
+        e?.photoUrl,
+        e?.uid,
+        e?.bio,
+        e?.pinned,
+        e?.createdTime,
+        e?.phoneNumber,
+        e?.fullName,
+        e?.sentPendingRequests,
+        e?.sentPendingRequestsNum,
+        e?.friendsList,
+        e?.friendsNum,
+        e?.incomingPendingRequests,
+        e?.incomingPendingRequestsNum,
+        e?.pinnedNum,
+        e?.liked,
+        e?.emailVerified,
+        e?.profileCreated,
+        e?.firstViewAfterSwitch
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is UsersRecord;
 }

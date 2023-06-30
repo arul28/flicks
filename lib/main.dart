@@ -155,20 +155,20 @@ class _NavBarPageState extends State<NavBarPage> {
         haptic: true,
         tabs: [
           GButton(
-            icon: Icons.dynamic_feed,
+            icon: Icons.dynamic_feed_outlined,
             text: '',
-            iconSize: 30.0,
+            iconSize: 50.0,
           ),
           GButton(
-            icon: Icons.camera_rounded,
+            icon: FFIcons.kremovalAiTmp649156ac0c6faJttv80,
             text: '',
-            iconSize: 30.0,
+            iconSize: 50.0,
             backgroundColor: FlutterFlowTheme.of(context).noColor,
           ),
           GButton(
-            icon: Icons.person_rounded,
+            icon: Icons.person_outlined,
             text: '',
-            iconSize: 30.0,
+            iconSize: 50.0,
           )
         ],
       ),
