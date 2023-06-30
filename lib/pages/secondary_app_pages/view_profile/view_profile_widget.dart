@@ -182,7 +182,13 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 context.pushNamed(
-                                  'ManageFriendsOption',
+                                  'usersFriends',
+                                  queryParameters: {
+                                    'userRef': serializeParam(
+                                      widget.userInfo!.reference,
+                                      ParamType.DocumentReference,
+                                    ),
+                                  }.withoutNulls,
                                   extra: <String, dynamic>{
                                     kTransitionInfoKey: TransitionInfo(
                                       hasTransition: true,

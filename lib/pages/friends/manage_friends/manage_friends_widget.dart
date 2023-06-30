@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -174,10 +175,42 @@ class _ManageFriendsWidgetState extends State<ManageFriendsWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Icon(
-                            Icons.person_add_alt,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 30.0,
+                          AuthUserStreamWidget(
+                            builder: (context) => badges.Badge(
+                              badgeContent: Text(
+                                valueOrDefault(
+                                        currentUserDocument
+                                            ?.incomingPendingRequestsNum,
+                                        0)
+                                    .toString(),
+                                style: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: Colors.white,
+                                      fontSize: 12.0,
+                                    ),
+                              ),
+                              showBadge: valueOrDefault(
+                                      currentUserDocument
+                                          ?.incomingPendingRequestsNum,
+                                      0) >
+                                  0,
+                              shape: badges.BadgeShape.circle,
+                              badgeColor: FlutterFlowTheme.of(context).primary,
+                              elevation: 4.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  4.0, 4.0, 4.0, 4.0),
+                              position: badges.BadgePosition.topEnd(),
+                              animationType: badges.BadgeAnimationType.scale,
+                              toAnimate: true,
+                              child: Icon(
+                                Icons.person_add_alt,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 30.0,
+                              ),
+                            ),
                           ),
                           Text(
                             'Requests',
