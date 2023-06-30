@@ -134,6 +134,7 @@ class _FeedWidgetState extends State<FeedWidget> {
           elevation: 0.0,
         ),
         body: SingleChildScrollView(
+          primary: false,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -161,7 +162,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 4.0, 0.0, 12.0),
+                              0.0, 4.0, 0.0, 0.0),
                           child: StreamBuilder<List<PinnedRecord>>(
                             stream: queryPinnedRecord(
                               parent: currentUserReference,
@@ -184,7 +185,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                   snapshot.data!;
                               return Container(
                                 width: double.infinity,
-                                height: 312.0,
+                                height: 254.0,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context).noColor,
                                   borderRadius: BorderRadius.circular(0.0),
@@ -202,7 +203,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 12.0, 0.0, 0.0),
+                                                  16.0, 5.0, 0.0, 0.0),
                                           child: Text(
                                             'Developed Flicks',
                                             style: FlutterFlowTheme.of(context)
@@ -218,7 +219,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 10.0, 10.0, 0.0),
+                                                  0.0, 5.0, 10.0, 0.0),
                                           child: StreamBuilder<
                                               List<OldSessionDetailsRecord>>(
                                             stream:
@@ -339,7 +340,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 4.0, 0.0, 12.0),
+                                                  16.0, 0.0, 0.0, 12.0),
                                           child: Text(
                                             'pin flicks to highlight them on your profile',
                                             style: FlutterFlowTheme.of(context)
@@ -444,7 +445,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                     snapshot.data!;
                                                 return Container(
                                                   width: double.infinity,
-                                                  height: 500.0,
+                                                  height: 181.0,
                                                   child: Stack(
                                                     children: [
                                                       Padding(
@@ -500,7 +501,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                           width:
                                                                               170.0,
                                                                           height:
-                                                                              300.0,
+                                                                              317.0,
                                                                           decoration:
                                                                               BoxDecoration(
                                                                             color:
@@ -539,7 +540,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                                 borderRadius: BorderRadius.circular(8.0),
                                                                                 child: Image.network(
                                                                                   pageViewOldSessionPicsRecord.imagePath,
-                                                                                  width: 144.0,
+                                                                                  width: 112.0,
                                                                                   height: 300.0,
                                                                                   fit: BoxFit.cover,
                                                                                 ),
@@ -846,7 +847,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                   3.0,
                                                               spacing: 8.0,
                                                               radius: 16.0,
-                                                              dotWidth: 16.0,
+                                                              dotWidth: 10.0,
                                                               dotHeight: 8.0,
                                                               dotColor:
                                                                   FlutterFlowTheme.of(
@@ -914,7 +915,7 @@ class _FeedWidgetState extends State<FeedWidget> {
               ),
               if (valueOrDefault(currentUserDocument?.friendsNum, 0) == 0)
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: AuthUserStreamWidget(
                     builder: (context) => Row(
                       mainAxisSize: MainAxisSize.max,
@@ -930,84 +931,98 @@ class _FeedWidgetState extends State<FeedWidget> {
                 ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 32.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    StreamBuilder<List<UsersRecord>>(
-                      stream: queryUsersRecord(
-                        queryBuilder: (usersRecord) => usersRecord.where(
-                            'friendsList',
-                            arrayContains: currentUserReference),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                color: FlutterFlowTheme.of(context).primary,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      StreamBuilder<List<UsersRecord>>(
+                        stream: queryUsersRecord(
+                          queryBuilder: (usersRecord) => usersRecord.where(
+                              'friendsList',
+                              arrayContains: currentUserReference),
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                ),
                               ),
-                            ),
-                          );
-                        }
-                        List<UsersRecord> listViewUsersRecordList =
-                            snapshot.data!;
-                        return ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: listViewUsersRecordList.length,
-                          itemBuilder: (context, listViewIndex) {
-                            final listViewUsersRecord =
-                                listViewUsersRecordList[listViewIndex];
-                            return FutureBuilder<int>(
-                              future: queryOldSessionPicsRecordCount(
-                                parent: listViewUsersRecord.reference,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                int containerCount = snapshot.data!;
-                                return Container(
-                                  width: double.infinity,
-                                  height: 320.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                  ),
-                                  child: Visibility(
-                                    visible: containerCount != 0,
-                                    child: FriendPhotosWidget(
-                                      key: Key(
-                                          'Keyqli_${listViewIndex}_of_${listViewUsersRecordList.length}'),
-                                      parameter1: listViewUsersRecord.photoUrl,
-                                      parameter2:
-                                          listViewUsersRecord.displayName,
-                                      parameter3: listViewUsersRecord.reference,
-                                      userDoc: listViewUsersRecord,
-                                    ),
-                                  ),
-                                );
-                              },
                             );
-                          },
-                        );
-                      },
-                    ),
-                  ],
+                          }
+                          List<UsersRecord> listViewUsersRecordList =
+                              snapshot.data!;
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: listViewUsersRecordList.length,
+                            itemBuilder: (context, listViewIndex) {
+                              final listViewUsersRecord =
+                                  listViewUsersRecordList[listViewIndex];
+                              return Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 6.0, 0.0, 20.0),
+                                    child: FutureBuilder<int>(
+                                      future: queryOldSessionPicsRecordCount(
+                                        parent: listViewUsersRecord.reference,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: CircularProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        int containerCount = snapshot.data!;
+                                        return Container(
+                                          width: double.infinity,
+                                          height: 259.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                          child: Visibility(
+                                            visible: containerCount != 0,
+                                            child: FriendPhotosWidget(
+                                              key: Key(
+                                                  'Keyqli_${listViewIndex}_of_${listViewUsersRecordList.length}'),
+                                              parameter1:
+                                                  listViewUsersRecord.photoUrl,
+                                              parameter2: listViewUsersRecord
+                                                  .displayName,
+                                              parameter3:
+                                                  listViewUsersRecord.reference,
+                                              userDoc: listViewUsersRecord,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
