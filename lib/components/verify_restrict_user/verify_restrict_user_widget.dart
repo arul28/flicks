@@ -126,7 +126,8 @@ class _VerifyRestrictUserWidgetState extends State<VerifyRestrictUserWidget> {
                           'restrictedUsers':
                               FieldValue.arrayUnion([widget.userRef]),
                         });
-                        Navigator.pop(context);
+
+                        context.pushNamed('hiddenUsers');
                       },
                       text: 'Confirm',
                       options: FFButtonOptions(

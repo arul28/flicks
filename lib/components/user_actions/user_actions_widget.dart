@@ -125,6 +125,8 @@ class _UserActionsWidgetState extends State<UserActionsWidget> {
                       },
                     ).then((value) => setState(() {}));
                   }
+
+                  Navigator.pop(context);
                 },
                 child: Container(
                   width: double.infinity,
@@ -193,6 +195,8 @@ class _UserActionsWidgetState extends State<UserActionsWidget> {
                     );
                   },
                 ).then((value) => setState(() {}));
+
+                Navigator.pop(context);
               },
               child: Container(
                 width: double.infinity,

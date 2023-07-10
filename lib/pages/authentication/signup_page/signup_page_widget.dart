@@ -454,6 +454,14 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                     return;
                                   }
 
+                                  await UsersRecord.collection
+                                      .doc(user.uid)
+                                      .update(createUsersRecordData(
+                                        comNotifs: true,
+                                        reqNotifs: true,
+                                        likesNotifs: true,
+                                      ));
+
                                   await authManager.sendEmailVerification();
 
                                   context.goNamedAuth(

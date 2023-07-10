@@ -331,7 +331,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                         _model.takingImage = true;
                                       });
                                       await Future.delayed(
-                                          const Duration(milliseconds: 2500));
+                                          const Duration(milliseconds: 3000));
                                       if (!FFAppState().uploadingPhoto) {
                                         await CurrentSessionPicsRecord
                                                 .createDoc(
@@ -407,10 +407,6 @@ class _CameraWidgetState extends State<CameraWidget> {
                                                 );
                                               },
                                             ).then((value) => setState(() {}));
-
-                                            setState(() {
-                                              FFAppState().makePhoto = false;
-                                            });
                                           }
                                         }
                                       }

@@ -115,7 +115,7 @@ class _HiddenUsersWidgetState extends State<HiddenUsersWidget>
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.safePop();
+                  context.pushNamed('settingPage');
                 },
               ),
             ),
