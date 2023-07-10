@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'setting_page_model.dart';
@@ -26,6 +27,11 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SettingPageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      context.pushNamed('restrictedUsers');
+    });
   }
 
   @override
@@ -75,8 +81,8 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
         elevation: 0.0,
       ),
       body: Container(
-        width: 398.0,
-        height: 796.0,
+        width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -88,219 +94,290 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
             end: AlignmentDirectional(0, 1.0),
           ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed('manageSettings');
-                },
-                child: ListTile(
-                  title: Text(
-                    'Manage Settings',
-                    style: FlutterFlowTheme.of(context).titleLarge,
-                  ),
-                  subtitle: Text(
-                    'flicks settings',
-                    style: FlutterFlowTheme.of(context).labelMedium,
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_right,
-                  ),
-                  tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  dense: false,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed(
-                    'EditProfile',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.rightToLeft,
-                      ),
-                    },
-                  );
-                },
-                child: ListTile(
-                  title: Text(
-                    'Edit Profile',
-                    style: FlutterFlowTheme.of(context).titleLarge,
-                  ),
-                  subtitle: Text(
-                    'Edit Username, Bio, and Profile Pic',
-                    style: FlutterFlowTheme.of(context).labelMedium,
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_right,
-                  ),
-                  tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  dense: false,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed(
-                    'ResetPassword',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.rightToLeft,
-                      ),
-                    },
-                  );
-                },
-                child: ListTile(
-                  title: Text(
-                    'Reset Password',
-                    style: FlutterFlowTheme.of(context).titleLarge,
-                  ),
-                  subtitle: Text(
-                    'Reset your password',
-                    style: FlutterFlowTheme.of(context).labelMedium,
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_right,
-                  ),
-                  tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  dense: false,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed('SupportForm');
-                },
-                child: ListTile(
-                  title: Text(
-                    'Contact Us',
-                    style: FlutterFlowTheme.of(context).titleLarge,
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_right,
-                  ),
-                  tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  dense: false,
-                ),
-              ),
-            ),
-            Flexible(
-              child: Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                        width: 200.0,
-                        height: 200.0,
-                        fit: BoxFit.fill,
-                      ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('ManageNotifications');
+                  },
+                  child: ListTile(
+                    title: Text(
+                      'Manage Notification',
+                      style: FlutterFlowTheme.of(context).titleLarge,
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Builder(
-                        builder: (context) => Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              70.0, 0.0, 70.0, 10.0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              await showAlignedDialog(
-                                context: context,
-                                isGlobal: true,
-                                avoidOverflow: false,
-                                targetAnchor: AlignmentDirectional(0.0, 0.0)
-                                    .resolve(Directionality.of(context)),
-                                followerAnchor: AlignmentDirectional(0.0, 0.0)
-                                    .resolve(Directionality.of(context)),
-                                builder: (dialogContext) {
-                                  return Material(
-                                    color: Colors.transparent,
-                                    child: Container(
-                                      height: 110.0,
-                                      width: 320.0,
-                                      child: LogoutWidget(),
-                                    ),
-                                  );
-                                },
-                              ).then((value) => setState(() {}));
-                            },
-                            text: 'Log Out\n',
-                            options: FFButtonOptions(
-                              width: 253.0,
-                              height: 50.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color:
-                                        FlutterFlowTheme.of(context).black600,
-                                  ),
-                              elevation: 3.0,
-                              borderSide: BorderSide(
+                    subtitle: Text(
+                      'flicks settings',
+                      style: FlutterFlowTheme.of(context).labelMedium,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_right,
+                    ),
+                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    dense: false,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed(
+                      'EditProfile',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.rightToLeft,
+                        ),
+                      },
+                    );
+                  },
+                  child: ListTile(
+                    title: Text(
+                      'Edit Profile',
+                      style: FlutterFlowTheme.of(context).titleLarge,
+                    ),
+                    subtitle: Text(
+                      'Edit Username, Bio, and Profile Pic',
+                      style: FlutterFlowTheme.of(context).labelMedium,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_right,
+                    ),
+                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    dense: false,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed(
+                      'ResetPassword',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.rightToLeft,
+                        ),
+                      },
+                    );
+                  },
+                  child: ListTile(
+                    title: Text(
+                      'Reset Password',
+                      style: FlutterFlowTheme.of(context).titleLarge,
+                    ),
+                    subtitle: Text(
+                      'Reset your password',
+                      style: FlutterFlowTheme.of(context).labelMedium,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_right,
+                    ),
+                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    dense: false,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('AdditionalSettings');
+                  },
+                  child: ListTile(
+                    title: Text(
+                      'Delete Account',
+                      style: FlutterFlowTheme.of(context).titleLarge,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_right,
+                    ),
+                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    dense: false,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('blockedUsers');
+                  },
+                  child: ListTile(
+                    title: Text(
+                      'Blocked Users',
+                      style: FlutterFlowTheme.of(context).titleLarge,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_right,
+                    ),
+                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    dense: false,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('blockedUsers');
+                  },
+                  child: ListTile(
+                    title: Text(
+                      'Hidden Users',
+                      style: FlutterFlowTheme.of(context).titleLarge,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_right,
+                    ),
+                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    dense: false,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('SupportForm');
+                  },
+                  child: ListTile(
+                    title: Text(
+                      'Contact Us',
+                      style: FlutterFlowTheme.of(context).titleLarge,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_right,
+                    ),
+                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    dense: false,
+                  ),
+                ),
+              ),
+              Flexible(
+                child: Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Builder(
+                          builder: (context) => Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                70.0, 10.0, 70.0, 20.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                await showAlignedDialog(
+                                  context: context,
+                                  isGlobal: true,
+                                  avoidOverflow: false,
+                                  targetAnchor: AlignmentDirectional(0.0, 0.0)
+                                      .resolve(Directionality.of(context)),
+                                  followerAnchor: AlignmentDirectional(0.0, 0.0)
+                                      .resolve(Directionality.of(context)),
+                                  builder: (dialogContext) {
+                                    return Material(
+                                      color: Colors.transparent,
+                                      child: Container(
+                                        height: 110.0,
+                                        width: 320.0,
+                                        child: LogoutWidget(),
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => setState(() {}));
+                              },
+                              text: 'Log Out\n',
+                              options: FFButtonOptions(
+                                width: 253.0,
+                                height: 50.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
                                 color:
                                     FlutterFlowTheme.of(context).primaryBtnText,
-                                width: 1.0,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color:
+                                          FlutterFlowTheme.of(context).black600,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBtnText,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(30.0),
                               ),
-                              borderRadius: BorderRadius.circular(30.0),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                          width: 200.0,
+                          height: 139.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 70.0),
-              child: Text(
-                'Licensed by BTA food and entertainment \nBeta Version 0.1.1',
-                textAlign: TextAlign.center,
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Readex Pro',
-                      color: FlutterFlowTheme.of(context).primaryBtnText,
-                      fontStyle: FontStyle.italic,
-                    ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
+                child: Text(
+                  'Licensed by BTA food and entertainment \nBeta Version 0.0.51',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        color: FlutterFlowTheme.of(context).primaryBtnText,
+                        fontStyle: FontStyle.italic,
+                      ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
