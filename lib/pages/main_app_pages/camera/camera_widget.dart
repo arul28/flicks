@@ -311,7 +311,11 @@ class _CameraWidgetState extends State<CameraWidget> {
                                                   FocusScope.of(context)
                                                       .requestFocus(
                                                           _model.unfocusNode),
-                                              child: PicsLimitHitWidget(),
+                                              child: Container(
+                                                height: 140.0,
+                                                width: 317.0,
+                                                child: PicsLimitHitWidget(),
+                                              ),
                                             ),
                                           );
                                         },

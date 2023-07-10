@@ -160,7 +160,7 @@ final parametersBuilderMap =
         },
       ),
   'blockedUsers': ParameterData.none(),
-  'restrictedUsers': ParameterData.none(),
+  'hiddenUsers': ParameterData.none(),
   'deleteAccountSettingsPage': ParameterData.none(),
 };
 

@@ -1065,7 +1065,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                                 child:
                                                                     Container(
                                                                   height: 200.0,
-                                                                  width: 300.0,
+                                                                  width: 350.0,
                                                                   child:
                                                                       UserActionsWidget(
                                                                     userRef: widget

@@ -1,13 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'manage_notifications_model.dart';
@@ -21,162 +19,10 @@ class ManageNotificationsWidget extends StatefulWidget {
       _ManageNotificationsWidgetState();
 }
 
-class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget>
-    with TickerProviderStateMixin {
+class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget> {
   late ManageNotificationsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  var hasContainerTriggered1 = false;
-  var hasContainerTriggered2 = false;
-  var hasContainerTriggered3 = false;
-  var hasContainerTriggered4 = false;
-  var hasContainerTriggered5 = false;
-  var hasContainerTriggered6 = false;
-  final animationsMap = {
-    'containerOnActionTriggerAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 350.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnActionTriggerAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 350.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      applyInitialState: true,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnActionTriggerAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 350.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      applyInitialState: true,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnActionTriggerAnimation4': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 350.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      applyInitialState: true,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnActionTriggerAnimation5': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 350.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation4': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      applyInitialState: true,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnActionTriggerAnimation6': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 350.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation5': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      applyInitialState: true,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(40.0, 0.0),
-        ),
-      ],
-    ),
-  };
 
   @override
   void initState() {
@@ -196,13 +42,6 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget>
             valueOrDefault<bool>(currentUserDocument?.devNotifs, false);
       });
     });
-
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
   }
 
   @override
@@ -251,7 +90,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget>
         elevation: 0.0,
       ),
       body: Container(
-        width: 402.0,
+        width: double.infinity,
         height: 796.0,
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -362,11 +201,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget>
                                           shape: BoxShape.rectangle,
                                         ),
                                       ),
-                                    ).animateOnActionTrigger(
-                                        animationsMap[
-                                            'containerOnActionTriggerAnimation1']!,
-                                        hasBeenTriggered:
-                                            hasContainerTriggered1),
+                                    ),
                                   ),
                                 ),
                               if (valueOrDefault<bool>(
@@ -406,14 +241,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget>
                                           shape: BoxShape.rectangle,
                                         ),
                                       ),
-                                    )
-                                        .animateOnPageLoad(animationsMap[
-                                            'containerOnPageLoadAnimation1']!)
-                                        .animateOnActionTrigger(
-                                            animationsMap[
-                                                'containerOnActionTriggerAnimation2']!,
-                                            hasBeenTriggered:
-                                                hasContainerTriggered2),
+                                    ),
                                   ),
                                 ),
                             ],
@@ -518,14 +346,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget>
                                           shape: BoxShape.rectangle,
                                         ),
                                       ),
-                                    )
-                                        .animateOnPageLoad(animationsMap[
-                                            'containerOnPageLoadAnimation2']!)
-                                        .animateOnActionTrigger(
-                                            animationsMap[
-                                                'containerOnActionTriggerAnimation3']!,
-                                            hasBeenTriggered:
-                                                hasContainerTriggered3),
+                                    ),
                                   ),
                                 ),
                               if (valueOrDefault<bool>(
@@ -565,14 +386,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget>
                                           shape: BoxShape.rectangle,
                                         ),
                                       ),
-                                    )
-                                        .animateOnPageLoad(animationsMap[
-                                            'containerOnPageLoadAnimation3']!)
-                                        .animateOnActionTrigger(
-                                            animationsMap[
-                                                'containerOnActionTriggerAnimation4']!,
-                                            hasBeenTriggered:
-                                                hasContainerTriggered4),
+                                    ),
                                   ),
                                 ),
                             ],
@@ -677,14 +491,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget>
                                           shape: BoxShape.rectangle,
                                         ),
                                       ),
-                                    )
-                                        .animateOnPageLoad(animationsMap[
-                                            'containerOnPageLoadAnimation4']!)
-                                        .animateOnActionTrigger(
-                                            animationsMap[
-                                                'containerOnActionTriggerAnimation5']!,
-                                            hasBeenTriggered:
-                                                hasContainerTriggered5),
+                                    ),
                                   ),
                                 ),
                               if (valueOrDefault<bool>(
@@ -724,14 +531,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget>
                                           shape: BoxShape.rectangle,
                                         ),
                                       ),
-                                    )
-                                        .animateOnPageLoad(animationsMap[
-                                            'containerOnPageLoadAnimation5']!)
-                                        .animateOnActionTrigger(
-                                            animationsMap[
-                                                'containerOnActionTriggerAnimation6']!,
-                                            hasBeenTriggered:
-                                                hasContainerTriggered6),
+                                    ),
                                   ),
                                 ),
                             ],

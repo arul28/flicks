@@ -13,19 +13,19 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'restricted_users_model.dart';
-export 'restricted_users_model.dart';
+import 'hidden_users_model.dart';
+export 'hidden_users_model.dart';
 
-class RestrictedUsersWidget extends StatefulWidget {
-  const RestrictedUsersWidget({Key? key}) : super(key: key);
+class HiddenUsersWidget extends StatefulWidget {
+  const HiddenUsersWidget({Key? key}) : super(key: key);
 
   @override
-  _RestrictedUsersWidgetState createState() => _RestrictedUsersWidgetState();
+  _HiddenUsersWidgetState createState() => _HiddenUsersWidgetState();
 }
 
-class _RestrictedUsersWidgetState extends State<RestrictedUsersWidget>
+class _HiddenUsersWidgetState extends State<HiddenUsersWidget>
     with TickerProviderStateMixin {
-  late RestrictedUsersModel _model;
+  late HiddenUsersModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -54,7 +54,7 @@ class _RestrictedUsersWidgetState extends State<RestrictedUsersWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => RestrictedUsersModel());
+    _model = createModel(context, () => HiddenUsersModel());
 
     setupAnimations(
       animationsMap.values.where((anim) =>
