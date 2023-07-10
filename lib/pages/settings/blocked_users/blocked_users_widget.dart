@@ -350,7 +350,7 @@ class _BlockedUsersWidgetState extends State<BlockedUsersWidget>
                                                           child:
                                                               VerifyUnblockUserWidget(
                                                             userRef:
-                                                                listViewUsersRecord
+                                                                userListUsersRecord
                                                                     .reference,
                                                           ),
                                                         ),

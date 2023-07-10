@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
+import '/components/image_error/image_error_widget.dart';
 import '/components/pics_limit_hit/pics_limit_hit_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
