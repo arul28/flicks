@@ -333,6 +333,32 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                   ),
                 ],
               ),
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await launchURL(
+                          'https://flicksocial.carrd.co/#privacypolicy');
+                    },
+                    child: Text(
+                      'Privacy Policy',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            color: Color(0xFF39B2D2),
+                            fontStyle: FontStyle.italic,
+                            decoration: TextDecoration.underline,
+                          ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
