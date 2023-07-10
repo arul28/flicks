@@ -56,11 +56,6 @@ class _RestrictedUsersWidgetState extends State<RestrictedUsersWidget>
     super.initState();
     _model = createModel(context, () => RestrictedUsersModel());
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('AdditionalSettings');
-    });
-
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -96,7 +91,7 @@ class _RestrictedUsersWidgetState extends State<RestrictedUsersWidget>
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: 'Restricted Users',
+                      text: 'Hidden Users',
                       style: FlutterFlowTheme.of(context).headlineLarge,
                     )
                   ],

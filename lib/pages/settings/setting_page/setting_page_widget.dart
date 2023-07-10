@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'setting_page_model.dart';
@@ -27,11 +26,6 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SettingPageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('restrictedUsers');
-    });
   }
 
   @override
