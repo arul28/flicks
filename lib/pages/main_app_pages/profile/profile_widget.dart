@@ -640,7 +640,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .error,
-                                                            size: 24.0,
+                                                            size: 30.0,
                                                           ),
                                                         );
                                                       },

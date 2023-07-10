@@ -1,8 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
+import '/components/user_actions/user_actions_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -106,11 +109,56 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                 style: FlutterFlowTheme.of(context).headlineLarge.override(
                       fontFamily: 'Outfit',
                       color: FlutterFlowTheme.of(context).frenchViolet,
+                      fontSize: 24.0,
                     ),
               )),
             ),
           ),
-          actions: [],
+          actions: [
+            Builder(
+              builder: (context) => Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    await showAlignedDialog(
+                      context: context,
+                      isGlobal: true,
+                      avoidOverflow: false,
+                      targetAnchor: AlignmentDirectional(0.0, 0.0)
+                          .resolve(Directionality.of(context)),
+                      followerAnchor: AlignmentDirectional(0.0, 0.0)
+                          .resolve(Directionality.of(context)),
+                      builder: (dialogContext) {
+                        return Material(
+                          color: Colors.transparent,
+                          child: GestureDetector(
+                            onTap: () => FocusScope.of(context)
+                                .requestFocus(_model.unfocusNode),
+                            child: Container(
+                              height: 200.0,
+                              width: 300.0,
+                              child: UserActionsWidget(
+                                userRef: widget.userInfo!.reference,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ).then((value) => setState(() {}));
+                  },
+                  child: Icon(
+                    Icons.keyboard_control,
+                    color: FlutterFlowTheme.of(context).frenchViolet,
+                    size: 30.0,
+                  ),
+                ),
+              ),
+            ),
+          ],
           centerTitle: false,
           elevation: 0.0,
         ),
@@ -269,21 +317,27 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context).noColor,
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, -1.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 15.0, 0.0, 0.0),
-                                child: Text(
-                                  widget.userInfo!.bio.maybeHandleOverflow(
-                                    maxChars: 40,
-                                    replacement: '…',
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, -1.0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 15.0, 0.0, 0.0),
+                                    child: Text(
+                                      widget.userInfo!.bio.maybeHandleOverflow(
+                                        maxChars: 40,
+                                        replacement: '…',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
                                   ),
-                                  textAlign: TextAlign.center,
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ),
@@ -323,6 +377,17 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                       'incomingPendingRequestsNum':
                                           FieldValue.increment(1),
                                     });
+                                    if (widget.userInfo!.reqNotifs) {
+                                      triggerPushNotification(
+                                        notificationTitle: 'New Friend Request',
+                                        notificationText:
+                                            'Someone has added you as a friend!',
+                                        notificationSound: 'default',
+                                        userRefs: [widget.userInfo!.reference],
+                                        initialPageName: 'Profile',
+                                        parameterData: {},
+                                      );
+                                    }
                                     setState(() {
                                       _model.sentWaiting = true;
                                       _model.noConnection = false;
@@ -587,6 +652,17 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                       'sentPendingRequestsNum':
                                           FieldValue.increment(-(1)),
                                     });
+                                    if (widget.userInfo!.reqNotifs) {
+                                      triggerPushNotification(
+                                        notificationTitle: 'New friend added',
+                                        notificationText:
+                                            'Someone accepted your friend request!',
+                                        notificationSound: 'default',
+                                        userRefs: [widget.userInfo!.reference],
+                                        initialPageName: 'Feed',
+                                        parameterData: {},
+                                      );
+                                    }
                                     setState(() {
                                       _model.isFriend = true;
                                       _model.recievedWaiting = false;

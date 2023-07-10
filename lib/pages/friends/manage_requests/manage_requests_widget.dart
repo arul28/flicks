@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -496,8 +497,27 @@ class _ManageRequestsWidgetState extends State<ManageRequestsWidget>
                                       'sentPendingRequestsNum':
                                           FieldValue.increment(-(1)),
                                     });
+                                    triggerPushNotification(
+                                      notificationTitle: 'Friend added',
+                                      notificationText:
+                                          'Someone accepted your friend request!',
+                                      notificationSound: 'default',
+                                      userRefs: [listViewUsersRecord.reference],
+                                      initialPageName: 'Profile',
+                                      parameterData: {},
+                                    );
 
-                                    context.pushNamed('manageRequests');
+                                    context.pushNamed(
+                                      'manageRequests',
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 0),
+                                        ),
+                                      },
+                                    );
                                   },
                                   child: Card(
                                     clipBehavior: Clip.antiAliasWithSaveLayer,

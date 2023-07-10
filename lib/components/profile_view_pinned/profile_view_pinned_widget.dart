@@ -1,5 +1,6 @@
 import '/components/image_saved/image_saved_widget.dart';
 import '/components/un_pin_message/un_pin_message_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
@@ -8,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'profile_view_pinned_model.dart';
 export 'profile_view_pinned_model.dart';
@@ -79,13 +81,40 @@ class _ProfileViewPinnedWidgetState extends State<ProfileViewPinnedWidget> {
               alignment: AlignmentDirectional(0.0, 0.0),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40.0),
-                  child: Image.network(
-                    widget.imgPath!,
-                    width: 453.0,
-                    height: 684.0,
-                    fit: BoxFit.cover,
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.fade,
+                        child: FlutterFlowExpandedImageView(
+                          image: Image.network(
+                            widget.imgPath!,
+                            fit: BoxFit.contain,
+                          ),
+                          allowRotation: true,
+                          tag: widget.imgPath!,
+                          useHeroAnimation: true,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Hero(
+                    tag: widget.imgPath!,
+                    transitionOnUserGestures: true,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(40.0),
+                      child: Image.network(
+                        widget.imgPath!,
+                        width: 453.0,
+                        height: 684.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -106,9 +135,6 @@ class _ProfileViewPinnedWidgetState extends State<ProfileViewPinnedWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        await actions.saveImage(
-                          widget.imgPath!,
-                        );
                         await showAlignedDialog(
                           context: context,
                           isGlobal: true,
@@ -128,6 +154,10 @@ class _ProfileViewPinnedWidgetState extends State<ProfileViewPinnedWidget> {
                             );
                           },
                         ).then((value) => setState(() {}));
+
+                        await actions.saveImage(
+                          widget.imgPath!,
+                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
