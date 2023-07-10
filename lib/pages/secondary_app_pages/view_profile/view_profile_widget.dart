@@ -140,7 +140,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                 .requestFocus(_model.unfocusNode),
                             child: Container(
                               height: 200.0,
-                              width: 300.0,
+                              width: 350.0,
                               child: UserActionsWidget(
                                 userRef: widget.userInfo!.reference,
                               ),
@@ -577,8 +577,8 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                     maxHeight: 32.0,
                                   ),
                                   decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).amethyst,
+                                    color: FlutterFlowTheme.of(context)
+                                        .frenchViolet,
                                     boxShadow: [
                                       BoxShadow(
                                         blurRadius: 4.0,
@@ -677,7 +677,8 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                       maxHeight: 32.0,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Color(0xFF3124A1),
+                                      color: FlutterFlowTheme.of(context)
+                                          .frenchViolet,
                                       boxShadow: [
                                         BoxShadow(
                                           blurRadius: 4.0,
