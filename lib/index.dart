@@ -52,3 +52,5 @@ export '/pages/settings/blocked_users/blocked_users_widget.dart'
     show BlockedUsersWidget;
 export '/pages/settings/restricted_users/restricted_users_widget.dart'
     show RestrictedUsersWidget;
+export '/pages/settings/delete_account_settings_page/delete_account_settings_page_widget.dart'
+    show DeleteAccountSettingsPageWidget;

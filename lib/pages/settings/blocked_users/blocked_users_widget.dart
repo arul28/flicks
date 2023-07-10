@@ -115,7 +115,7 @@ class _BlockedUsersWidgetState extends State<BlockedUsersWidget>
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.safePop();
+                  context.pushNamed('AdditionalSettings');
                 },
               ),
             ),

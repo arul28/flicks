@@ -167,6 +167,7 @@ class _UserActionsWidgetState extends State<UserActionsWidget> {
                                           fontFamily: 'Readex Pro',
                                           color: FlutterFlowTheme.of(context)
                                               .frenchViolet,
+                                          fontSize: 16.0,
                                         ),
                                   ),
                                 ),
@@ -236,6 +237,7 @@ class _UserActionsWidgetState extends State<UserActionsWidget> {
                                         fontFamily: 'Readex Pro',
                                         color: FlutterFlowTheme.of(context)
                                             .frenchViolet,
+                                        fontSize: 16.0,
                                       ),
                                 ),
                               ),
@@ -297,6 +299,7 @@ class _UserActionsWidgetState extends State<UserActionsWidget> {
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       color: FlutterFlowTheme.of(context).error,
+                                      fontSize: 16.0,
                                     ),
                               ),
                             ),

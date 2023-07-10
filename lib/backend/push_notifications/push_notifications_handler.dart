@@ -161,6 +161,7 @@ final parametersBuilderMap =
       ),
   'blockedUsers': ParameterData.none(),
   'restrictedUsers': ParameterData.none(),
+  'deleteAccountSettingsPage': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
