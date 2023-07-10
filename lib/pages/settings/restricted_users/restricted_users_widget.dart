@@ -56,6 +56,11 @@ class _RestrictedUsersWidgetState extends State<RestrictedUsersWidget>
     super.initState();
     _model = createModel(context, () => RestrictedUsersModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      context.pushNamed('AdditionalSettings');
+    });
+
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||

@@ -1,9 +1,6 @@
-import '/components/delete_account/delete_account_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -93,136 +90,87 @@ class _AdditionalSettingsWidgetState extends State<AdditionalSettingsWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 80.0),
-              child: Theme(
-                data: ThemeData(
-                  checkboxTheme: CheckboxThemeData(
-                    visualDensity: VisualDensity.compact,
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  unselectedWidgetColor:
-                      FlutterFlowTheme.of(context).secondaryText,
-                ),
-                child: CheckboxListTile(
-                  value: _model.checkboxListTileValue ??= false,
-                  onChanged: (newValue) async {
-                    setState(() => _model.checkboxListTileValue = newValue!);
-                  },
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.pushNamed('deleteAccountSettingsPage');
+                },
+                child: ListTile(
                   title: Text(
                     'Delete Account',
                     style: FlutterFlowTheme.of(context).titleLarge,
                   ),
                   subtitle: Text(
-                    'Deleting an account is permanent and it will remove all your comments, added friends, photo and flicks history, this action is irreversible',
+                    'Delete your account, this action cannot be undone',
                     style: FlutterFlowTheme.of(context).labelMedium,
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 20.0,
+                  ),
                   tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  activeColor: FlutterFlowTheme.of(context).primary,
-                  checkColor: FlutterFlowTheme.of(context).info,
                   dense: false,
-                  controlAffinity: ListTileControlAffinity.trailing,
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 400.0, 0.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            40.0, 0.0, 40.0, 0.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('settingPage');
-                          },
-                          text: 'Cancel',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 47.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primaryBtnText,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: FlutterFlowTheme.of(context).black600,
-                                  fontSize: 14.0,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).black600,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                        ),
-                      ),
-                    ),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.pushNamed('blockedUsers');
+                },
+                child: ListTile(
+                  title: Text(
+                    'Blocked Users',
+                    style: FlutterFlowTheme.of(context).titleLarge,
                   ),
-                  Expanded(
-                    child: Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Builder(
-                        builder: (context) => Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              40.0, 0.0, 40.0, 0.0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              await showAlignedDialog(
-                                context: context,
-                                isGlobal: true,
-                                avoidOverflow: false,
-                                targetAnchor: AlignmentDirectional(0.0, 0.0)
-                                    .resolve(Directionality.of(context)),
-                                followerAnchor: AlignmentDirectional(0.0, 0.0)
-                                    .resolve(Directionality.of(context)),
-                                builder: (dialogContext) {
-                                  return Material(
-                                    color: Colors.transparent,
-                                    child: DeleteAccountWidget(),
-                                  );
-                                },
-                              ).then((value) => setState(() {}));
-                            },
-                            text: 'Confirm',
-                            options: FFButtonOptions(
-                              width: double.infinity,
-                              height: 47.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).error,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color:
-                                        FlutterFlowTheme.of(context).black600,
-                                    fontSize: 14.0,
-                                  ),
-                              elevation: 3.0,
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).black600,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                  subtitle: Text(
+                    'Block a User from interacting with you',
+                    style: FlutterFlowTheme.of(context).labelMedium,
                   ),
-                ],
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 20.0,
+                  ),
+                  tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  dense: false,
+                ),
+              ),
+            ),
+            InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.pushNamed('restrictedUsers');
+              },
+              child: ListTile(
+                title: Text(
+                  'Hidden Users',
+                  style: FlutterFlowTheme.of(context).titleLarge,
+                ),
+                subtitle: Text(
+                  'Hide a User\'s flicks from your feed',
+                  style: FlutterFlowTheme.of(context).labelMedium,
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 20.0,
+                ),
+                tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                dense: false,
               ),
             ),
           ],

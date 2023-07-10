@@ -251,6 +251,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'restrictedUsers',
           path: '/restrictedUsers',
           builder: (context, params) => RestrictedUsersWidget(),
+        ),
+        FFRoute(
+          name: 'deleteAccountSettingsPage',
+          path: '/deleteAccountSettingsPage',
+          builder: (context, params) => DeleteAccountSettingsPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -207,8 +207,12 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                   },
                   child: ListTile(
                     title: Text(
-                      'Delete Account',
+                      'Additional Settings',
                       style: FlutterFlowTheme.of(context).titleLarge,
+                    ),
+                    subtitle: Text(
+                      'Delete Account, View blocked and restricted Users',
+                      style: FlutterFlowTheme.of(context).labelMedium,
                     ),
                     trailing: Icon(
                       Icons.arrow_right,
@@ -219,53 +223,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('blockedUsers');
-                  },
-                  child: ListTile(
-                    title: Text(
-                      'Blocked Users',
-                      style: FlutterFlowTheme.of(context).titleLarge,
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_right,
-                    ),
-                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                    dense: false,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('blockedUsers');
-                  },
-                  child: ListTile(
-                    title: Text(
-                      'Hidden Users',
-                      style: FlutterFlowTheme.of(context).titleLarge,
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_right,
-                    ),
-                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                    dense: false,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -287,94 +245,99 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                   ),
                 ),
               ),
-              Flexible(
-                child: Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Column(
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: Builder(
+                  builder: (context) => Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(70.0, 10.0, 70.0, 30.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        await showAlignedDialog(
+                          context: context,
+                          isGlobal: true,
+                          avoidOverflow: false,
+                          targetAnchor: AlignmentDirectional(0.0, 0.0)
+                              .resolve(Directionality.of(context)),
+                          followerAnchor: AlignmentDirectional(0.0, 0.0)
+                              .resolve(Directionality.of(context)),
+                          builder: (dialogContext) {
+                            return Material(
+                              color: Colors.transparent,
+                              child: Container(
+                                height: 110.0,
+                                width: 320.0,
+                                child: LogoutWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => setState(() {}));
+                      },
+                      text: 'Log Out\n',
+                      options: FFButtonOptions(
+                        width: 253.0,
+                        height: 50.0,
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primaryBtnText,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Readex Pro',
+                                  color: FlutterFlowTheme.of(context).black600,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).primaryBtnText,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Stack(
+                alignment: AlignmentDirectional(0.0, 1.0),
+                children: [
+                  Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Builder(
-                          builder: (context) => Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                70.0, 10.0, 70.0, 20.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                await showAlignedDialog(
-                                  context: context,
-                                  isGlobal: true,
-                                  avoidOverflow: false,
-                                  targetAnchor: AlignmentDirectional(0.0, 0.0)
-                                      .resolve(Directionality.of(context)),
-                                  followerAnchor: AlignmentDirectional(0.0, 0.0)
-                                      .resolve(Directionality.of(context)),
-                                  builder: (dialogContext) {
-                                    return Material(
-                                      color: Colors.transparent,
-                                      child: Container(
-                                        height: 110.0,
-                                        width: 320.0,
-                                        child: LogoutWidget(),
-                                      ),
-                                    );
-                                  },
-                                ).then((value) => setState(() {}));
-                              },
-                              text: 'Log Out\n',
-                              options: FFButtonOptions(
-                                width: 253.0,
-                                height: 50.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color:
-                                          FlutterFlowTheme.of(context).black600,
-                                    ),
-                                elevation: 3.0,
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBtnText,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                            ),
+                        alignment: AlignmentDirectional(0.0, -1.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                            width: 200.0,
+                            height: 139.0,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                          width: 200.0,
-                          height: 139.0,
-                          fit: BoxFit.cover,
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 20.0, 0.0, 0.0),
+                          child: Text(
+                            'Licensed by BTA food and entertainment \nBeta Version 0.0.51',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBtnText,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
-                child: Text(
-                  'Licensed by BTA food and entertainment \nBeta Version 0.0.51',
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Readex Pro',
-                        color: FlutterFlowTheme.of(context).primaryBtnText,
-                        fontStyle: FontStyle.italic,
-                      ),
-                ),
+                ],
               ),
             ],
           ),
