@@ -153,7 +153,7 @@ class _AdditionalSettingsWidgetState extends State<AdditionalSettingsWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
-                context.pushNamed('hidenUsers');
+                context.pushNamed('hiddenUsers');
               },
               child: ListTile(
                 title: Text(

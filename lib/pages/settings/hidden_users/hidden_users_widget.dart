@@ -13,19 +13,19 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'hiden_users_model.dart';
-export 'hiden_users_model.dart';
+import 'hidden_users_model.dart';
+export 'hidden_users_model.dart';
 
-class HidenUsersWidget extends StatefulWidget {
-  const HidenUsersWidget({Key? key}) : super(key: key);
+class HiddenUsersWidget extends StatefulWidget {
+  const HiddenUsersWidget({Key? key}) : super(key: key);
 
   @override
-  _HidenUsersWidgetState createState() => _HidenUsersWidgetState();
+  _HiddenUsersWidgetState createState() => _HiddenUsersWidgetState();
 }
 
-class _HidenUsersWidgetState extends State<HidenUsersWidget>
+class _HiddenUsersWidgetState extends State<HiddenUsersWidget>
     with TickerProviderStateMixin {
-  late HidenUsersModel _model;
+  late HiddenUsersModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -54,7 +54,7 @@ class _HidenUsersWidgetState extends State<HidenUsersWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HidenUsersModel());
+    _model = createModel(context, () => HiddenUsersModel());
 
     setupAnimations(
       animationsMap.values.where((anim) =>

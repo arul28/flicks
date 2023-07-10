@@ -50,7 +50,7 @@ export '/pages/settings/report_form/report_form_widget.dart'
     show ReportFormWidget;
 export '/pages/settings/blocked_users/blocked_users_widget.dart'
     show BlockedUsersWidget;
-export '/pages/settings/hiden_users/hiden_users_widget.dart'
-    show HidenUsersWidget;
+export '/pages/settings/hidden_users/hidden_users_widget.dart'
+    show HiddenUsersWidget;
 export '/pages/settings/delete_account_settings_page/delete_account_settings_page_widget.dart'
     show DeleteAccountSettingsPageWidget;

@@ -128,7 +128,7 @@ class _VerifyUnrestrictUserWidgetState
                               FieldValue.arrayRemove([widget.userRef]),
                         });
 
-                        context.pushNamed('hidenUsers');
+                        context.pushNamed('hiddenUsers');
                       },
                       text: 'Confirm',
                       options: FFButtonOptions(

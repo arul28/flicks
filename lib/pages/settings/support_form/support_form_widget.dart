@@ -81,7 +81,7 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
         body: SafeArea(
           top: true,
           child: Container(
-            width: 394.0,
+            width: double.infinity,
             height: 800.0,
             decoration: BoxDecoration(
               gradient: LinearGradient(

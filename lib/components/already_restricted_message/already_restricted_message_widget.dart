@@ -115,7 +115,7 @@ class _AlreadyRestrictedMessageWidgetState
                         EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 25.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('hidenUsers');
+                        context.pushNamed('hiddenUsers');
                       },
                       text: 'Unhide',
                       options: FFButtonOptions(

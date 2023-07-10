@@ -248,9 +248,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => BlockedUsersWidget(),
         ),
         FFRoute(
-          name: 'hidenUsers',
-          path: '/hidenUsers',
-          builder: (context, params) => HidenUsersWidget(),
+          name: 'hiddenUsers',
+          path: '/hiddenUsers',
+          builder: (context, params) => HiddenUsersWidget(),
         ),
         FFRoute(
           name: 'deleteAccountSettingsPage',
