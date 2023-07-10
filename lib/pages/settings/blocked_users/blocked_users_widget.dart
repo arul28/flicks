@@ -157,12 +157,8 @@ class _BlockedUsersWidgetState extends State<BlockedUsersWidget>
                 ),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                  child: StreamBuilder<List<UsersRecord>>(
-                    stream: queryUsersRecord(
-                      queryBuilder: (usersRecord) => usersRecord.where(
-                          'blockedBy',
-                          arrayContains: currentUserReference),
-                    ),
+                  child: StreamBuilder<UsersRecord>(
+                    stream: UsersRecord.getDocument(currentUserReference!),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -176,190 +172,211 @@ class _BlockedUsersWidgetState extends State<BlockedUsersWidget>
                           ),
                         );
                       }
-                      List<UsersRecord> listViewUsersRecordList = snapshot.data!
-                          .where((u) => u.uid != currentUserUid)
-                          .toList();
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: listViewUsersRecordList.length,
-                        itemBuilder: (context, listViewIndex) {
-                          final listViewUsersRecord =
-                              listViewUsersRecordList[listViewIndex];
-                          return Visibility(
-                            visible:
-                                !(currentUserDocument?.blockedUsers?.toList() ??
-                                        [])
-                                    .contains(listViewUsersRecord.reference),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 1.0),
-                              child: AuthUserStreamWidget(
-                                builder: (context) => Container(
-                                  width: double.infinity,
-                                  height: 75.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).black600,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 0.0,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(0.0, 1.0),
-                                      )
-                                    ],
-                                    border: Border.all(
-                                      color:
-                                          FlutterFlowTheme.of(context).noColor,
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4.0, 4.0, 4.0, 4.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Container(
-                                          width: 60.0,
-                                          height: 60.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0x4C4B39EF),
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                      final listViewUsersRecord = snapshot.data!;
+                      return Builder(
+                        builder: (context) {
+                          final blocked = listViewUsersRecord.iBlocked.toList();
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: blocked.length,
+                            itemBuilder: (context, blockedIndex) {
+                              final blockedItem = blocked[blockedIndex];
+                              return Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 1.0),
+                                child: StreamBuilder<UsersRecord>(
+                                  stream: UsersRecord.getDocument(blockedItem),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    final userListUsersRecord = snapshot.data!;
+                                    return Container(
+                                      width: double.infinity,
+                                      height: 75.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .black600,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 0.0,
+                                            color: Color(0xFFE0E3E7),
+                                            offset: Offset(0.0, 1.0),
+                                          )
+                                        ],
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .noColor,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            4.0, 4.0, 4.0, 4.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Container(
+                                              width: 60.0,
+                                              height: 60.0,
+                                              decoration: BoxDecoration(
+                                                color: Color(0x4C4B39EF),
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .success,
-                                              width: 2.0,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    2.0, 2.0, 2.0, 2.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(40.0),
-                                              child: Image.network(
-                                                listViewUsersRecord.photoUrl,
-                                                width: 60.0,
-                                                height: 60.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        12.0, 12.0, 0.0, 0.0),
-                                                child: Text(
-                                                  listViewUsersRecord
-                                                      .displayName,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily:
-                                                            'Plus Jakarta Sans',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .gray200,
-                                                        fontSize: 16.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                                                  width: 2.0,
                                                 ),
                                               ),
-                                              Padding(
+                                              child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        12.0, 4.0, 0.0, 0.0),
-                                                child: Text(
-                                                  listViewUsersRecord.fullName,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Plus Jakarta Sans',
-                                                        color:
-                                                            Color(0xFF57636C),
-                                                        fontSize: 14.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                                                        2.0, 2.0, 2.0, 2.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          40.0),
+                                                  child: Image.network(
+                                                    userListUsersRecord
+                                                        .photoUrl,
+                                                    width: 60.0,
+                                                    height: 60.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                        Builder(
-                                          builder: (context) => InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await showAlignedDialog(
-                                                context: context,
-                                                isGlobal: true,
-                                                avoidOverflow: false,
-                                                targetAnchor:
-                                                    AlignmentDirectional(
-                                                            0.0, 0.0)
-                                                        .resolve(
-                                                            Directionality.of(
-                                                                context)),
-                                                followerAnchor:
-                                                    AlignmentDirectional(
-                                                            0.0, 0.0)
-                                                        .resolve(
-                                                            Directionality.of(
-                                                                context)),
-                                                builder: (dialogContext) {
-                                                  return Material(
-                                                    color: Colors.transparent,
-                                                    child: GestureDetector(
-                                                      onTap: () => FocusScope
-                                                              .of(context)
-                                                          .requestFocus(_model
-                                                              .unfocusNode),
-                                                      child:
-                                                          VerifyUnblockUserWidget(
-                                                        userRef:
-                                                            listViewUsersRecord
-                                                                .reference,
-                                                      ),
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(12.0,
+                                                                12.0, 0.0, 0.0),
+                                                    child: Text(
+                                                      userListUsersRecord
+                                                          .displayName,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Plus Jakarta Sans',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .gray200,
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
                                                     ),
-                                                  );
-                                                },
-                                              ).then(
-                                                  (value) => setState(() {}));
-                                            },
-                                            child: Icon(
-                                              Icons.remove_circle,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              size: 40.0,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(12.0, 4.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      userListUsersRecord
+                                                          .fullName,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Plus Jakarta Sans',
+                                                            color: Color(
+                                                                0xFF57636C),
+                                                            fontSize: 14.0,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
+                                            Builder(
+                                              builder: (context) => InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await showAlignedDialog(
+                                                    context: context,
+                                                    isGlobal: true,
+                                                    avoidOverflow: false,
+                                                    targetAnchor:
+                                                        AlignmentDirectional(
+                                                                0.0, 0.0)
+                                                            .resolve(
+                                                                Directionality.of(
+                                                                    context)),
+                                                    followerAnchor:
+                                                        AlignmentDirectional(
+                                                                0.0, 0.0)
+                                                            .resolve(
+                                                                Directionality.of(
+                                                                    context)),
+                                                    builder: (dialogContext) {
+                                                      return Material(
+                                                        color:
+                                                            Colors.transparent,
+                                                        child: GestureDetector(
+                                                          onTap: () => FocusScope
+                                                                  .of(context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode),
+                                                          child:
+                                                              VerifyUnblockUserWidget(
+                                                            userRef:
+                                                                listViewUsersRecord
+                                                                    .reference,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      setState(() {}));
+                                                },
+                                                child: Icon(
+                                                  Icons.remove_circle,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  size: 40.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ).animateOnPageLoad(animationsMap[
-                                    'containerOnPageLoadAnimation']!),
-                              ),
-                            ),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'containerOnPageLoadAnimation']!);
+                                  },
+                                ),
+                              );
+                            },
                           );
                         },
                       );

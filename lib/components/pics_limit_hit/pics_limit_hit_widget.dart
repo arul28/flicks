@@ -48,7 +48,7 @@ class _PicsLimitHitWidgetState extends State<PicsLimitHitWidget> {
       ),
       child: Container(
         width: 317.0,
-        height: 150.0,
+        height: 140.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.0),

@@ -119,13 +119,9 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                         EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 15.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        GoRouter.of(context).prepareAuthEvent();
-                        await authManager.signOut();
-                        GoRouter.of(context).clearRedirectLocation();
-
                         await authManager.deleteUser(context);
 
-                        context.pushNamedAuth('LandingPage', context.mounted);
+                        context.pushNamed('LandingPage');
                       },
                       text: 'Confirm',
                       options: FFButtonOptions(
