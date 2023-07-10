@@ -981,46 +981,39 @@ class _FeedWidgetState extends State<FeedWidget> {
                           return Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 6.0, 0.0, 20.0),
-                                child: FutureBuilder<int>(
-                                  future: queryOldSessionPicsRecordCount(
-                                    parent: listViewUsersRecord.reference,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    int containerCount = snapshot.data!;
-                                    return Container(
-                                      width: double.infinity,
-                                      height: 259.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                              if (true /* Warning: Trying to access variable not yet defined. */)
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 6.0, 0.0, 20.0),
+                                  child: AuthUserStreamWidget(
+                                    builder: (context) => FutureBuilder<int>(
+                                      future: queryOldSessionPicsRecordCount(
+                                        parent: listViewUsersRecord.reference,
                                       ),
-                                      child: Visibility(
-                                        visible: (containerCount != 0) &&
-                                            !(currentUserDocument
-                                                        ?.restrictedUsers
-                                                        ?.toList() ??
-                                                    [])
-                                                .contains(listViewUsersRecord
-                                                    .reference),
-                                        child: AuthUserStreamWidget(
-                                          builder: (context) =>
-                                              FriendPhotosWidget(
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: CircularProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        int containerCount = snapshot.data!;
+                                        return Container(
+                                          width: double.infinity,
+                                          height: 259.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                          child: FriendPhotosWidget(
                                             key: Key(
                                                 'Keyqli_${listViewIndex}_of_${listViewUsersRecordList.length}'),
                                             parameter1:
@@ -1031,12 +1024,11 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                 listViewUsersRecord.reference,
                                             userDoc: listViewUsersRecord,
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  },
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
                             ],
                           );
                         },
