@@ -462,7 +462,17 @@ class _ManageFriendsWidgetState extends State<ManageFriendsWidget> {
                                         setState(() {});
                                       }
 
-                                      context.pushNamed('manageFriends');
+                                      context.pushNamed(
+                                        'manageFriends',
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration: Duration(milliseconds: 0),
+                                          ),
+                                        },
+                                      );
                                     },
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,

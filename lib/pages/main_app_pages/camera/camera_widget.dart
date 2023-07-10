@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
+import '/components/image_error/image_error_widget.dart';
 import '/components/pics_limit_hit/pics_limit_hit_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -143,24 +144,25 @@ class _CameraWidgetState extends State<CameraWidget> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
-                        child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30.0,
-                          borderWidth: 1.0,
-                          buttonSize: 60.0,
-                          icon: Icon(
-                            Icons.camera_roll,
-                            color: FlutterFlowTheme.of(context).frenchViolet,
-                            size: 35.0,
+                      if (!FFAppState().uploadingPhoto)
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 4.0),
+                          child: FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 30.0,
+                            borderWidth: 1.0,
+                            buttonSize: 60.0,
+                            icon: Icon(
+                              Icons.camera_roll,
+                              color: FlutterFlowTheme.of(context).frenchViolet,
+                              size: 35.0,
+                            ),
+                            onPressed: () async {
+                              context.pushNamed('currentSessionPhotosDetails');
+                            },
                           ),
-                          onPressed: () async {
-                            context.pushNamed('currentSessionPhotosDetails');
-                          },
                         ),
-                      ),
                     ],
                   ),
                   actions: [],
@@ -275,7 +277,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                               ),
                             ),
                           ),
-                        if (!_model.takingImage!)
+                        if (!FFAppState().uploadingPhoto)
                           Align(
                             alignment: AlignmentDirectional(0.0, 1.0),
                             child: Builder(
@@ -311,7 +313,11 @@ class _CameraWidgetState extends State<CameraWidget> {
                                                   FocusScope.of(context)
                                                       .requestFocus(
                                                           _model.unfocusNode),
-                                              child: PicsLimitHitWidget(),
+                                              child: Container(
+                                                height: 140.0,
+                                                width: 317.0,
+                                                child: PicsLimitHitWidget(),
+                                              ),
                                             ),
                                           );
                                         },
@@ -326,17 +332,85 @@ class _CameraWidgetState extends State<CameraWidget> {
                                       });
                                       await Future.delayed(
                                           const Duration(milliseconds: 3000));
+                                      if (!FFAppState().uploadingPhoto) {
+                                        await CurrentSessionPicsRecord
+                                                .createDoc(
+                                                    currentUserReference!)
+                                            .set({
+                                          ...createCurrentSessionPicsRecordData(
+                                            imagePath: functions.strToImgPath(
+                                                FFAppState().filePath),
+                                          ),
+                                          'timeTaken':
+                                              FieldValue.serverTimestamp(),
+                                        });
+                                      } else {
+                                        await Future.delayed(
+                                            const Duration(milliseconds: 3000));
+                                        if (!FFAppState().uploadingPhoto) {
+                                          await CurrentSessionPicsRecord
+                                                  .createDoc(
+                                                      currentUserReference!)
+                                              .set({
+                                            ...createCurrentSessionPicsRecordData(
+                                              imagePath: functions.strToImgPath(
+                                                  FFAppState().filePath),
+                                            ),
+                                            'timeTaken':
+                                                FieldValue.serverTimestamp(),
+                                          });
+                                        } else {
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 3000));
+                                          if (!FFAppState().uploadingPhoto) {
+                                            await CurrentSessionPicsRecord
+                                                    .createDoc(
+                                                        currentUserReference!)
+                                                .set({
+                                              ...createCurrentSessionPicsRecordData(
+                                                imagePath:
+                                                    functions.strToImgPath(
+                                                        FFAppState().filePath),
+                                              ),
+                                              'timeTaken':
+                                                  FieldValue.serverTimestamp(),
+                                            });
+                                          } else {
+                                            await showAlignedDialog(
+                                              context: context,
+                                              isGlobal: true,
+                                              avoidOverflow: false,
+                                              targetAnchor:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              followerAnchor:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              builder: (dialogContext) {
+                                                return Material(
+                                                  color: Colors.transparent,
+                                                  child: GestureDetector(
+                                                    onTap: () => FocusScope.of(
+                                                            context)
+                                                        .requestFocus(
+                                                            _model.unfocusNode),
+                                                    child: Container(
+                                                      height: 150.0,
+                                                      width: 400.0,
+                                                      child: ImageErrorWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then((value) => setState(() {}));
+                                          }
+                                        }
+                                      }
 
-                                      await CurrentSessionPicsRecord.createDoc(
-                                              currentUserReference!)
-                                          .set({
-                                        ...createCurrentSessionPicsRecordData(
-                                          imagePath: functions.strToImgPath(
-                                              FFAppState().filePath),
-                                        ),
-                                        'timeTaken':
-                                            FieldValue.serverTimestamp(),
-                                      });
                                       setState(() {
                                         _model.takingImage = false;
                                       });
@@ -362,7 +436,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  if (_model.takingImage ?? true)
+                                  if (FFAppState().uploadingPhoto)
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.asset(
@@ -374,9 +448,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                                     ),
                                 ],
                               ),
-                            if (_model.takingImage ?? true)
+                            if (FFAppState().uploadingPhoto)
                               Text(
-                                'flick captured!',
+                                'uploading flick!',
                                 style: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(

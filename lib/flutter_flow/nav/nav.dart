@@ -182,9 +182,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ResetPasswordWidget(),
         ),
         FFRoute(
-          name: 'manageSettings',
-          path: '/manageSettings',
-          builder: (context, params) => ManageSettingsWidget(),
+          name: 'ManageNotifications',
+          path: '/manageNotifications',
+          builder: (context, params) => ManageNotificationsWidget(),
         ),
         FFRoute(
           name: 'imageViewer',
@@ -228,6 +228,34 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'managePending',
           path: '/managePending',
           builder: (context, params) => ManagePendingWidget(),
+        ),
+        FFRoute(
+          name: 'AdditionalSettings',
+          path: '/additionalSettings',
+          builder: (context, params) => AdditionalSettingsWidget(),
+        ),
+        FFRoute(
+          name: 'ReportForm',
+          path: '/reportForm',
+          builder: (context, params) => ReportFormWidget(
+            reportedUser: params.getParam(
+                'reportedUser', ParamType.DocumentReference, false, ['users']),
+          ),
+        ),
+        FFRoute(
+          name: 'blockedUsers',
+          path: '/blockedUsers',
+          builder: (context, params) => BlockedUsersWidget(),
+        ),
+        FFRoute(
+          name: 'hiddenUsers',
+          path: '/hiddenUsers',
+          builder: (context, params) => HiddenUsersWidget(),
+        ),
+        FFRoute(
+          name: 'deleteAccountSettingsPage',
+          path: '/deleteAccountSettingsPage',
+          builder: (context, params) => DeleteAccountSettingsPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

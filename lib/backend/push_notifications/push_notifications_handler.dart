@@ -135,7 +135,7 @@ final parametersBuilderMap =
   'SupportForm': ParameterData.none(),
   'ForgotPassword': ParameterData.none(),
   'ResetPassword': ParameterData.none(),
-  'manageSettings': ParameterData.none(),
+  'ManageNotifications': ParameterData.none(),
   'imageViewer': (data) async => ParameterData(
         allParams: {
           'userRef': getParameter<DocumentReference>(data, 'userRef'),
@@ -153,6 +153,15 @@ final parametersBuilderMap =
   'manageFriends': ParameterData.none(),
   'manageRequests': ParameterData.none(),
   'managePending': ParameterData.none(),
+  'AdditionalSettings': ParameterData.none(),
+  'ReportForm': (data) async => ParameterData(
+        allParams: {
+          'reportedUser': getParameter<DocumentReference>(data, 'reportedUser'),
+        },
+      ),
+  'blockedUsers': ParameterData.none(),
+  'hiddenUsers': ParameterData.none(),
+  'deleteAccountSettingsPage': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

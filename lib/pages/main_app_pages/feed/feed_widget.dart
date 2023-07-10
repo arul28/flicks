@@ -1011,17 +1011,26 @@ class _FeedWidgetState extends State<FeedWidget> {
                                             .secondaryBackground,
                                       ),
                                       child: Visibility(
-                                        visible: containerCount != 0,
-                                        child: FriendPhotosWidget(
-                                          key: Key(
-                                              'Keyqli_${listViewIndex}_of_${listViewUsersRecordList.length}'),
-                                          parameter1:
-                                              listViewUsersRecord.photoUrl,
-                                          parameter2:
-                                              listViewUsersRecord.displayName,
-                                          parameter3:
-                                              listViewUsersRecord.reference,
-                                          userDoc: listViewUsersRecord,
+                                        visible: (containerCount != 0) &&
+                                            !(currentUserDocument
+                                                        ?.restrictedUsers
+                                                        ?.toList() ??
+                                                    [])
+                                                .contains(listViewUsersRecord
+                                                    .reference),
+                                        child: AuthUserStreamWidget(
+                                          builder: (context) =>
+                                              FriendPhotosWidget(
+                                            key: Key(
+                                                'Keyqli_${listViewIndex}_of_${listViewUsersRecordList.length}'),
+                                            parameter1:
+                                                listViewUsersRecord.photoUrl,
+                                            parameter2:
+                                                listViewUsersRecord.displayName,
+                                            parameter3:
+                                                listViewUsersRecord.reference,
+                                            userDoc: listViewUsersRecord,
+                                          ),
                                         ),
                                       ),
                                     );

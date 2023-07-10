@@ -118,6 +118,46 @@ class UsersRecord extends FirestoreRecord {
   bool get firstViewAfterSwitch => _firstViewAfterSwitch ?? false;
   bool hasFirstViewAfterSwitch() => _firstViewAfterSwitch != null;
 
+  // "comNotifs" field.
+  bool? _comNotifs;
+  bool get comNotifs => _comNotifs ?? false;
+  bool hasComNotifs() => _comNotifs != null;
+
+  // "likesNotifs" field.
+  bool? _likesNotifs;
+  bool get likesNotifs => _likesNotifs ?? false;
+  bool hasLikesNotifs() => _likesNotifs != null;
+
+  // "reqNotifs" field.
+  bool? _reqNotifs;
+  bool get reqNotifs => _reqNotifs ?? false;
+  bool hasReqNotifs() => _reqNotifs != null;
+
+  // "devNotifs" field.
+  bool? _devNotifs;
+  bool get devNotifs => _devNotifs ?? false;
+  bool hasDevNotifs() => _devNotifs != null;
+
+  // "blockedUsers" field.
+  List<DocumentReference>? _blockedUsers;
+  List<DocumentReference> get blockedUsers => _blockedUsers ?? const [];
+  bool hasBlockedUsers() => _blockedUsers != null;
+
+  // "iBlocked" field.
+  List<DocumentReference>? _iBlocked;
+  List<DocumentReference> get iBlocked => _iBlocked ?? const [];
+  bool hasIBlocked() => _iBlocked != null;
+
+  // "blockedBy" field.
+  List<DocumentReference>? _blockedBy;
+  List<DocumentReference> get blockedBy => _blockedBy ?? const [];
+  bool hasBlockedBy() => _blockedBy != null;
+
+  // "restrictedUsers" field.
+  List<DocumentReference>? _restrictedUsers;
+  List<DocumentReference> get restrictedUsers => _restrictedUsers ?? const [];
+  bool hasRestrictedUsers() => _restrictedUsers != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -142,6 +182,14 @@ class UsersRecord extends FirestoreRecord {
     _emailVerified = snapshotData['emailVerified'] as bool?;
     _profileCreated = snapshotData['profileCreated'] as bool?;
     _firstViewAfterSwitch = snapshotData['firstViewAfterSwitch'] as bool?;
+    _comNotifs = snapshotData['comNotifs'] as bool?;
+    _likesNotifs = snapshotData['likesNotifs'] as bool?;
+    _reqNotifs = snapshotData['reqNotifs'] as bool?;
+    _devNotifs = snapshotData['devNotifs'] as bool?;
+    _blockedUsers = getDataList(snapshotData['blockedUsers']);
+    _iBlocked = getDataList(snapshotData['iBlocked']);
+    _blockedBy = getDataList(snapshotData['blockedBy']);
+    _restrictedUsers = getDataList(snapshotData['restrictedUsers']);
   }
 
   static CollectionReference get collection =>
@@ -193,6 +241,10 @@ Map<String, dynamic> createUsersRecordData({
   bool? emailVerified,
   bool? profileCreated,
   bool? firstViewAfterSwitch,
+  bool? comNotifs,
+  bool? likesNotifs,
+  bool? reqNotifs,
+  bool? devNotifs,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -211,6 +263,10 @@ Map<String, dynamic> createUsersRecordData({
       'emailVerified': emailVerified,
       'profileCreated': profileCreated,
       'firstViewAfterSwitch': firstViewAfterSwitch,
+      'comNotifs': comNotifs,
+      'likesNotifs': likesNotifs,
+      'reqNotifs': reqNotifs,
+      'devNotifs': devNotifs,
     }.withoutNulls,
   );
 
@@ -243,7 +299,15 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.liked, e2?.liked) &&
         e1?.emailVerified == e2?.emailVerified &&
         e1?.profileCreated == e2?.profileCreated &&
-        e1?.firstViewAfterSwitch == e2?.firstViewAfterSwitch;
+        e1?.firstViewAfterSwitch == e2?.firstViewAfterSwitch &&
+        e1?.comNotifs == e2?.comNotifs &&
+        e1?.likesNotifs == e2?.likesNotifs &&
+        e1?.reqNotifs == e2?.reqNotifs &&
+        e1?.devNotifs == e2?.devNotifs &&
+        listEquality.equals(e1?.blockedUsers, e2?.blockedUsers) &&
+        listEquality.equals(e1?.iBlocked, e2?.iBlocked) &&
+        listEquality.equals(e1?.blockedBy, e2?.blockedBy) &&
+        listEquality.equals(e1?.restrictedUsers, e2?.restrictedUsers);
   }
 
   @override
@@ -267,7 +331,15 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.liked,
         e?.emailVerified,
         e?.profileCreated,
-        e?.firstViewAfterSwitch
+        e?.firstViewAfterSwitch,
+        e?.comNotifs,
+        e?.likesNotifs,
+        e?.reqNotifs,
+        e?.devNotifs,
+        e?.blockedUsers,
+        e?.iBlocked,
+        e?.blockedBy,
+        e?.restrictedUsers
       ]);
 
   @override

@@ -85,6 +85,12 @@ class FFAppState extends ChangeNotifier {
   set switchCam(bool _value) {
     _switchCam = _value;
   }
+
+  bool _uploadingPhoto = false;
+  bool get uploadingPhoto => _uploadingPhoto;
+  set uploadingPhoto(bool _value) {
+    _uploadingPhoto = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

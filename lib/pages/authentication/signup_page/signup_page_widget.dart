@@ -454,6 +454,14 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                     return;
                                   }
 
+                                  await UsersRecord.collection
+                                      .doc(user.uid)
+                                      .update(createUsersRecordData(
+                                        comNotifs: true,
+                                        reqNotifs: true,
+                                        likesNotifs: true,
+                                      ));
+
                                   await authManager.sendEmailVerification();
 
                                   context.goNamedAuth(
@@ -549,12 +557,14 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                                     0.0, 0.0, 0.0, 0.0),
                                             iconPadding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 8.0, 0.0),
+                                                    0.0, 0.0, 0.0, 0.0),
                                             color: Colors.white,
                                             textStyle: GoogleFonts.getFont(
                                               'Roboto',
-                                              color: Color(0xFF606060),
-                                              fontSize: 17.0,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .black600,
+                                              fontSize: 15.0,
                                             ),
                                             elevation: 4.0,
                                             borderSide: BorderSide(
@@ -567,16 +577,21 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                       Align(
                                         alignment:
                                             AlignmentDirectional(-0.83, 0.0),
-                                        child: Container(
-                                          width: 22.0,
-                                          height: 22.0,
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Image.network(
-                                            'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
-                                            fit: BoxFit.contain,
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  15.0, 0.0, 0.0, 0.0),
+                                          child: Container(
+                                            width: 22.0,
+                                            height: 22.0,
+                                            clipBehavior: Clip.antiAlias,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Image.network(
+                                              'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
+                                              fit: BoxFit.contain,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -623,12 +638,13 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                           0.0, 0.0, 0.0, 0.0),
                                       iconPadding:
                                           EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 10.0, 1.0),
+                                              0.0, 0.0, 0.0, 1.0),
                                       color: Colors.white,
                                       textStyle: GoogleFonts.getFont(
                                         'Roboto',
-                                        color: Colors.black,
-                                        fontSize: 17.0,
+                                        color: FlutterFlowTheme.of(context)
+                                            .black600,
+                                        fontSize: 15.0,
                                       ),
                                       elevation: 4.0,
                                       borderSide: BorderSide(

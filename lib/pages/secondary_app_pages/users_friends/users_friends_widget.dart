@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -213,92 +214,106 @@ class _UsersFriendsWidgetState extends State<UsersFriendsWidget>
                         itemBuilder: (context, listViewIndex) {
                           final listViewUsersRecord =
                               listViewUsersRecordList[listViewIndex];
-                          return Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 1.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed(
-                                  'viewProfile',
-                                  queryParameters: {
-                                    'userInfo': serializeParam(
-                                      listViewUsersRecord,
-                                      ParamType.Document,
-                                    ),
-                                  }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    'userInfo': listViewUsersRecord,
-                                  },
-                                );
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: 75.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).black600,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 0.0,
-                                      color: Color(0xFFE0E3E7),
-                                      offset: Offset(0.0, 1.0),
-                                    )
-                                  ],
-                                  border: Border.all(
-                                    color: FlutterFlowTheme.of(context).noColor,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      4.0, 4.0, 4.0, 4.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Container(
-                                        width: 60.0,
-                                        height: 60.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0x4C4B39EF),
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .success,
-                                            width: 2.0,
+                          return Visibility(
+                            visible:
+                                !(currentUserDocument?.blockedUsers?.toList() ??
+                                        [])
+                                    .contains(listViewUsersRecord.reference),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 1.0),
+                              child: AuthUserStreamWidget(
+                                builder: (context) => InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    if (listViewUsersRecord.reference ==
+                                        currentUserReference) {
+                                      context.pushNamed('Profile');
+                                    } else {
+                                      context.pushNamed(
+                                        'viewProfile',
+                                        queryParameters: {
+                                          'userInfo': serializeParam(
+                                            listViewUsersRecord,
+                                            ParamType.Document,
                                           ),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  2.0, 2.0, 2.0, 2.0),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(40.0),
-                                            child: Image.network(
-                                              listViewUsersRecord.photoUrl,
-                                              width: 60.0,
-                                              height: 60.0,
-                                              fit: BoxFit.cover,
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'userInfo': listViewUsersRecord,
+                                        },
+                                      );
+                                    }
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 75.0,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          FlutterFlowTheme.of(context).black600,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 0.0,
+                                          color: Color(0xFFE0E3E7),
+                                          offset: Offset(0.0, 1.0),
+                                        )
+                                      ],
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .noColor,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          4.0, 4.0, 4.0, 4.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Container(
+                                            width: 60.0,
+                                            height: 60.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0x4C4B39EF),
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .success,
+                                                width: 2.0,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(2.0, 2.0, 2.0, 2.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(40.0),
+                                                child: Image.network(
+                                                  listViewUsersRecord.photoUrl,
+                                                  width: 60.0,
+                                                  height: 60.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 12.0, 0.0, 0.0),
-                                              child: Text(
-                                                listViewUsersRecord.displayName,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          12.0, 12.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    listViewUsersRecord
+                                                        .displayName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyLarge
                                                         .override(
                                                           fontFamily:
@@ -310,16 +325,17 @@ class _UsersFriendsWidgetState extends State<UsersFriendsWidget>
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 4.0, 0.0, 0.0),
-                                              child: Text(
-                                                listViewUsersRecord.fullName,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          12.0, 4.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    listViewUsersRecord
+                                                        .fullName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .labelMedium
                                                         .override(
                                                           fontFamily:
@@ -330,17 +346,19 @@ class _UsersFriendsWidgetState extends State<UsersFriendsWidget>
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
-                                              ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                ).animateOnPageLoad(animationsMap[
+                                    'containerOnPageLoadAnimation']!),
                               ),
-                            ).animateOnPageLoad(
-                                animationsMap['containerOnPageLoadAnimation']!),
+                            ),
                           );
                         },
                       );

@@ -28,8 +28,8 @@ export '/pages/authentication/forgot_password/forgot_password_widget.dart'
     show ForgotPasswordWidget;
 export '/pages/settings/reset_password/reset_password_widget.dart'
     show ResetPasswordWidget;
-export '/pages/settings/manage_settings/manage_settings_widget.dart'
-    show ManageSettingsWidget;
+export '/pages/settings/manage_notifications/manage_notifications_widget.dart'
+    show ManageNotificationsWidget;
 export '/pages/secondary_app_pages/image_viewer/image_viewer_widget.dart'
     show ImageViewerWidget;
 export '/pages/secondary_app_pages/current_session_photos_details/current_session_photos_details_widget.dart'
@@ -44,3 +44,13 @@ export '/pages/friends/manage_requests/manage_requests_widget.dart'
     show ManageRequestsWidget;
 export '/pages/friends/manage_pending/manage_pending_widget.dart'
     show ManagePendingWidget;
+export '/pages/settings/additional_settings/additional_settings_widget.dart'
+    show AdditionalSettingsWidget;
+export '/pages/settings/report_form/report_form_widget.dart'
+    show ReportFormWidget;
+export '/pages/settings/blocked_users/blocked_users_widget.dart'
+    show BlockedUsersWidget;
+export '/pages/settings/hidden_users/hidden_users_widget.dart'
+    show HiddenUsersWidget;
+export '/pages/settings/delete_account_settings_page/delete_account_settings_page_widget.dart'
+    show DeleteAccountSettingsPageWidget;

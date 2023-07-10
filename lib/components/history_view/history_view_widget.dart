@@ -89,9 +89,6 @@ class _HistoryViewWidgetState extends State<HistoryViewWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        await actions.saveImage(
-                          widget.imgPath!,
-                        );
                         await showAlignedDialog(
                           context: context,
                           isGlobal: true,
@@ -111,6 +108,10 @@ class _HistoryViewWidgetState extends State<HistoryViewWidget> {
                             );
                           },
                         ).then((value) => setState(() {}));
+
+                        await actions.saveImage(
+                          widget.imgPath!,
+                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
