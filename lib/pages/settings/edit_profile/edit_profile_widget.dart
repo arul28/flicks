@@ -161,6 +161,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           final selectedMedia =
                               await selectMediaWithSourceBottomSheet(
                             context: context,
+                            imageQuality: 20,
                             allowPhoto: true,
                           );
                           if (selectedMedia != null &&

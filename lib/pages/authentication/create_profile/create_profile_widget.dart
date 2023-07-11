@@ -291,6 +291,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                                       final selectedMedia =
                                                           await selectMediaWithSourceBottomSheet(
                                                         context: context,
+                                                        imageQuality: 20,
                                                         allowPhoto: true,
                                                       );
                                                       if (selectedMedia !=
@@ -644,7 +645,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                 bio: _model.bioCreateController.text,
                                 fullName: _model.yourNameController.text,
                               ));
-                              if (_model.imageAdded != true) {
+                              if (!_model.imageAdded!) {
                                 await currentUserReference!
                                     .update(createUsersRecordData(
                                   photoUrl:

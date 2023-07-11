@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
 import '/components/profile_view_pinned/profile_view_pinned_widget.dart';
+import '/components/tour_components/profile_tour/profile_tour_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:badges/badges.dart' as badges;
@@ -82,6 +83,36 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             );
           },
         ).then((value) => setState(() {}));
+      }
+      if (!FFAppState().profileTour) {
+        await showAlignedDialog(
+          barrierDismissible: false,
+          context: context,
+          isGlobal: true,
+          avoidOverflow: false,
+          targetAnchor: AlignmentDirectional(0.0, 0.0)
+              .resolve(Directionality.of(context)),
+          followerAnchor: AlignmentDirectional(0.0, 0.0)
+              .resolve(Directionality.of(context)),
+          builder: (dialogContext) {
+            return Material(
+              color: Colors.transparent,
+              child: GestureDetector(
+                onTap: () =>
+                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                child: Container(
+                  height: 340.0,
+                  width: 500.0,
+                  child: ProfileTourWidget(),
+                ),
+              ),
+            );
+          },
+        ).then((value) => setState(() {}));
+
+        setState(() {
+          FFAppState().profileTour = true;
+        });
       }
     });
   }

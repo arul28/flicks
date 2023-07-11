@@ -21,6 +21,15 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _isDark = prefs.getBool('ff_isDark') ?? _isDark;
     });
+    _safeInit(() {
+      _profileTour = prefs.getBool('ff_profileTour') ?? _profileTour;
+    });
+    _safeInit(() {
+      _feedTour = prefs.getBool('ff_feedTour') ?? _feedTour;
+    });
+    _safeInit(() {
+      _cameraTour = prefs.getBool('ff_cameraTour') ?? _cameraTour;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -90,6 +99,27 @@ class FFAppState extends ChangeNotifier {
   bool get uploadingPhoto => _uploadingPhoto;
   set uploadingPhoto(bool _value) {
     _uploadingPhoto = _value;
+  }
+
+  bool _profileTour = false;
+  bool get profileTour => _profileTour;
+  set profileTour(bool _value) {
+    _profileTour = _value;
+    prefs.setBool('ff_profileTour', _value);
+  }
+
+  bool _feedTour = false;
+  bool get feedTour => _feedTour;
+  set feedTour(bool _value) {
+    _feedTour = _value;
+    prefs.setBool('ff_feedTour', _value);
+  }
+
+  bool _cameraTour = false;
+  bool get cameraTour => _cameraTour;
+  set cameraTour(bool _value) {
+    _cameraTour = _value;
+    prefs.setBool('ff_cameraTour', _value);
   }
 }
 

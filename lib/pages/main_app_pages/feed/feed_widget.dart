@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
 import '/components/friend_photos/friend_photos_widget.dart';
 import '/components/pinned_message/pinned_message_widget.dart';
+import '/components/tour_components/feed_tour/feed_tour_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -62,6 +63,32 @@ class _FeedWidgetState extends State<FeedWidget> {
             );
           },
         ).then((value) => setState(() {}));
+      }
+      if (!FFAppState().feedTour) {
+        await showAlignedDialog(
+          barrierDismissible: false,
+          context: context,
+          isGlobal: true,
+          avoidOverflow: false,
+          targetAnchor: AlignmentDirectional(0.0, 0.0)
+              .resolve(Directionality.of(context)),
+          followerAnchor: AlignmentDirectional(0.0, 0.0)
+              .resolve(Directionality.of(context)),
+          builder: (dialogContext) {
+            return Material(
+              color: Colors.transparent,
+              child: Container(
+                height: 360.0,
+                width: 500.0,
+                child: FeedTourWidget(),
+              ),
+            );
+          },
+        ).then((value) => setState(() {}));
+
+        setState(() {
+          FFAppState().feedTour = true;
+        });
       }
     });
   }
@@ -946,96 +973,106 @@ class _FeedWidgetState extends State<FeedWidget> {
               ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 32.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  StreamBuilder<List<UsersRecord>>(
-                    stream: queryUsersRecord(
-                      queryBuilder: (usersRecord) => usersRecord.where(
-                          'friendsList',
-                          arrayContains: currentUserReference),
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              color: FlutterFlowTheme.of(context).primary,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    StreamBuilder<List<UsersRecord>>(
+                      stream: queryUsersRecord(
+                        queryBuilder: (usersRecord) => usersRecord.where(
+                            'friendsList',
+                            arrayContains: currentUserReference),
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                color: FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
-                          ),
-                        );
-                      }
-                      List<UsersRecord> listViewUsersRecordList =
-                          snapshot.data!;
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: listViewUsersRecordList.length,
-                        itemBuilder: (context, listViewIndex) {
-                          final listViewUsersRecord =
-                              listViewUsersRecordList[listViewIndex];
-                          return Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              if (true /* Warning: Trying to access variable not yet defined. */)
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 6.0, 0.0, 20.0),
-                                  child: AuthUserStreamWidget(
-                                    builder: (context) => FutureBuilder<int>(
-                                      future: queryOldSessionPicsRecordCount(
-                                        parent: listViewUsersRecord.reference,
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: CircularProgressIndicator(
+                          );
+                        }
+                        List<UsersRecord> listViewUsersRecordList =
+                            snapshot.data!;
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: listViewUsersRecordList.length,
+                          itemBuilder: (context, listViewIndex) {
+                            final listViewUsersRecord =
+                                listViewUsersRecordList[listViewIndex];
+                            return Visibility(
+                              visible: (currentUserDocument?.restrictedUsers
+                                              ?.toList() ??
+                                          [])
+                                      .contains(
+                                          listViewUsersRecord.reference) !=
+                                  true,
+                              child: AuthUserStreamWidget(
+                                builder: (context) => FutureBuilder<int>(
+                                  future: queryOldSessionPicsRecordCount(
+                                    parent: listViewUsersRecord.reference,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    int stackCount = snapshot.data!;
+                                    return Stack(
+                                      children: [
+                                        if (stackCount != 0)
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 6.0, 0.0, 20.0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: 259.0,
+                                              decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primary,
+                                                        .secondaryBackground,
+                                              ),
+                                              child: FriendPhotosWidget(
+                                                key: Key(
+                                                    'Keyqli_${listViewIndex}_of_${listViewUsersRecordList.length}'),
+                                                parameter1: listViewUsersRecord
+                                                    .photoUrl,
+                                                parameter2: listViewUsersRecord
+                                                    .displayName,
+                                                parameter3: listViewUsersRecord
+                                                    .reference,
+                                                userDoc: listViewUsersRecord,
                                               ),
                                             ),
-                                          );
-                                        }
-                                        int containerCount = snapshot.data!;
-                                        return Container(
-                                          width: double.infinity,
-                                          height: 259.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
                                           ),
-                                          child: FriendPhotosWidget(
-                                            key: Key(
-                                                'Keyqli_${listViewIndex}_of_${listViewUsersRecordList.length}'),
-                                            parameter1:
-                                                listViewUsersRecord.photoUrl,
-                                            parameter2:
-                                                listViewUsersRecord.displayName,
-                                            parameter3:
-                                                listViewUsersRecord.reference,
-                                            userDoc: listViewUsersRecord,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
+                                      ],
+                                    );
+                                  },
                                 ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
