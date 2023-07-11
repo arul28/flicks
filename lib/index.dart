@@ -54,4 +54,3 @@ export '/pages/settings/hidden_users/hidden_users_widget.dart'
     show HiddenUsersWidget;
 export '/pages/settings/delete_account_settings_page/delete_account_settings_page_widget.dart'
     show DeleteAccountSettingsPageWidget;
-export '/onboarding4/onboarding4_widget.dart' show Onboarding4Widget;

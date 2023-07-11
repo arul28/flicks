@@ -89,8 +89,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                 onTap: () =>
                     FocusScope.of(context).requestFocus(_model.unfocusNode),
                 child: Container(
-                  height: 420.0,
-                  width: 500.0,
+                  height: 380.0,
+                  width: 350.0,
                   child: CameraTourWidget(),
                 ),
               ),

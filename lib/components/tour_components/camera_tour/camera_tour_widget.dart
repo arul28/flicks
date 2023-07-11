@@ -47,8 +47,8 @@ class _CameraTourWidgetState extends State<CameraTourWidget> {
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 500.0,
-        height: 420.0,
+        width: 350.0,
+        height: 380.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.0),

@@ -256,11 +256,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'deleteAccountSettingsPage',
           path: '/deleteAccountSettingsPage',
           builder: (context, params) => DeleteAccountSettingsPageWidget(),
-        ),
-        FFRoute(
-          name: 'Onboarding4',
-          path: '/onboarding4',
-          builder: (context, params) => Onboarding4Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
