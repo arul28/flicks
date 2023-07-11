@@ -161,7 +161,6 @@ class _FeedWidgetState extends State<FeedWidget> {
           elevation: 0.0,
         ),
         body: SingleChildScrollView(
-          primary: false,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -984,6 +983,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                             snapshot.data!;
                         return ListView.builder(
                           padding: EdgeInsets.zero,
+                          primary: false,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           itemCount: listViewUsersRecordList.length,
