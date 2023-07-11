@@ -211,7 +211,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                   snapshot.data!;
                               return Container(
                                 width: double.infinity,
-                                height: 254.0,
+                                height: 283.0,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context).noColor,
                                   borderRadius: BorderRadius.circular(0.0),
@@ -471,7 +471,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                     snapshot.data!;
                                                 return Container(
                                                   width: double.infinity,
-                                                  height: 181.0,
+                                                  height: 214.0,
                                                   child: Stack(
                                                     children: [
                                                       Padding(
@@ -527,7 +527,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                           width:
                                                                               170.0,
                                                                           height:
-                                                                              317.0,
+                                                                              346.0,
                                                                           decoration:
                                                                               BoxDecoration(
                                                                             color:
@@ -566,7 +566,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                                 borderRadius: BorderRadius.circular(8.0),
                                                                                 child: Image.network(
                                                                                   pageViewOldSessionPicsRecord.imagePath,
-                                                                                  width: 112.0,
+                                                                                  width: 126.0,
                                                                                   height: 300.0,
                                                                                   fit: BoxFit.cover,
                                                                                 ),
@@ -1060,7 +1060,7 @@ class _FeedWidgetState extends State<FeedWidget> {
               ),
               Container(
                 width: double.infinity,
-                height: 300.0,
+                height: 30.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
