@@ -438,6 +438,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                                           }
                                         }
                                       }
+
+                                      setState(() {});
                                     }
                                   },
                                   child: Icon(
