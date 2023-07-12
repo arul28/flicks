@@ -13,6 +13,10 @@ import 'index.dart'; // Imports other custom widgets
 
 import 'index.dart'; // Imports other custom widgets
 
+import 'index.dart'; // Imports other custom widgets
+
+import 'dart:math';
+
 import '../../auth/firebase_auth/auth_util.dart';
 import '../../backend/firebase_storage/storage.dart';
 import 'package:camera/camera.dart';
@@ -87,10 +91,15 @@ class _CameraPhotoState extends State<CameraPhoto> {
           FFAppState().makePhoto = false;
         });
         String dir = '/users/' + currentUserUid + '/flicks/';
-        final downloadUrl = await uploadData(
-            dir + FFAppState().index.toString() + '.jpg', result);
+        var rng = new Random();
+        var index = rng.nextInt(999999);
+        final downloadUrl =
+            await uploadData(dir + index.toString() + '.jpg', result);
+        // var rng = new Random();
+        // var index = rng.nextInt(999999);
+
         FFAppState().update(() {
-          FFAppState().index = FFAppState().index + 1;
+          // FFAppState().index = FFAppState().index + 1;
           FFAppState().filePath = downloadUrl ?? '';
           FFAppState().uploadingPhoto = false;
         });
