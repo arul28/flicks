@@ -71,10 +71,12 @@ class _CameraPhotoState extends State<CameraPhoto> {
   void didUpdateWidget(covariant CameraPhoto oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (FFAppState().makePhoto) {
-      FFAppState().errorUploading = false;
-      FFAppState().index = FFAppState().index + 1;
+      // FFAppState().errorUploading = false;
+      // FFAppState().index = FFAppState().index + 1;
       FFAppState().update(() {
         FFAppState().uploadingPhoto = true;
+        FFAppState().errorUploading = false;
+        FFAppState().index = FFAppState().index + 1;
       });
       controller!.takePicture().then((file) async {
         Uint8List fileAsBytes = await file.readAsBytes();
