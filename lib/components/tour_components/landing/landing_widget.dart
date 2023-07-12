@@ -4,18 +4,18 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'profile_tour_model.dart';
-export 'profile_tour_model.dart';
+import 'landing_model.dart';
+export 'landing_model.dart';
 
-class ProfileTourWidget extends StatefulWidget {
-  const ProfileTourWidget({Key? key}) : super(key: key);
+class LandingWidget extends StatefulWidget {
+  const LandingWidget({Key? key}) : super(key: key);
 
   @override
-  _ProfileTourWidgetState createState() => _ProfileTourWidgetState();
+  _LandingWidgetState createState() => _LandingWidgetState();
 }
 
-class _ProfileTourWidgetState extends State<ProfileTourWidget> {
-  late ProfileTourModel _model;
+class _LandingWidgetState extends State<LandingWidget> {
+  late LandingModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -26,7 +26,7 @@ class _ProfileTourWidgetState extends State<ProfileTourWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProfileTourModel());
+    _model = createModel(context, () => LandingModel());
   }
 
   @override
@@ -79,7 +79,7 @@ class _ProfileTourWidgetState extends State<ProfileTourWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 15.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'View Profile',
+                              'Welcome to Flicks! ',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .titleLarge
@@ -94,7 +94,7 @@ class _ProfileTourWidgetState extends State<ProfileTourWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 20.0, 0.0, 0.0),
                             child: Text(
-                              'This is your profile. You can view your friends and all of your pinned flicks here!  \n\nView all of your past flicks by selecting the view past flicks options. ',
+                              'Flicks is a new social media application that relives the disposable camera functionality. \n\nTake a flick and wait for it to develop! Flicks will be developed at random times and aren\'t immediately viewable.',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -133,7 +133,7 @@ class _ProfileTourWidgetState extends State<ProfileTourWidget> {
                         textStyle: FlutterFlowTheme.of(context).titleSmall,
                         elevation: 3.0,
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).noColor,
+                          color: Colors.transparent,
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(25.0),

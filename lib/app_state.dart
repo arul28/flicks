@@ -121,6 +121,12 @@ class FFAppState extends ChangeNotifier {
     _cameraTour = _value;
     prefs.setBool('ff_cameraTour', _value);
   }
+
+  bool _errorUploading = false;
+  bool get errorUploading => _errorUploading;
+  set errorUploading(bool _value) {
+    _errorUploading = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

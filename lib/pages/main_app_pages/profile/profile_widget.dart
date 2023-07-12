@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
 import '/components/profile_view_pinned/profile_view_pinned_widget.dart';
+import '/components/tour_components/landing/landing_widget.dart';
 import '/components/tour_components/profile_tour/profile_tour_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -86,6 +87,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       }
       if (!FFAppState().profileTour) {
         await showAlignedDialog(
+          context: context,
+          isGlobal: true,
+          avoidOverflow: false,
+          targetAnchor: AlignmentDirectional(0.0, 0.0)
+              .resolve(Directionality.of(context)),
+          followerAnchor: AlignmentDirectional(0.0, 0.0)
+              .resolve(Directionality.of(context)),
+          builder: (dialogContext) {
+            return Material(
+              color: Colors.transparent,
+              child: GestureDetector(
+                onTap: () =>
+                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                child: Container(
+                  height: 249.0,
+                  width: 375.0,
+                  child: LandingWidget(),
+                ),
+              ),
+            );
+          },
+        ).then((value) => setState(() {}));
+
+        await showAlignedDialog(
           barrierDismissible: false,
           context: context,
           isGlobal: true,
@@ -101,8 +126,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 onTap: () =>
                     FocusScope.of(context).requestFocus(_model.unfocusNode),
                 child: Container(
-                  height: 250.0,
-                  width: 350.0,
+                  height: 249.0,
+                  width: 375.0,
                   child: ProfileTourWidget(),
                 ),
               ),

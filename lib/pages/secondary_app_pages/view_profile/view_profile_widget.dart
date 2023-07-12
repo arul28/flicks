@@ -509,7 +509,6 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                         _model.recievedWaiting = false;
                                       });
                                     }
-                                    setState(() {});
                                   },
                                   child: Container(
                                     width: 200.0,

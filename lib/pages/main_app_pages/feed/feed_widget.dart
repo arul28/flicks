@@ -78,8 +78,8 @@ class _FeedWidgetState extends State<FeedWidget> {
             return Material(
               color: Colors.transparent,
               child: Container(
-                height: 320.0,
-                width: 350.0,
+                height: 249.0,
+                width: 375.0,
                 child: FeedTourWidget(),
               ),
             );

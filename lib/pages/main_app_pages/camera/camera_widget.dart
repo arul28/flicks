@@ -89,8 +89,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                 onTap: () =>
                     FocusScope.of(context).requestFocus(_model.unfocusNode),
                 child: Container(
-                  height: 380.0,
-                  width: 350.0,
+                  height: 264.0,
+                  width: 375.0,
                   child: CameraTourWidget(),
                 ),
               ),
@@ -364,21 +364,37 @@ class _CameraWidgetState extends State<CameraWidget> {
                                       await Future.delayed(
                                           const Duration(milliseconds: 3000));
                                       if (!FFAppState().uploadingPhoto) {
-                                        await CurrentSessionPicsRecord
-                                                .createDoc(
-                                                    currentUserReference!)
-                                            .set({
-                                          ...createCurrentSessionPicsRecordData(
-                                            imagePath: functions.strToImgPath(
-                                                FFAppState().filePath),
-                                          ),
-                                          'timeTaken':
-                                              FieldValue.serverTimestamp(),
-                                        });
-                                      } else {
-                                        await Future.delayed(
-                                            const Duration(milliseconds: 3000));
-                                        if (!FFAppState().uploadingPhoto) {
+                                        if (FFAppState().errorUploading) {
+                                          await showAlignedDialog(
+                                            context: context,
+                                            isGlobal: true,
+                                            avoidOverflow: false,
+                                            targetAnchor: AlignmentDirectional(
+                                                    0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                            followerAnchor:
+                                                AlignmentDirectional(0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                            builder: (dialogContext) {
+                                              return Material(
+                                                color: Colors.transparent,
+                                                child: GestureDetector(
+                                                  onTap: () => FocusScope.of(
+                                                          context)
+                                                      .requestFocus(
+                                                          _model.unfocusNode),
+                                                  child: Container(
+                                                    height: 150.0,
+                                                    width: 400.0,
+                                                    child: ImageErrorWidget(),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ).then((value) => setState(() {}));
+                                        } else {
                                           await CurrentSessionPicsRecord
                                                   .createDoc(
                                                       currentUserReference!)
@@ -390,10 +406,44 @@ class _CameraWidgetState extends State<CameraWidget> {
                                             'timeTaken':
                                                 FieldValue.serverTimestamp(),
                                           });
-                                        } else {
-                                          await Future.delayed(const Duration(
-                                              milliseconds: 3000));
-                                          if (!FFAppState().uploadingPhoto) {
+                                        }
+                                      } else {
+                                        await Future.delayed(
+                                            const Duration(milliseconds: 3000));
+                                        if (!FFAppState().uploadingPhoto) {
+                                          if (FFAppState().errorUploading) {
+                                            await showAlignedDialog(
+                                              context: context,
+                                              isGlobal: true,
+                                              avoidOverflow: false,
+                                              targetAnchor:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              followerAnchor:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              builder: (dialogContext) {
+                                                return Material(
+                                                  color: Colors.transparent,
+                                                  child: GestureDetector(
+                                                    onTap: () => FocusScope.of(
+                                                            context)
+                                                        .requestFocus(
+                                                            _model.unfocusNode),
+                                                    child: Container(
+                                                      height: 150.0,
+                                                      width: 400.0,
+                                                      child: ImageErrorWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then((value) => setState(() {}));
+                                          } else {
                                             await CurrentSessionPicsRecord
                                                     .createDoc(
                                                         currentUserReference!)
@@ -406,6 +456,61 @@ class _CameraWidgetState extends State<CameraWidget> {
                                               'timeTaken':
                                                   FieldValue.serverTimestamp(),
                                             });
+                                          }
+                                        } else {
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 3000));
+                                          if (!FFAppState().uploadingPhoto) {
+                                            if (FFAppState().errorUploading) {
+                                              await showAlignedDialog(
+                                                context: context,
+                                                isGlobal: true,
+                                                avoidOverflow: false,
+                                                targetAnchor:
+                                                    AlignmentDirectional(
+                                                            0.0, 0.0)
+                                                        .resolve(
+                                                            Directionality.of(
+                                                                context)),
+                                                followerAnchor:
+                                                    AlignmentDirectional(
+                                                            0.0, 0.0)
+                                                        .resolve(
+                                                            Directionality.of(
+                                                                context)),
+                                                builder: (dialogContext) {
+                                                  return Material(
+                                                    color: Colors.transparent,
+                                                    child: GestureDetector(
+                                                      onTap: () => FocusScope
+                                                              .of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode),
+                                                      child: Container(
+                                                        height: 150.0,
+                                                        width: 400.0,
+                                                        child:
+                                                            ImageErrorWidget(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then(
+                                                  (value) => setState(() {}));
+                                            } else {
+                                              await CurrentSessionPicsRecord
+                                                      .createDoc(
+                                                          currentUserReference!)
+                                                  .set({
+                                                ...createCurrentSessionPicsRecordData(
+                                                  imagePath: functions
+                                                      .strToImgPath(FFAppState()
+                                                          .filePath),
+                                                ),
+                                                'timeTaken': FieldValue
+                                                    .serverTimestamp(),
+                                              });
+                                            }
                                           } else {
                                             await showAlignedDialog(
                                               context: context,
@@ -441,10 +546,6 @@ class _CameraWidgetState extends State<CameraWidget> {
                                           }
                                         }
                                       }
-
-                                      setState(() {
-                                        _model.takingImage = false;
-                                      });
                                     }
                                   },
                                   child: Icon(

@@ -47,10 +47,18 @@ class _FeedTourWidgetState extends State<FeedTourWidget> {
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 350.0,
-        height: 320.0,
+        width: 375.0,
+        height: 249.0,
         decoration: BoxDecoration(
-          color: Colors.white,
+          gradient: LinearGradient(
+            colors: [
+              FlutterFlowTheme.of(context).primary,
+              FlutterFlowTheme.of(context).frenchViolet
+            ],
+            stops: [0.0, 1.0],
+            begin: AlignmentDirectional(0.0, -1.0),
+            end: AlignmentDirectional(0, 1.0),
+          ),
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: Padding(
@@ -71,14 +79,14 @@ class _FeedTourWidgetState extends State<FeedTourWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 15.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'View your friends flicks!',
+                              'View your friends flicks',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .titleLarge
                                   .override(
                                     fontFamily: 'Outfit',
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
                                   ),
                             ),
                           ),
@@ -86,14 +94,14 @@ class _FeedTourWidgetState extends State<FeedTourWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 20.0, 0.0, 0.0),
                             child: Text(
-                              'Here you can see your flicks once they develop! You can also view all your friends flicks and like and comment on them. Make sure to add friends by searching for them from the top right search icon!\n\nRemember, flicks randomly develop and you wont be able to view your current flicks until they have developed.',
+                              'Here you can see your flicks once they develop! You can also view all your friends flicks and like and comment on them. \n\nMake sure to add friends by searching for them from the top right search icon!',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
                                     fontSize: 16.0,
                                   ),
                             ),
@@ -109,8 +117,7 @@ class _FeedTourWidgetState extends State<FeedTourWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         Navigator.pop(context);

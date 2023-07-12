@@ -71,6 +71,8 @@ class _CameraPhotoState extends State<CameraPhoto> {
   void didUpdateWidget(covariant CameraPhoto oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (FFAppState().makePhoto) {
+      FFAppState().errorUploading = false;
+      FFAppState().index = FFAppState().index + 1;
       FFAppState().update(() {
         FFAppState().uploadingPhoto = true;
       });
@@ -90,7 +92,10 @@ class _CameraPhotoState extends State<CameraPhoto> {
         final downloadUrl = await uploadData(
             dir + FFAppState().index.toString() + '.jpg', result);
         FFAppState().update(() {
-          FFAppState().index = FFAppState().index + 1;
+          // FFAppState().index = FFAppState().index + 1;
+          if (FFAppState().filePath == downloadUrl) {
+            FFAppState().errorUploading = true;
+          }
           FFAppState().filePath = downloadUrl ?? '';
           FFAppState().uploadingPhoto = false;
         });

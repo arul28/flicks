@@ -5,23 +5,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'remove_friend_model.dart';
-export 'remove_friend_model.dart';
+import 'remove_friend_request_model.dart';
+export 'remove_friend_request_model.dart';
 
-class RemoveFriendWidget extends StatefulWidget {
-  const RemoveFriendWidget({
+class RemoveFriendRequestWidget extends StatefulWidget {
+  const RemoveFriendRequestWidget({
     Key? key,
-    required this.currentSessionPics,
+    required this.userRef,
   }) : super(key: key);
 
-  final DocumentReference? currentSessionPics;
+  final DocumentReference? userRef;
 
   @override
-  _RemoveFriendWidgetState createState() => _RemoveFriendWidgetState();
+  _RemoveFriendRequestWidgetState createState() =>
+      _RemoveFriendRequestWidgetState();
 }
 
-class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
-  late RemoveFriendModel _model;
+class _RemoveFriendRequestWidgetState extends State<RemoveFriendRequestWidget> {
+  late RemoveFriendRequestModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -32,7 +33,7 @@ class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => RemoveFriendModel());
+    _model = createModel(context, () => RemoveFriendRequestModel());
   }
 
   @override
@@ -53,8 +54,8 @@ class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 344.0,
-        height: 131.0,
+        width: 320.0,
+        height: 120.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.0),
@@ -71,10 +72,10 @@ class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 0.0, 15.0, 0.0),
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
                         child: Text(
-                          'Are you sure you want to remove this friend request?',
+                          'Are you sure you want to remove this friend?',
                           textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
@@ -91,11 +92,11 @@ class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 25.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 25.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         Navigator.pop(context);
@@ -121,7 +122,7 @@ class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 15.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 25.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () {
                         print('Button pressed ...');

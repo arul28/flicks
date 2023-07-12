@@ -47,10 +47,18 @@ class _CameraTourWidgetState extends State<CameraTourWidget> {
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 350.0,
-        height: 380.0,
+        width: 375.0,
+        height: 264.0,
         decoration: BoxDecoration(
-          color: Colors.white,
+          gradient: LinearGradient(
+            colors: [
+              FlutterFlowTheme.of(context).primary,
+              FlutterFlowTheme.of(context).frenchViolet
+            ],
+            stops: [0.0, 1.0],
+            begin: AlignmentDirectional(0.0, -1.0),
+            end: AlignmentDirectional(0, 1.0),
+          ),
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: Padding(
@@ -71,29 +79,29 @@ class _CameraTourWidgetState extends State<CameraTourWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 15.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Capture flicks!',
+                              'Capture flicks',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .titleLarge
                                   .override(
                                     fontFamily: 'Outfit',
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
                                   ),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 20.0, 0.0, 0.0),
+                                0.0, 20.0, 0.0, 5.0),
                             child: Text(
-                              'Here you can capture flicks! The max number of flicks you can take in the current session are listed in the top left. This is a random amount, and it chnages every time new flicks develop randomly. You can view the flicks you have taken from the top left camera roll icon.\n\n\nRemember, flicks randomly develop and you wont be able to view your current flicks until they have developed.',
+                              'Here you can capture flicks! The maximum number of flicks you can take is displayed in the top left. It\'s a random amount that changes as new flicks develop.\n\nYou can view the flicks you have taken from the top left camera roll icon.',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
                                     fontSize: 16.0,
                                   ),
                             ),
@@ -108,29 +116,25 @@ class _CameraTourWidgetState extends State<CameraTourWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        Navigator.pop(context);
-                      },
-                      text: 'Close',
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).frenchViolet,
-                        textStyle: FlutterFlowTheme.of(context).titleSmall,
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(25.0),
+                  FFButtonWidget(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                    },
+                    text: 'Close',
+                    options: FFButtonOptions(
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).frenchViolet,
+                      textStyle: FlutterFlowTheme.of(context).titleSmall,
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
                       ),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
                 ],
