@@ -11,6 +11,7 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -41,6 +42,12 @@ class _CameraWidgetState extends State<CameraWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setState(() {
         FFAppState().makePhoto = false;
+      });
+      _model.currentCountQuery = await queryCurrentSessionPicsRecordCount(
+        parent: currentUserReference,
+      );
+      setState(() {
+        _model.currentCount = _model.currentCountQuery!;
       });
       if (valueOrDefault<bool>(
               currentUserDocument?.firstViewAfterSwitch, false) ==
@@ -259,7 +266,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                     children: [
                                       TextSpan(
                                         text: valueOrDefault<String>(
-                                          cameraCount.toString(),
+                                          _model.currentCount.toString(),
                                           '0',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -321,7 +328,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    if (cameraCount >=
+                                    if (_model.currentCount >=
                                         stackCurrentSessionDetailsRecord!
                                             .maxPics) {
                                       await showAlignedDialog(
