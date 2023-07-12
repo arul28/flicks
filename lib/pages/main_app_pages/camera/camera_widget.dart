@@ -365,6 +365,10 @@ class _CameraWidgetState extends State<CameraWidget> {
                                       setState(() {
                                         FFAppState().makePhoto = true;
                                       });
+                                      setState(() {
+                                        _model.currentCount =
+                                            _model.currentCount + 1;
+                                      });
                                       await Future.delayed(
                                           const Duration(milliseconds: 3000));
                                       if (!FFAppState().uploadingPhoto) {
