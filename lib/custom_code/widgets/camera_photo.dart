@@ -75,7 +75,7 @@ class _CameraPhotoState extends State<CameraPhoto> {
       // FFAppState().index = FFAppState().index + 1;
       FFAppState().update(() {
         FFAppState().uploadingPhoto = true;
-        FFAppState().errorUploading = false;
+        // FFAppState().errorUploading = false;
         FFAppState().index = FFAppState().index + 1;
       });
       controller!.takePicture().then((file) async {
@@ -95,9 +95,9 @@ class _CameraPhotoState extends State<CameraPhoto> {
             dir + FFAppState().index.toString() + '.jpg', result);
         FFAppState().update(() {
           // FFAppState().index = FFAppState().index + 1;
-          if (FFAppState().filePath == downloadUrl) {
-            FFAppState().errorUploading = true;
-          }
+          // if (FFAppState().filePath == downloadUrl) {
+          //   FFAppState().errorUploading = true;
+          // }
           FFAppState().filePath = downloadUrl ?? '';
           FFAppState().uploadingPhoto = false;
         });
