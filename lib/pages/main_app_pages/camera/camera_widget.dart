@@ -90,7 +90,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                     FocusScope.of(context).requestFocus(_model.unfocusNode),
                 child: Container(
                   height: 264.0,
-                  width: 375.0,
+                  width: 350.0,
                   child: CameraTourWidget(),
                 ),
               ),
@@ -457,7 +457,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            if (_model.takingImage ?? true)
+                            if (FFAppState().uploadingPhoto)
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,

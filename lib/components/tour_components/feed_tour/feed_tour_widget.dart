@@ -47,7 +47,7 @@ class _FeedTourWidgetState extends State<FeedTourWidget> {
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 375.0,
+        width: 350.0,
         height: 249.0,
         decoration: BoxDecoration(
           gradient: LinearGradient(

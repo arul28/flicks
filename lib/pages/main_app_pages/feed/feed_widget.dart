@@ -79,7 +79,7 @@ class _FeedWidgetState extends State<FeedWidget> {
               color: Colors.transparent,
               child: Container(
                 height: 249.0,
-                width: 375.0,
+                width: 350.0,
                 child: FeedTourWidget(),
               ),
             );
