@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
 import '/components/image_error/image_error_widget.dart';
 import '/components/pics_limit_hit/pics_limit_hit_widget.dart';
+import '/components/tour_components/camera_tour/camera_tour_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,6 +11,7 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -41,6 +43,12 @@ class _CameraWidgetState extends State<CameraWidget> {
       setState(() {
         FFAppState().makePhoto = false;
       });
+      _model.currentCountQuery = await queryCurrentSessionPicsRecordCount(
+        parent: currentUserReference,
+      );
+      setState(() {
+        _model.currentCount = _model.currentCountQuery!;
+      });
       if (valueOrDefault<bool>(
               currentUserDocument?.firstViewAfterSwitch, false) ==
           true) {
@@ -71,6 +79,36 @@ class _CameraWidgetState extends State<CameraWidget> {
           },
         ).then((value) => setState(() {}));
       }
+      if (!FFAppState().cameraTour) {
+        await showAlignedDialog(
+          barrierDismissible: false,
+          context: context,
+          isGlobal: true,
+          avoidOverflow: false,
+          targetAnchor: AlignmentDirectional(0.0, 0.0)
+              .resolve(Directionality.of(context)),
+          followerAnchor: AlignmentDirectional(0.0, 0.0)
+              .resolve(Directionality.of(context)),
+          builder: (dialogContext) {
+            return Material(
+              color: Colors.transparent,
+              child: GestureDetector(
+                onTap: () =>
+                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                child: Container(
+                  height: 264.0,
+                  width: 350.0,
+                  child: CameraTourWidget(),
+                ),
+              ),
+            );
+          },
+        ).then((value) => setState(() {}));
+
+        setState(() {
+          FFAppState().cameraTour = true;
+        });
+      }
     });
   }
 
@@ -99,7 +137,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                   width: 50.0,
                   height: 50.0,
                   child: CircularProgressIndicator(
-                    color: FlutterFlowTheme.of(context).primary,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      FlutterFlowTheme.of(context).primary,
+                    ),
                   ),
                 ),
               ),
@@ -183,7 +223,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                           width: 50.0,
                           height: 50.0,
                           child: CircularProgressIndicator(
-                            color: FlutterFlowTheme.of(context).primary,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
                           ),
                         ),
                       );
@@ -228,7 +270,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                     children: [
                                       TextSpan(
                                         text: valueOrDefault<String>(
-                                          cameraCount.toString(),
+                                          _model.currentCount.toString(),
                                           '0',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -251,9 +293,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                                       ),
                                       TextSpan(
                                         text: valueOrDefault<String>(
-                                          stackCurrentSessionDetailsRecord!
-                                              .maxPics
-                                              .toString(),
+                                          stackCurrentSessionDetailsRecord
+                                              ?.maxPics
+                                              ?.toString(),
                                           '0',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -290,7 +332,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    if (cameraCount >=
+                                    if (_model.currentCount >=
                                         stackCurrentSessionDetailsRecord!
                                             .maxPics) {
                                       await showAlignedDialog(
@@ -328,7 +370,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                                         FFAppState().makePhoto = true;
                                       });
                                       setState(() {
-                                        _model.takingImage = true;
+                                        _model.currentCount =
+                                            _model.currentCount + 1;
                                       });
                                       await Future.delayed(
                                           const Duration(milliseconds: 3000));
@@ -411,9 +454,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                                         }
                                       }
 
-                                      setState(() {
-                                        _model.takingImage = false;
-                                      });
+                                      setState(() {});
                                     }
                                   },
                                   child: Icon(
@@ -431,7 +472,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            if (_model.takingImage ?? true)
+                            if (FFAppState().uploadingPhoto)
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,

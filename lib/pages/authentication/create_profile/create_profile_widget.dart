@@ -67,24 +67,54 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Text(
-                                'flicks',
-                                textAlign: TextAlign.center,
-                                style:
-                                    FlutterFlowTheme.of(context).headlineLarge,
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 20.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 6.0),
+                                    child: Text(
+                                      'flicks',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineLarge,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 0.0, 0.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed('LandingPage');
+                                },
+                                child: Icon(
+                                  Icons.chevron_left_sharp,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 40.0,
+                                ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -261,6 +291,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                                       final selectedMedia =
                                                           await selectMediaWithSourceBottomSheet(
                                                         context: context,
+                                                        imageQuality: 20,
                                                         allowPhoto: true,
                                                       );
                                                       if (selectedMedia !=
@@ -614,7 +645,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                 bio: _model.bioCreateController.text,
                                 fullName: _model.yourNameController.text,
                               ));
-                              if (_model.imageAdded != true) {
+                              if (!_model.imageAdded!) {
                                 await currentUserReference!
                                     .update(createUsersRecordData(
                                   photoUrl:

@@ -158,6 +158,11 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get restrictedUsers => _restrictedUsers ?? const [];
   bool hasRestrictedUsers() => _restrictedUsers != null;
 
+  // "oldSessionPicsCount" field.
+  int? _oldSessionPicsCount;
+  int get oldSessionPicsCount => _oldSessionPicsCount ?? 0;
+  bool hasOldSessionPicsCount() => _oldSessionPicsCount != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -190,6 +195,7 @@ class UsersRecord extends FirestoreRecord {
     _iBlocked = getDataList(snapshotData['iBlocked']);
     _blockedBy = getDataList(snapshotData['blockedBy']);
     _restrictedUsers = getDataList(snapshotData['restrictedUsers']);
+    _oldSessionPicsCount = castToType<int>(snapshotData['oldSessionPicsCount']);
   }
 
   static CollectionReference get collection =>
@@ -245,6 +251,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? likesNotifs,
   bool? reqNotifs,
   bool? devNotifs,
+  int? oldSessionPicsCount,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -267,6 +274,7 @@ Map<String, dynamic> createUsersRecordData({
       'likesNotifs': likesNotifs,
       'reqNotifs': reqNotifs,
       'devNotifs': devNotifs,
+      'oldSessionPicsCount': oldSessionPicsCount,
     }.withoutNulls,
   );
 
@@ -307,7 +315,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.blockedUsers, e2?.blockedUsers) &&
         listEquality.equals(e1?.iBlocked, e2?.iBlocked) &&
         listEquality.equals(e1?.blockedBy, e2?.blockedBy) &&
-        listEquality.equals(e1?.restrictedUsers, e2?.restrictedUsers);
+        listEquality.equals(e1?.restrictedUsers, e2?.restrictedUsers) &&
+        e1?.oldSessionPicsCount == e2?.oldSessionPicsCount;
   }
 
   @override
@@ -339,7 +348,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.blockedUsers,
         e?.iBlocked,
         e?.blockedBy,
-        e?.restrictedUsers
+        e?.restrictedUsers,
+        e?.oldSessionPicsCount
       ]);
 
   @override

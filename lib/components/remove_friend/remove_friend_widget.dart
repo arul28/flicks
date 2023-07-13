@@ -11,10 +11,10 @@ export 'remove_friend_model.dart';
 class RemoveFriendWidget extends StatefulWidget {
   const RemoveFriendWidget({
     Key? key,
-    required this.userRef,
+    required this.currentSessionPics,
   }) : super(key: key);
 
-  final DocumentReference? userRef;
+  final DocumentReference? currentSessionPics;
 
   @override
   _RemoveFriendWidgetState createState() => _RemoveFriendWidgetState();
@@ -53,8 +53,8 @@ class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        width: 320.0,
-        height: 120.0,
+        width: 344.0,
+        height: 131.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.0),
@@ -71,10 +71,10 @@ class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            15.0, 0.0, 15.0, 0.0),
                         child: Text(
-                          'Are you sure you want to remove this friend?',
+                          'Are you sure you want to remove this friend request?',
                           textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
@@ -91,14 +91,14 @@ class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 25.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 25.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.safePop();
+                        Navigator.pop(context);
                       },
                       text: 'Cancel',
                       options: FFButtonOptions(
@@ -121,7 +121,7 @@ class _RemoveFriendWidgetState extends State<RemoveFriendWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 25.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 15.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () {
                         print('Button pressed ...');

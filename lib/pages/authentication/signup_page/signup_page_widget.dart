@@ -537,6 +537,9 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                                 .update(createUsersRecordData(
                                               emailVerified: true,
                                               profileCreated: false,
+                                              comNotifs: true,
+                                              reqNotifs: true,
+                                              likesNotifs: true,
                                             ));
 
                                             context.pushNamedAuth(
@@ -621,6 +624,9 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                           .update(createUsersRecordData(
                                         emailVerified: true,
                                         profileCreated: false,
+                                        comNotifs: true,
+                                        likesNotifs: true,
+                                        reqNotifs: true,
                                       ));
 
                                       context.pushNamedAuth(

@@ -73,7 +73,7 @@ class _AdditionalSettingsWidgetState extends State<AdditionalSettingsWidget> {
         elevation: 0.0,
       ),
       body: Container(
-        width: 398.0,
+        width: double.infinity,
         height: 796.0,
         decoration: BoxDecoration(
           gradient: LinearGradient(

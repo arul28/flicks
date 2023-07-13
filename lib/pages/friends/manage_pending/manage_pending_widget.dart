@@ -297,7 +297,9 @@ class _ManagePendingWidgetState extends State<ManagePendingWidget>
                         width: 50.0,
                         height: 50.0,
                         child: CircularProgressIndicator(
-                          color: FlutterFlowTheme.of(context).primary,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
+                          ),
                         ),
                       ),
                     );
@@ -451,9 +453,9 @@ class _ManagePendingWidgetState extends State<ManagePendingWidget>
                                                         (alertDialogContext) {
                                                       return AlertDialog(
                                                         title: Text(
-                                                            'Take Back Request'),
+                                                            'Remove Friend Request'),
                                                         content: Text(
-                                                            'Are you sure you want to take back this friend request?'),
+                                                            'Are you sure you want to remove this friend request?'),
                                                         actions: [
                                                           TextButton(
                                                             onPressed: () =>

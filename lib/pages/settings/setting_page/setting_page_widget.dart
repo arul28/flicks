@@ -304,8 +304,8 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
                             'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                            width: 200.0,
-                            height: 139.0,
+                            width: 123.0,
+                            height: 100.0,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -314,9 +314,9 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                         alignment: AlignmentDirectional(0.0, 0.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 20.0, 0.0, 0.0),
+                              0.0, 10.0, 0.0, 0.0),
                           child: Text(
-                            'Licensed by BTA food and entertainment \nBeta Version 0.1.0',
+                            'Licensed by BTA food and entertainment \nbeta v.1.0.0',
                             textAlign: TextAlign.center,
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -332,6 +332,32 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                     ],
                   ),
                 ],
+              ),
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await launchURL(
+                          'https://flicksocial.carrd.co/#privacypolicy');
+                    },
+                    child: Text(
+                      'Privacy Policy',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            color: Color(0xFF39B2D2),
+                            fontStyle: FontStyle.italic,
+                            decoration: TextDecoration.underline,
+                          ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
