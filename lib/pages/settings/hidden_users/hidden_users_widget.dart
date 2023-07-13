@@ -168,7 +168,9 @@ class _HiddenUsersWidgetState extends State<HiddenUsersWidget>
                               width: 50.0,
                               height: 50.0,
                               child: CircularProgressIndicator(
-                                color: FlutterFlowTheme.of(context).primary,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
+                                ),
                               ),
                             ),
                           );
@@ -208,9 +210,12 @@ class _HiddenUsersWidgetState extends State<HiddenUsersWidget>
                                               width: 50.0,
                                               height: 50.0,
                                               child: CircularProgressIndicator(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                                ),
                                               ),
                                             ),
                                           );

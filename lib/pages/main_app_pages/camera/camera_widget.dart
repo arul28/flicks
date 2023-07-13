@@ -137,7 +137,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                   width: 50.0,
                   height: 50.0,
                   child: CircularProgressIndicator(
-                    color: FlutterFlowTheme.of(context).primary,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      FlutterFlowTheme.of(context).primary,
+                    ),
                   ),
                 ),
               ),
@@ -221,7 +223,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                           width: 50.0,
                           height: 50.0,
                           child: CircularProgressIndicator(
-                            color: FlutterFlowTheme.of(context).primary,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
                           ),
                         ),
                       );
@@ -289,9 +293,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                                       ),
                                       TextSpan(
                                         text: valueOrDefault<String>(
-                                          stackCurrentSessionDetailsRecord!
-                                              .maxPics
-                                              .toString(),
+                                          stackCurrentSessionDetailsRecord
+                                              ?.maxPics
+                                              ?.toString(),
                                           '0',
                                         ),
                                         style: FlutterFlowTheme.of(context)

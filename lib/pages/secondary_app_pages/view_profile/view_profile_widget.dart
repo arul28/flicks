@@ -40,17 +40,17 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if ((currentUserDocument?.friendsList?.toList() ?? [])
-          .contains(widget.userInfo!.reference)) {
+          .contains(widget.userInfo?.reference)) {
         setState(() {
           _model.isFriend = true;
         });
       } else if ((currentUserDocument?.sentPendingRequests?.toList() ?? [])
-          .contains(widget.userInfo!.reference)) {
+          .contains(widget.userInfo?.reference)) {
         setState(() {
           _model.sentWaiting = true;
         });
       } else if ((currentUserDocument?.incomingPendingRequests?.toList() ?? [])
-          .contains(widget.userInfo!.reference)) {
+          .contains(widget.userInfo?.reference)) {
         setState(() {
           _model.recievedWaiting = true;
         });
@@ -197,7 +197,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                   'usersFriends',
                                   queryParameters: {
                                     'userRef': serializeParam(
-                                      widget.userInfo!.reference,
+                                      widget.userInfo?.reference,
                                       ParamType.DocumentReference,
                                     ),
                                   }.withoutNulls,
@@ -212,7 +212,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                               },
                               child: Text(
                                 valueOrDefault<String>(
-                                  widget.userInfo!.friendsNum.toString(),
+                                  widget.userInfo?.friendsNum?.toString(),
                                   '0',
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -233,7 +233,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                   'usersFriends',
                                   queryParameters: {
                                     'userRef': serializeParam(
-                                      widget.userInfo!.reference,
+                                      widget.userInfo?.reference,
                                       ParamType.DocumentReference,
                                     ),
                                   }.withoutNulls,
@@ -280,7 +280,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                           children: [
                             Text(
                               valueOrDefault<String>(
-                                widget.userInfo!.pinnedNum.toString(),
+                                widget.userInfo?.pinnedNum?.toString(),
                                 '0',
                               ),
                               style: FlutterFlowTheme.of(context)
@@ -365,7 +365,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                     await currentUserReference!.update({
                                       'sentPendingRequests':
                                           FieldValue.arrayUnion(
-                                              [widget.userInfo!.reference]),
+                                              [widget.userInfo?.reference]),
                                       'sentPendingRequestsNum':
                                           FieldValue.increment(1),
                                     });
@@ -491,7 +491,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                     if (confirmDialogResponse) {
                                       await currentUserReference!.update({
                                         'friendsList': FieldValue.arrayRemove(
-                                            [widget.userInfo!.reference]),
+                                            [widget.userInfo?.reference]),
                                         'friendsNum':
                                             FieldValue.increment(-(1)),
                                       });
@@ -632,11 +632,11 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                   onTap: () async {
                                     await currentUserReference!.update({
                                       'friendsList': FieldValue.arrayUnion(
-                                          [widget.userInfo!.reference]),
+                                          [widget.userInfo?.reference]),
                                       'friendsNum': FieldValue.increment(1),
                                       'incomingPendingRequests':
                                           FieldValue.arrayRemove(
-                                              [widget.userInfo!.reference]),
+                                              [widget.userInfo?.reference]),
                                       'incomingPendingRequestsNum':
                                           FieldValue.increment(-(1)),
                                     });
@@ -748,7 +748,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                     4.0, 10.0, 4.0, 0.0),
                                 child: StreamBuilder<List<PinnedRecord>>(
                                   stream: queryPinnedRecord(
-                                    parent: widget.userInfo!.reference,
+                                    parent: widget.userInfo?.reference,
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
@@ -758,8 +758,11 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                           width: 50.0,
                                           height: 50.0,
                                           child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
                                           ),
                                         ),
                                       );

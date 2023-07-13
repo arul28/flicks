@@ -176,7 +176,9 @@ class _FeedWidgetState extends State<FeedWidget> {
                         width: 50.0,
                         height: 50.0,
                         child: CircularProgressIndicator(
-                          color: FlutterFlowTheme.of(context).primary,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
+                          ),
                         ),
                       ),
                     );
@@ -201,8 +203,9 @@ class _FeedWidgetState extends State<FeedWidget> {
                                     width: 50.0,
                                     height: 50.0,
                                     child: CircularProgressIndicator(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
                                     ),
                                   ),
                                 );
@@ -261,10 +264,13 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                     height: 50.0,
                                                     child:
                                                         CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                              Color>(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                      ),
                                                     ),
                                                   ),
                                                 );
@@ -320,9 +326,9 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                     TextSpan(
                                                       text: valueOrDefault<
                                                           String>(
-                                                        richTextOldSessionDetailsRecord!
-                                                            .maxPics
-                                                            .toString(),
+                                                        richTextOldSessionDetailsRecord
+                                                            ?.maxPics
+                                                            ?.toString(),
                                                         '0',
                                                       ),
                                                       style:
@@ -458,10 +464,13 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                       height: 50.0,
                                                       child:
                                                           CircularProgressIndicator(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                        ),
                                                       ),
                                                     ),
                                                   );
@@ -715,7 +724,9 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                               width: 50.0,
                                                                               height: 50.0,
                                                                               child: CircularProgressIndicator(
-                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                  FlutterFlowTheme.of(context).primary,
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                           );
@@ -974,7 +985,9 @@ class _FeedWidgetState extends State<FeedWidget> {
                               width: 50.0,
                               height: 50.0,
                               child: CircularProgressIndicator(
-                                color: FlutterFlowTheme.of(context).primary,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
+                                ),
                               ),
                             ),
                           );
@@ -1010,8 +1023,11 @@ class _FeedWidgetState extends State<FeedWidget> {
                                           width: 50.0,
                                           height: 50.0,
                                           child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
                                           ),
                                         ),
                                       );
