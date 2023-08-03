@@ -1,27 +1,23 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'delete_flick_model.dart';
-export 'delete_flick_model.dart';
+import 'delete_flick_once_developed_error_model.dart';
+export 'delete_flick_once_developed_error_model.dart';
 
-class DeleteFlickWidget extends StatefulWidget {
-  const DeleteFlickWidget({
-    Key? key,
-    required this.currentSessionPics,
-  }) : super(key: key);
-
-  final DocumentReference? currentSessionPics;
+class DeleteFlickOnceDevelopedErrorWidget extends StatefulWidget {
+  const DeleteFlickOnceDevelopedErrorWidget({Key? key}) : super(key: key);
 
   @override
-  _DeleteFlickWidgetState createState() => _DeleteFlickWidgetState();
+  _DeleteFlickOnceDevelopedErrorWidgetState createState() =>
+      _DeleteFlickOnceDevelopedErrorWidgetState();
 }
 
-class _DeleteFlickWidgetState extends State<DeleteFlickWidget> {
-  late DeleteFlickModel _model;
+class _DeleteFlickOnceDevelopedErrorWidgetState
+    extends State<DeleteFlickOnceDevelopedErrorWidget> {
+  late DeleteFlickOnceDevelopedErrorModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -32,7 +28,7 @@ class _DeleteFlickWidgetState extends State<DeleteFlickWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => DeleteFlickModel());
+    _model = createModel(context, () => DeleteFlickOnceDevelopedErrorModel());
   }
 
   @override
@@ -74,13 +70,13 @@ class _DeleteFlickWidgetState extends State<DeleteFlickWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 0.0, 15.0, 0.0),
                         child: Text(
-                          'Are you sure you want to delete this flick? You can\'t undo this',
+                          'This flick is currently pinned. Remove it first before deleting it.',
                           textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Lexend Deca',
                                     color: Color(0xFF57636C),
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.normal,
                                   ),
                         ),
@@ -95,48 +91,12 @@ class _DeleteFlickWidgetState extends State<DeleteFlickWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 25.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 15.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         Navigator.pop(context);
                       },
-                      text: 'Cancel',
-                      options: FFButtonOptions(
-                        width: 108.0,
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).frenchViolet,
-                        textStyle: FlutterFlowTheme.of(context).titleSmall,
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 15.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        await widget.currentSessionPics!.delete();
-
-                        context.goNamed(
-                          'Camera',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                            ),
-                          },
-                        );
-                      },
-                      text: 'Confirm',
+                      text: 'OK',
                       options: FFButtonOptions(
                         width: 108.0,
                         height: 40.0,

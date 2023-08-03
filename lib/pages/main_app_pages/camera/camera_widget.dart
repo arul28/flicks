@@ -491,8 +491,18 @@ class _CameraWidgetState extends State<CameraWidget> {
                                                   .height *
                                               1.0,
                                           decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                FlutterFlowTheme.of(context)
+                                                    .amethyst,
+                                                FlutterFlowTheme.of(context)
+                                                    .persianIndigo
+                                              ],
+                                              stops: [0.0, 1.0],
+                                              begin: AlignmentDirectional(
+                                                  0.0, -1.0),
+                                              end: AlignmentDirectional(0, 1.0),
+                                            ),
                                           ),
                                           child: Align(
                                             alignment:
@@ -533,14 +543,47 @@ class _CameraWidgetState extends State<CameraWidget> {
                                                   ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 100.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    'tip of the week: don\'t forget to pin flicks before the current session ends!',
+                                                      .fromSTEB(0.0, 100.0, 0.0,
+                                                          100.0),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text:
+                                                              'Tip Of The Week',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .titleMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .mauve,
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .underline,
+                                                              ),
+                                                        ),
+                                                        TextSpan(
+                                                          text:
+                                                              '\n\ndon\'t forget to pin flicks as soon as they develop!',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                fontSize: 15.0,
+                                                              ),
+                                                        )
+                                                      ],
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
                                                     textAlign: TextAlign.center,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleSmall,
                                                   ),
                                                 ),
                                               ],

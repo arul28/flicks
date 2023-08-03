@@ -146,14 +146,6 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                                                     .parentReference,
                                                 ParamType.DocumentReference,
                                               ),
-                                              'username': serializeParam(
-                                                widget.parameter2,
-                                                ParamType.String,
-                                              ),
-                                              'profilePic': serializeParam(
-                                                widget.parameter1,
-                                                ParamType.String,
-                                              ),
                                             }.withoutNulls,
                                           );
                                         },
@@ -304,14 +296,6 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                             widget.parameter3,
                             ParamType.DocumentReference,
                           ),
-                          'username': serializeParam(
-                            widget.parameter2,
-                            ParamType.String,
-                          ),
-                          'profilePic': serializeParam(
-                            widget.parameter1,
-                            ParamType.String,
-                          ),
                         }.withoutNulls,
                       );
                     },
@@ -326,9 +310,9 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
             ),
           ),
           Align(
-            alignment: AlignmentDirectional(1.0, 0.0),
+            alignment: AlignmentDirectional(-1.0, 1.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 50.0),
               child: ToggleIcon(
                 onPressed: () async {
                   setState(() => _model.liked = !_model.liked!);
@@ -357,9 +341,9 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
             ),
           ),
           Align(
-            alignment: AlignmentDirectional(1.0, 0.0),
+            alignment: AlignmentDirectional(-1.0, 1.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 26.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(44.0, 0.0, 0.0, 40.0),
               child: FutureBuilder<int>(
                 future: queryUsersRecordCount(
                   queryBuilder: (usersRecord) => usersRecord.where('liked',

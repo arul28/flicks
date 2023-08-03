@@ -188,8 +188,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ImageViewerWidget(
             userRef: params.getParam(
                 'userRef', ParamType.DocumentReference, false, ['users']),
-            username: params.getParam('username', ParamType.String),
-            profilePic: params.getParam('profilePic', ParamType.String),
           ),
         ),
         FFRoute(
@@ -254,11 +252,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => DeleteAccountSettingsPageWidget(),
         ),
         FFRoute(
-          name: 'dddddd',
-          path: '/dddddd',
-          builder: (context, params) => DdddddWidget(),
-        ),
-        FFRoute(
           name: 'viewProfileFromFriendManager',
           path: '/viewProfileFromFriendManager',
           asyncParams: {
@@ -270,6 +263,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               userInfo: params.getParam('userInfo', ParamType.Document),
             ),
           ),
+        ),
+        FFRoute(
+          name: 'friendActivity',
+          path: '/friendActivity',
+          builder: (context, params) => FriendActivityWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

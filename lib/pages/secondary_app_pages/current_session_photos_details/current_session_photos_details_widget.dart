@@ -66,7 +66,16 @@ class _CurrentSessionPhotosDetailsWidgetState
               size: 30.0,
             ),
             onPressed: () async {
-              context.pushNamed('Camera');
+              context.goNamed(
+                'Camera',
+                extra: <String, dynamic>{
+                  kTransitionInfoKey: TransitionInfo(
+                    hasTransition: true,
+                    transitionType: PageTransitionType.scale,
+                    alignment: Alignment.bottomCenter,
+                  ),
+                },
+              );
             },
           ),
           title: Text(
@@ -141,8 +150,8 @@ class _CurrentSessionPhotosDetailsWidgetState
                                     ClipRect(
                                       child: ImageFiltered(
                                         imageFilter: ImageFilter.blur(
-                                          sigmaX: 30.0,
-                                          sigmaY: 30.0,
+                                          sigmaX: 50.0,
+                                          sigmaY: 50.0,
                                         ),
                                         child: ClipRRect(
                                           borderRadius:

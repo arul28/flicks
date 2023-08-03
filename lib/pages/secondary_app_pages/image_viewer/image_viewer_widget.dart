@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/push_notifications/push_notifications_util.dart';
+import '/components/delete_flick_once_developed/delete_flick_once_developed_widget.dart';
 import '/components/user_actions/user_actions_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
@@ -27,13 +28,9 @@ class ImageViewerWidget extends StatefulWidget {
   const ImageViewerWidget({
     Key? key,
     required this.userRef,
-    required this.username,
-    required this.profilePic,
   }) : super(key: key);
 
   final DocumentReference? userRef;
-  final String? username;
-  final String? profilePic;
 
   @override
   _ImageViewerWidgetState createState() => _ImageViewerWidgetState();
@@ -132,7 +129,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
               backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
               automaticallyImplyLeading: false,
               title: Text(
-                widget.username!,
+                imageViewerUsersRecord.displayName,
                 style: FlutterFlowTheme.of(context).displaySmall.override(
                       fontFamily: 'Outfit',
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -232,57 +229,150 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                 final pageViewOldSessionPicsRecord =
                                                     pageViewOldSessionPicsRecordList[
                                                         pageViewIndex];
-                                                return InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    await Navigator.push(
-                                                      context,
-                                                      PageTransition(
-                                                        type: PageTransitionType
-                                                            .fade,
-                                                        child:
-                                                            FlutterFlowExpandedImageView(
-                                                          image: Image.network(
+                                                return Stack(
+                                                  children: [
+                                                    InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        await Navigator.push(
+                                                          context,
+                                                          PageTransition(
+                                                            type:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                            child:
+                                                                FlutterFlowExpandedImageView(
+                                                              image:
+                                                                  Image.network(
+                                                                pageViewOldSessionPicsRecord
+                                                                    .imagePath,
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                              ),
+                                                              allowRotation:
+                                                                  true,
+                                                              tag: pageViewOldSessionPicsRecord
+                                                                  .imagePath,
+                                                              useHeroAnimation:
+                                                                  true,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Hero(
+                                                        tag:
                                                             pageViewOldSessionPicsRecord
                                                                 .imagePath,
-                                                            fit: BoxFit.contain,
+                                                        transitionOnUserGestures:
+                                                            true,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      16.0),
+                                                          child: Image.network(
+                                                            pageViewOldSessionPicsRecord
+                                                                .imagePath,
+                                                            width:
+                                                                double.infinity,
+                                                            height:
+                                                                double.infinity,
+                                                            fit: BoxFit.cover,
                                                           ),
-                                                          allowRotation: true,
-                                                          tag:
-                                                              pageViewOldSessionPicsRecord
-                                                                  .imagePath,
-                                                          useHeroAnimation:
-                                                              true,
                                                         ),
                                                       ),
-                                                    );
-                                                  },
-                                                  child: Hero(
-                                                    tag:
-                                                        pageViewOldSessionPicsRecord
-                                                            .imagePath,
-                                                    transitionOnUserGestures:
-                                                        true,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              16.0),
-                                                      child: Image.network(
-                                                        pageViewOldSessionPicsRecord
-                                                            .imagePath,
-                                                        width: 300.0,
-                                                        height: 200.0,
-                                                        fit: BoxFit.cover,
-                                                      ),
                                                     ),
-                                                  ),
+                                                    if (widget.userRef ==
+                                                        currentUserReference)
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                1.0, -1.0),
+                                                        child: Builder(
+                                                          builder: (context) =>
+                                                              Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        8.0,
+                                                                        4.0,
+                                                                        0.0),
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                await showAlignedDialog(
+                                                                  context:
+                                                                      context,
+                                                                  isGlobal:
+                                                                      true,
+                                                                  avoidOverflow:
+                                                                      false,
+                                                                  targetAnchor: AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0)
+                                                                      .resolve(
+                                                                          Directionality.of(
+                                                                              context)),
+                                                                  followerAnchor: AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0)
+                                                                      .resolve(
+                                                                          Directionality.of(
+                                                                              context)),
+                                                                  builder:
+                                                                      (dialogContext) {
+                                                                    return Material(
+                                                                      color: Colors
+                                                                          .transparent,
+                                                                      child:
+                                                                          GestureDetector(
+                                                                        onTap: () =>
+                                                                            FocusScope.of(context).requestFocus(_model.unfocusNode),
+                                                                        child:
+                                                                            DeleteFlickOnceDevelopedWidget(
+                                                                          oldSessionPics:
+                                                                              pageViewOldSessionPicsRecord.reference,
+                                                                          imgPath:
+                                                                              pageViewOldSessionPicsRecord.imagePath,
+                                                                          userRef:
+                                                                              widget.userRef!,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
+                                                              },
+                                                              child: Icon(
+                                                                Icons
+                                                                    .remove_circle_outline,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .error,
+                                                                size: 24.0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                  ],
                                                 );
                                               },
                                             ),

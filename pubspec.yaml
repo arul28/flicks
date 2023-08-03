@@ -37,6 +37,7 @@ dependencies:
   cloud_functions: 4.3.2
   cloud_functions_platform_interface: 5.4.2
   cloud_functions_web: 4.5.2
+  contacts_service: ^0.6.3
   easy_debounce: 2.0.1
   file_picker: 5.2.6
   firebase_auth: 4.6.2

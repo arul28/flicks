@@ -127,6 +127,31 @@ class FFAppState extends ChangeNotifier {
   set errorUploading(bool _value) {
     _errorUploading = _value;
   }
+
+  List<String> _suggestedNums = [];
+  List<String> get suggestedNums => _suggestedNums;
+  set suggestedNums(List<String> _value) {
+    _suggestedNums = _value;
+  }
+
+  void addToSuggestedNums(String _value) {
+    _suggestedNums.add(_value);
+  }
+
+  void removeFromSuggestedNums(String _value) {
+    _suggestedNums.remove(_value);
+  }
+
+  void removeAtIndexFromSuggestedNums(int _index) {
+    _suggestedNums.removeAt(_index);
+  }
+
+  void updateSuggestedNumsAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _suggestedNums[_index] = updateFn(_suggestedNums[_index]);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

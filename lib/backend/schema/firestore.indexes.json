@@ -1,5 +1,34 @@
 {
-  "indexes": [],
+  "indexes": [
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "friendsList",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "lastPicTakenTime",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "friendsList",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "lastPinAddedTime",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
   "fieldOverrides": [
     {
       "collectionGroup": "fcm_tokens",

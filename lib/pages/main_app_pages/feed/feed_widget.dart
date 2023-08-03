@@ -121,24 +121,36 @@ class _FeedWidgetState extends State<FeedWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.pushNamed('Camera');
+                  context.goNamed('friendActivity');
                 },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                    width: 40.0,
-                    height: 40.0,
-                    fit: BoxFit.cover,
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Icon(
+                      Icons.people_alt,
+                      color: FlutterFlowTheme.of(context).amethyst,
+                      size: 24.0,
+                    ),
+                    Text(
+                      'activity',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            color: FlutterFlowTheme.of(context).amethyst,
+                            fontSize: 13.0,
+                          ),
+                    ),
+                  ],
                 ),
               ),
-              Text(
-                'flicks',
-                style: FlutterFlowTheme.of(context).headlineLarge.override(
-                      fontFamily: 'Outfit',
-                      color: FlutterFlowTheme.of(context).frenchViolet,
-                    ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                child: Text(
+                  'flicks',
+                  style: FlutterFlowTheme.of(context).headlineLarge.override(
+                        fontFamily: 'Outfit',
+                        color: FlutterFlowTheme.of(context).frenchViolet,
+                      ),
+                ),
               ),
               InkWell(
                 splashColor: Colors.transparent,
@@ -560,14 +572,6 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                                       currentUserReference,
                                                                                       ParamType.DocumentReference,
                                                                                     ),
-                                                                                    'username': serializeParam(
-                                                                                      currentUserDisplayName,
-                                                                                      ParamType.String,
-                                                                                    ),
-                                                                                    'profilePic': serializeParam(
-                                                                                      currentUserPhoto,
-                                                                                      ParamType.String,
-                                                                                    ),
                                                                                   }.withoutNulls,
                                                                                 );
                                                                               },
@@ -810,14 +814,6 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                               'userRef': serializeParam(
                                                                                 currentUserReference,
                                                                                 ParamType.DocumentReference,
-                                                                              ),
-                                                                              'username': serializeParam(
-                                                                                currentUserDisplayName,
-                                                                                ParamType.String,
-                                                                              ),
-                                                                              'profilePic': serializeParam(
-                                                                                currentUserPhoto,
-                                                                                ParamType.String,
                                                                               ),
                                                                             }.withoutNulls,
                                                                           );

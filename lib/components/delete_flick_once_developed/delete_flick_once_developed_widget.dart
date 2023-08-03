@@ -1,27 +1,36 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/components/delete_flick_once_developed_error/delete_flick_once_developed_error_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'delete_flick_model.dart';
-export 'delete_flick_model.dart';
+import 'delete_flick_once_developed_model.dart';
+export 'delete_flick_once_developed_model.dart';
 
-class DeleteFlickWidget extends StatefulWidget {
-  const DeleteFlickWidget({
+class DeleteFlickOnceDevelopedWidget extends StatefulWidget {
+  const DeleteFlickOnceDevelopedWidget({
     Key? key,
-    required this.currentSessionPics,
+    required this.oldSessionPics,
+    required this.imgPath,
+    required this.userRef,
   }) : super(key: key);
 
-  final DocumentReference? currentSessionPics;
+  final DocumentReference? oldSessionPics;
+  final String? imgPath;
+  final DocumentReference? userRef;
 
   @override
-  _DeleteFlickWidgetState createState() => _DeleteFlickWidgetState();
+  _DeleteFlickOnceDevelopedWidgetState createState() =>
+      _DeleteFlickOnceDevelopedWidgetState();
 }
 
-class _DeleteFlickWidgetState extends State<DeleteFlickWidget> {
-  late DeleteFlickModel _model;
+class _DeleteFlickOnceDevelopedWidgetState
+    extends State<DeleteFlickOnceDevelopedWidget> {
+  late DeleteFlickOnceDevelopedModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -32,7 +41,7 @@ class _DeleteFlickWidgetState extends State<DeleteFlickWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => DeleteFlickModel());
+    _model = createModel(context, () => DeleteFlickOnceDevelopedModel());
   }
 
   @override
@@ -119,39 +128,60 @@ class _DeleteFlickWidgetState extends State<DeleteFlickWidget> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 15.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        await widget.currentSessionPics!.delete();
+                  Builder(
+                    builder: (context) => Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 15.0, 15.0, 0.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          if ((currentUserDocument?.pinned?.toList() ?? [])
+                              .contains(widget.imgPath)) {
+                            await showAlignedDialog(
+                              context: context,
+                              isGlobal: true,
+                              avoidOverflow: false,
+                              targetAnchor: AlignmentDirectional(0.0, 0.0)
+                                  .resolve(Directionality.of(context)),
+                              followerAnchor: AlignmentDirectional(0.0, 0.0)
+                                  .resolve(Directionality.of(context)),
+                              builder: (dialogContext) {
+                                return Material(
+                                  color: Colors.transparent,
+                                  child: DeleteFlickOnceDevelopedErrorWidget(),
+                                );
+                              },
+                            ).then((value) => setState(() {}));
+                          } else {
+                            await widget.oldSessionPics!.delete();
 
-                        context.goNamed(
-                          'Camera',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                            ),
-                          },
-                        );
-                      },
-                      text: 'Confirm',
-                      options: FFButtonOptions(
-                        width: 108.0,
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).frenchViolet,
-                        textStyle: FlutterFlowTheme.of(context).titleSmall,
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
+                            context.goNamed(
+                              'imageViewer',
+                              queryParameters: {
+                                'userRef': serializeParam(
+                                  widget.userRef,
+                                  ParamType.DocumentReference,
+                                ),
+                              }.withoutNulls,
+                            );
+                          }
+                        },
+                        text: 'Confirm',
+                        options: FFButtonOptions(
+                          width: 108.0,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).frenchViolet,
+                          textStyle: FlutterFlowTheme.of(context).titleSmall,
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(25.0),
                         ),
-                        borderRadius: BorderRadius.circular(25.0),
                       ),
                     ),
                   ),

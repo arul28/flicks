@@ -140,8 +140,6 @@ final parametersBuilderMap =
   'imageViewer': (data) async => ParameterData(
         allParams: {
           'userRef': getParameter<DocumentReference>(data, 'userRef'),
-          'username': getParameter<String>(data, 'username'),
-          'profilePic': getParameter<String>(data, 'profilePic'),
         },
       ),
   'currentSessionPhotosDetails': ParameterData.none(),
@@ -163,13 +161,13 @@ final parametersBuilderMap =
   'blockedUsers': ParameterData.none(),
   'hiddenUsers': ParameterData.none(),
   'deleteAccountSettingsPage': ParameterData.none(),
-  'dddddd': ParameterData.none(),
   'viewProfileFromFriendManager': (data) async => ParameterData(
         allParams: {
           'userInfo': await getDocumentParameter<UsersRecord>(
               data, 'userInfo', UsersRecord.fromSnapshot),
         },
       ),
+  'friendActivity': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

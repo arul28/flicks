@@ -52,6 +52,7 @@ export '/pages/settings/hidden_users/hidden_users_widget.dart'
     show HiddenUsersWidget;
 export '/pages/settings/delete_account_settings_page/delete_account_settings_page_widget.dart'
     show DeleteAccountSettingsPageWidget;
-export '/dddddd/dddddd_widget.dart' show DdddddWidget;
 export '/pages/secondary_app_pages/view_profile_from_friend_manager/view_profile_from_friend_manager_widget.dart'
     show ViewProfileFromFriendManagerWidget;
+export '/pages/secondary_app_pages/friend_activity/friend_activity_widget.dart'
+    show FriendActivityWidget;
