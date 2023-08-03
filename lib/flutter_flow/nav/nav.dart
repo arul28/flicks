@@ -257,6 +257,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'dddddd',
           path: '/dddddd',
           builder: (context, params) => DdddddWidget(),
+        ),
+        FFRoute(
+          name: 'viewProfileFromFriendManager',
+          path: '/viewProfileFromFriendManager',
+          asyncParams: {
+            'userInfo': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: ViewProfileFromFriendManagerWidget(
+              userInfo: params.getParam('userInfo', ParamType.Document),
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

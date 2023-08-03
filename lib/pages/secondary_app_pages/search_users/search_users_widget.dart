@@ -139,7 +139,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
             body: SafeArea(
               top: true,
               child: Container(
-                width: 397.0,
+                width: double.infinity,
                 height: 800.0,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(

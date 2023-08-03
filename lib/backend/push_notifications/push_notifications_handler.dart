@@ -164,6 +164,12 @@ final parametersBuilderMap =
   'hiddenUsers': ParameterData.none(),
   'deleteAccountSettingsPage': ParameterData.none(),
   'dddddd': ParameterData.none(),
+  'viewProfileFromFriendManager': (data) async => ParameterData(
+        allParams: {
+          'userInfo': await getDocumentParameter<UsersRecord>(
+              data, 'userInfo', UsersRecord.fromSnapshot),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

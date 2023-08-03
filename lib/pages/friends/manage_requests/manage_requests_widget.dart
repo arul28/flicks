@@ -437,8 +437,8 @@ class _ManageRequestsWidgetState extends State<ManageRequestsWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    context.pushNamed(
-                                      'viewProfile',
+                                    context.goNamed(
+                                      'viewProfileFromFriendManager',
                                       queryParameters: {
                                         'userInfo': serializeParam(
                                           listViewUsersRecord,
