@@ -453,121 +453,162 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                           ],
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                      FutureBuilder<int>(
+                        future: queryUsersRecordCount(
+                          queryBuilder: (usersRecord) => usersRecord
+                              .where('liked', arrayContains: widget.userRef),
                         ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 10.0, 0.0, 0.0),
-                          child: StreamBuilder<List<UsersRecord>>(
-                            stream: queryUsersRecord(
-                              queryBuilder: (usersRecord) => usersRecord.where(
-                                  'liked',
-                                  arrayContains: widget.userRef),
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
-                                    ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
                                   ),
-                                );
-                              }
-                              List<UsersRecord> listViewUsersRecordList =
-                                  snapshot.data!;
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: listViewUsersRecordList.length,
-                                itemBuilder: (context, listViewIndex) {
-                                  final listViewUsersRecord =
-                                      listViewUsersRecordList[listViewIndex];
-                                  return Visibility(
-                                    visible: !(currentUserDocument?.blockedUsers
-                                                ?.toList() ??
-                                            [])
-                                        .contains(
-                                            listViewUsersRecord.reference),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 0.0, 10.0, 0.0),
-                                      child: AuthUserStreamWidget(
-                                        builder: (context) => Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                if (listViewUsersRecord
-                                                        .reference ==
-                                                    currentUserReference) {
-                                                  context.pushNamed('Profile');
-                                                } else {
-                                                  context.pushNamed(
-                                                    'viewProfile',
-                                                    queryParameters: {
-                                                      'userInfo':
-                                                          serializeParam(
-                                                        listViewUsersRecord,
-                                                        ParamType.Document,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'userInfo':
-                                                          listViewUsersRecord,
-                                                    },
-                                                  );
-                                                }
-                                              },
-                                              child: Container(
-                                                width: 60.0,
-                                                height: 60.0,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  listViewUsersRecord.photoUrl,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
+                                ),
+                              ),
+                            );
+                          }
+                          int containerCount = snapshot.data!;
+                          return Container(
+                            width: double.infinity,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Visibility(
+                              visible: containerCount != 0,
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 10.0, 0.0, 0.0),
+                                child: StreamBuilder<List<UsersRecord>>(
+                                  stream: queryUsersRecord(
+                                    queryBuilder: (usersRecord) =>
+                                        usersRecord.where('liked',
+                                            arrayContains: widget.userRef),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
                                             ),
-                                            Expanded(
-                                              child: Text(
-                                                listViewUsersRecord.displayName,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        ),
+                                      );
+                                    }
+                                    List<UsersRecord> listViewUsersRecordList =
+                                        snapshot.data!;
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: listViewUsersRecordList.length,
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewUsersRecord =
+                                            listViewUsersRecordList[
+                                                listViewIndex];
+                                        return Visibility(
+                                          visible: !(currentUserDocument
+                                                      ?.blockedUsers
+                                                      ?.toList() ??
+                                                  [])
+                                              .contains(listViewUsersRecord
+                                                  .reference),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 0.0, 10.0, 0.0),
+                                            child: AuthUserStreamWidget(
+                                              builder: (context) => Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      if (listViewUsersRecord
+                                                              .reference ==
+                                                          currentUserReference) {
+                                                        context.pushNamed(
+                                                            'Profile');
+                                                      } else {
+                                                        context.pushNamed(
+                                                          'viewProfile',
+                                                          queryParameters: {
+                                                            'userInfo':
+                                                                serializeParam(
+                                                              listViewUsersRecord,
+                                                              ParamType
+                                                                  .Document,
+                                                            ),
+                                                          }.withoutNulls,
+                                                          extra: <String,
+                                                              dynamic>{
+                                                            'userInfo':
+                                                                listViewUsersRecord,
+                                                          },
+                                                        );
+                                                      }
+                                                    },
+                                                    child: Container(
+                                                      width: 60.0,
+                                                      height: 60.0,
+                                                      clipBehavior:
+                                                          Clip.antiAlias,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: Image.network(
+                                                        listViewUsersRecord
+                                                            .photoUrl,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                      listViewUsersRecord
+                                                          .displayName,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       Container(
                         width: double.infinity,

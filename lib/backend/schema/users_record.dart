@@ -163,6 +163,11 @@ class UsersRecord extends FirestoreRecord {
   int get oldSessionPicsCount => _oldSessionPicsCount ?? 0;
   bool hasOldSessionPicsCount() => _oldSessionPicsCount != null;
 
+  // "lastPicTakenTime" field.
+  DateTime? _lastPicTakenTime;
+  DateTime? get lastPicTakenTime => _lastPicTakenTime;
+  bool hasLastPicTakenTime() => _lastPicTakenTime != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -196,6 +201,7 @@ class UsersRecord extends FirestoreRecord {
     _blockedBy = getDataList(snapshotData['blockedBy']);
     _restrictedUsers = getDataList(snapshotData['restrictedUsers']);
     _oldSessionPicsCount = castToType<int>(snapshotData['oldSessionPicsCount']);
+    _lastPicTakenTime = snapshotData['lastPicTakenTime'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -252,6 +258,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? reqNotifs,
   bool? devNotifs,
   int? oldSessionPicsCount,
+  DateTime? lastPicTakenTime,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -275,6 +282,7 @@ Map<String, dynamic> createUsersRecordData({
       'reqNotifs': reqNotifs,
       'devNotifs': devNotifs,
       'oldSessionPicsCount': oldSessionPicsCount,
+      'lastPicTakenTime': lastPicTakenTime,
     }.withoutNulls,
   );
 
@@ -316,7 +324,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.iBlocked, e2?.iBlocked) &&
         listEquality.equals(e1?.blockedBy, e2?.blockedBy) &&
         listEquality.equals(e1?.restrictedUsers, e2?.restrictedUsers) &&
-        e1?.oldSessionPicsCount == e2?.oldSessionPicsCount;
+        e1?.oldSessionPicsCount == e2?.oldSessionPicsCount &&
+        e1?.lastPicTakenTime == e2?.lastPicTakenTime;
   }
 
   @override
@@ -349,7 +358,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.iBlocked,
         e?.blockedBy,
         e?.restrictedUsers,
-        e?.oldSessionPicsCount
+        e?.oldSessionPicsCount,
+        e?.lastPicTakenTime
       ]);
 
   @override

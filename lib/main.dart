@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
       ..listen((user) => _appStateNotifier.update(user));
     jwtTokenStream.listen((_) {});
     Future.delayed(
-      Duration(seconds: 1),
+      Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
@@ -149,7 +149,7 @@ class _NavBarPageState extends State<NavBarPage> {
         activeColor: FlutterFlowTheme.of(context).frenchViolet,
         tabBackgroundColor: Color(0x00000000),
         tabBorderRadius: 100.0,
-        tabMargin: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+        tabMargin: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
         padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
         gap: 0.0,
         mainAxisAlignment: MainAxisAlignment.spaceAround,

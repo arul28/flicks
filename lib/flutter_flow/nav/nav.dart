@@ -3,16 +3,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
-import '../flutter_flow_theme.dart';
 import '/backend/backend.dart';
 
 import '../../auth/base_auth_user_provider.dart';
 import '../../backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
-import '../../index.dart';
-import '../../main.dart';
-import '../lat_lng.dart';
-import '../place.dart';
+import '/index.dart';
+import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -144,11 +145,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => EditProfileWidget(),
         ),
         FFRoute(
-          name: 'ManageFriendsOption',
-          path: '/manageFriendsOption',
-          builder: (context, params) => ManageFriendsOptionWidget(),
-        ),
-        FFRoute(
           name: 'searchUsers',
           path: '/searchUsers',
           builder: (context, params) => SearchUsersWidget(),
@@ -256,6 +252,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'deleteAccountSettingsPage',
           path: '/deleteAccountSettingsPage',
           builder: (context, params) => DeleteAccountSettingsPageWidget(),
+        ),
+        FFRoute(
+          name: 'dddddd',
+          path: '/dddddd',
+          builder: (context, params) => DdddddWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -69,7 +69,7 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
     context.watch<FFAppState>();
 
     return Container(
-      width: 100.0,
+      width: 385.0,
       height: 317.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -126,7 +126,7 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                      width: 163.0,
+                                      width: 200.0,
                                       height: 350.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
@@ -163,7 +163,7 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                                           child: Image.network(
                                             pageViewOldSessionPicsRecord
                                                 .imagePath,
-                                            width: 269.0,
+                                            width: 345.0,
                                             height: 200.0,
                                             fit: BoxFit.cover,
                                           ),
@@ -220,203 +220,191 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 10.0),
-                  child: InkWell(
+            padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.pushNamed(
+                  'viewProfile',
+                  queryParameters: {
+                    'userInfo': serializeParam(
+                      widget.userDoc,
+                      ParamType.Document,
+                    ),
+                  }.withoutNulls,
+                  extra: <String, dynamic>{
+                    'userInfo': widget.userDoc,
+                  },
+                );
+              },
+              child: Container(
+                width: 60.0,
+                height: 60.0,
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: Image.network(
+                  widget.parameter1!,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: AlignmentDirectional(-1.0, -1.0),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(15.0, 100.0, 0.0, 5.0),
+              child: Text(
+                widget.parameter2!,
+                textAlign: TextAlign.center,
+                style: FlutterFlowTheme.of(context).bodySmall.override(
+                      fontFamily: 'Readex Pro',
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w200,
+                    ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: AlignmentDirectional(-1.0, 0.0),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(26.0, 10.0, 0.0, 10.0),
+              child: StreamBuilder<UsersRecord>(
+                stream: UsersRecord.getDocument(widget.parameter3!),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  final iconUsersRecord = snapshot.data!;
+                  return InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       context.pushNamed(
-                        'viewProfile',
+                        'imageViewer',
                         queryParameters: {
-                          'userInfo': serializeParam(
-                            widget.userDoc,
-                            ParamType.Document,
+                          'userRef': serializeParam(
+                            widget.parameter3,
+                            ParamType.DocumentReference,
+                          ),
+                          'username': serializeParam(
+                            widget.parameter2,
+                            ParamType.String,
+                          ),
+                          'profilePic': serializeParam(
+                            widget.parameter1,
+                            ParamType.String,
                           ),
                         }.withoutNulls,
-                        extra: <String, dynamic>{
-                          'userInfo': widget.userDoc,
-                        },
                       );
                     },
-                    child: Container(
-                      width: 48.0,
-                      height: 48.0,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.network(
-                        widget.parameter1!,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(15.0, 5.0, 0.0, 5.0),
-                    child: Text(
-                      widget.parameter2!,
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).bodySmall.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w200,
-                          ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(15.0, 10.0, 0.0, 10.0),
-                  child: StreamBuilder<UsersRecord>(
-                    stream: UsersRecord.getDocument(widget.parameter3!),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-                      final iconUsersRecord = snapshot.data!;
-                      return InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            'imageViewer',
-                            queryParameters: {
-                              'userRef': serializeParam(
-                                widget.parameter3,
-                                ParamType.DocumentReference,
-                              ),
-                              'username': serializeParam(
-                                widget.parameter2,
-                                ParamType.String,
-                              ),
-                              'profilePic': serializeParam(
-                                widget.parameter1,
-                                ParamType.String,
-                              ),
-                            }.withoutNulls,
-                          );
-                        },
-                        child: Icon(
-                          Icons.mode_comment,
-                          color: FlutterFlowTheme.of(context).primaryBtnText,
-                          size: 30.0,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
-                  child: ToggleIcon(
-                    onPressed: () async {
-                      setState(() => _model.liked = !_model.liked!);
-                      if (_model.liked!) {
-                        await currentUserReference!.update({
-                          'liked': FieldValue.arrayUnion([widget.parameter3]),
-                        });
-                      } else {
-                        await currentUserReference!.update({
-                          'liked': FieldValue.arrayRemove([widget.parameter3]),
-                        });
-                      }
-                    },
-                    value: _model.liked!,
-                    onIcon: Icon(
-                      Icons.camera_sharp,
+                    child: Icon(
+                      Icons.mode_comment,
                       color: FlutterFlowTheme.of(context).frenchViolet,
-                      size: 30.0,
+                      size: 40.0,
                     ),
-                    offIcon: Icon(
-                      Icons.camera_rounded,
-                      color: FlutterFlowTheme.of(context).primaryBtnText,
-                      size: 30.0,
-                    ),
-                  ),
+                  );
+                },
+              ),
+            ),
+          ),
+          Align(
+            alignment: AlignmentDirectional(1.0, 0.0),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+              child: ToggleIcon(
+                onPressed: () async {
+                  setState(() => _model.liked = !_model.liked!);
+                  if (_model.liked!) {
+                    await currentUserReference!.update({
+                      'liked': FieldValue.arrayUnion([widget.parameter3]),
+                    });
+                  } else {
+                    await currentUserReference!.update({
+                      'liked': FieldValue.arrayRemove([widget.parameter3]),
+                    });
+                  }
+                },
+                value: _model.liked!,
+                onIcon: Icon(
+                  Icons.camera_sharp,
+                  color: FlutterFlowTheme.of(context).frenchViolet,
+                  size: 40.0,
                 ),
-                Expanded(
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
-                    child: FutureBuilder<int>(
-                      future: queryUsersRecordCount(
-                        queryBuilder: (usersRecord) => usersRecord
-                            .where('liked', arrayContains: widget.parameter3),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        int richTextCount = snapshot.data!;
-                        return RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: richTextCount.toString(),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: FlutterFlowTheme.of(context)
-                                          .frenchViolet,
-                                    ),
-                              ),
-                              TextSpan(
-                                text: ' likes',
-                                style: TextStyle(),
-                              )
-                            ],
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color:
-                                      FlutterFlowTheme.of(context).frenchViolet,
-                                  fontSize: 12.0,
-                                ),
+                offIcon: Icon(
+                  Icons.camera_rounded,
+                  color: FlutterFlowTheme.of(context).primaryBtnText,
+                  size: 40.0,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: AlignmentDirectional(1.0, 0.0),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 26.0, 0.0),
+              child: FutureBuilder<int>(
+                future: queryUsersRecordCount(
+                  queryBuilder: (usersRecord) => usersRecord.where('liked',
+                      arrayContains: widget.parameter3),
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
                           ),
-                          textAlign: TextAlign.center,
-                        );
-                      },
+                        ),
+                      ),
+                    );
+                  }
+                  int richTextCount = snapshot.data!;
+                  return RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: richTextCount.toString(),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyLarge
+                              .override(
+                                fontFamily: 'Readex Pro',
+                                color:
+                                    FlutterFlowTheme.of(context).frenchViolet,
+                              ),
+                        )
+                      ],
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            color: FlutterFlowTheme.of(context).frenchViolet,
+                            fontSize: 12.0,
+                          ),
                     ),
-                  ),
-                ),
-              ],
+                    textAlign: TextAlign.center,
+                  );
+                },
+              ),
             ),
           ),
         ],

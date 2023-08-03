@@ -1042,7 +1042,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                     0.0, 6.0, 0.0, 20.0),
                                             child: Container(
                                               width: double.infinity,
-                                              height: 259.0,
+                                              height: 326.0,
                                               decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)

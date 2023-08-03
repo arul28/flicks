@@ -126,7 +126,6 @@ final parametersBuilderMap =
         },
       ),
   'EditProfile': ParameterData.none(),
-  'ManageFriendsOption': ParameterData.none(),
   'searchUsers': ParameterData.none(),
   'viewProfile': (data) async => ParameterData(
         allParams: {
@@ -164,6 +163,7 @@ final parametersBuilderMap =
   'blockedUsers': ParameterData.none(),
   'hiddenUsers': ParameterData.none(),
   'deleteAccountSettingsPage': ParameterData.none(),
+  'dddddd': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
