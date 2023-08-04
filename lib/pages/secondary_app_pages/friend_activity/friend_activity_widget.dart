@@ -330,7 +330,7 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          4.0, 20.0, 0.0, 0.0),
+                                                          4.0, 20.0, 5.0, 0.0),
                                                   child: RichText(
                                                     text: TextSpan(
                                                       children: [
@@ -343,7 +343,7 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
                                                               .bodyLarge,
                                                         ),
                                                         TextSpan(
-                                                          text: 'out of ',
+                                                          text: ' out of ',
                                                           style: TextStyle(),
                                                         ),
                                                         TextSpan(

@@ -153,6 +153,7 @@ class _DeleteFlickOnceDevelopedWidgetState
                             ).then((value) => setState(() {}));
                           } else {
                             await widget.oldSessionPics!.delete();
+                            Navigator.pop(context);
 
                             context.goNamed(
                               'imageViewer',
