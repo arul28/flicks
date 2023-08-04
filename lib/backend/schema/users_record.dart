@@ -173,6 +173,11 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get lastPinAddedTime => _lastPinAddedTime;
   bool hasLastPinAddedTime() => _lastPinAddedTime != null;
 
+  // "whatsNew" field.
+  bool? _whatsNew;
+  bool get whatsNew => _whatsNew ?? false;
+  bool hasWhatsNew() => _whatsNew != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -208,6 +213,7 @@ class UsersRecord extends FirestoreRecord {
     _oldSessionPicsCount = castToType<int>(snapshotData['oldSessionPicsCount']);
     _lastPicTakenTime = snapshotData['lastPicTakenTime'] as DateTime?;
     _lastPinAddedTime = snapshotData['lastPinAddedTime'] as DateTime?;
+    _whatsNew = snapshotData['whatsNew'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -266,6 +272,7 @@ Map<String, dynamic> createUsersRecordData({
   int? oldSessionPicsCount,
   DateTime? lastPicTakenTime,
   DateTime? lastPinAddedTime,
+  bool? whatsNew,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -291,6 +298,7 @@ Map<String, dynamic> createUsersRecordData({
       'oldSessionPicsCount': oldSessionPicsCount,
       'lastPicTakenTime': lastPicTakenTime,
       'lastPinAddedTime': lastPinAddedTime,
+      'whatsNew': whatsNew,
     }.withoutNulls,
   );
 
@@ -334,7 +342,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.restrictedUsers, e2?.restrictedUsers) &&
         e1?.oldSessionPicsCount == e2?.oldSessionPicsCount &&
         e1?.lastPicTakenTime == e2?.lastPicTakenTime &&
-        e1?.lastPinAddedTime == e2?.lastPinAddedTime;
+        e1?.lastPinAddedTime == e2?.lastPinAddedTime &&
+        e1?.whatsNew == e2?.whatsNew;
   }
 
   @override
@@ -369,7 +378,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.restrictedUsers,
         e?.oldSessionPicsCount,
         e?.lastPicTakenTime,
-        e?.lastPinAddedTime
+        e?.lastPinAddedTime,
+        e?.whatsNew
       ]);
 
   @override
