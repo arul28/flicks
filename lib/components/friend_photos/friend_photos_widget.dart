@@ -266,7 +266,10 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 5.0),
                     child: Text(
-                      'Arul.Sharma',
+                      widget.parameter2!.maybeHandleOverflow(
+                        maxChars: 12,
+                        replacement: '…',
+                      ),
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).bodySmall.override(
                             fontFamily: 'Readex Pro',
