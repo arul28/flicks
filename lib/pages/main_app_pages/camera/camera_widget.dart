@@ -455,6 +455,11 @@ class _CameraWidgetState extends State<CameraWidget> {
                                       }
 
                                       setState(() {});
+
+                                      await currentUserReference!
+                                          .update(createUsersRecordData(
+                                        lastPicTakenTime: getCurrentTimestamp,
+                                      ));
                                     }
                                   },
                                   child: Icon(

@@ -312,7 +312,7 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
           Align(
             alignment: AlignmentDirectional(-1.0, 1.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 50.0),
+              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 60.0),
               child: ToggleIcon(
                 onPressed: () async {
                   setState(() => _model.liked = !_model.liked!);

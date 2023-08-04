@@ -40,75 +40,79 @@ class _WhatsNewWidgetState extends State<WhatsNewWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            FlutterFlowTheme.of(context).frenchViolet,
-            FlutterFlowTheme.of(context).heliotrope
-          ],
-          stops: [0.0, 1.0],
-          begin: AlignmentDirectional(0.0, -1.0),
-          end: AlignmentDirectional(0, 1.0),
+    return Opacity(
+      opacity: 0.8,
+      child: Container(
+        width: 400.0,
+        height: 300.0,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              FlutterFlowTheme.of(context).frenchViolet,
+              FlutterFlowTheme.of(context).heliotrope
+            ],
+            stops: [0.0, 1.0],
+            begin: AlignmentDirectional(0.0, -1.0),
+            end: AlignmentDirectional(0, 1.0),
+          ),
         ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-            child: Text(
-              'WHATS NEW?',
-              textAlign: TextAlign.center,
-              style: FlutterFlowTheme.of(context).displayMedium,
-            ),
-          ),
-          Text(
-            '\n- NEW FRIEND ACTVITY PAGE!\n\n- DELETE A FLICK ONCE IT HAS DEVELOPED\n\n- NEW DISPLAY ONCE YOU HAVE CAPTURED A FLICK\n\n- BUG FIXES\n\n',
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Readex Pro',
-                  color: FlutterFlowTheme.of(context).info,
-                  letterSpacing: 0.2,
-                ),
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.asset(
-              'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-              width: 300.0,
-              height: 200.0,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-            child: FFButtonWidget(
-              onPressed: () async {
-                Navigator.pop(context);
-              },
-              text: 'CONTINUE',
-              options: FFButtonOptions(
-                width: 217.0,
-                height: 60.0,
-                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                color: FlutterFlowTheme.of(context).frenchViolet,
-                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: 'Readex Pro',
-                      color: Colors.white,
-                    ),
-                elevation: 10.0,
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 1.0,
-                ),
-                borderRadius: BorderRadius.circular(40.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              child: Text(
+                'WHATS NEW?',
+                textAlign: TextAlign.center,
+                style: FlutterFlowTheme.of(context).displayMedium,
               ),
             ),
-          ),
-        ],
+            Text(
+              '\n- NEW FRIEND ACTVITY PAGE!\n\n- DELETE A FLICK ONCE IT HAS DEVELOPED\n\n- NEW DISPLAY ONCE YOU HAVE CAPTURED A FLICK\n\n- BUG FIXES\n\n',
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Readex Pro',
+                    color: FlutterFlowTheme.of(context).info,
+                    letterSpacing: 0.2,
+                  ),
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.asset(
+                'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                width: 300.0,
+                height: 200.0,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  Navigator.pop(context);
+                },
+                text: 'CONTINUE',
+                options: FFButtonOptions(
+                  width: 217.0,
+                  height: 60.0,
+                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                  iconPadding:
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: FlutterFlowTheme.of(context).frenchViolet,
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily: 'Readex Pro',
+                        color: Colors.white,
+                      ),
+                  elevation: 10.0,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(40.0),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

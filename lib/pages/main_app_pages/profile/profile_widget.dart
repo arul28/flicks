@@ -128,7 +128,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     FocusScope.of(context).requestFocus(_model.unfocusNode),
                 child: Container(
                   height: 230.0,
-                  width: 350.0,
+                  width: 400.0,
                   child: ProfileTourWidget(),
                 ),
               ),

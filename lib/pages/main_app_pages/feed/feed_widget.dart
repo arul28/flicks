@@ -682,6 +682,12 @@ class _FeedWidgetState extends State<FeedWidget> {
                                                                             timeTaken:
                                                                                 pageViewOldSessionPicsRecord.timeTaken,
                                                                           ));
+
+                                                                          await currentUserReference!
+                                                                              .update(createUsersRecordData(
+                                                                            lastPinAddedTime:
+                                                                                getCurrentTimestamp,
+                                                                          ));
                                                                         },
                                                                         child:
                                                                             Icon(
