@@ -251,11 +251,14 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
             child: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(15.0, 100.0, 0.0, 5.0),
               child: Text(
-                widget.parameter2!,
+                widget.parameter2!.maybeHandleOverflow(
+                  maxChars: 12,
+                  replacement: '…',
+                ),
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodySmall.override(
                       fontFamily: 'Readex Pro',
-                      fontSize: 12.0,
+                      fontSize: 11.0,
                       fontWeight: FontWeight.w200,
                     ),
               ),
@@ -312,7 +315,7 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
           Align(
             alignment: AlignmentDirectional(-1.0, 1.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 60.0),
+              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 70.0),
               child: ToggleIcon(
                 onPressed: () async {
                   setState(() => _model.liked = !_model.liked!);
@@ -343,7 +346,7 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
           Align(
             alignment: AlignmentDirectional(-1.0, 1.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(44.0, 0.0, 0.0, 40.0),
+              padding: EdgeInsetsDirectional.fromSTEB(44.0, 0.0, 0.0, 50.0),
               child: FutureBuilder<int>(
                 future: queryUsersRecordCount(
                   queryBuilder: (usersRecord) => usersRecord.where('liked',

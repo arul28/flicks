@@ -343,7 +343,7 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
                                                               .bodyLarge,
                                                         ),
                                                         TextSpan(
-                                                          text: '/',
+                                                          text: 'out of ',
                                                           style: TextStyle(),
                                                         ),
                                                         TextSpan(

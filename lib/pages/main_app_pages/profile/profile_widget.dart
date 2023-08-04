@@ -155,7 +155,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               child: GestureDetector(
                 onTap: () =>
                     FocusScope.of(context).requestFocus(_model.unfocusNode),
-                child: WhatsNewWidget(),
+                child: Container(
+                  height: 600.0,
+                  width: 450.0,
+                  child: WhatsNewWidget(),
+                ),
               ),
             );
           },
