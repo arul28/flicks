@@ -28,6 +28,11 @@ class EditProfileModel extends FlutterFlowModel {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
+  // State field(s) for TabBar widget.
+  TabController? tabBarController;
+  int get tabBarCurrentIndex =>
+      tabBarController != null ? tabBarController!.index : 0;
+
   // State field(s) for yourName widget.
   TextEditingController? yourNameController;
   String? Function(BuildContext, String?)? yourNameControllerValidator;
@@ -63,6 +68,7 @@ class EditProfileModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    tabBarController?.dispose();
     yourNameController?.dispose();
     usernameCreateController?.dispose();
     bioCreateController?.dispose();

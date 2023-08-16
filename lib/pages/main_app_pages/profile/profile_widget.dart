@@ -361,10 +361,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               },
                                               child: Text(
                                                 valueOrDefault<String>(
-                                                  valueOrDefault(
-                                                          currentUserDocument
-                                                              ?.friendsNum,
-                                                          0)
+                                                  (currentUserDocument
+                                                              ?.friendsList
+                                                              ?.toList() ??
+                                                          [])
+                                                      .length
                                                       .toString(),
                                                   '0',
                                                 ),

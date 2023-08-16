@@ -191,10 +191,10 @@ class _ManageRequestsWidgetState extends State<ManageRequestsWidget>
                         AuthUserStreamWidget(
                           builder: (context) => badges.Badge(
                             badgeContent: Text(
-                              valueOrDefault(
-                                      currentUserDocument
-                                          ?.incomingPendingRequestsNum,
-                                      0)
+                              (currentUserDocument?.incomingPendingRequests
+                                          ?.toList() ??
+                                      [])
+                                  .length
                                   .toString(),
                               style: FlutterFlowTheme.of(context)
                                   .titleSmall
