@@ -178,8 +178,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                     fontSize: 14.0,
                                   ),
                             ),
-                            showBadge:
-                                feedCount > FFAppState().friendActivityCount,
+                            showBadge: true,
                             shape: badges.BadgeShape.circle,
                             badgeColor: FlutterFlowTheme.of(context).error,
                             elevation: 4.0,
