@@ -17,6 +17,11 @@ import 'index.dart'; // Imports other custom widgets
 
 import 'dart:math';
 
+import 'package:image/image.dart' as img;
+
+import 'package:photofilters/filters/filters.dart';
+import 'package:photofilters/filters/preset_filters.dart';
+
 import '../../auth/firebase_auth/auth_util.dart';
 import '../../backend/firebase_storage/storage.dart';
 import 'package:camera/camera.dart';
@@ -80,6 +85,14 @@ class _CameraPhotoState extends State<CameraPhoto> {
       });
       controller!.takePicture().then((file) async {
         Uint8List fileAsBytes = await file.readAsBytes();
+
+        // Check if the camera used is the front camera
+        if (selectedCameraIndex == 1) {
+          img.Image image = img.decodeImage(fileAsBytes)!;
+          img.Image flippedImage = img.flipHorizontal(image);
+          fileAsBytes = Uint8List.fromList(img.encodeJpg(flippedImage));
+        }
+
         // Compress the image
         var result = await FlutterImageCompress.compressWithList(
           fileAsBytes,

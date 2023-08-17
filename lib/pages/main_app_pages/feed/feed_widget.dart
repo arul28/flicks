@@ -7,10 +7,12 @@ import '/components/tour_components/feed_tour/feed_tour_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:badges/badges.dart' as badges;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -90,6 +92,12 @@ class _FeedWidgetState extends State<FeedWidget> {
           FFAppState().feedTour = true;
         });
       }
+      _model.deets = await queryCurrentSessionDetailsRecordOnce(
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+      setState(() {
+        _model.currentSessionStartTime = _model.deets?.startTime;
+      });
     });
   }
 
@@ -115,32 +123,84 @@ class _FeedWidgetState extends State<FeedWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.goNamed('friendActivity');
-                },
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Icon(
-                      Icons.people_alt,
-                      color: FlutterFlowTheme.of(context).amethyst,
-                      size: 24.0,
-                    ),
-                    Text(
-                      'activity',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            color: FlutterFlowTheme.of(context).amethyst,
-                            fontSize: 13.0,
-                          ),
-                    ),
-                  ],
+              FutureBuilder<int>(
+                future: queryUsersRecordCount(
+                  queryBuilder: (usersRecord) => usersRecord
+                      .where('friendsList', arrayContains: currentUserReference)
+                      .where('lastPicTakenTime',
+                          isGreaterThan: _model.currentSessionStartTime)
+                      .orderBy('lastPicTakenTime', descending: true),
                 ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  int columnCount = snapshot.data!
+                      .where((u) => u.uid != currentUserUid)
+                      .toList();
+                  return InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.goNamed('friendActivity');
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        if (columnCount > 0)
+                          badges.Badge(
+                            badgeContent: Text(
+                              '!',
+                              style: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                    fontSize: 14.0,
+                                  ),
+                            ),
+                            showBadge: true,
+                            shape: badges.BadgeShape.circle,
+                            badgeColor: FlutterFlowTheme.of(context).error,
+                            elevation: 4.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                6.0, 6.0, 6.0, 6.0),
+                            position: badges.BadgePosition.topEnd(),
+                            animationType: badges.BadgeAnimationType.scale,
+                            toAnimate: true,
+                            child: Icon(
+                              Icons.people_alt,
+                              color: FlutterFlowTheme.of(context).amethyst,
+                              size: 24.0,
+                            ),
+                          ),
+                        Text(
+                          'activity',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Readex Pro',
+                                color: FlutterFlowTheme.of(context).amethyst,
+                                fontSize: 13.0,
+                              ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
@@ -949,7 +1009,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                 },
               ),
               Divider(
-                thickness: 3.0,
+                thickness: 5.0,
                 color: FlutterFlowTheme.of(context).frenchViolet,
               ),
               if (valueOrDefault(currentUserDocument?.friendsNum, 0) == 0)

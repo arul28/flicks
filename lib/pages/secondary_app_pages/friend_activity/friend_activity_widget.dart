@@ -387,7 +387,7 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
                 ),
               ),
               Divider(
-                thickness: 10.0,
+                thickness: 5.0,
                 color: FlutterFlowTheme.of(context).frenchViolet,
               ),
               Padding(

@@ -309,6 +309,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   ),
                           unselectedLabelStyle: TextStyle(),
                           indicatorColor: FlutterFlowTheme.of(context).primary,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              4.0, 4.0, 4.0, 4.0),
                           tabs: [
                             Tab(
                               text: 'Name',

@@ -4,6 +4,7 @@ import '/components/first_view_after_switch/first_view_after_switch_widget.dart'
 import '/components/image_error/image_error_widget.dart';
 import '/components/pics_limit_hit/pics_limit_hit_widget.dart';
 import '/components/tour_components/camera_tour/camera_tour_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'camera_model.dart';
@@ -28,10 +30,28 @@ class CameraWidget extends StatefulWidget {
   _CameraWidgetState createState() => _CameraWidgetState();
 }
 
-class _CameraWidgetState extends State<CameraWidget> {
+class _CameraWidgetState extends State<CameraWidget>
+    with TickerProviderStateMixin {
   late CameraModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'iconButtonOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        ShakeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 2000.ms,
+          hz: 3,
+          offset: Offset(-3.0, 3.0),
+          rotation: 0.087,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
@@ -110,6 +130,13 @@ class _CameraWidgetState extends State<CameraWidget> {
         });
       }
     });
+
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
   }
 
   @override
@@ -201,6 +228,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                             onPressed: () async {
                               context.pushNamed('currentSessionPhotosDetails');
                             },
+                          ).animateOnActionTrigger(
+                            animationsMap[
+                                'iconButtonOnActionTriggerAnimation']!,
                           ),
                         ),
                     ],
@@ -387,6 +417,14 @@ class _CameraWidgetState extends State<CameraWidget> {
                                           'timeTaken':
                                               FieldValue.serverTimestamp(),
                                         });
+                                        if (animationsMap[
+                                                'iconButtonOnActionTriggerAnimation'] !=
+                                            null) {
+                                          await animationsMap[
+                                                  'iconButtonOnActionTriggerAnimation']!
+                                              .controller
+                                              .forward(from: 0.0);
+                                        }
                                       } else {
                                         await Future.delayed(
                                             const Duration(milliseconds: 3000));
@@ -402,6 +440,14 @@ class _CameraWidgetState extends State<CameraWidget> {
                                             'timeTaken':
                                                 FieldValue.serverTimestamp(),
                                           });
+                                          if (animationsMap[
+                                                  'iconButtonOnActionTriggerAnimation'] !=
+                                              null) {
+                                            await animationsMap[
+                                                    'iconButtonOnActionTriggerAnimation']!
+                                                .controller
+                                                .forward(from: 0.0);
+                                          }
                                         } else {
                                           await Future.delayed(const Duration(
                                               milliseconds: 3000));
@@ -418,6 +464,14 @@ class _CameraWidgetState extends State<CameraWidget> {
                                               'timeTaken':
                                                   FieldValue.serverTimestamp(),
                                             });
+                                            if (animationsMap[
+                                                    'iconButtonOnActionTriggerAnimation'] !=
+                                                null) {
+                                              await animationsMap[
+                                                      'iconButtonOnActionTriggerAnimation']!
+                                                  .controller
+                                                  .forward(from: 0.0);
+                                            }
                                           } else {
                                             await showAlignedDialog(
                                               context: context,

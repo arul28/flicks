@@ -4,6 +4,7 @@ import '/components/first_view_after_switch/first_view_after_switch_widget.dart'
 import '/components/image_error/image_error_widget.dart';
 import '/components/pics_limit_hit/pics_limit_hit_widget.dart';
 import '/components/tour_components/camera_tour/camera_tour_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
