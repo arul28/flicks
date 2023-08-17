@@ -157,6 +157,10 @@ class _FeedWidgetState extends State<FeedWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      setState(() {
+                        FFAppState().friendActivityCount = feedCount;
+                      });
+
                       context.goNamed('friendActivity');
                     },
                     child: Column(
@@ -174,7 +178,8 @@ class _FeedWidgetState extends State<FeedWidget> {
                                     fontSize: 14.0,
                                   ),
                             ),
-                            showBadge: true,
+                            showBadge:
+                                feedCount > FFAppState().friendActivityCount,
                             shape: badges.BadgeShape.circle,
                             badgeColor: FlutterFlowTheme.of(context).error,
                             elevation: 4.0,

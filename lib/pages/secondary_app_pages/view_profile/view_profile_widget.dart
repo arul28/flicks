@@ -784,7 +784,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                         snapshot.data!;
                                     return MasonryGridView.count(
                                       crossAxisCount: 3,
-                                      crossAxisSpacing: 10.0,
+                                      crossAxisSpacing: 8.0,
                                       mainAxisSpacing: 10.0,
                                       itemCount:
                                           staggeredViewPinnedRecordList.length,
@@ -798,7 +798,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                           direction: FlipDirection.HORIZONTAL,
                                           speed: 400,
                                           front: Container(
-                                            width: 100.0,
+                                            width: 132.0,
                                             height: 168.0,
                                             decoration: BoxDecoration(
                                               color:
@@ -813,8 +813,8 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                               child: Image.network(
                                                 staggeredViewPinnedRecord
                                                     .imagePath,
-                                                width: 300.0,
-                                                height: 200.0,
+                                                width: 346.0,
+                                                height: 288.0,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),

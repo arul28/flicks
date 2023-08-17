@@ -30,6 +30,10 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _cameraTour = prefs.getBool('ff_cameraTour') ?? _cameraTour;
     });
+    _safeInit(() {
+      _friendActivityCount =
+          prefs.getInt('ff_friendActivityCount') ?? _friendActivityCount;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -151,6 +155,13 @@ class FFAppState extends ChangeNotifier {
     String Function(String) updateFn,
   ) {
     _suggestedNums[_index] = updateFn(_suggestedNums[_index]);
+  }
+
+  int _friendActivityCount = 0;
+  int get friendActivityCount => _friendActivityCount;
+  set friendActivityCount(int _value) {
+    _friendActivityCount = _value;
+    prefs.setInt('ff_friendActivityCount', _value);
   }
 }
 
