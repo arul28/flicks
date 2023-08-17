@@ -19,9 +19,6 @@ import 'dart:math';
 
 import 'package:image/image.dart' as img;
 
-import 'package:photofilters/filters/filters.dart';
-import 'package:photofilters/filters/preset_filters.dart';
-
 import '../../auth/firebase_auth/auth_util.dart';
 import '../../backend/firebase_storage/storage.dart';
 import 'package:camera/camera.dart';
