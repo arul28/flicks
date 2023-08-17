@@ -119,115 +119,81 @@ class _FeedWidgetState extends State<FeedWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          title: FutureBuilder<int>(
-            future: queryUsersRecordCount(
-              queryBuilder: (usersRecord) => usersRecord
-                  .where('friendsList', arrayContains: currentUserReference)
-                  .where('lastPicTakenTime',
-                      isGreaterThan: _model.currentSessionStartTime)
-                  .orderBy('lastPicTakenTime', descending: true),
-            ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
-                  ),
-                );
-              }
-              int rowCount =
-                  snapshot.data!.where((u) => u.uid != currentUserUid).toList();
-              return Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      badges.Badge(
-                        badgeContent: Text(
-                          '!',
-                          style:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Colors.white,
-                                    fontSize: 14.0,
-                                  ),
-                        ),
-                        showBadge: true,
-                        shape: badges.BadgeShape.circle,
-                        badgeColor: FlutterFlowTheme.of(context).error,
-                        elevation: 4.0,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(6.0, 6.0, 6.0, 6.0),
-                        position: badges.BadgePosition.topEnd(),
-                        animationType: badges.BadgeAnimationType.scale,
-                        toAnimate: true,
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            setState(() {
-                              FFAppState().friendActivityCount = rowCount;
-                            });
-
-                            context.goNamed('friendActivity');
-                          },
-                          child: Icon(
-                            Icons.people_alt,
-                            color: FlutterFlowTheme.of(context).amethyst,
-                            size: 26.0,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'activity',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.goNamed('friendActivity');
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    badges.Badge(
+                      badgeContent: Text(
+                        '!',
+                        style: FlutterFlowTheme.of(context).titleSmall.override(
                               fontFamily: 'Readex Pro',
-                              color: FlutterFlowTheme.of(context).amethyst,
-                              fontSize: 13.0,
+                              color: Colors.white,
+                              fontSize: 14.0,
                             ),
                       ),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
-                    child: Text(
-                      'flicks',
-                      style: FlutterFlowTheme.of(context)
-                          .headlineLarge
-                          .override(
-                            fontFamily: 'Outfit',
-                            color: FlutterFlowTheme.of(context).frenchViolet,
+                      showBadge: true,
+                      shape: badges.BadgeShape.circle,
+                      badgeColor: FlutterFlowTheme.of(context).heliotrope,
+                      elevation: 4.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(6.0, 6.0, 6.0, 6.0),
+                      position: badges.BadgePosition.topEnd(),
+                      animationType: badges.BadgeAnimationType.scale,
+                      toAnimate: true,
+                      child: Icon(
+                        Icons.people_alt,
+                        color: FlutterFlowTheme.of(context).amethyst,
+                        size: 26.0,
+                      ),
+                    ),
+                    Text(
+                      'activity',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            color: FlutterFlowTheme.of(context).amethyst,
+                            fontSize: 13.0,
                           ),
                     ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed('searchUsers');
-                    },
-                    child: Icon(
-                      Icons.person_search_sharp,
-                      color: FlutterFlowTheme.of(context).frenchViolet,
-                      size: 35.0,
-                    ),
-                  ),
-                ],
-              );
-            },
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                child: Text(
+                  'flicks',
+                  style: FlutterFlowTheme.of(context).headlineLarge.override(
+                        fontFamily: 'Outfit',
+                        color: FlutterFlowTheme.of(context).frenchViolet,
+                      ),
+                ),
+              ),
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.pushNamed('searchUsers');
+                },
+                child: Icon(
+                  Icons.person_search_sharp,
+                  color: FlutterFlowTheme.of(context).frenchViolet,
+                  size: 35.0,
+                ),
+              ),
+            ],
           ),
           actions: [],
           centerTitle: false,
