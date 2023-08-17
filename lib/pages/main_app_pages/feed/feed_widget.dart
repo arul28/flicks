@@ -151,60 +151,58 @@ class _FeedWidgetState extends State<FeedWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      setState(() {
-                        FFAppState().friendActivityCount = feedCount;
-                      });
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      if (feedCount > 0)
+                        badges.Badge(
+                          badgeContent: Text(
+                            '!',
+                            style: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                  fontSize: 14.0,
+                                ),
+                          ),
+                          showBadge: true,
+                          shape: badges.BadgeShape.circle,
+                          badgeColor: FlutterFlowTheme.of(context).error,
+                          elevation: 4.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              6.0, 6.0, 6.0, 6.0),
+                          position: badges.BadgePosition.topEnd(),
+                          animationType: badges.BadgeAnimationType.scale,
+                          toAnimate: true,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              setState(() {
+                                FFAppState().friendActivityCount = feedCount;
+                              });
 
-                      context.goNamed('friendActivity');
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        if (feedCount > 0)
-                          badges.Badge(
-                            badgeContent: Text(
-                              '!',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Colors.white,
-                                    fontSize: 14.0,
-                                  ),
-                            ),
-                            showBadge: true,
-                            shape: badges.BadgeShape.circle,
-                            badgeColor: FlutterFlowTheme.of(context).error,
-                            elevation: 4.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                6.0, 6.0, 6.0, 6.0),
-                            position: badges.BadgePosition.topEnd(),
-                            animationType: badges.BadgeAnimationType.scale,
-                            toAnimate: true,
+                              context.goNamed('friendActivity');
+                            },
                             child: Icon(
                               Icons.people_alt,
                               color: FlutterFlowTheme.of(context).amethyst,
-                              size: 24.0,
+                              size: 26.0,
                             ),
                           ),
-                        Text(
-                          'activity',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: 'Readex Pro',
-                                color: FlutterFlowTheme.of(context).amethyst,
-                                fontSize: 13.0,
-                              ),
                         ),
-                      ],
-                    ),
+                      Text(
+                        'activity',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              color: FlutterFlowTheme.of(context).amethyst,
+                              fontSize: 13.0,
+                            ),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
