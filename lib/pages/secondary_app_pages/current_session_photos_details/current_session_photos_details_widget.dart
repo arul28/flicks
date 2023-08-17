@@ -150,8 +150,8 @@ class _CurrentSessionPhotosDetailsWidgetState
                                     ClipRect(
                                       child: ImageFiltered(
                                         imageFilter: ImageFilter.blur(
-                                          sigmaX: 50.0,
-                                          sigmaY: 50.0,
+                                          sigmaX: 0.0,
+                                          sigmaY: 0.0,
                                         ),
                                         child: ClipRRect(
                                           borderRadius:
