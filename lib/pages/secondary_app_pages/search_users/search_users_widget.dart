@@ -60,7 +60,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
       setState(() {
         FFAppState().searchActive = false;
       });
-      await actions.updateSuggestedNums(
+      _model.num = await actions.updateSuggestedNums(
         FFAppState().suggestedNums.toList(),
       );
     });
@@ -280,6 +280,23 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                               ),
                             ],
                           ),
+                        ),
+                      ],
+                    ),
+                    ListView(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        Text(
+                          FFAppState().suggestedNums.first,
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                        Text(
+                          _model.num!,
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],
                     ),
@@ -547,17 +564,6 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                           ),
                         ),
                       ),
-                    ListView(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Text(
-                          FFAppState().suggestedNums.length.toString(),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),

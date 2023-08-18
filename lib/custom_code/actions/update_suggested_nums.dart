@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 // Import package
 import 'package:contacts_service/contacts_service.dart';
 
-Future updateSuggestedNums(List<String>? masterList) async {
+Future<String> updateSuggestedNums(List<String>? masterList) async {
   List<String?> phones = [];
 
   Iterable<Contact> _contacts =
@@ -29,4 +29,7 @@ Future updateSuggestedNums(List<String>? masterList) async {
     masterList?.addAll(
         phones.whereType<String>()); // Add non-null phone values to masterList
   }
+
+  return phones.length
+      .toString(); // Return the number of items in phones as a string
 }
