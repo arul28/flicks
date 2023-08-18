@@ -188,6 +188,11 @@ class UsersRecord extends FirestoreRecord {
   bool get introNeeded => _introNeeded ?? false;
   bool hasIntroNeeded() => _introNeeded != null;
 
+  // "numberOfContacts" field.
+  int? _numberOfContacts;
+  int get numberOfContacts => _numberOfContacts ?? 0;
+  bool hasNumberOfContacts() => _numberOfContacts != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -226,6 +231,7 @@ class UsersRecord extends FirestoreRecord {
     _whatsNew = snapshotData['whatsNew'] as bool?;
     _streak = castToType<int>(snapshotData['streak']);
     _introNeeded = snapshotData['introNeeded'] as bool?;
+    _numberOfContacts = castToType<int>(snapshotData['numberOfContacts']);
   }
 
   static CollectionReference get collection =>
@@ -287,6 +293,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? whatsNew,
   int? streak,
   bool? introNeeded,
+  int? numberOfContacts,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -315,6 +322,7 @@ Map<String, dynamic> createUsersRecordData({
       'whatsNew': whatsNew,
       'streak': streak,
       'introNeeded': introNeeded,
+      'numberOfContacts': numberOfContacts,
     }.withoutNulls,
   );
 
@@ -361,7 +369,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.lastPinAddedTime == e2?.lastPinAddedTime &&
         e1?.whatsNew == e2?.whatsNew &&
         e1?.streak == e2?.streak &&
-        e1?.introNeeded == e2?.introNeeded;
+        e1?.introNeeded == e2?.introNeeded &&
+        e1?.numberOfContacts == e2?.numberOfContacts;
   }
 
   @override
@@ -399,7 +408,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.lastPinAddedTime,
         e?.whatsNew,
         e?.streak,
-        e?.introNeeded
+        e?.introNeeded,
+        e?.numberOfContacts
       ]);
 
   @override
