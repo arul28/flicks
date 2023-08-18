@@ -293,11 +293,6 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
-                        Text(
-                          _model.num!,
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
                       ],
                     ),
                     if (!FFAppState().searchActive)
