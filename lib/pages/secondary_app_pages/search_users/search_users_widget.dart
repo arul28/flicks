@@ -283,18 +283,6 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                         ),
                       ],
                     ),
-                    ListView(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Text(
-                          FFAppState().suggestedNums.first,
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ],
-                    ),
                     if (!FFAppState().searchActive)
                       Expanded(
                         child: Align(
