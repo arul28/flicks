@@ -338,8 +338,9 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                               4.0, 8.0, 4.0, 0.0),
                           child: StreamBuilder<List<UsersRecord>>(
                             stream: queryUsersRecord(
-                              queryBuilder: (usersRecord) => usersRecord
-                                  .whereIn('phone_number', _model.list),
+                              queryBuilder: (usersRecord) =>
+                                  usersRecord.whereIn('phone_number',
+                                      _model.list?.take(8).toList()),
                             ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
