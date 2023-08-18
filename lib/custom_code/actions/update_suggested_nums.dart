@@ -11,25 +11,35 @@ import 'package:flutter/material.dart';
 // Import package
 import 'package:contacts_service/contacts_service.dart';
 
-Future<String> updateSuggestedNums(List<String>? masterList) async {
-  List<String?> phones = [];
-
-  Iterable<Contact> _contacts =
+Future updateSuggestedNums(List<String>? masterList) async {
+  Iterable<Contact> contacts =
       await ContactsService.getContacts(withThumbnails: false);
+  List<Contact> contactsList = contacts.toList();
 
-  _contacts.forEach((contact) {
-    contact.phones?.toSet().forEach((phone) {
-      phones.add(phone?.value);
-    });
-  });
+  masterList?.clear();
 
-  masterList?.clear(); // Clear the masterList if it's not null
-
-  if (phones.isNotEmpty) {
-    masterList?.addAll(
-        phones.whereType<String>()); // Add non-null phone values to masterList
+  for (int i = 0; i < contactsList.length; i++) {
+    masterList?.add(contactsList[i].phones!.first.value.toString());
   }
 
-  return phones.length
-      .toString(); // Return the number of items in phones as a string
+  // List<String?> phones = [];
+
+  // Iterable<Contact> _contacts =
+  //     await ContactsService.getContacts(withThumbnails: false);
+
+  // _contacts.forEach((contact) {
+  //   contact.phones?.toSet().forEach((phone) {
+  //     phones.add(phone?.value);
+  //   });
+  // });
+
+  // masterList?.clear(); // Clear the masterList if it's not null
+
+  // if (phones.isNotEmpty) {
+  //   masterList?.addAll(
+  //       phones.whereType<String>()); // Add non-null phone values to masterList
+  // }
+
+  // return phones.length
+  //     .toString(); // Return the number of items in phones as a string
 }

@@ -60,7 +60,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
       setState(() {
         FFAppState().searchActive = false;
       });
-      _model.num = await actions.updateSuggestedNums(
+      await actions.updateSuggestedNums(
         FFAppState().suggestedNums.toList(),
       );
     });
