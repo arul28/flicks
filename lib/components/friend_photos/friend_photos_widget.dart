@@ -221,41 +221,56 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed(
-                          'viewProfile',
-                          queryParameters: {
-                            'userInfo': serializeParam(
-                              widget.userDoc,
-                              ParamType.Document,
-                            ),
-                          }.withoutNulls,
-                          extra: <String, dynamic>{
-                            'userInfo': widget.userDoc,
-                          },
-                        );
-                      },
-                      child: Container(
+                Container(
+                  width: 70.0,
+                  height: 70.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    borderRadius: BorderRadius.circular(50.0),
+                    border: Border.all(
+                      color: valueOrDefault<Color>(
+                        () {
+                          if (widget.userDoc?.streak == 1) {
+                            return Color(0xFFCD7F32);
+                          } else if (widget.userDoc?.streak == 2) {
+                            return Color(0xFFC0C0C0);
+                          } else if (widget.userDoc!.streak >= 3) {
+                            return Color(0xFFFFD700);
+                          } else {
+                            return FlutterFlowTheme.of(context).noColor;
+                          }
+                        }(),
+                        FlutterFlowTheme.of(context).noColor,
+                      ),
+                      width: 3.0,
+                    ),
+                  ),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed(
+                        'viewProfile',
+                        queryParameters: {
+                          'userInfo': serializeParam(
+                            widget.userDoc,
+                            ParamType.Document,
+                          ),
+                        }.withoutNulls,
+                        extra: <String, dynamic>{
+                          'userInfo': widget.userDoc,
+                        },
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50.0),
+                      child: Image.network(
+                        widget.parameter1!,
                         width: 60.0,
                         height: 60.0,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.network(
-                          widget.parameter1!,
-                          fit: BoxFit.cover,
-                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),

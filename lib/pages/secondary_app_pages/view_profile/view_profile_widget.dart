@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/push_notifications/push_notifications_util.dart';
+import '/components/profile_view_pinned_friend/profile_view_pinned_friend_widget.dart';
 import '/components/user_actions/user_actions_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -272,15 +273,41 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                           ],
                         ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: ClipRRect(
+                      Container(
+                        width: 100.0,
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
                           borderRadius: BorderRadius.circular(50.0),
-                          child: Image.network(
-                            widget.userInfo!.photoUrl,
-                            width: 100.0,
-                            height: 100.0,
-                            fit: BoxFit.cover,
+                          border: Border.all(
+                            color: valueOrDefault<Color>(
+                              () {
+                                if (widget.userInfo?.streak == 1) {
+                                  return Color(0xFFCD7F32);
+                                } else if (widget.userInfo?.streak == 2) {
+                                  return Color(0xFFC0C0C0);
+                                } else if (widget.userInfo!.streak >= 3) {
+                                  return Color(0xFFFFD700);
+                                } else {
+                                  return FlutterFlowTheme.of(context).noColor;
+                                }
+                              }(),
+                              FlutterFlowTheme.of(context).noColor,
+                            ),
+                            width: 3.0,
+                          ),
+                        ),
+                        child: Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50.0),
+                            child: Image.network(
+                              widget.userInfo!.photoUrl,
+                              width: 100.0,
+                              height: 100.0,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
@@ -797,27 +824,104 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                           fill: Fill.fillBack,
                                           direction: FlipDirection.HORIZONTAL,
                                           speed: 400,
-                                          front: Container(
-                                            width: 132.0,
-                                            height: 168.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                          front: Stack(
+                                            children: [
+                                              Container(
+                                                width: 132.0,
+                                                height: 168.0,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .secondaryBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.network(
-                                                staggeredViewPinnedRecord
-                                                    .imagePath,
-                                                width: 346.0,
-                                                height: 288.0,
-                                                fit: BoxFit.cover,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.0),
+                                                ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    staggeredViewPinnedRecord
+                                                        .imagePath,
+                                                    width: 346.0,
+                                                    height: 288.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    1.0, -1.0),
+                                                child: Builder(
+                                                  builder: (context) => Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 8.0,
+                                                                6.0, 0.0),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        await showAlignedDialog(
+                                                          context: context,
+                                                          isGlobal: true,
+                                                          avoidOverflow: false,
+                                                          targetAnchor:
+                                                              AlignmentDirectional(
+                                                                      0.0, 0.0)
+                                                                  .resolve(
+                                                                      Directionality.of(
+                                                                          context)),
+                                                          followerAnchor:
+                                                              AlignmentDirectional(
+                                                                      0.0, 0.0)
+                                                                  .resolve(
+                                                                      Directionality.of(
+                                                                          context)),
+                                                          builder:
+                                                              (dialogContext) {
+                                                            return Material(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () => FocusScope.of(
+                                                                        context)
+                                                                    .requestFocus(
+                                                                        _model
+                                                                            .unfocusNode),
+                                                                child:
+                                                                    ProfileViewPinnedFriendWidget(
+                                                                  imgPath:
+                                                                      staggeredViewPinnedRecord
+                                                                          .imagePath,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            setState(() {}));
+                                                      },
+                                                      child: Icon(
+                                                        Icons.zoom_out_map,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        size: 24.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           back: Container(
                                             width: 100.0,

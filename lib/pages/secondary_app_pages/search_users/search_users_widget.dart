@@ -381,11 +381,35 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                                                       color: Color(0x4C4B39EF),
                                                       shape: BoxShape.circle,
                                                       border: Border.all(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .tekhelet,
-                                                        width: 2.0,
+                                                        color: valueOrDefault<
+                                                            Color>(
+                                                          () {
+                                                            if (userNoSearchItem
+                                                                    .streak ==
+                                                                1) {
+                                                              return Color(
+                                                                  0xFFCD7F32);
+                                                            } else if (userNoSearchItem
+                                                                    .streak ==
+                                                                2) {
+                                                              return Color(
+                                                                  0xFFC0C0C0);
+                                                            } else if (userNoSearchItem
+                                                                    .streak >=
+                                                                3) {
+                                                              return Color(
+                                                                  0xFFFFD700);
+                                                            } else {
+                                                              return FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .noColor;
+                                                            }
+                                                          }(),
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .noColor,
+                                                        ),
+                                                        width: 4.0,
                                                       ),
                                                     ),
                                                     child: Padding(

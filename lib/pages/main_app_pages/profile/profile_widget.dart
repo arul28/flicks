@@ -415,38 +415,81 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       ],
                                     ),
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                    child: AuthUserStreamWidget(
-                                      builder: (context) => InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onLongPress: () async {
-                                          context.pushNamed(
-                                            'EditProfile',
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType.fade,
+                                  AuthUserStreamWidget(
+                                    builder: (context) => Container(
+                                      width: 100.0,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
+                                        border: Border.all(
+                                          color: valueOrDefault<Color>(
+                                            () {
+                                              if (valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.streak,
+                                                      0) ==
+                                                  1) {
+                                                return Color(0xFFCD7F32);
+                                              } else if (valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.streak,
+                                                      0) ==
+                                                  2) {
+                                                return Color(0xFFC0C0C0);
+                                              } else if (valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.streak,
+                                                      0) >=
+                                                  3) {
+                                                return Color(0xFFFFD700);
+                                              } else {
+                                                return FlutterFlowTheme.of(
+                                                        context)
+                                                    .noColor;
+                                              }
+                                            }(),
+                                            FlutterFlowTheme.of(context)
+                                                .noColor,
+                                          ),
+                                          width: 4.0,
+                                        ),
+                                      ),
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onLongPress: () async {
+                                            context.pushNamed(
+                                              'EditProfile',
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                ),
+                                              },
+                                            );
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50.0),
+                                            child: Image.network(
+                                              valueOrDefault<String>(
+                                                currentUserPhoto,
+                                                'https://www.themoviedb.org/t/p/original/xMGWSdT0mcqzentuImFmVhkEgAQ.jpg',
                                               ),
-                                            },
-                                          );
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
-                                          child: Image.network(
-                                            valueOrDefault<String>(
-                                              currentUserPhoto,
-                                              'https://www.themoviedb.org/t/p/original/xMGWSdT0mcqzentuImFmVhkEgAQ.jpg',
+                                              width: 100.0,
+                                              height: 100.0,
+                                              fit: BoxFit.cover,
                                             ),
-                                            width: 100.0,
-                                            height: 100.0,
-                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),

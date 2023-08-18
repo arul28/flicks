@@ -460,6 +460,9 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                         comNotifs: true,
                                         reqNotifs: true,
                                         likesNotifs: true,
+                                        introNeeded: true,
+                                        whatsNew: true,
+                                        streak: 0,
                                       ));
 
                                   await authManager.sendEmailVerification();
@@ -540,6 +543,9 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                               comNotifs: true,
                                               reqNotifs: true,
                                               likesNotifs: true,
+                                              whatsNew: true,
+                                              streak: 0,
+                                              introNeeded: true,
                                             ));
 
                                             context.pushNamedAuth(
@@ -627,6 +633,9 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                         comNotifs: true,
                                         likesNotifs: true,
                                         reqNotifs: true,
+                                        whatsNew: true,
+                                        streak: 0,
+                                        introNeeded: true,
                                       ));
 
                                       context.pushNamedAuth(

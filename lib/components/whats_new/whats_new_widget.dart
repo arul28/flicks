@@ -66,20 +66,70 @@ class _WhatsNewWidgetState extends State<WhatsNewWidget> {
             ),
           ),
           Text(
-            '\n- NEW FRIEND ACTVITY PAGE!\n\n- DELETE A FLICK ONCE IT HAS DEVELOPED\n\n- NEW DISPLAY ONCE YOU HAVE CAPTURED A FLICK\n\n- BUG FIXES\n\n',
+            '\n- NEW FRIEND ACTVITY PAGE!\n\n- STREAKS! YOU PHOTO BORDER CHANGES BETWEEN  BRONZE, SILVER, AND GOLD BASED ON HOW ACTIVE YOU ARE\n\n- NEW DISPLAY ONCE YOU HAVE CAPTURED A FLICK\n\n- BUG FIXES\n\n',
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Readex Pro',
                   color: FlutterFlowTheme.of(context).info,
                   letterSpacing: 0.2,
                 ),
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.asset(
-              'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-              width: 205.0,
-              height: 200.0,
-              fit: BoxFit.cover,
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                'WE NEED YOUR HELP!!!',
+                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                      fontFamily: 'Readex Pro',
+                      color: FlutterFlowTheme.of(context).error,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                child: Text(
+                  'If you enjoy flicks please take a moment to follow us on IG',
+                  style: FlutterFlowTheme.of(context).bodyMedium,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    await launchURL('https://www.instagram.com/flicksapp_/');
+                  },
+                  child: Text(
+                    'FLICKS INSTAGRAM',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Readex Pro',
+                          color: FlutterFlowTheme.of(context).persianIndigo,
+                          decoration: TextDecoration.underline,
+                        ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                child: Text(
+                  'Let Your Friends Know About Flicks!!!',
+                  style: FlutterFlowTheme.of(context).bodyMedium,
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.asset(
+                'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
+                width: 150.0,
+                height: 100.0,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(

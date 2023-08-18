@@ -178,6 +178,16 @@ class UsersRecord extends FirestoreRecord {
   bool get whatsNew => _whatsNew ?? false;
   bool hasWhatsNew() => _whatsNew != null;
 
+  // "streak" field.
+  int? _streak;
+  int get streak => _streak ?? 0;
+  bool hasStreak() => _streak != null;
+
+  // "introNeeded" field.
+  bool? _introNeeded;
+  bool get introNeeded => _introNeeded ?? false;
+  bool hasIntroNeeded() => _introNeeded != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -214,6 +224,8 @@ class UsersRecord extends FirestoreRecord {
     _lastPicTakenTime = snapshotData['lastPicTakenTime'] as DateTime?;
     _lastPinAddedTime = snapshotData['lastPinAddedTime'] as DateTime?;
     _whatsNew = snapshotData['whatsNew'] as bool?;
+    _streak = castToType<int>(snapshotData['streak']);
+    _introNeeded = snapshotData['introNeeded'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -273,6 +285,8 @@ Map<String, dynamic> createUsersRecordData({
   DateTime? lastPicTakenTime,
   DateTime? lastPinAddedTime,
   bool? whatsNew,
+  int? streak,
+  bool? introNeeded,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -299,6 +313,8 @@ Map<String, dynamic> createUsersRecordData({
       'lastPicTakenTime': lastPicTakenTime,
       'lastPinAddedTime': lastPinAddedTime,
       'whatsNew': whatsNew,
+      'streak': streak,
+      'introNeeded': introNeeded,
     }.withoutNulls,
   );
 
@@ -343,7 +359,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.oldSessionPicsCount == e2?.oldSessionPicsCount &&
         e1?.lastPicTakenTime == e2?.lastPicTakenTime &&
         e1?.lastPinAddedTime == e2?.lastPinAddedTime &&
-        e1?.whatsNew == e2?.whatsNew;
+        e1?.whatsNew == e2?.whatsNew &&
+        e1?.streak == e2?.streak &&
+        e1?.introNeeded == e2?.introNeeded;
   }
 
   @override
@@ -379,7 +397,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.oldSessionPicsCount,
         e?.lastPicTakenTime,
         e?.lastPinAddedTime,
-        e?.whatsNew
+        e?.whatsNew,
+        e?.streak,
+        e?.introNeeded
       ]);
 
   @override

@@ -627,52 +627,93 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      if (listViewUsersRecord
-                                                              .reference ==
-                                                          currentUserReference) {
-                                                        context.pushNamed(
-                                                            'Profile');
-                                                      } else {
-                                                        context.pushNamed(
-                                                          'viewProfile',
-                                                          queryParameters: {
-                                                            'userInfo':
-                                                                serializeParam(
-                                                              listViewUsersRecord,
-                                                              ParamType
-                                                                  .Document,
-                                                            ),
-                                                          }.withoutNulls,
-                                                          extra: <String,
-                                                              dynamic>{
-                                                            'userInfo':
-                                                                listViewUsersRecord,
-                                                          },
-                                                        );
-                                                      }
-                                                    },
-                                                    child: Container(
-                                                      width: 60.0,
-                                                      height: 60.0,
-                                                      clipBehavior:
-                                                          Clip.antiAlias,
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
+                                                  Container(
+                                                    width: 70.0,
+                                                    height: 70.0,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50.0),
+                                                      border: Border.all(
+                                                        color: valueOrDefault<
+                                                            Color>(
+                                                          () {
+                                                            if (listViewUsersRecord
+                                                                    .streak ==
+                                                                1) {
+                                                              return Color(
+                                                                  0xFFCD7F32);
+                                                            } else if (listViewUsersRecord
+                                                                    .streak ==
+                                                                2) {
+                                                              return Color(
+                                                                  0xFFC0C0C0);
+                                                            } else if (listViewUsersRecord
+                                                                    .streak >=
+                                                                3) {
+                                                              return Color(
+                                                                  0xFFFFD700);
+                                                            } else {
+                                                              return FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .noColor;
+                                                            }
+                                                          }(),
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .noColor,
+                                                        ),
+                                                        width: 3.0,
                                                       ),
-                                                      child: Image.network(
-                                                        listViewUsersRecord
-                                                            .photoUrl,
-                                                        fit: BoxFit.cover,
+                                                    ),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        if (listViewUsersRecord
+                                                                .reference ==
+                                                            currentUserReference) {
+                                                          context.pushNamed(
+                                                              'Profile');
+                                                        } else {
+                                                          context.pushNamed(
+                                                            'viewProfile',
+                                                            queryParameters: {
+                                                              'userInfo':
+                                                                  serializeParam(
+                                                                listViewUsersRecord,
+                                                                ParamType
+                                                                    .Document,
+                                                              ),
+                                                            }.withoutNulls,
+                                                            extra: <String,
+                                                                dynamic>{
+                                                              'userInfo':
+                                                                  listViewUsersRecord,
+                                                            },
+                                                          );
+                                                        }
+                                                      },
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(50.0),
+                                                        child: Image.network(
+                                                          listViewUsersRecord
+                                                              .photoUrl,
+                                                          width: 300.0,
+                                                          height: 200.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
