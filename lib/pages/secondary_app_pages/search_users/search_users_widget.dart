@@ -61,12 +61,10 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
       setState(() {
         FFAppState().searchActive = false;
       });
-      await actions.updateSuggestedNums(
-        FFAppState().suggestedNums.toList(),
-      );
+      _model.list = await actions.updateSuggestedNums();
 
       await currentUserReference!.update(createUsersRecordData(
-        numberOfContacts: FFAppState().suggestedNums.length,
+        numberOfContacts: _model.list?.length,
       ));
     });
 

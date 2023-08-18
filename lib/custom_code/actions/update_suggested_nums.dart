@@ -8,38 +8,62 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'index.dart'; // Imports other custom actions
+
 // Import package
 import 'package:contacts_service/contacts_service.dart';
 
-Future updateSuggestedNums(List<String>? masterList) async {
-  Iterable<Contact> contacts =
+// Future updateSuggestedNums() async {
+//   // Iterable<Contact> contacts =
+//   //     await ContactsService.getContacts(withThumbnails: false);
+//   // List<Contact> contactsList = contacts.toList();
+
+//   // masterList?.clear();
+
+//   // for (int i = 0; i < contactsList.length; i++) {
+//   //   masterList?.add(contactsList[i].phones!.first.value.toString());
+//   // }
+
+//   List<String?> phones = [];
+
+//   Iterable<Contact> _contacts =
+//       await ContactsService.getContacts(withThumbnails: false);
+
+//   _contacts.forEach((contact) {
+//     contact.phones?.toSet().forEach((phone) {
+//       phones.add(phone?.value);
+//     });
+//   });
+
+//   // masterList?.clear(); // Clear the masterList if it's not null
+
+// // print("Before function call - masterList length: ${masterList?.length}");
+
+//   // if (phones.isNotEmpty) {
+//   //   masterList?.addAll(
+//   //       phones.whereType<String>()); // Add non-null phone values to masterList
+//   // }
+// // print("After function call - masterList length: ${masterList?.length}");
+//   // return phones.length
+//   //     .toString(); // Return the number of items in phones as a string
+// }
+
+Future<List<String>> updateSuggestedNums() async {
+  List<String> phones = []; // Changed the type to List<String>
+
+  Iterable<Contact> _contacts =
       await ContactsService.getContacts(withThumbnails: false);
-  List<Contact> contactsList = contacts.toList();
 
-  masterList?.clear();
+  _contacts.forEach((contact) {
+    contact.phones?.toSet().forEach((phone) {
+      if (phone?.value != null) {
+        // Ensure the phone value is not null
+        phones.add(phone!.value!); // Convert to non-nullable String
+      }
+    });
+  });
 
-  for (int i = 0; i < contactsList.length; i++) {
-    masterList?.add(contactsList[i].phones!.first.value.toString());
-  }
+  print("Length of phones list: ${phones.length}");
 
-  // List<String?> phones = [];
-
-  // Iterable<Contact> _contacts =
-  //     await ContactsService.getContacts(withThumbnails: false);
-
-  // _contacts.forEach((contact) {
-  //   contact.phones?.toSet().forEach((phone) {
-  //     phones.add(phone?.value);
-  //   });
-  // });
-
-  // masterList?.clear(); // Clear the masterList if it's not null
-
-  // if (phones.isNotEmpty) {
-  //   masterList?.addAll(
-  //       phones.whereType<String>()); // Add non-null phone values to masterList
-  // }
-
-  // return phones.length
-  //     .toString(); // Return the number of items in phones as a string
+  return phones; // Return a List<String>
 }

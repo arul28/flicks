@@ -193,6 +193,11 @@ class UsersRecord extends FirestoreRecord {
   int get numberOfContacts => _numberOfContacts ?? 0;
   bool hasNumberOfContacts() => _numberOfContacts != null;
 
+  // "contacts" field.
+  List<String>? _contacts;
+  List<String> get contacts => _contacts ?? const [];
+  bool hasContacts() => _contacts != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -232,6 +237,7 @@ class UsersRecord extends FirestoreRecord {
     _streak = castToType<int>(snapshotData['streak']);
     _introNeeded = snapshotData['introNeeded'] as bool?;
     _numberOfContacts = castToType<int>(snapshotData['numberOfContacts']);
+    _contacts = getDataList(snapshotData['contacts']);
   }
 
   static CollectionReference get collection =>
@@ -370,7 +376,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.whatsNew == e2?.whatsNew &&
         e1?.streak == e2?.streak &&
         e1?.introNeeded == e2?.introNeeded &&
-        e1?.numberOfContacts == e2?.numberOfContacts;
+        e1?.numberOfContacts == e2?.numberOfContacts &&
+        listEquality.equals(e1?.contacts, e2?.contacts);
   }
 
   @override
@@ -409,7 +416,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.whatsNew,
         e?.streak,
         e?.introNeeded,
-        e?.numberOfContacts
+        e?.numberOfContacts,
+        e?.contacts
       ]);
 
   @override

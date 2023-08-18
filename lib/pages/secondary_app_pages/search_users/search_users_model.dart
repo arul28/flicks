@@ -18,6 +18,8 @@ class SearchUsersModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Custom Action - updateSuggestedNums] action in searchUsers widget.
+  List<String>? list;
   // State field(s) for TextField widget.
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
