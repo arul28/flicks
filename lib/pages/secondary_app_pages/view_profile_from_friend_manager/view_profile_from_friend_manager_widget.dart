@@ -94,7 +94,7 @@ class _ViewProfileFromFriendManagerWidgetState
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).lineColor,
+          backgroundColor: FlutterFlowTheme.of(context).gray600,
           automaticallyImplyLeading: false,
           leading: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
@@ -192,7 +192,7 @@ class _ViewProfileFromFriendManagerWidgetState
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).lineColor,
+              color: FlutterFlowTheme.of(context).gray600,
             ),
             child: SingleChildScrollView(
               child: Column(

@@ -41,8 +41,8 @@ class _WhatsNewWidgetState extends State<WhatsNewWidget> {
     context.watch<FFAppState>();
 
     return Container(
-      width: 400.0,
-      height: 600.0,
+      width: 411.0,
+      height: 678.0,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -66,7 +66,7 @@ class _WhatsNewWidgetState extends State<WhatsNewWidget> {
             ),
           ),
           Text(
-            '\n- NEW FRIEND ACTVITY PAGE!\n\n- STREAKS! YOU PHOTO BORDER CHANGES BETWEEN  BRONZE, SILVER, AND GOLD BASED ON HOW ACTIVE YOU ARE\n\n- NEW DISPLAY ONCE YOU HAVE CAPTURED A FLICK\n\n- BUG FIXES\n\n',
+            '\n- NEW FRIEND ACTVITY PAGE!\n\n- NEW FRIEND SUGGESTIONS!\n\n- STREAKS! YOUR PHOTO BORDER CHANGES BETWEEN  BRONZE, SILVER, AND GOLD BASED ON HOW ACTIVE YOU ARE\n\n- NEW DISPLAY ONCE YOU HAVE CAPTURED A FLICK\n\n- BUG FIXES\n\n',
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Readex Pro',
                   color: FlutterFlowTheme.of(context).info,

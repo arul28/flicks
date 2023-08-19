@@ -90,9 +90,9 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).gray600,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).lineColor,
+          backgroundColor: FlutterFlowTheme.of(context).gray600,
           automaticallyImplyLeading: false,
           leading: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
@@ -181,7 +181,7 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).lineColor,
+              color: FlutterFlowTheme.of(context).gray600,
             ),
             child: SingleChildScrollView(
               child: Column(
