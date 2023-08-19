@@ -268,6 +268,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'friendActivity',
           path: '/friendActivity',
           builder: (context, params) => FriendActivityWidget(),
+        ),
+        FFRoute(
+          name: 'editPhone',
+          path: '/editPhone',
+          builder: (context, params) => EditPhoneWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

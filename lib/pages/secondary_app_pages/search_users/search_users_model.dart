@@ -15,15 +15,19 @@ import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
 
 class SearchUsersModel extends FlutterFlowModel {
+  ///  Local state fields for this page.
+
+  bool reloading = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Custom Action - updateSuggestedNums] action in searchUsers widget.
-  List<String>? list;
   // State field(s) for TextField widget.
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   List<UsersRecord> simpleSearchResults = [];
+  // Stores action output result for [Custom Action - updateSuggestedNums] action in Icon widget.
+  List<String>? list;
 
   /// Initialization and disposal methods.
 

@@ -163,6 +163,41 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                   highlightColor: Colors.transparent,
                   onTap: () async {
                     context.pushNamed(
+                      'EditProfile',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.rightToLeft,
+                        ),
+                      },
+                    );
+                  },
+                  child: ListTile(
+                    title: Text(
+                      'Change Phone Number',
+                      style: FlutterFlowTheme.of(context).titleLarge,
+                    ),
+                    subtitle: Text(
+                      'Edit or remove phone number',
+                      style: FlutterFlowTheme.of(context).labelMedium,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_right,
+                    ),
+                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    dense: false,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed(
                       'ResetPassword',
                       extra: <String, dynamic>{
                         kTransitionInfoKey: TransitionInfo(

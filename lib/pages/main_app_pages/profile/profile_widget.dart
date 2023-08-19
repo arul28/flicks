@@ -169,6 +169,18 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           whatsNew: true,
         ));
       }
+      if (!valueOrDefault<bool>(currentUserDocument?.phoneNumSet, false)) {
+        context.goNamed(
+          'editPhone',
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.scale,
+              alignment: Alignment.bottomCenter,
+            ),
+          },
+        );
+      }
     });
   }
 

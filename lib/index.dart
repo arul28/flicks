@@ -56,3 +56,4 @@ export '/pages/secondary_app_pages/view_profile_from_friend_manager/view_profile
     show ViewProfileFromFriendManagerWidget;
 export '/pages/secondary_app_pages/friend_activity/friend_activity_widget.dart'
     show FriendActivityWidget;
+export '/pages/settings/edit_phone/edit_phone_widget.dart' show EditPhoneWidget;

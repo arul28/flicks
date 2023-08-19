@@ -188,15 +188,25 @@ class UsersRecord extends FirestoreRecord {
   bool get introNeeded => _introNeeded ?? false;
   bool hasIntroNeeded() => _introNeeded != null;
 
-  // "numberOfContacts" field.
-  int? _numberOfContacts;
-  int get numberOfContacts => _numberOfContacts ?? 0;
-  bool hasNumberOfContacts() => _numberOfContacts != null;
-
   // "contacts" field.
   List<String>? _contacts;
   List<String> get contacts => _contacts ?? const [];
   bool hasContacts() => _contacts != null;
+
+  // "runReloadScript" field.
+  bool? _runReloadScript;
+  bool get runReloadScript => _runReloadScript ?? false;
+  bool hasRunReloadScript() => _runReloadScript != null;
+
+  // "suggestedFriends" field.
+  List<DocumentReference>? _suggestedFriends;
+  List<DocumentReference> get suggestedFriends => _suggestedFriends ?? const [];
+  bool hasSuggestedFriends() => _suggestedFriends != null;
+
+  // "phoneNumSet" field.
+  bool? _phoneNumSet;
+  bool get phoneNumSet => _phoneNumSet ?? false;
+  bool hasPhoneNumSet() => _phoneNumSet != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -236,8 +246,10 @@ class UsersRecord extends FirestoreRecord {
     _whatsNew = snapshotData['whatsNew'] as bool?;
     _streak = castToType<int>(snapshotData['streak']);
     _introNeeded = snapshotData['introNeeded'] as bool?;
-    _numberOfContacts = castToType<int>(snapshotData['numberOfContacts']);
     _contacts = getDataList(snapshotData['contacts']);
+    _runReloadScript = snapshotData['runReloadScript'] as bool?;
+    _suggestedFriends = getDataList(snapshotData['suggestedFriends']);
+    _phoneNumSet = snapshotData['phoneNumSet'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -299,7 +311,8 @@ Map<String, dynamic> createUsersRecordData({
   bool? whatsNew,
   int? streak,
   bool? introNeeded,
-  int? numberOfContacts,
+  bool? runReloadScript,
+  bool? phoneNumSet,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -328,7 +341,8 @@ Map<String, dynamic> createUsersRecordData({
       'whatsNew': whatsNew,
       'streak': streak,
       'introNeeded': introNeeded,
-      'numberOfContacts': numberOfContacts,
+      'runReloadScript': runReloadScript,
+      'phoneNumSet': phoneNumSet,
     }.withoutNulls,
   );
 
@@ -376,8 +390,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.whatsNew == e2?.whatsNew &&
         e1?.streak == e2?.streak &&
         e1?.introNeeded == e2?.introNeeded &&
-        e1?.numberOfContacts == e2?.numberOfContacts &&
-        listEquality.equals(e1?.contacts, e2?.contacts);
+        listEquality.equals(e1?.contacts, e2?.contacts) &&
+        e1?.runReloadScript == e2?.runReloadScript &&
+        listEquality.equals(e1?.suggestedFriends, e2?.suggestedFriends) &&
+        e1?.phoneNumSet == e2?.phoneNumSet;
   }
 
   @override
@@ -416,8 +432,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.whatsNew,
         e?.streak,
         e?.introNeeded,
-        e?.numberOfContacts,
-        e?.contacts
+        e?.contacts,
+        e?.runReloadScript,
+        e?.suggestedFriends,
+        e?.phoneNumSet
       ]);
 
   @override

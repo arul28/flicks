@@ -22,3 +22,21 @@ String? strToImgPath(String? str) {
 int addOne(int index) {
   return index + 1;
 }
+
+String? phonNumValidate(String? num) {
+// Return null if the input is null
+  if (num == null) {
+    return null;
+  }
+
+  // Remove all non-digit characters and whitespace
+  String cleanedNumber = num.replaceAll(RegExp(r'[^0-9]'), '');
+
+  // Check if the cleaned number has a valid length of 10
+  if (cleanedNumber.length == 10) {
+    return cleanedNumber;
+  }
+
+  // Return null if the number is not valid
+  return null;
+}

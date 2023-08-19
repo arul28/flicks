@@ -49,7 +49,7 @@ import 'package:contacts_service/contacts_service.dart';
 // }
 
 Future<List<String>> updateSuggestedNums() async {
-  List<String> phones = []; // Changed the type to List<String>
+  List<String> phones = [];
 
   Iterable<Contact> _contacts =
       await ContactsService.getContacts(withThumbnails: false);
@@ -57,8 +57,12 @@ Future<List<String>> updateSuggestedNums() async {
   _contacts.forEach((contact) {
     contact.phones?.toSet().forEach((phone) {
       if (phone?.value != null) {
-        // Ensure the phone value is not null
-        phones.add(phone!.value!); // Convert to non-nullable String
+        // Clean up the phone number and remove special characters
+        String cleanedNumber = _cleanPhoneNumber(phone!.value!);
+
+        if (cleanedNumber.isNotEmpty) {
+          phones.add(cleanedNumber); // Add cleaned number to the list
+        }
       }
     });
   });
@@ -66,4 +70,17 @@ Future<List<String>> updateSuggestedNums() async {
   print("Length of phones list: ${phones.length}");
 
   return phones; // Return a List<String>
+}
+
+String _cleanPhoneNumber(String phoneNumber) {
+  // Remove all non-digit characters and whitespace
+  String cleanedNumber = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
+
+  // Check if the cleaned number has a valid length
+  if (cleanedNumber.length == 10) {
+    return cleanedNumber;
+  }
+
+  // Return an empty string if the number is not valid
+  return '';
 }

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +29,20 @@ class CreateProfileModel extends FlutterFlowModel {
   String uploadedFileUrl = '';
 
   // State field(s) for yourName widget.
-  TextEditingController? yourNameController;
-  String? Function(BuildContext, String?)? yourNameControllerValidator;
-  String? _yourNameControllerValidator(BuildContext context, String? val) {
+  TextEditingController? yourNameController1;
+  String? Function(BuildContext, String?)? yourNameController1Validator;
+  String? _yourNameController1Validator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
+  // State field(s) for yourName widget.
+  TextEditingController? yourNameController2;
+  String? Function(BuildContext, String?)? yourNameController2Validator;
+  String? _yourNameController2Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Field is required';
     }
@@ -66,13 +78,15 @@ class CreateProfileModel extends FlutterFlowModel {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    yourNameControllerValidator = _yourNameControllerValidator;
+    yourNameController1Validator = _yourNameController1Validator;
+    yourNameController2Validator = _yourNameController2Validator;
     usernameCreateControllerValidator = _usernameCreateControllerValidator;
   }
 
   void dispose() {
     unfocusNode.dispose();
-    yourNameController?.dispose();
+    yourNameController1?.dispose();
+    yourNameController2?.dispose();
     usernameCreateController?.dispose();
     bioCreateController?.dispose();
   }

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
     super.initState();
     _model = createModel(context, () => CreateProfileModel());
 
-    _model.yourNameController ??= TextEditingController();
+    _model.yourNameController1 ??= TextEditingController();
+    _model.yourNameController2 ??= TextEditingController();
     _model.usernameCreateController ??= TextEditingController();
     _model.bioCreateController ??= TextEditingController();
   }
@@ -456,7 +458,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(
                           20.0, 10.0, 20.0, 18.0),
                       child: TextFormField(
-                        controller: _model.yourNameController,
+                        controller: _model.yourNameController1,
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -498,7 +500,57 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                               20.0, 24.0, 0.0, 24.0),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
-                        validator: _model.yourNameControllerValidator
+                        validator: _model.yourNameController1Validator
+                            .asValidator(context),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          20.0, 10.0, 20.0, 18.0),
+                      child: TextFormField(
+                        controller: _model.yourNameController2,
+                        textCapitalization: TextCapitalization.words,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Phone Number',
+                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).primary,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          filled: true,
+                          fillColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 24.0, 0.0, 24.0),
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        validator: _model.yourNameController2Validator
                             .asValidator(context),
                       ),
                     ),
@@ -643,7 +695,10 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                 displayName:
                                     _model.usernameCreateController.text,
                                 bio: _model.bioCreateController.text,
-                                fullName: _model.yourNameController.text,
+                                fullName: _model.yourNameController1.text,
+                                phoneNumber: functions.phonNumValidate(
+                                    _model.yourNameController2.text),
+                                phoneNumSet: true,
                               ));
                               if (!_model.imageAdded!) {
                                 await currentUserReference!
