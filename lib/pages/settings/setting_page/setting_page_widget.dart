@@ -162,8 +162,8 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed(
-                      'EditProfile',
+                    context.goNamed(
+                      'editPhone',
                       extra: <String, dynamic>{
                         kTransitionInfoKey: TransitionInfo(
                           hasTransition: true,
