@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:badges/badges.dart' as badges;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:aligned_dialog/aligned_dialog.dart';

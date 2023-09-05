@@ -195,28 +195,30 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                                       '_model.textController',
                                       Duration(milliseconds: 500),
                                       () async {
-                                        setState(() {
-                                          _model
-                                              .simpleSearchResults = TextSearch(
-                                            searchUsersUsersRecordList
-                                                .map(
-                                                  (record) => TextSearchItem(
-                                                      record, [
-                                                    record.displayName!,
-                                                    record.fullName!
-                                                  ]),
-                                                )
-                                                .toList(),
-                                          )
-                                              .search(
-                                                  _model.textController.text)
-                                              .map((r) => r.object)
-                                              .toList();
-                                          ;
-                                        });
-                                        setState(() {
-                                          FFAppState().searchActive = true;
-                                        });
+                                        if (_model.textController.text != '') {
+                                          setState(() {
+                                            _model.simpleSearchResults =
+                                                TextSearch(
+                                              searchUsersUsersRecordList
+                                                  .map(
+                                                    (record) => TextSearchItem(
+                                                        record, [
+                                                      record.displayName!,
+                                                      record.fullName!
+                                                    ]),
+                                                  )
+                                                  .toList(),
+                                            )
+                                                    .search(_model
+                                                        .textController.text)
+                                                    .map((r) => r.object)
+                                                    .toList();
+                                            ;
+                                          });
+                                          setState(() {
+                                            FFAppState().searchActive = true;
+                                          });
+                                        }
                                       },
                                     ),
                                     obscureText: false,

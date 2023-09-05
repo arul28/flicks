@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:badges/badges.dart' as badges;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:aligned_dialog/aligned_dialog.dart';
@@ -135,29 +134,10 @@ class _FeedWidgetState extends State<FeedWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    badges.Badge(
-                      badgeContent: Text(
-                        '!',
-                        style: FlutterFlowTheme.of(context).titleSmall.override(
-                              fontFamily: 'Readex Pro',
-                              color: Colors.white,
-                              fontSize: 14.0,
-                            ),
-                      ),
-                      showBadge: true,
-                      shape: badges.BadgeShape.circle,
-                      badgeColor: FlutterFlowTheme.of(context).heliotrope,
-                      elevation: 4.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(6.0, 6.0, 6.0, 6.0),
-                      position: badges.BadgePosition.topEnd(),
-                      animationType: badges.BadgeAnimationType.scale,
-                      toAnimate: true,
-                      child: Icon(
-                        Icons.people_alt,
-                        color: FlutterFlowTheme.of(context).amethyst,
-                        size: 26.0,
-                      ),
+                    Icon(
+                      Icons.people_alt,
+                      color: FlutterFlowTheme.of(context).amethyst,
+                      size: 26.0,
                     ),
                     Text(
                       'activity',
