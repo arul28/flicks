@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'edit_phone_model.dart';
@@ -183,67 +184,76 @@ class _EditPhoneWidgetState extends State<EditPhoneWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
-                                child: AuthUserStreamWidget(
-                                  builder: (context) => TextFormField(
-                                    controller: _model.phoneNumberController,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Your Phone Number...',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall,
-                                      hintText: valueOrDefault<bool>(
-                                              currentUserDocument?.phoneNumSet,
-                                              false)
-                                          ? currentPhoneNumber
-                                          : 'xxx-xxx-xxxx',
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          width: 2.0,
+                                child: Form(
+                                  key: _model.formKey,
+                                  autovalidateMode: AutovalidateMode.disabled,
+                                  child: AuthUserStreamWidget(
+                                    builder: (context) => TextFormField(
+                                      controller: _model.phoneNumberController,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Your Phone Number...',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall,
+                                        hintText: valueOrDefault<bool>(
+                                                currentUserDocument
+                                                    ?.phoneNumSet,
+                                                false)
+                                            ? currentPhoneNumber
+                                            : 'xxx-xxx-xxxx',
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .bodySmall,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 2.0,
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 2.0,
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 2.0,
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
+                                        filled: true,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                16.0, 24.0, 0.0, 24.0),
                                       ),
-                                      filled: true,
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              16.0, 24.0, 0.0, 24.0),
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium,
+                                      maxLines: null,
+                                      maxLength: 10,
+                                      maxLengthEnforcement:
+                                          MaxLengthEnforcement.enforced,
+                                      keyboardType: TextInputType.phone,
+                                      validator: _model
+                                          .phoneNumberControllerValidator
+                                          .asValidator(context),
                                     ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium,
-                                    maxLines: null,
-                                    validator: _model
-                                        .phoneNumberControllerValidator
-                                        .asValidator(context),
                                   ),
                                 ),
                               ),
