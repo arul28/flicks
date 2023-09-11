@@ -9,6 +9,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +46,13 @@ class CreateProfileModel extends FlutterFlowModel {
   String? _yourNameController2Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Field is required';
+    }
+
+    if (val.length < 10) {
+      return 'please enter valid phone number';
+    }
+    if (val.length > 10) {
+      return 'please enter valid phone number';
     }
 
     return null;

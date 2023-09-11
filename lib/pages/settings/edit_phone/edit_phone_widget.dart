@@ -70,15 +70,19 @@ class _EditPhoneWidgetState extends State<EditPhoneWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'flicks',
-                          style: FlutterFlowTheme.of(context)
-                              .headlineMedium
-                              .override(
-                                fontFamily: 'Outfit',
-                                color: FlutterFlowTheme.of(context).amethyst,
-                                fontSize: 40.0,
-                              ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 20.0, 0.0, 0.0),
+                          child: Text(
+                            'flicks',
+                            style: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: FlutterFlowTheme.of(context).amethyst,
+                                  fontSize: 40.0,
+                                ),
+                          ),
                         ),
                       ],
                     ),
@@ -88,12 +92,12 @@ class _EditPhoneWidgetState extends State<EditPhoneWidget> {
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 100.0, 0.0, 100.0),
+                            0.0, 60.0, 0.0, 60.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
                             'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                            width: 300.0,
+                            width: 280.0,
                             height: 200.0,
                             fit: BoxFit.cover,
                           ),
@@ -267,52 +271,47 @@ class _EditPhoneWidgetState extends State<EditPhoneWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 20.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    await currentUserReference!
-                                        .update(createUsersRecordData(
-                                      phoneNumber: functions.phonNumValidate(
-                                          _model.phoneNumberController.text),
-                                      phoneNumSet: true,
-                                    ));
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  await currentUserReference!
+                                      .update(createUsersRecordData(
+                                    phoneNumber: functions.phonNumValidate(
+                                        _model.phoneNumberController.text),
+                                    phoneNumSet: true,
+                                  ));
 
-                                    context.goNamed(
-                                      'Profile',
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                        ),
-                                      },
-                                    );
-                                  },
-                                  text: 'Update',
-                                  options: FFButtonOptions(
-                                    width: 120.0,
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                        ),
-                                    elevation: 2.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(20.0),
+                                  context.goNamed(
+                                    'Profile',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                      ),
+                                    },
+                                  );
+                                },
+                                text: 'Update',
+                                options: FFButtonOptions(
+                                  width: 120.0,
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                        fontSize: 18.0,
+                                      ),
+                                  elevation: 2.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
                                   ),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                               ),
                             ],

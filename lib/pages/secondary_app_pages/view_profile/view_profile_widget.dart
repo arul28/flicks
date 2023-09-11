@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/profile_view_pinned_friend/profile_view_pinned_friend_widget.dart';
 import '/components/user_actions/user_actions_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -401,6 +402,11 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    _model.sentWaiting = true;
+                                    _model.noConnection = false;
+                                    _model.isFriend = false;
+                                    _model.recievedWaiting = false;
+
                                     await currentUserReference!.update({
                                       'sentPendingRequests':
                                           FieldValue.arrayUnion(
@@ -422,6 +428,20 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                       _model.isFriend = false;
                                       _model.recievedWaiting = false;
                                     });
+                                    if (widget.userInfo?.reqNotifs == true) {
+                                      triggerPushNotification(
+                                        notificationTitle: 'Friend Request',
+                                        notificationText:
+                                            valueOrDefault<String>(
+                                          '${valueOrDefault(currentUserDocument?.fullName, '')} wants to be your friend!',
+                                          'Someone wants to be your friend!',
+                                        ),
+                                        notificationSound: 'default',
+                                        userRefs: [widget.userInfo!.reference],
+                                        initialPageName: 'manageRequests',
+                                        parameterData: {},
+                                      );
+                                    }
                                   },
                                   child: Container(
                                     width: 200.0,
@@ -658,6 +678,11 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    _model.isFriend = true;
+                                    _model.recievedWaiting = false;
+                                    _model.noConnection = false;
+                                    _model.sentWaiting = false;
+
                                     await currentUserReference!.update({
                                       'friendsList': FieldValue.arrayUnion(
                                           [widget.userInfo?.reference]),
@@ -685,6 +710,20 @@ class _ViewProfileWidgetState extends State<ViewProfileWidget> {
                                       _model.noConnection = false;
                                       _model.sentWaiting = false;
                                     });
+                                    if (widget.userInfo?.reqNotifs == true) {
+                                      triggerPushNotification(
+                                        notificationTitle: 'Friend Added!',
+                                        notificationText:
+                                            valueOrDefault<String>(
+                                          '${valueOrDefault(currentUserDocument?.fullName, '')} is now your friend!',
+                                          'You have a new friend!',
+                                        ),
+                                        notificationSound: 'default',
+                                        userRefs: [widget.userInfo!.reference],
+                                        initialPageName: 'Profile',
+                                        parameterData: {},
+                                      );
+                                    }
                                   },
                                   child: Container(
                                     width: 200.0,
