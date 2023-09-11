@@ -7,6 +7,7 @@ import '/components/tour_components/profile_tour/profile_tour_widget.dart';
 import '/components/whats_new/whats_new_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flip_card/flip_card.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';

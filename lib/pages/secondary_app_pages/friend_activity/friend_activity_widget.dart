@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
@@ -280,6 +281,10 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
                                                             .start,
                                                     children: [
                                                       RichText(
+                                                        textScaleFactor:
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .textScaleFactor,
                                                         text: TextSpan(
                                                           children: [
                                                             TextSpan(
@@ -332,6 +337,9 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
                                                       .fromSTEB(
                                                           4.0, 20.0, 5.0, 0.0),
                                                   child: RichText(
+                                                    textScaleFactor:
+                                                        MediaQuery.of(context)
+                                                            .textScaleFactor,
                                                     text: TextSpan(
                                                       children: [
                                                         TextSpan(
@@ -531,6 +539,9 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 RichText(
+                                                  textScaleFactor:
+                                                      MediaQuery.of(context)
+                                                          .textScaleFactor,
                                                   text: TextSpan(
                                                     children: [
                                                       TextSpan(

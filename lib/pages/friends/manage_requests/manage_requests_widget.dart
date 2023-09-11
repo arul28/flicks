@@ -486,7 +486,7 @@ class _ManageRequestsWidgetState extends State<ManageRequestsWidget>
                 color: FlutterFlowTheme.of(context).secondaryBackground,
               ),
               child: Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.00, 0.00),
                 child: FFButtonWidget(
                   onPressed: () async {
                     context.pushNamed('searchUsers');

@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
@@ -191,7 +192,7 @@ class _CameraWidgetState extends State<CameraWidget>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.00, 0.00),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 4.0, 0.0, 4.0),
@@ -280,7 +281,7 @@ class _CameraWidgetState extends State<CameraWidget>
                         ),
                         if (!_model.takingImage!)
                           Align(
-                            alignment: AlignmentDirectional(-1.0, -1.0),
+                            alignment: AlignmentDirectional(-1.00, -1.00),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   10.0, 10.0, 0.0, 0.0),
@@ -294,6 +295,8 @@ class _CameraWidgetState extends State<CameraWidget>
                                       .pushNamed('currentSessionPhotosDetails');
                                 },
                                 child: RichText(
+                                  textScaleFactor:
+                                      MediaQuery.of(context).textScaleFactor,
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
@@ -349,7 +352,7 @@ class _CameraWidgetState extends State<CameraWidget>
                           ),
                         if (!FFAppState().uploadingPhoto)
                           Align(
-                            alignment: AlignmentDirectional(0.0, 1.0),
+                            alignment: AlignmentDirectional(0.00, 1.00),
                             child: Builder(
                               builder: (context) => Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -525,7 +528,7 @@ class _CameraWidgetState extends State<CameraWidget>
                             ),
                           ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -539,7 +542,7 @@ class _CameraWidgetState extends State<CameraWidget>
                                     if (FFAppState().uploadingPhoto)
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.00, 0.00),
                                         child: Container(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -562,8 +565,8 @@ class _CameraWidgetState extends State<CameraWidget>
                                             ),
                                           ),
                                           child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
+                                            alignment: AlignmentDirectional(
+                                                0.00, 0.00),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -603,6 +606,9 @@ class _CameraWidgetState extends State<CameraWidget>
                                                       .fromSTEB(0.0, 100.0, 0.0,
                                                           100.0),
                                                   child: RichText(
+                                                    textScaleFactor:
+                                                        MediaQuery.of(context)
+                                                            .textScaleFactor,
                                                     text: TextSpan(
                                                       children: [
                                                         TextSpan(

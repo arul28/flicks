@@ -142,14 +142,14 @@ class _VerificationWidgetState extends State<VerificationWidget>
                 end: AlignmentDirectional(-0.87, 1.0),
               ),
             ),
-            alignment: AlignmentDirectional(0.0, -1.0),
+            alignment: AlignmentDirectional(0.00, -1.00),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(-1.0, -1.0),
+                    alignment: AlignmentDirectional(-1.00, -1.00),
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
@@ -182,7 +182,7 @@ class _VerificationWidgetState extends State<VerificationWidget>
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.0),
                       ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.00, 0.00),
                       child: Text(
                         'flicks',
                         style: FlutterFlowTheme.of(context).headlineLarge,
@@ -209,7 +209,7 @@ class _VerificationWidgetState extends State<VerificationWidget>
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.00, 0.00),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               32.0, 32.0, 32.0, 32.0),
@@ -234,7 +234,7 @@ class _VerificationWidgetState extends State<VerificationWidget>
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(1.0, 0.0),
+                                alignment: AlignmentDirectional(1.00, 0.00),
                                 child: Builder(
                                   builder: (context) => Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -354,7 +354,7 @@ class _VerificationWidgetState extends State<VerificationWidget>
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.00, 0.00),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               32.0, 32.0, 32.0, 32.0),
@@ -363,7 +363,7 @@ class _VerificationWidgetState extends State<VerificationWidget>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       70.0, 0.0, 70.0, 0.0),

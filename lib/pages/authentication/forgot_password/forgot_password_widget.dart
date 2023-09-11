@@ -136,7 +136,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                 end: AlignmentDirectional(-0.87, 1.0),
               ),
             ),
-            alignment: AlignmentDirectional(0.0, -1.0),
+            alignment: AlignmentDirectional(0.00, -1.00),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -151,7 +151,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.0),
                       ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.00, 0.00),
                       child: Text(
                         'flicks',
                         style: FlutterFlowTheme.of(context).headlineLarge,
@@ -182,7 +182,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 32.0, 32.0, 32.0, 32.0),
@@ -299,7 +299,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                     children: [
                       Expanded(
                         child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Builder(
                             builder: (context) => Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -378,7 +378,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                       ),
                       Expanded(
                         child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 70.0, 0.0),

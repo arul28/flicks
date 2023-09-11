@@ -1,10 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/profile_view_pinned_friend/profile_view_pinned_friend_widget.dart';
 import '/components/user_actions/user_actions_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -97,7 +97,7 @@ class _ViewProfileFromFriendManagerWidgetState
           backgroundColor: FlutterFlowTheme.of(context).gray600,
           automaticallyImplyLeading: false,
           leading: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.00, 0.00),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -123,7 +123,7 @@ class _ViewProfileFromFriendManagerWidgetState
             ),
           ),
           title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.00, 0.00),
             child: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 35.0, 0.0),
               child: SelectionArea(
@@ -310,7 +310,7 @@ class _ViewProfileFromFriendManagerWidgetState
                           ),
                         ),
                         child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(50.0),
                             child: Image.network(
@@ -372,7 +372,7 @@ class _ViewProfileFromFriendManagerWidgetState
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, -1.0),
+                                  alignment: AlignmentDirectional(0.00, -1.00),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 15.0, 0.0, 0.0),
@@ -405,7 +405,7 @@ class _ViewProfileFromFriendManagerWidgetState
                           children: [
                             if (_model.noConnection == true)
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.00, 0.00),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -427,17 +427,6 @@ class _ViewProfileFromFriendManagerWidgetState
                                       'incomingPendingRequestsNum':
                                           FieldValue.increment(1),
                                     });
-                                    if (widget.userInfo!.reqNotifs) {
-                                      triggerPushNotification(
-                                        notificationTitle: 'New Friend Request',
-                                        notificationText:
-                                            'Someone has added you as a friend!',
-                                        notificationSound: 'default',
-                                        userRefs: [widget.userInfo!.reference],
-                                        initialPageName: 'Profile',
-                                        parameterData: {},
-                                      );
-                                    }
                                     setState(() {
                                       _model.sentWaiting = true;
                                       _model.noConnection = false;
@@ -503,7 +492,7 @@ class _ViewProfileFromFriendManagerWidgetState
                               ),
                             if (_model.isFriend == true)
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.00, 0.00),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -618,7 +607,7 @@ class _ViewProfileFromFriendManagerWidgetState
                               ),
                             if (_model.sentWaiting)
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Container(
                                   width: 200.0,
                                   height: 60.0,
@@ -673,7 +662,7 @@ class _ViewProfileFromFriendManagerWidgetState
                               ),
                             if (_model.recievedWaiting)
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.00, 0.00),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -701,17 +690,6 @@ class _ViewProfileFromFriendManagerWidgetState
                                       'sentPendingRequestsNum':
                                           FieldValue.increment(-(1)),
                                     });
-                                    if (widget.userInfo!.reqNotifs) {
-                                      triggerPushNotification(
-                                        notificationTitle: 'New friend added',
-                                        notificationText:
-                                            'Someone accepted your friend request!',
-                                        notificationSound: 'default',
-                                        userRefs: [widget.userInfo!.reference],
-                                        initialPageName: 'Feed',
-                                        parameterData: {},
-                                      );
-                                    }
                                     setState(() {
                                       _model.isFriend = true;
                                       _model.recievedWaiting = false;
@@ -863,7 +841,7 @@ class _ViewProfileFromFriendManagerWidgetState
                                               ),
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    1.0, -1.0),
+                                                    1.00, -1.00),
                                                 child: Builder(
                                                   builder: (context) => Padding(
                                                     padding:

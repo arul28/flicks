@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -152,7 +153,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget> {
                             alignment: AlignmentDirectional(0.0, 0.0),
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.61, -0.19),
+                                alignment: AlignmentDirectional(0.61, -0.18),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       8.0, 2.0, 0.0, 0.0),
@@ -167,7 +168,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget> {
                               if (!valueOrDefault<bool>(
                                   currentUserDocument?.comNotifs, false))
                                 Align(
-                                  alignment: AlignmentDirectional(0.9, 0.41),
+                                  alignment: AlignmentDirectional(0.90, 0.41),
                                   child: AuthUserStreamWidget(
                                     builder: (context) => InkWell(
                                       splashColor: Colors.transparent,
@@ -207,7 +208,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget> {
                               if (valueOrDefault<bool>(
                                   currentUserDocument?.comNotifs, false))
                                 Align(
-                                  alignment: AlignmentDirectional(-0.96, 0.56),
+                                  alignment: AlignmentDirectional(-0.95, 0.56),
                                   child: AuthUserStreamWidget(
                                     builder: (context) => InkWell(
                                       splashColor: Colors.transparent,
@@ -352,7 +353,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget> {
                               if (valueOrDefault<bool>(
                                   currentUserDocument?.likesNotifs, false))
                                 Align(
-                                  alignment: AlignmentDirectional(-0.96, 0.56),
+                                  alignment: AlignmentDirectional(-0.95, 0.56),
                                   child: AuthUserStreamWidget(
                                     builder: (context) => InkWell(
                                       splashColor: Colors.transparent,
@@ -497,7 +498,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget> {
                               if (valueOrDefault<bool>(
                                   currentUserDocument?.reqNotifs, false))
                                 Align(
-                                  alignment: AlignmentDirectional(-0.96, 0.56),
+                                  alignment: AlignmentDirectional(-0.95, 0.56),
                                   child: AuthUserStreamWidget(
                                     builder: (context) => InkWell(
                                       splashColor: Colors.transparent,

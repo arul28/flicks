@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +89,7 @@ class _HiddenUsersWidgetState extends State<HiddenUsersWidget>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               RichText(
+                textScaleFactor: MediaQuery.of(context).textScaleFactor,
                 text: TextSpan(
                   children: [
                     TextSpan(

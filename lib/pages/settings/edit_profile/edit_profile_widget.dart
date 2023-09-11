@@ -37,7 +37,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
       vsync: this,
       length: 3,
       initialIndex: 0,
-    );
+    )..addListener(() => setState(() {}));
     _model.yourNameController ??= TextEditingController();
     _model.usernameCreateController ??= TextEditingController();
     _model.bioCreateController ??= TextEditingController();
@@ -323,7 +323,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                             ),
                           ],
                           controller: _model.tabBarController,
-                          onTap: (value) => setState(() {}),
                         ),
                       ),
                       Expanded(
@@ -399,7 +398,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.05),
+                                    alignment: AlignmentDirectional(0.00, 0.05),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 24.0, 0.0, 0.0),
@@ -554,7 +553,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                           ),
                                     ),
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.05),
+                                    alignment: AlignmentDirectional(0.00, 0.05),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 24.0, 0.0, 0.0),
@@ -713,7 +712,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.05),
+                                    alignment: AlignmentDirectional(0.00, 0.05),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 24.0, 0.0, 0.0),

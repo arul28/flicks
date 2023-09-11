@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -278,7 +279,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(1.0, 0.0),
+                                  alignment: AlignmentDirectional(1.00, 0.00),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 25.0, 0.0),
@@ -318,7 +319,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.00, 0.00),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 120.0, 0.0),
@@ -712,12 +713,12 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                     if (!FFAppState().searchActive)
                       Expanded(
                         child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Container(
                             width: 200.0,
                             height: 200.0,
                             decoration: BoxDecoration(),
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.00, 0.00),
                             child: Visibility(
                               visible: !FFAppState().searchActive,
                               child: ClipRRect(

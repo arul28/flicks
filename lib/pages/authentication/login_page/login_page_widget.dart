@@ -189,7 +189,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                 key: _model.formKey,
                 autovalidateMode: AutovalidateMode.disabled,
                 child: Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.00, 0.00),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
@@ -322,7 +322,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
@@ -396,7 +396,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
@@ -439,15 +439,15 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.00, 0.00),
                                     child: Container(
                                       width: 230.0,
                                       height: 44.0,
                                       child: Stack(
                                         children: [
                                           Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
+                                            alignment: AlignmentDirectional(
+                                                0.00, 0.00),
                                             child: FFButtonWidget(
                                               onPressed: () async {
                                                 GoRouter.of(context)
@@ -509,7 +509,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                           ),
                                           Align(
                                             alignment: AlignmentDirectional(
-                                                -0.83, 0.0),
+                                                -0.83, 0.00),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
@@ -546,7 +546,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.00, 0.00),
                                   child: Container(
                                     width: 230.0,
                                     height: 44.0,
@@ -621,7 +621,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                           ],
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 20.0, 0.0, 0.0),

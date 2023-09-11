@@ -95,7 +95,7 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
               ),
             ),
             child: Align(
-              alignment: AlignmentDirectional(0.0, -1.0),
+              alignment: AlignmentDirectional(0.00, -1.00),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
                 child: SingleChildScrollView(

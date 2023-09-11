@@ -55,7 +55,7 @@ class _EditPhoneWidgetState extends State<EditPhoneWidget> {
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Align(
-            alignment: AlignmentDirectional(0.0, 1.0),
+            alignment: AlignmentDirectional(0.00, 1.00),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,

@@ -294,7 +294,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                       Align(
                                                         alignment:
                                                             AlignmentDirectional(
-                                                                1.0, -1.0),
+                                                                1.00, -1.00),
                                                         child: Builder(
                                                           builder: (context) =>
                                                               Padding(
@@ -378,8 +378,8 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                             ),
                                           ),
                                           Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 1.0),
+                                            alignment: AlignmentDirectional(
+                                                0.00, 1.00),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
@@ -470,6 +470,8 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                 }
                                 int richTextCount = snapshot.data!;
                                 return RichText(
+                                  textScaleFactor:
+                                      MediaQuery.of(context).textScaleFactor,
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
@@ -782,6 +784,8 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                     }
                                     int richTextCount = snapshot.data!;
                                     return RichText(
+                                      textScaleFactor: MediaQuery.of(context)
+                                          .textScaleFactor,
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
@@ -1168,7 +1172,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                             Flexible(
                                               child: Align(
                                                 alignment: AlignmentDirectional(
-                                                    -1.0, 0.0),
+                                                    -1.00, 0.00),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
@@ -1185,7 +1189,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                             ),
                                             Align(
                                               alignment: AlignmentDirectional(
-                                                  1.0, 1.0),
+                                                  1.00, 1.00),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -1205,7 +1209,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                 currentUserReference)
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    1.0, -1.0),
+                                                    1.00, -1.00),
                                                 child: Builder(
                                                   builder: (context) => Padding(
                                                     padding:
@@ -1284,7 +1288,7 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                     currentUserReference))
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    1.0, -1.0),
+                                                    1.00, -1.00),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(

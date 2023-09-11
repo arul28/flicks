@@ -4,6 +4,7 @@ import '/components/delete_flick/delete_flick_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
@@ -168,7 +169,7 @@ class _CurrentSessionPhotosDetailsWidgetState
                                     ),
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-1.0, 1.0),
+                                          AlignmentDirectional(-1.00, 1.00),
                                       child: Builder(
                                         builder: (context) => Padding(
                                           padding:
@@ -235,7 +236,8 @@ class _CurrentSessionPhotosDetailsWidgetState
                                       ),
                                     ),
                                     Align(
-                                      alignment: AlignmentDirectional(0.0, 1.0),
+                                      alignment:
+                                          AlignmentDirectional(0.00, 1.00),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 10.0),
@@ -300,7 +302,7 @@ class _CurrentSessionPhotosDetailsWidgetState
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(0.0, 1.0),
+                            alignment: AlignmentDirectional(0.00, 1.00),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 16.0),

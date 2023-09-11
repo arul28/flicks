@@ -79,7 +79,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.00, 0.00),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 6.0),
@@ -95,7 +95,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            alignment: AlignmentDirectional(-1.00, 0.00),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 0.0, 0.0),
@@ -673,7 +673,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                         ],
                       ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.05),
+                      alignment: AlignmentDirectional(0.00, 0.05),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),

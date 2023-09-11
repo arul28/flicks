@@ -120,7 +120,7 @@ class _ReportFormWidgetState extends State<ReportFormWidget> {
                   ),
                 ),
                 child: Align(
-                  alignment: AlignmentDirectional(0.0, -1.0),
+                  alignment: AlignmentDirectional(0.00, -1.00),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
@@ -152,7 +152,8 @@ class _ReportFormWidgetState extends State<ReportFormWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    alignment:
+                                        AlignmentDirectional(-1.00, 0.00),
                                     child: Text(
                                       reportFormUsersRecord.displayName,
                                       style: FlutterFlowTheme.of(context)

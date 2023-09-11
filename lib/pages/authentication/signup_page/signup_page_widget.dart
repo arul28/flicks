@@ -189,7 +189,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                 key: _model.formKey,
                 autovalidateMode: AutovalidateMode.disabled,
                 child: Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.00, 0.00),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
@@ -416,7 +416,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                             ],
                           ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
@@ -517,7 +517,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Container(
                                   width: 230.0,
                                   height: 44.0,
@@ -525,7 +525,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                     children: [
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.00, 0.00),
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             GoRouter.of(context)
@@ -585,7 +585,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                       ),
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(-0.83, 0.0),
+                                            AlignmentDirectional(-0.83, 0.00),
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -677,7 +677,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 24.0),

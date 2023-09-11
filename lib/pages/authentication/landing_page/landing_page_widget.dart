@@ -206,7 +206,7 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
                 children: [
                   Expanded(
                     child: Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.00, 0.00),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 16.0),
@@ -238,7 +238,7 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
                   ),
                   Expanded(
                     child: Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.00, 0.00),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 16.0),
