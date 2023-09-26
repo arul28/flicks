@@ -639,7 +639,8 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                       ));
 
                                       context.pushNamedAuth(
-                                          'CreateProfile', context.mounted);
+                                          'CreateProfileAppleUser',
+                                          context.mounted);
                                     },
                                     text: 'Sign up with Apple',
                                     icon: FaIcon(

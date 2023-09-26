@@ -783,7 +783,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                 );
                                                               },
                                                             ).then((value) =>
-                                                                setState(
+                                                                safeSetState(
                                                                     () {}));
                                                           },
                                                           child: Icon(

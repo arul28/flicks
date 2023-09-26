@@ -169,6 +169,7 @@ final parametersBuilderMap =
       ),
   'friendActivity': ParameterData.none(),
   'editPhone': ParameterData.none(),
+  'CreateProfileAppleUser': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

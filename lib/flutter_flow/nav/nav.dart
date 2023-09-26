@@ -273,6 +273,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'editPhone',
           path: '/editPhone',
           builder: (context, params) => EditPhoneWidget(),
+        ),
+        FFRoute(
+          name: 'CreateProfileAppleUser',
+          path: '/createProfileAppleUser',
+          builder: (context, params) => CreateProfileAppleUserWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

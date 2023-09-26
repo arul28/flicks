@@ -197,7 +197,7 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                                       Duration(milliseconds: 500),
                                       () async {
                                         if (_model.textController.text != '') {
-                                          setState(() {
+                                          safeSetState(() {
                                             _model.simpleSearchResults =
                                                 TextSearch(
                                               searchUsersUsersRecordList

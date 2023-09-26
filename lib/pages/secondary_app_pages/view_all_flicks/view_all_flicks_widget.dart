@@ -160,7 +160,7 @@ class _ViewAllFlicksWidgetState extends State<ViewAllFlicksWidget> {
                                               ),
                                             );
                                           },
-                                        ).then((value) => setState(() {}));
+                                        ).then((value) => safeSetState(() {}));
                                       },
                                       child: ClipRRect(
                                         borderRadius:
