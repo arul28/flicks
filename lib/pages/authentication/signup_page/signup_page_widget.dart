@@ -640,7 +640,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget>
                                         introNeeded: true,
                                       ));
 
-                                      context.pushNamedAuth(
+                                      context.goNamedAuth(
                                           'CreateProfileAppleUser',
                                           context.mounted);
                                     },

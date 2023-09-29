@@ -580,8 +580,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         'Profile',
                                                         context.mounted);
                                                   } else {
-                                                    context.pushNamedAuth(
-                                                        'CreateProfile',
+                                                    context.goNamedAuth(
+                                                        'CreateProfileAppleUser',
                                                         context.mounted);
                                                   }
                                                 },
