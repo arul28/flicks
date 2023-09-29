@@ -41,7 +41,9 @@ class _ViewAllFlicksWidgetState extends State<ViewAllFlicksWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -146,10 +148,13 @@ class _ViewAllFlicksWidgetState extends State<ViewAllFlicksWidget> {
                                           context: context,
                                           builder: (context) {
                                             return GestureDetector(
-                                              onTap: () =>
-                                                  FocusScope.of(context)
+                                              onTap: () => _model.unfocusNode
+                                                      .canRequestFocus
+                                                  ? FocusScope.of(context)
                                                       .requestFocus(
-                                                          _model.unfocusNode),
+                                                          _model.unfocusNode)
+                                                  : FocusScope.of(context)
+                                                      .unfocus(),
                                               child: Padding(
                                                 padding:
                                                     MediaQuery.viewInsetsOf(

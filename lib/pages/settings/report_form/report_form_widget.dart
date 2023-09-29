@@ -71,7 +71,9 @@ class _ReportFormWidgetState extends State<ReportFormWidget> {
         }
         final reportFormUsersRecord = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).frenchViolet,
@@ -251,7 +253,12 @@ class _ReportFormWidgetState extends State<ReportFormWidget> {
                                           reportFormUsersRecord.displayName,
                                       email: currentUserEmail,
                                     ),
-                                    'dateCreated': FieldValue.serverTimestamp(),
+                                    ...mapToFirestore(
+                                      {
+                                        'dateCreated':
+                                            FieldValue.serverTimestamp(),
+                                      },
+                                    ),
                                   });
                                   await showAlignedDialog(
                                     context: context,
@@ -266,8 +273,13 @@ class _ReportFormWidgetState extends State<ReportFormWidget> {
                                       return Material(
                                         color: Colors.transparent,
                                         child: GestureDetector(
-                                          onTap: () => FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode),
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
                                           child: Container(
                                             height: 110.0,
                                             width: 320.0,

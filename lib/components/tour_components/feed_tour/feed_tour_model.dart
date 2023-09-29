@@ -1,11 +1,12 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'feed_tour_widget.dart' show FeedTourWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class FeedTourModel extends FlutterFlowModel {
+class FeedTourModel extends FlutterFlowModel<FeedTourWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

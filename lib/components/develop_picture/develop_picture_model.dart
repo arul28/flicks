@@ -1,11 +1,12 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'develop_picture_widget.dart' show DevelopPictureWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class DevelopPictureModel extends FlutterFlowModel {
+class DevelopPictureModel extends FlutterFlowModel<DevelopPictureWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

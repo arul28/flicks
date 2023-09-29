@@ -569,10 +569,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                               await queryUsersRecordCount(
                                             queryBuilder: (usersRecord) =>
                                                 usersRecord.where(
-                                                    'display_name',
-                                                    isEqualTo: _model
-                                                        .usernameCreateController
-                                                        .text),
+                                              'display_name',
+                                              isEqualTo: _model
+                                                  .usernameCreateController
+                                                  .text,
+                                            ),
                                           );
                                           if (_model.numOfUsername == 0) {
                                             HapticFeedback.lightImpact();

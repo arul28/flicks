@@ -353,12 +353,21 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                         setState(() => _model.liked = !_model.liked!);
                         if (_model.liked!) {
                           await currentUserReference!.update({
-                            'liked': FieldValue.arrayUnion([widget.parameter3]),
+                            ...mapToFirestore(
+                              {
+                                'liked':
+                                    FieldValue.arrayUnion([widget.parameter3]),
+                              },
+                            ),
                           });
                         } else {
                           await currentUserReference!.update({
-                            'liked':
-                                FieldValue.arrayRemove([widget.parameter3]),
+                            ...mapToFirestore(
+                              {
+                                'liked':
+                                    FieldValue.arrayRemove([widget.parameter3]),
+                              },
+                            ),
                           });
                         }
                       },
@@ -380,8 +389,10 @@ class _FriendPhotosWidgetState extends State<FriendPhotosWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
                   child: FutureBuilder<int>(
                     future: queryUsersRecordCount(
-                      queryBuilder: (usersRecord) => usersRecord.where('liked',
-                          arrayContains: widget.parameter3),
+                      queryBuilder: (usersRecord) => usersRecord.where(
+                        'liked',
+                        arrayContains: widget.parameter3,
+                      ),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.

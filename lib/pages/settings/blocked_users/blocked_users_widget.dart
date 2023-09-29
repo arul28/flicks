@@ -77,7 +77,9 @@ class _BlockedUsersWidgetState extends State<BlockedUsersWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -141,6 +143,7 @@ class _BlockedUsersWidgetState extends State<BlockedUsersWidget>
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         lineHeight: 12.0,
                         animation: true,
+                        animateFromLastPercent: true,
                         progressColor:
                             FlutterFlowTheme.of(context).frenchViolet,
                         backgroundColor: Color(0xFFE0E3E7),
@@ -350,10 +353,17 @@ class _BlockedUsersWidgetState extends State<BlockedUsersWidget>
                                                         color:
                                                             Colors.transparent,
                                                         child: GestureDetector(
-                                                          onTap: () => FocusScope
-                                                                  .of(context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode),
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
                                                           child:
                                                               VerifyUnblockUserWidget(
                                                             userRef:

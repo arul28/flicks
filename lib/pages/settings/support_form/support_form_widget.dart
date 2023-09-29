@@ -46,7 +46,9 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).frenchViolet,
@@ -258,7 +260,11 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
                                   subject: _model.subjectFieldController.text,
                                   email: currentUserEmail,
                                 ),
-                                'dateCreated': FieldValue.serverTimestamp(),
+                                ...mapToFirestore(
+                                  {
+                                    'dateCreated': FieldValue.serverTimestamp(),
+                                  },
+                                ),
                               });
                               await showAlignedDialog(
                                 context: context,
@@ -272,8 +278,11 @@ class _SupportFormWidgetState extends State<SupportFormWidget> {
                                   return Material(
                                     color: Colors.transparent,
                                     child: GestureDetector(
-                                      onTap: () => FocusScope.of(context)
-                                          .requestFocus(_model.unfocusNode),
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
                                       child: Container(
                                         height: 110.0,
                                         width: 320.0,

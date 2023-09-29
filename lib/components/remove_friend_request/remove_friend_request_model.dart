@@ -1,12 +1,14 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'remove_friend_request_widget.dart' show RemoveFriendRequestWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class RemoveFriendRequestModel extends FlutterFlowModel {
+class RemoveFriendRequestModel
+    extends FlutterFlowModel<RemoveFriendRequestWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

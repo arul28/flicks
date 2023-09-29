@@ -126,7 +126,9 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
         List<UsersRecord> searchUsersUsersRecordList =
             snapshot.data!.where((u) => u.uid != currentUserUid).toList();
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).frenchViolet,
@@ -358,7 +360,11 @@ class _SearchUsersWidgetState extends State<SearchUsersWidget>
                                       ...createUsersRecordData(
                                         runReloadScript: true,
                                       ),
-                                      'contacts': _model.list,
+                                      ...mapToFirestore(
+                                        {
+                                          'contacts': _model.list,
+                                        },
+                                      ),
                                     });
                                     await Future.delayed(
                                         const Duration(milliseconds: 2000));

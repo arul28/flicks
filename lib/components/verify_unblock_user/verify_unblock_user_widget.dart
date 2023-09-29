@@ -123,16 +123,25 @@ class _VerifyUnblockUserWidgetState extends State<VerifyUnblockUserWidget> {
                     child: FFButtonWidget(
                       onPressed: () async {
                         await currentUserReference!.update({
-                          'iBlocked': FieldValue.arrayRemove([widget.userRef]),
-                          'blockedUsers':
-                              FieldValue.arrayRemove([widget.userRef]),
+                          ...mapToFirestore(
+                            {
+                              'iBlocked':
+                                  FieldValue.arrayRemove([widget.userRef]),
+                              'blockedUsers':
+                                  FieldValue.arrayRemove([widget.userRef]),
+                            },
+                          ),
                         });
 
                         await widget.userRef!.update({
-                          'blockedBy':
-                              FieldValue.arrayRemove([currentUserReference]),
-                          'blockedUsers':
-                              FieldValue.arrayRemove([currentUserReference]),
+                          ...mapToFirestore(
+                            {
+                              'blockedBy': FieldValue.arrayRemove(
+                                  [currentUserReference]),
+                              'blockedUsers': FieldValue.arrayRemove(
+                                  [currentUserReference]),
+                            },
+                          ),
                         });
 
                         context.pushNamed('blockedUsers');

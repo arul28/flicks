@@ -124,63 +124,97 @@ class _VerifyBlockUserWidgetState extends State<VerifyBlockUserWidget> {
                         if ((currentUserDocument?.friendsList?.toList() ?? [])
                             .contains(widget.userRef)) {
                           await currentUserReference!.update({
-                            'friendsList':
-                                FieldValue.arrayRemove([widget.userRef]),
-                            'friendsNum': FieldValue.increment(-(1)),
+                            ...mapToFirestore(
+                              {
+                                'friendsList':
+                                    FieldValue.arrayRemove([widget.userRef]),
+                                'friendsNum': FieldValue.increment(-(1)),
+                              },
+                            ),
                           });
 
                           await widget.userRef!.update({
-                            'friendsList':
-                                FieldValue.arrayRemove([currentUserReference]),
-                            'friendsNum': FieldValue.increment(-(1)),
+                            ...mapToFirestore(
+                              {
+                                'friendsList': FieldValue.arrayRemove(
+                                    [currentUserReference]),
+                                'friendsNum': FieldValue.increment(-(1)),
+                              },
+                            ),
                           });
                         } else if ((currentUserDocument?.sentPendingRequests
                                     ?.toList() ??
                                 [])
                             .contains(widget.userRef)) {
                           await currentUserReference!.update({
-                            'sentPendingRequests':
-                                FieldValue.arrayRemove([widget.userRef]),
-                            'sentPendingRequestsNum':
-                                FieldValue.increment(-(1)),
+                            ...mapToFirestore(
+                              {
+                                'sentPendingRequests':
+                                    FieldValue.arrayRemove([widget.userRef]),
+                                'sentPendingRequestsNum':
+                                    FieldValue.increment(-(1)),
+                              },
+                            ),
                           });
 
                           await widget.userRef!.update({
-                            'incomingPendingRequests':
-                                FieldValue.arrayRemove([currentUserReference]),
-                            'incomingPendingRequestsNum':
-                                FieldValue.increment(-(1)),
+                            ...mapToFirestore(
+                              {
+                                'incomingPendingRequests':
+                                    FieldValue.arrayRemove(
+                                        [currentUserReference]),
+                                'incomingPendingRequestsNum':
+                                    FieldValue.increment(-(1)),
+                              },
+                            ),
                           });
                         } else if ((currentUserDocument?.incomingPendingRequests
                                     ?.toList() ??
                                 [])
                             .contains(widget.userRef)) {
                           await currentUserReference!.update({
-                            'incomingPendingRequests':
-                                FieldValue.arrayRemove([widget.userRef]),
-                            'incomingPendingRequestsNum':
-                                FieldValue.increment(-(1)),
+                            ...mapToFirestore(
+                              {
+                                'incomingPendingRequests':
+                                    FieldValue.arrayRemove([widget.userRef]),
+                                'incomingPendingRequestsNum':
+                                    FieldValue.increment(-(1)),
+                              },
+                            ),
                           });
 
                           await widget.userRef!.update({
-                            'sentPendingRequests':
-                                FieldValue.arrayRemove([currentUserReference]),
-                            'sentPendingRequestsNum':
-                                FieldValue.increment(-(1)),
+                            ...mapToFirestore(
+                              {
+                                'sentPendingRequests': FieldValue.arrayRemove(
+                                    [currentUserReference]),
+                                'sentPendingRequestsNum':
+                                    FieldValue.increment(-(1)),
+                              },
+                            ),
                           });
                         }
 
                         await currentUserReference!.update({
-                          'blockedUsers':
-                              FieldValue.arrayUnion([widget.userRef]),
-                          'iBlocked': FieldValue.arrayUnion([widget.userRef]),
+                          ...mapToFirestore(
+                            {
+                              'blockedUsers':
+                                  FieldValue.arrayUnion([widget.userRef]),
+                              'iBlocked':
+                                  FieldValue.arrayUnion([widget.userRef]),
+                            },
+                          ),
                         });
 
                         await widget.userRef!.update({
-                          'blockedUsers':
-                              FieldValue.arrayUnion([currentUserReference]),
-                          'blockedBy':
-                              FieldValue.arrayUnion([currentUserReference]),
+                          ...mapToFirestore(
+                            {
+                              'blockedUsers':
+                                  FieldValue.arrayUnion([currentUserReference]),
+                              'blockedBy':
+                                  FieldValue.arrayUnion([currentUserReference]),
+                            },
+                          ),
                         });
 
                         context.pushNamed(

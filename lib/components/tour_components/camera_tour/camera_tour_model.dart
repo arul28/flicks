@@ -1,11 +1,12 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'camera_tour_widget.dart' show CameraTourWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CameraTourModel extends FlutterFlowModel {
+class CameraTourModel extends FlutterFlowModel<CameraTourWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

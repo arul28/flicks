@@ -54,7 +54,9 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -115,10 +117,14 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
                   child: StreamBuilder<List<UsersRecord>>(
                     stream: queryUsersRecord(
                       queryBuilder: (usersRecord) => usersRecord
-                          .where('friendsList',
-                              arrayContains: currentUserReference)
-                          .where('lastPicTakenTime',
-                              isGreaterThan: _model.currentSessionBegining)
+                          .where(
+                            'friendsList',
+                            arrayContains: currentUserReference,
+                          )
+                          .where(
+                            'lastPicTakenTime',
+                            isGreaterThan: _model.currentSessionBegining,
+                          )
                           .orderBy('lastPicTakenTime', descending: true),
                     ),
                     builder: (context, snapshot) {
@@ -403,10 +409,14 @@ class _FriendActivityWidgetState extends State<FriendActivityWidget> {
                 child: StreamBuilder<List<UsersRecord>>(
                   stream: queryUsersRecord(
                     queryBuilder: (usersRecord) => usersRecord
-                        .where('lastPinAddedTime',
-                            isGreaterThan: _model.currentSessionBegining)
-                        .where('friendsList',
-                            arrayContains: currentUserReference)
+                        .where(
+                          'lastPinAddedTime',
+                          isGreaterThan: _model.currentSessionBegining,
+                        )
+                        .where(
+                          'friendsList',
+                          arrayContains: currentUserReference,
+                        )
                         .orderBy('lastPinAddedTime', descending: true),
                   ),
                   builder: (context, snapshot) {

@@ -4,6 +4,8 @@ import '/components/delete_flick_once_developed_error/delete_flick_once_develope
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'delete_flick_once_developed_widget.dart'
+    show DeleteFlickOnceDevelopedWidget;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,7 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class DeleteFlickOnceDevelopedModel extends FlutterFlowModel {
+class DeleteFlickOnceDevelopedModel
+    extends FlutterFlowModel<DeleteFlickOnceDevelopedWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

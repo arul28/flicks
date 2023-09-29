@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'friend_activity_widget.dart' show FriendActivityWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
@@ -12,7 +13,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class FriendActivityModel extends FlutterFlowModel {
+class FriendActivityModel extends FlutterFlowModel<FriendActivityWidget> {
   ///  Local state fields for this page.
 
   DateTime? currentSessionBegining;

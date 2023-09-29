@@ -119,7 +119,9 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -471,10 +473,13 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                             return Material(
                                               color: Colors.transparent,
                                               child: GestureDetector(
-                                                onTap: () =>
-                                                    FocusScope.of(context)
+                                                onTap: () => _model.unfocusNode
+                                                        .canRequestFocus
+                                                    ? FocusScope.of(context)
                                                         .requestFocus(
-                                                            _model.unfocusNode),
+                                                            _model.unfocusNode)
+                                                    : FocusScope.of(context)
+                                                        .unfocus(),
                                                 child: Container(
                                                   height: 120.0,
                                                   width: 320.0,
@@ -510,10 +515,13 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget>
                                             return Material(
                                               color: Colors.transparent,
                                               child: GestureDetector(
-                                                onTap: () =>
-                                                    FocusScope.of(context)
+                                                onTap: () => _model.unfocusNode
+                                                        .canRequestFocus
+                                                    ? FocusScope.of(context)
                                                         .requestFocus(
-                                                            _model.unfocusNode),
+                                                            _model.unfocusNode)
+                                                    : FocusScope.of(context)
+                                                        .unfocus(),
                                                 child: Container(
                                                   height: 120.0,
                                                   width: 320.0,

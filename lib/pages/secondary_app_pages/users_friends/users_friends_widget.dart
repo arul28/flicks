@@ -81,7 +81,9 @@ class _UsersFriendsWidgetState extends State<UsersFriendsWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -172,6 +174,7 @@ class _UsersFriendsWidgetState extends State<UsersFriendsWidget>
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         lineHeight: 12.0,
                         animation: true,
+                        animateFromLastPercent: true,
                         progressColor:
                             FlutterFlowTheme.of(context).frenchViolet,
                         backgroundColor: Color(0xFFE0E3E7),
@@ -192,8 +195,10 @@ class _UsersFriendsWidgetState extends State<UsersFriendsWidget>
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: FutureBuilder<List<UsersRecord>>(
                     future: queryUsersRecordOnce(
-                      queryBuilder: (usersRecord) => usersRecord
-                          .where('friendsList', arrayContains: widget.userRef),
+                      queryBuilder: (usersRecord) => usersRecord.where(
+                        'friendsList',
+                        arrayContains: widget.userRef,
+                      ),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.

@@ -1,11 +1,13 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'first_view_after_switch_widget.dart' show FirstViewAfterSwitchWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class FirstViewAfterSwitchModel extends FlutterFlowModel {
+class FirstViewAfterSwitchModel
+    extends FlutterFlowModel<FirstViewAfterSwitchWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

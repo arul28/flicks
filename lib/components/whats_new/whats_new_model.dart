@@ -1,11 +1,12 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'whats_new_widget.dart' show WhatsNewWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class WhatsNewModel extends FlutterFlowModel {
+class WhatsNewModel extends FlutterFlowModel<WhatsNewWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'blocked_users_widget.dart' show BlockedUsersWidget;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
-class BlockedUsersModel extends FlutterFlowModel {
+class BlockedUsersModel extends FlutterFlowModel<BlockedUsersWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

@@ -123,8 +123,12 @@ class _VerifyRestrictUserWidgetState extends State<VerifyRestrictUserWidget> {
                     child: FFButtonWidget(
                       onPressed: () async {
                         await currentUserReference!.update({
-                          'restrictedUsers':
-                              FieldValue.arrayUnion([widget.userRef]),
+                          ...mapToFirestore(
+                            {
+                              'restrictedUsers':
+                                  FieldValue.arrayUnion([widget.userRef]),
+                            },
+                          ),
                         });
 
                         context.pushNamed('hiddenUsers');

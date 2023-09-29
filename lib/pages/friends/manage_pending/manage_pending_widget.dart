@@ -62,7 +62,9 @@ class _ManagePendingWidgetState extends State<ManagePendingWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -131,6 +133,7 @@ class _ManagePendingWidgetState extends State<ManagePendingWidget>
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       lineHeight: 12.0,
                       animation: true,
+                      animateFromLastPercent: true,
                       progressColor: FlutterFlowTheme.of(context).frenchViolet,
                       backgroundColor: Color(0xFFE0E3E7),
                       barRadius: Radius.circular(0.0),
@@ -286,8 +289,9 @@ class _ManagePendingWidgetState extends State<ManagePendingWidget>
               child: FutureBuilder<List<UsersRecord>>(
                 future: queryUsersRecordOnce(
                   queryBuilder: (usersRecord) => usersRecord.where(
-                      'incomingPendingRequests',
-                      arrayContains: currentUserReference),
+                    'incomingPendingRequests',
+                    arrayContains: currentUserReference,
+                  ),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -480,21 +484,33 @@ class _ManagePendingWidgetState extends State<ManagePendingWidget>
                                                   false;
                                           if (confirmDialogResponse) {
                                             await currentUserReference!.update({
-                                              'sentPendingRequestsNum':
-                                                  FieldValue.increment(-(1)),
-                                              'sentPendingRequests':
-                                                  FieldValue.arrayRemove([
-                                                listViewUsersRecord.reference
-                                              ]),
+                                              ...mapToFirestore(
+                                                {
+                                                  'sentPendingRequestsNum':
+                                                      FieldValue.increment(
+                                                          -(1)),
+                                                  'sentPendingRequests':
+                                                      FieldValue.arrayRemove([
+                                                    listViewUsersRecord
+                                                        .reference
+                                                  ]),
+                                                },
+                                              ),
                                             });
 
                                             await listViewUsersRecord.reference
                                                 .update({
-                                              'incomingPendingRequestsNum':
-                                                  FieldValue.increment(-(1)),
-                                              'incomingPendingRequests':
-                                                  FieldValue.arrayRemove(
-                                                      [currentUserReference]),
+                                              ...mapToFirestore(
+                                                {
+                                                  'incomingPendingRequestsNum':
+                                                      FieldValue.increment(
+                                                          -(1)),
+                                                  'incomingPendingRequests':
+                                                      FieldValue.arrayRemove([
+                                                    currentUserReference
+                                                  ]),
+                                                },
+                                              ),
                                             });
                                           }
 

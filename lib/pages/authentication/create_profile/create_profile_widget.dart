@@ -50,7 +50,9 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -673,9 +675,9 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                             }
                             _model.usernameCount = await queryUsersRecordCount(
                               queryBuilder: (usersRecord) => usersRecord.where(
-                                  'display_name',
-                                  isEqualTo:
-                                      _model.usernameCreateController.text),
+                                'display_name',
+                                isEqualTo: _model.usernameCreateController.text,
+                              ),
                             );
                             if (_model.usernameCount == 0) {
                               await currentUserReference!

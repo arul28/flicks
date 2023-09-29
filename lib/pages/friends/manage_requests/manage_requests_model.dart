@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'manage_requests_widget.dart' show ManageRequestsWidget;
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -14,7 +15,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
-class ManageRequestsModel extends FlutterFlowModel {
+class ManageRequestsModel extends FlutterFlowModel<ManageRequestsWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

@@ -121,7 +121,9 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
         }
         final imageViewerUsersRecord = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -342,8 +344,9 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                                           .transparent,
                                                                       child:
                                                                           GestureDetector(
-                                                                        onTap: () =>
-                                                                            FocusScope.of(context).requestFocus(_model.unfocusNode),
+                                                                        onTap: () => _model.unfocusNode.canRequestFocus
+                                                                            ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                            : FocusScope.of(context).unfocus(),
                                                                         child:
                                                                             DeleteFlickOnceDevelopedWidget(
                                                                           oldSessionPics:
@@ -449,8 +452,10 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                             FutureBuilder<int>(
                               future: queryUsersRecordCount(
                                 queryBuilder: (usersRecord) =>
-                                    usersRecord.where('liked',
-                                        arrayContains: widget.userRef),
+                                    usersRecord.where(
+                                  'liked',
+                                  arrayContains: widget.userRef,
+                                ),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -507,8 +512,12 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                 setState(() => _model.liked = !_model.liked!);
                                 if (_model.liked!) {
                                   await currentUserReference!.update({
-                                    'liked':
-                                        FieldValue.arrayUnion([widget.userRef]),
+                                    ...mapToFirestore(
+                                      {
+                                        'liked': FieldValue.arrayUnion(
+                                            [widget.userRef]),
+                                      },
+                                    ),
                                   });
                                   if (imageViewerUsersRecord.likesNotifs) {
                                     triggerPushNotification(
@@ -523,8 +532,12 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                   }
                                 } else {
                                   await currentUserReference!.update({
-                                    'liked': FieldValue.arrayRemove(
-                                        [widget.userRef]),
+                                    ...mapToFirestore(
+                                      {
+                                        'liked': FieldValue.arrayRemove(
+                                            [widget.userRef]),
+                                      },
+                                    ),
                                   });
                                 }
                               },
@@ -547,8 +560,10 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                       ),
                       FutureBuilder<int>(
                         future: queryUsersRecordCount(
-                          queryBuilder: (usersRecord) => usersRecord
-                              .where('liked', arrayContains: widget.userRef),
+                          queryBuilder: (usersRecord) => usersRecord.where(
+                            'liked',
+                            arrayContains: widget.userRef,
+                          ),
                         ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -581,8 +596,10 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                 child: StreamBuilder<List<UsersRecord>>(
                                   stream: queryUsersRecord(
                                     queryBuilder: (usersRecord) =>
-                                        usersRecord.where('liked',
-                                            arrayContains: widget.userRef),
+                                        usersRecord.where(
+                                      'liked',
+                                      arrayContains: widget.userRef,
+                                    ),
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
@@ -963,8 +980,12 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                 message:
                                                     _model.textController.text,
                                               ),
-                                              'timePosted':
-                                                  FieldValue.serverTimestamp(),
+                                              ...mapToFirestore(
+                                                {
+                                                  'timePosted': FieldValue
+                                                      .serverTimestamp(),
+                                                },
+                                              ),
                                             });
                                             setState(() {
                                               _model.textController?.clear();
@@ -1249,11 +1270,16 @@ class _ImageViewerWidgetState extends State<ImageViewerWidget>
                                                                   .transparent,
                                                               child:
                                                                   GestureDetector(
-                                                                onTap: () => FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _model
-                                                                            .unfocusNode),
+                                                                onTap: () => _model
+                                                                        .unfocusNode
+                                                                        .canRequestFocus
+                                                                    ? FocusScope.of(
+                                                                            context)
+                                                                        .requestFocus(_model
+                                                                            .unfocusNode)
+                                                                    : FocusScope.of(
+                                                                            context)
+                                                                        .unfocus(),
                                                                 child:
                                                                     Container(
                                                                   height: 200.0,

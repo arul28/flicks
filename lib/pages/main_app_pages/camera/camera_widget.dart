@@ -88,8 +88,9 @@ class _CameraWidgetState extends State<CameraWidget>
             return Material(
               color: Colors.transparent,
               child: GestureDetector(
-                onTap: () =>
-                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
                 child: Container(
                   height: 120.0,
                   width: 320.0,
@@ -114,8 +115,9 @@ class _CameraWidgetState extends State<CameraWidget>
             return Material(
               color: Colors.transparent,
               child: GestureDetector(
-                onTap: () =>
-                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
                 child: Container(
                   height: 264.0,
                   width: 350.0,
@@ -175,8 +177,9 @@ class _CameraWidgetState extends State<CameraWidget>
           }
           int cameraCount = snapshot.data!;
           return GestureDetector(
-            onTap: () =>
-                FocusScope.of(context).requestFocus(_model.unfocusNode),
+            onTap: () => _model.unfocusNode.canRequestFocus
+                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                : FocusScope.of(context).unfocus(),
             child: Scaffold(
               key: scaffoldKey,
               appBar: PreferredSize(
@@ -382,10 +385,13 @@ class _CameraWidgetState extends State<CameraWidget>
                                           return Material(
                                             color: Colors.transparent,
                                             child: GestureDetector(
-                                              onTap: () =>
-                                                  FocusScope.of(context)
+                                              onTap: () => _model.unfocusNode
+                                                      .canRequestFocus
+                                                  ? FocusScope.of(context)
                                                       .requestFocus(
-                                                          _model.unfocusNode),
+                                                          _model.unfocusNode)
+                                                  : FocusScope.of(context)
+                                                      .unfocus(),
                                               child: Container(
                                                 height: 140.0,
                                                 width: 317.0,
@@ -415,8 +421,12 @@ class _CameraWidgetState extends State<CameraWidget>
                                             imagePath: functions.strToImgPath(
                                                 FFAppState().filePath),
                                           ),
-                                          'timeTaken':
-                                              FieldValue.serverTimestamp(),
+                                          ...mapToFirestore(
+                                            {
+                                              'timeTaken':
+                                                  FieldValue.serverTimestamp(),
+                                            },
+                                          ),
                                         });
                                         if (animationsMap[
                                                 'iconButtonOnActionTriggerAnimation'] !=
@@ -438,8 +448,12 @@ class _CameraWidgetState extends State<CameraWidget>
                                               imagePath: functions.strToImgPath(
                                                   FFAppState().filePath),
                                             ),
-                                            'timeTaken':
-                                                FieldValue.serverTimestamp(),
+                                            ...mapToFirestore(
+                                              {
+                                                'timeTaken': FieldValue
+                                                    .serverTimestamp(),
+                                              },
+                                            ),
                                           });
                                           if (animationsMap[
                                                   'iconButtonOnActionTriggerAnimation'] !=
@@ -462,8 +476,12 @@ class _CameraWidgetState extends State<CameraWidget>
                                                     functions.strToImgPath(
                                                         FFAppState().filePath),
                                               ),
-                                              'timeTaken':
-                                                  FieldValue.serverTimestamp(),
+                                              ...mapToFirestore(
+                                                {
+                                                  'timeTaken': FieldValue
+                                                      .serverTimestamp(),
+                                                },
+                                              ),
                                             });
                                             if (animationsMap[
                                                     'iconButtonOnActionTriggerAnimation'] !=
@@ -492,10 +510,14 @@ class _CameraWidgetState extends State<CameraWidget>
                                                 return Material(
                                                   color: Colors.transparent,
                                                   child: GestureDetector(
-                                                    onTap: () => FocusScope.of(
-                                                            context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode),
+                                                    onTap: () => _model
+                                                            .unfocusNode
+                                                            .canRequestFocus
+                                                        ? FocusScope.of(context)
+                                                            .requestFocus(_model
+                                                                .unfocusNode)
+                                                        : FocusScope.of(context)
+                                                            .unfocus(),
                                                     child: Container(
                                                       height: 150.0,
                                                       width: 400.0,

@@ -3,12 +3,13 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'verify_unblock_user_widget.dart' show VerifyUnblockUserWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class VerifyUnblockUserModel extends FlutterFlowModel {
+class VerifyUnblockUserModel extends FlutterFlowModel<VerifyUnblockUserWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

@@ -75,8 +75,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             return Material(
               color: Colors.transparent,
               child: GestureDetector(
-                onTap: () =>
-                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
                 child: Container(
                   height: 120.0,
                   width: 320.0,
@@ -100,8 +101,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             return Material(
               color: Colors.transparent,
               child: GestureDetector(
-                onTap: () =>
-                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
                 child: Container(
                   height: 264.0,
                   width: 350.0,
@@ -125,8 +127,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             return Material(
               color: Colors.transparent,
               child: GestureDetector(
-                onTap: () =>
-                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
                 child: Container(
                   height: 230.0,
                   width: 400.0,
@@ -154,8 +157,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             return Material(
               color: Colors.transparent,
               child: GestureDetector(
-                onTap: () =>
-                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
                 child: Container(
                   height: 680.0,
                   width: 450.0,
@@ -221,8 +225,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           }
           int profileCount = snapshot.data!;
           return GestureDetector(
-            onTap: () =>
-                FocusScope.of(context).requestFocus(_model.unfocusNode),
+            onTap: () => _model.unfocusNode.canRequestFocus
+                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                : FocusScope.of(context).unfocus(),
             child: Scaffold(
               key: scaffoldKey,
               backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -705,12 +710,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                           queryOldSessionPicsRecordCount(
                                                         parent:
                                                             currentUserReference,
-                                                        queryBuilder: (oldSessionPicsRecord) =>
-                                                            oldSessionPicsRecord.where(
-                                                                'imagePath',
-                                                                isEqualTo:
-                                                                    staggeredViewPinnedRecord
-                                                                        .imagePath),
+                                                        queryBuilder:
+                                                            (oldSessionPicsRecord) =>
+                                                                oldSessionPicsRecord
+                                                                    .where(
+                                                          'imagePath',
+                                                          isEqualTo:
+                                                              staggeredViewPinnedRecord
+                                                                  .imagePath,
+                                                        ),
                                                       ),
                                                       builder:
                                                           (context, snapshot) {
@@ -755,11 +763,16 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                               builder:
                                                                   (context) {
                                                                 return GestureDetector(
-                                                                  onTap: () => FocusScope.of(
-                                                                          context)
-                                                                      .requestFocus(
-                                                                          _model
-                                                                              .unfocusNode),
+                                                                  onTap: () => _model
+                                                                          .unfocusNode
+                                                                          .canRequestFocus
+                                                                      ? FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(_model
+                                                                              .unfocusNode)
+                                                                      : FocusScope.of(
+                                                                              context)
+                                                                          .unfocus(),
                                                                   child:
                                                                       Padding(
                                                                     padding: MediaQuery

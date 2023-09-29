@@ -1034,8 +1034,9 @@ class _FeedWidgetState extends State<FeedWidget> {
                     StreamBuilder<List<UsersRecord>>(
                       stream: queryUsersRecord(
                         queryBuilder: (usersRecord) => usersRecord.where(
-                            'friendsList',
-                            arrayContains: currentUserReference),
+                          'friendsList',
+                          arrayContains: currentUserReference,
+                        ),
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.

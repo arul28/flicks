@@ -90,7 +90,9 @@ class _ViewProfileFromFriendManagerWidgetState
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -161,8 +163,10 @@ class _ViewProfileFromFriendManagerWidgetState
                         return Material(
                           color: Colors.transparent,
                           child: GestureDetector(
-                            onTap: () => FocusScope.of(context)
-                                .requestFocus(_model.unfocusNode),
+                            onTap: () => _model.unfocusNode.canRequestFocus
+                                ? FocusScope.of(context)
+                                    .requestFocus(_model.unfocusNode)
+                                : FocusScope.of(context).unfocus(),
                             child: Container(
                               height: 200.0,
                               width: 350.0,
@@ -419,19 +423,27 @@ class _ViewProfileFromFriendManagerWidgetState
                                     _model.recievedWaiting = false;
 
                                     await currentUserReference!.update({
-                                      'sentPendingRequests':
-                                          FieldValue.arrayUnion(
-                                              [widget.userInfo?.reference]),
-                                      'sentPendingRequestsNum':
-                                          FieldValue.increment(1),
+                                      ...mapToFirestore(
+                                        {
+                                          'sentPendingRequests':
+                                              FieldValue.arrayUnion(
+                                                  [widget.userInfo?.reference]),
+                                          'sentPendingRequestsNum':
+                                              FieldValue.increment(1),
+                                        },
+                                      ),
                                     });
 
                                     await widget.userInfo!.reference.update({
-                                      'incomingPendingRequests':
-                                          FieldValue.arrayUnion(
-                                              [currentUserReference]),
-                                      'incomingPendingRequestsNum':
-                                          FieldValue.increment(1),
+                                      ...mapToFirestore(
+                                        {
+                                          'incomingPendingRequests':
+                                              FieldValue.arrayUnion(
+                                                  [currentUserReference]),
+                                          'incomingPendingRequestsNum':
+                                              FieldValue.increment(1),
+                                        },
+                                      ),
                                     });
                                     setState(() {
                                       _model.sentWaiting = true;
@@ -549,17 +561,28 @@ class _ViewProfileFromFriendManagerWidgetState
                                             false;
                                     if (confirmDialogResponse) {
                                       await currentUserReference!.update({
-                                        'friendsList': FieldValue.arrayRemove(
-                                            [widget.userInfo?.reference]),
-                                        'friendsNum':
-                                            FieldValue.increment(-(1)),
+                                        ...mapToFirestore(
+                                          {
+                                            'friendsList':
+                                                FieldValue.arrayRemove([
+                                              widget.userInfo?.reference
+                                            ]),
+                                            'friendsNum':
+                                                FieldValue.increment(-(1)),
+                                          },
+                                        ),
                                       });
 
                                       await widget.userInfo!.reference.update({
-                                        'friendsList': FieldValue.arrayRemove(
-                                            [currentUserReference]),
-                                        'friendsNum':
-                                            FieldValue.increment(-(1)),
+                                        ...mapToFirestore(
+                                          {
+                                            'friendsList':
+                                                FieldValue.arrayRemove(
+                                                    [currentUserReference]),
+                                            'friendsNum':
+                                                FieldValue.increment(-(1)),
+                                          },
+                                        ),
                                       });
                                       setState(() {
                                         _model.isFriend = false;
@@ -695,25 +718,33 @@ class _ViewProfileFromFriendManagerWidgetState
                                     _model.sentWaiting = false;
 
                                     await currentUserReference!.update({
-                                      'friendsList': FieldValue.arrayUnion(
-                                          [widget.userInfo?.reference]),
-                                      'friendsNum': FieldValue.increment(1),
-                                      'incomingPendingRequests':
-                                          FieldValue.arrayRemove(
+                                      ...mapToFirestore(
+                                        {
+                                          'friendsList': FieldValue.arrayUnion(
                                               [widget.userInfo?.reference]),
-                                      'incomingPendingRequestsNum':
-                                          FieldValue.increment(-(1)),
+                                          'friendsNum': FieldValue.increment(1),
+                                          'incomingPendingRequests':
+                                              FieldValue.arrayRemove(
+                                                  [widget.userInfo?.reference]),
+                                          'incomingPendingRequestsNum':
+                                              FieldValue.increment(-(1)),
+                                        },
+                                      ),
                                     });
 
                                     await widget.userInfo!.reference.update({
-                                      'friendsList': FieldValue.arrayUnion(
-                                          [currentUserReference]),
-                                      'friendsNum': FieldValue.increment(1),
-                                      'sentPendingRequests':
-                                          FieldValue.arrayRemove(
+                                      ...mapToFirestore(
+                                        {
+                                          'friendsList': FieldValue.arrayUnion(
                                               [currentUserReference]),
-                                      'sentPendingRequestsNum':
-                                          FieldValue.increment(-(1)),
+                                          'friendsNum': FieldValue.increment(1),
+                                          'sentPendingRequests':
+                                              FieldValue.arrayRemove(
+                                                  [currentUserReference]),
+                                          'sentPendingRequestsNum':
+                                              FieldValue.increment(-(1)),
+                                        },
+                                      ),
                                     });
                                     setState(() {
                                       _model.isFriend = true;
@@ -920,11 +951,16 @@ class _ViewProfileFromFriendManagerWidgetState
                                                                   .transparent,
                                                               child:
                                                                   GestureDetector(
-                                                                onTap: () => FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _model
-                                                                            .unfocusNode),
+                                                                onTap: () => _model
+                                                                        .unfocusNode
+                                                                        .canRequestFocus
+                                                                    ? FocusScope.of(
+                                                                            context)
+                                                                        .requestFocus(_model
+                                                                            .unfocusNode)
+                                                                    : FocusScope.of(
+                                                                            context)
+                                                                        .unfocus(),
                                                                 child:
                                                                     ProfileViewPinnedFriendWidget(
                                                                   imgPath:
