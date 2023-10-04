@@ -331,18 +331,6 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.00, -1.00),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            'assets/images/[removal.ai]_tmp-649156ac0c6fa_JTTV80.png',
-                            width: 123.0,
-                            height: 100.0,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Align(
                         alignment: AlignmentDirectional(0.00, 0.00),
                         child: Text(
                           'licensed by BTA FOOD & ENTERTAINMENT ©\nfollow the team: @arul.beats, @sanjitvv, @trey_dixit\n\nrelease v.1.0.1',
