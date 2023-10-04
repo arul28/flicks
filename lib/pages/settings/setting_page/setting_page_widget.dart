@@ -345,7 +345,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                       Align(
                         alignment: AlignmentDirectional(0.00, 0.00),
                         child: Text(
-                          'licensed by BTA FOOD & ENTERTAINMENT ©\npublished by @arul.beats\nrelease v.1.0.0 ',
+                          'licensed by BTA FOOD & ENTERTAINMENT ©\nfollow the team: @arul.beats, @sanjitvv, @trey_dixit\n\nrelease v.1.0.1',
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
