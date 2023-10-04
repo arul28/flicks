@@ -80,7 +80,7 @@ class _WhatsNewWidgetState extends State<WhatsNewWidget> {
                 'WE NEED YOUR HELP!!!',
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
                       fontFamily: 'Readex Pro',
-                      color: FlutterFlowTheme.of(context).error,
+                      color: FlutterFlowTheme.of(context).black600,
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -114,7 +114,7 @@ class _WhatsNewWidgetState extends State<WhatsNewWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 10.0),
                 child: Text(
-                  '(also follow @arul.beats)',
+                  '(also follow @arul.beats, sanjitvv and trey_dixit)',
                   style: FlutterFlowTheme.of(context).bodyMedium,
                 ),
               ),
