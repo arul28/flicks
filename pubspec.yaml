@@ -79,7 +79,7 @@ dependencies:
     git:
       url: https://github.com/FlutterFlow/infinite_scroll_pagination.git
       ref: develop
-  intl: 0.18.0
+  intl: 0.18.1
   json_path: 0.6.2
   mime_type: 1.0.0
   page_transition: 2.0.4
