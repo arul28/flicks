@@ -1,22 +1,15 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
-import '/components/profile_view_pinned/profile_view_pinned_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:badges/badges.dart' as badges;
-import 'package:flip_card/flip_card.dart';
-import 'profile_widget.dart' show ProfileWidget;
-import 'package:aligned_dialog/aligned_dialog.dart';
+import 'whats_new_page_widget.dart' show WhatsNewPageWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ProfileModel extends FlutterFlowModel<ProfileWidget> {
+class WhatsNewPageModel extends FlutterFlowModel<WhatsNewPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

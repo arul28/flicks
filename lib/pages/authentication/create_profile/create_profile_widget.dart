@@ -442,7 +442,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
                         decoration: InputDecoration(
-                          labelText: 'Your Name',
+                          labelText: 'Your Name (Only used to find friends)',
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(
@@ -548,7 +548,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
                         decoration: InputDecoration(
-                          labelText: 'Your Username',
+                          labelText:
+                              'Your Username (What other people will see)',
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(

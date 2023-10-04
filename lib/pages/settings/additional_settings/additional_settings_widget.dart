@@ -55,7 +55,16 @@ class _AdditionalSettingsWidgetState extends State<AdditionalSettingsWidget> {
             size: 30.0,
           ),
           onPressed: () async {
-            context.pushNamed('settingPage');
+            context.pushNamed(
+              'settingPage',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.leftToRight,
+                  duration: Duration(milliseconds: 300),
+                ),
+              },
+            );
           },
         ),
         title: Padding(

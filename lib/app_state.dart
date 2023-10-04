@@ -29,12 +29,6 @@ class FFAppState extends ChangeNotifier {
       _profileTour = prefs.getBool('ff_profileTour') ?? _profileTour;
     });
     _safeInit(() {
-      _feedTour = prefs.getBool('ff_feedTour') ?? _feedTour;
-    });
-    _safeInit(() {
-      _cameraTour = prefs.getBool('ff_cameraTour') ?? _cameraTour;
-    });
-    _safeInit(() {
       _friendActivityCount =
           prefs.getInt('ff_friendActivityCount') ?? _friendActivityCount;
     });
@@ -114,20 +108,6 @@ class FFAppState extends ChangeNotifier {
   set profileTour(bool _value) {
     _profileTour = _value;
     prefs.setBool('ff_profileTour', _value);
-  }
-
-  bool _feedTour = false;
-  bool get feedTour => _feedTour;
-  set feedTour(bool _value) {
-    _feedTour = _value;
-    prefs.setBool('ff_feedTour', _value);
-  }
-
-  bool _cameraTour = false;
-  bool get cameraTour => _cameraTour;
-  set cameraTour(bool _value) {
-    _cameraTour = _value;
-    prefs.setBool('ff_cameraTour', _value);
   }
 
   bool _errorUploading = false;

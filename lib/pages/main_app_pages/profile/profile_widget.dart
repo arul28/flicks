@@ -2,9 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
 import '/components/profile_view_pinned/profile_view_pinned_widget.dart';
-import '/components/tour_components/landing/landing_widget.dart';
-import '/components/tour_components/profile_tour/profile_tour_widget.dart';
-import '/components/whats_new/whats_new_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -41,131 +38,73 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (valueOrDefault<bool>(currentUserDocument?.emailVerified, false) &&
           valueOrDefault<bool>(currentUserDocument?.profileCreated, false)) {
-        if (valueOrDefault<bool>(
-                currentUserDocument?.firstViewAfterSwitch, false) ==
-            true) {
-          await currentUserReference!.update(createUsersRecordData(
-            firstViewAfterSwitch: false,
-          ));
-          await showAlignedDialog(
-            context: context,
-            isGlobal: true,
-            avoidOverflow: false,
-            targetAnchor: AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            followerAnchor: AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            builder: (dialogContext) {
-              return Material(
-                color: Colors.transparent,
-                child: GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
-                  child: Container(
-                    height: 120.0,
-                    width: 320.0,
-                    child: FirstViewAfterSwitchWidget(),
+        if (FFAppState().profileTour) {
+          if (valueOrDefault<bool>(currentUserDocument?.whatsNew, false)) {
+            if (valueOrDefault<bool>(currentUserDocument?.phoneNumSet, false)) {
+              if (valueOrDefault<bool>(
+                      currentUserDocument?.firstViewAfterSwitch, false) ==
+                  true) {
+                await currentUserReference!.update(createUsersRecordData(
+                  firstViewAfterSwitch: false,
+                ));
+                await showAlignedDialog(
+                  context: context,
+                  isGlobal: true,
+                  avoidOverflow: false,
+                  targetAnchor: AlignmentDirectional(0.0, 0.0)
+                      .resolve(Directionality.of(context)),
+                  followerAnchor: AlignmentDirectional(0.0, 0.0)
+                      .resolve(Directionality.of(context)),
+                  builder: (dialogContext) {
+                    return Material(
+                      color: Colors.transparent,
+                      child: GestureDetector(
+                        onTap: () => _model.unfocusNode.canRequestFocus
+                            ? FocusScope.of(context)
+                                .requestFocus(_model.unfocusNode)
+                            : FocusScope.of(context).unfocus(),
+                        child: Container(
+                          height: 120.0,
+                          width: 320.0,
+                          child: FirstViewAfterSwitchWidget(),
+                        ),
+                      ),
+                    );
+                  },
+                ).then((value) => setState(() {}));
+              }
+            } else {
+              context.goNamed(
+                'editPhone',
+                extra: <String, dynamic>{
+                  kTransitionInfoKey: TransitionInfo(
+                    hasTransition: true,
+                    transitionType: PageTransitionType.scale,
+                    alignment: Alignment.bottomCenter,
                   ),
-                ),
+                },
               );
-            },
-          ).then((value) => setState(() {}));
-        }
-        if (!FFAppState().profileTour) {
-          await showAlignedDialog(
-            context: context,
-            isGlobal: true,
-            avoidOverflow: false,
-            targetAnchor: AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            followerAnchor: AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            builder: (dialogContext) {
-              return Material(
-                color: Colors.transparent,
-                child: GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
-                  child: Container(
-                    height: 264.0,
-                    width: 350.0,
-                    child: LandingWidget(),
-                  ),
+            }
+          } else {
+            context.goNamed(
+              'whatsNewPage',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 0),
                 ),
-              );
-            },
-          ).then((value) => setState(() {}));
-
-          await showAlignedDialog(
-            barrierDismissible: false,
-            context: context,
-            isGlobal: true,
-            avoidOverflow: false,
-            targetAnchor: AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            followerAnchor: AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            builder: (dialogContext) {
-              return Material(
-                color: Colors.transparent,
-                child: GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
-                  child: Container(
-                    height: 230.0,
-                    width: 400.0,
-                    child: ProfileTourWidget(),
-                  ),
-                ),
-              );
-            },
-          ).then((value) => setState(() {}));
-
-          setState(() {
-            FFAppState().profileTour = true;
-          });
-        }
-        if (!valueOrDefault<bool>(currentUserDocument?.whatsNew, false)) {
-          await showAlignedDialog(
-            context: context,
-            isGlobal: true,
-            avoidOverflow: false,
-            targetAnchor: AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            followerAnchor: AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            builder: (dialogContext) {
-              return Material(
-                color: Colors.transparent,
-                child: GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
-                  child: Container(
-                    height: 615.0,
-                    width: 450.0,
-                    child: WhatsNewWidget(),
-                  ),
-                ),
-              );
-            },
-          ).then((value) => setState(() {}));
-
-          await currentUserReference!.update(createUsersRecordData(
-            whatsNew: true,
-          ));
-        }
-        if (!valueOrDefault<bool>(currentUserDocument?.phoneNumSet, false)) {
+              },
+            );
+          }
+        } else {
           context.goNamed(
-            'editPhone',
+            'welcomeToFlicks',
             extra: <String, dynamic>{
               kTransitionInfoKey: TransitionInfo(
                 hasTransition: true,
-                transitionType: PageTransitionType.scale,
-                alignment: Alignment.bottomCenter,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
               ),
             },
           );
@@ -336,10 +275,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                         fontSize: 12.0,
                                                       ),
                                             ),
-                                            showBadge: valueOrDefault(
-                                                    currentUserDocument
-                                                        ?.incomingPendingRequestsNum,
-                                                    0) >
+                                            showBadge: (currentUserDocument
+                                                            ?.incomingPendingRequests
+                                                            ?.toList() ??
+                                                        [])
+                                                    .length >
                                                 0,
                                             shape: badges.BadgeShape.circle,
                                             badgeColor:

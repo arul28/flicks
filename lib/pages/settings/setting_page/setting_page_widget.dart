@@ -276,7 +276,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                 child: Builder(
                   builder: (context) => Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(70.0, 10.0, 70.0, 20.0),
+                        EdgeInsetsDirectional.fromSTEB(70.0, 5.0, 70.0, 20.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         await showAlignedDialog(
@@ -344,21 +344,17 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                       ),
                       Align(
                         alignment: AlignmentDirectional(0.00, 0.00),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 10.0, 0.0, 0.0),
-                          child: Text(
-                            'Licensed by BTA food and entertainment \nrelease v.1.0.0',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBtnText,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                          ),
+                        child: Text(
+                          'licensed by BTA FOOD & ENTERTAINMENT ©\npublished by @arul.beats\nrelease v.1.0.0 ',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Readex Pro',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontStyle: FontStyle.italic,
+                              ),
                         ),
                       ),
                     ],
@@ -368,7 +364,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
               Align(
                 alignment: AlignmentDirectional(0.00, 0.00),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,

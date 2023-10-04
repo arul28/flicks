@@ -3,7 +3,6 @@ import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
 import '/components/image_error/image_error_widget.dart';
 import '/components/pics_limit_hit/pics_limit_hit_widget.dart';
-import '/components/tour_components/camera_tour/camera_tour_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -100,37 +99,6 @@ class _CameraWidgetState extends State<CameraWidget>
             );
           },
         ).then((value) => setState(() {}));
-      }
-      if (!FFAppState().cameraTour) {
-        await showAlignedDialog(
-          barrierDismissible: false,
-          context: context,
-          isGlobal: true,
-          avoidOverflow: false,
-          targetAnchor: AlignmentDirectional(0.0, 0.0)
-              .resolve(Directionality.of(context)),
-          followerAnchor: AlignmentDirectional(0.0, 0.0)
-              .resolve(Directionality.of(context)),
-          builder: (dialogContext) {
-            return Material(
-              color: Colors.transparent,
-              child: GestureDetector(
-                onTap: () => _model.unfocusNode.canRequestFocus
-                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                    : FocusScope.of(context).unfocus(),
-                child: Container(
-                  height: 264.0,
-                  width: 350.0,
-                  child: CameraTourWidget(),
-                ),
-              ),
-            );
-          },
-        ).then((value) => setState(() {}));
-
-        setState(() {
-          FFAppState().cameraTour = true;
-        });
       }
     });
 
@@ -576,9 +544,9 @@ class _CameraWidgetState extends State<CameraWidget>
                                             gradient: LinearGradient(
                                               colors: [
                                                 FlutterFlowTheme.of(context)
-                                                    .amethyst,
+                                                    .heliotrope,
                                                 FlutterFlowTheme.of(context)
-                                                    .persianIndigo
+                                                    .amethyst
                                               ],
                                               stops: [0.0, 1.0],
                                               begin: AlignmentDirectional(
@@ -618,11 +586,47 @@ class _CameraWidgetState extends State<CameraWidget>
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryBtnText,
-                                                          fontSize: 18.0,
+                                                          fontSize: 22.0,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
                                                   ),
+                                                if (FFAppState().uploadingPhoto)
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 10.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      'this may take a sec...',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBtnText,
+                                                                fontSize: 12.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                    ),
+                                                  ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 30.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    'you and your friends flicks will randomly develop!',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium,
+                                                  ),
+                                                ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0.0, 100.0, 0.0,
@@ -635,7 +639,7 @@ class _CameraWidgetState extends State<CameraWidget>
                                                       children: [
                                                         TextSpan(
                                                           text:
-                                                              'Tip Of The Week',
+                                                              'Quote Of The Week',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .titleMedium
@@ -644,7 +648,7 @@ class _CameraWidgetState extends State<CameraWidget>
                                                                     'Readex Pro',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .mauve,
+                                                                    .persianIndigo,
                                                                 decoration:
                                                                     TextDecoration
                                                                         .underline,
@@ -652,7 +656,7 @@ class _CameraWidgetState extends State<CameraWidget>
                                                         ),
                                                         TextSpan(
                                                           text:
-                                                              '\n\ndon\'t forget to pin flicks as soon as they develop!',
+                                                              '\n\nion wipe cause ion let shit bother me - B. Franklin',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyLarge

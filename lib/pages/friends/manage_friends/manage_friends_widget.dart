@@ -83,12 +83,13 @@ class _ManageFriendsWidgetState extends State<ManageFriendsWidget> {
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed(
+                  context.goNamed(
                     'Profile',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
-                        transitionType: PageTransitionType.bottomToTop,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
                       ),
                     },
                   );

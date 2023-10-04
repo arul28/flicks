@@ -284,11 +284,11 @@ class _LandingPageWidgetState extends State<LandingPageWidget>
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                   child: Text(
-                    'release v.1.0.0\nlicensed and published by BTA food and entertainment ©',
+                    'licensed by BTA FOOD & ENTERTAINMENT ©\npublished by @arul.beats\nrelease v.1.0.0',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
-                          fontSize: 11.0,
+                          fontSize: 13.0,
                         ),
                   ),
                 ),

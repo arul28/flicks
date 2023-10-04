@@ -279,6 +279,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'CreateProfileAppleUser',
           path: '/createProfileAppleUser',
           builder: (context, params) => CreateProfileAppleUserWidget(),
+        ),
+        FFRoute(
+          name: 'whatsNewPage',
+          path: '/whatsNewPage',
+          builder: (context, params) => WhatsNewPageWidget(),
+        ),
+        FFRoute(
+          name: 'welcomeToFlicks',
+          path: '/welcomeToFlicks',
+          builder: (context, params) => WelcomeToFlicksWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

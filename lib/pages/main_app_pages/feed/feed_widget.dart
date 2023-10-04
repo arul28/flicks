@@ -3,7 +3,6 @@ import '/backend/backend.dart';
 import '/components/first_view_after_switch/first_view_after_switch_widget.dart';
 import '/components/friend_photos/friend_photos_widget.dart';
 import '/components/pinned_message/pinned_message_widget.dart';
-import '/components/tour_components/feed_tour/feed_tour_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -65,32 +64,6 @@ class _FeedWidgetState extends State<FeedWidget> {
             );
           },
         ).then((value) => setState(() {}));
-      }
-      if (!FFAppState().feedTour) {
-        await showAlignedDialog(
-          barrierDismissible: false,
-          context: context,
-          isGlobal: true,
-          avoidOverflow: false,
-          targetAnchor: AlignmentDirectional(0.0, 0.0)
-              .resolve(Directionality.of(context)),
-          followerAnchor: AlignmentDirectional(0.0, 0.0)
-              .resolve(Directionality.of(context)),
-          builder: (dialogContext) {
-            return Material(
-              color: Colors.transparent,
-              child: Container(
-                height: 249.0,
-                width: 350.0,
-                child: FeedTourWidget(),
-              ),
-            );
-          },
-        ).then((value) => setState(() {}));
-
-        setState(() {
-          FFAppState().feedTour = true;
-        });
       }
       _model.deets = await queryCurrentSessionDetailsRecordOnce(
         singleRecord: true,

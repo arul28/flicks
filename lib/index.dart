@@ -59,3 +59,7 @@ export '/pages/secondary_app_pages/friend_activity/friend_activity_widget.dart'
 export '/pages/settings/edit_phone/edit_phone_widget.dart' show EditPhoneWidget;
 export '/pages/authentication/create_profile_apple_user/create_profile_apple_user_widget.dart'
     show CreateProfileAppleUserWidget;
+export '/pages/secondary_app_pages/whats_new_page/whats_new_page_widget.dart'
+    show WhatsNewPageWidget;
+export '/pages/secondary_app_pages/welcome_to_flicks/welcome_to_flicks_widget.dart'
+    show WelcomeToFlicksWidget;

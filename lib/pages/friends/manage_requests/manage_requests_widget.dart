@@ -103,12 +103,13 @@ class _ManageRequestsWidgetState extends State<ManageRequestsWidget>
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed(
+                  context.goNamed(
                     'Profile',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
-                        transitionType: PageTransitionType.bottomToTop,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
                       ),
                     },
                   );
@@ -207,10 +208,11 @@ class _ManageRequestsWidgetState extends State<ManageRequestsWidget>
                                     fontSize: 12.0,
                                   ),
                             ),
-                            showBadge: valueOrDefault(
-                                    currentUserDocument
-                                        ?.incomingPendingRequestsNum,
-                                    0) >
+                            showBadge: (currentUserDocument
+                                            ?.incomingPendingRequests
+                                            ?.toList() ??
+                                        [])
+                                    .length >
                                 0,
                             shape: badges.BadgeShape.circle,
                             badgeColor: FlutterFlowTheme.of(context).primary,

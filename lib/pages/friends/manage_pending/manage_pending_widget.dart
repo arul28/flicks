@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -103,12 +102,13 @@ class _ManagePendingWidgetState extends State<ManagePendingWidget>
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed(
+                  context.goNamed(
                     'Profile',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
-                        transitionType: PageTransitionType.bottomToTop,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
                       ),
                     },
                   );
@@ -227,41 +227,10 @@ class _ManagePendingWidgetState extends State<ManagePendingWidget>
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        AuthUserStreamWidget(
-                          builder: (context) => badges.Badge(
-                            badgeContent: Text(
-                              (currentUserDocument?.incomingPendingRequests
-                                          ?.toList() ??
-                                      [])
-                                  .length
-                                  .toString(),
-                              style: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Colors.white,
-                                    fontSize: 12.0,
-                                  ),
-                            ),
-                            showBadge: valueOrDefault(
-                                    currentUserDocument
-                                        ?.incomingPendingRequestsNum,
-                                    0) >
-                                0,
-                            shape: badges.BadgeShape.circle,
-                            badgeColor: FlutterFlowTheme.of(context).primary,
-                            elevation: 4.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                4.0, 4.0, 4.0, 4.0),
-                            position: badges.BadgePosition.topEnd(),
-                            animationType: badges.BadgeAnimationType.scale,
-                            toAnimate: true,
-                            child: Icon(
-                              Icons.send_sharp,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 30.0,
-                            ),
-                          ),
+                        Icon(
+                          Icons.send_sharp,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 30.0,
                         ),
                         Text(
                           'Pending',
